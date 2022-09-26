@@ -1,116 +1,17 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-
-import 'models/habit.dart';
-import 'models/habit_task.dart';
+import 'package:intl/intl.dart';
 
 class Helper {
   //blue and red shades used for the logo
   static const blueColor = Color.fromRGBO(11, 137, 156, 1), redColor = Color.fromRGBO(171, 0, 82, 1);
+  static final DateFormat formatter = DateFormat('dd/MM/yyyy');
 
-
-//function for sending user credentials for log in, promising future
-  static Future<http.Response> logIn(String email, String password) async {
-    return http.post(
-      Uri.parse('http://192.168.178.28:3000/login'),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-      body: jsonEncode(<String, String>{
-        'email': email,
-        'password': password,
-      }),
-    );
-  }
-
-//function for fetching user roles, promising future
-  static Future<http.Response> fetchUserRoles(String token) async {
-    return http.get(
-      Uri.parse('http://192.168.178.28:3000/my_role'),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-        'Authorization': 'Bearer $token',
-      },
-    );
-  }
-
-  //function to patch a habit instance
-  static void patchHabit(String token, int id, String date, String note, String userId,
-      String coachId, List<HabitTask> habits) async {
-    String inner = jsonEncode(habits);
-
-    await http.patch(
-      Uri.parse('http://192.168.178.28:3000/habits/$id'),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-        'Authorization': 'Bearer $token',
-      },
-      body: "${jsonEncode(<String, String>{
-        'date': date,
-        'note': note,
-        'userId': userId,
-        'coachId': coachId,
-      }).replaceAll("}", "")}, \"habits\" : $inner}",
-    );
-  }
-
-  //function for fetching habits template
-  static Future<http.Response> fetchTemplate(String token, String userId, Function(http.Response res) callback) async {
-    http.Response res = await http.post(
-      Uri.parse('http://192.168.178.28:3000/user_template_habit'),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-        'Authorization': 'Bearer $token',
-      },
-      body: jsonEncode(<String, String>{
-        'userId': userId,
-      }),
-    );
-    callback(res);
-    return res;
-  }
-
-  static Future<http.Response> fetchHabits(String token, String userId, Function(http.Response res) callback) async {
-    fetchTemplate(token, userId, callback);
-    return http.get(
-      Uri.parse('http://192.168.178.28:3000/habits'),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-        'Authorization': 'Bearer $token',
-      },
-    );
-  }
-
-  //function for posting habits
-  static Future<http.Response> postHabit(
-      BuildContext context,
-      List<Habit> allHabits,
-      String token,
-      String date,
-      String note,
-      String userId,
-      String coachId,
-      List<HabitTask> habits,
-      Function(http.Response res) callback) async {
-    String inner = jsonEncode(habits);
-
-    http.Response res = await http.post(
-      Uri.parse('http://192.168.178.28:3000/habits'),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-        'Authorization': 'Bearer $token',
-      },
-      body: "${jsonEncode(<String, String>{
-        'date': date,
-        'note': note,
-        'userId': userId,
-        'coachId': coachId,
-      }).replaceAll("}", "")}, \"habits\" : $inner}",
-    );
-
-    callback(res);
-    return res;
+  static String imageToBlob(File file) {
+    final bytes = file.readAsBytesSync();
+    String img64 = base64Encode(bytes);
+    return img64;
   }
 
 //function for making SnackBar toasts
@@ -120,18 +21,80 @@ class Helper {
     ));
   }
 
-  //push page to navigator
-  static void pushPage(BuildContext context, Widget page) {
+  //push page with animation to navigator
+  static void pushPageWithAnimation(BuildContext context, Widget page) {
     Navigator.push(
       context,
-      MaterialPageRoute(
-          builder: (context) => page),
+        PageRouteBuilder(
+          pageBuilder: (context, animation, secondaryAnimation) => page,
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            const begin = Offset(0.0, 1.0);
+            const end = Offset.zero;
+            const curve = Curves.ease;
+
+            var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+            return FadeTransition(
+              //position: animation.drive(tween),
+              opacity: animation,
+              child: child,
+            );
+          },
+        )
     );
   }
 
+  //push page to navigator
+  static void pushPage(BuildContext context, Widget page) {
+    Navigator.push(
+        context,
+        PageRouteBuilder(
+          pageBuilder: (context, animation, secondaryAnimation) => page,
+        )
+    );
+  }
+
+  //push page to navigator
+  static void pushPageWithCallback(BuildContext context, Widget page, Function callback) {
+    Navigator.push(
+        context,
+        PageRouteBuilder(
+          pageBuilder: (context, animation, secondaryAnimation) => page,
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            const begin = Offset(0.0, 1.0);
+            const end = Offset.zero;
+            const curve = Curves.ease;
+
+            var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+            return FadeTransition(
+              //position: animation.drive(tween),
+              opacity: animation,
+              child: child,
+            );
+          },
+        )
+    ).then((value) => callback());
+  }
+
   static void replacePage(BuildContext context, Widget page) {
-    Route route =
-    MaterialPageRoute(builder: (context) => page);
+    Route route = PageRouteBuilder(
+      pageBuilder: (context, animation, secondaryAnimation) => page,
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        const begin = Offset(0.0, 1.0);
+        const end = Offset.zero;
+        const curve = Curves.ease;
+
+        var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+        return FadeTransition(
+          //position: animation.drive(tween),
+          opacity: animation,
+          child: child,
+        );
+      },
+    );
+    //MaterialPageRoute(builder: (context) => page);
     Navigator.pushReplacement(context, route);
   }
 }

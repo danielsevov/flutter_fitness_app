@@ -1,34 +1,29 @@
 import 'dart:convert';
-import 'dart:developer';
 
-import 'package:first_solo_flutter_app/models/article.dart';
 import 'package:first_solo_flutter_app/pages/sign_in_route.dart';
 import 'package:first_solo_flutter_app/pages/trainees_route.dart';
 import 'package:first_solo_flutter_app/pages/user_profile_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../api_services.dart';
 import '../helper.dart';
 import '../models/image.dart';
-import '../models/news.dart';
 import '../models/user.dart';
 import 'habits_route.dart';
 
-class HomeRoute extends StatefulWidget {
-  const HomeRoute({Key? key}) : super(key: key);
+class HubRoute extends StatefulWidget {
+  const HubRoute({Key? key}) : super(key: key);
 
   @override
-  State<HomeRoute> createState() => _HomeRouteState();
+  State<HubRoute> createState() => _HubRouteState();
 }
 
-class _HomeRouteState extends State<HomeRoute> {
+class _HubRouteState extends State<HubRoute> {
   late Future<void> future;
-  String name = "", nationality = "", phone = "";
-  Image img = Image.asset('assets/images/prof_pic.png', height: 100);
+  var name = "", nationality = "", phone = "";
+  var img = Image.asset('assets/images/prof_pic.png', height: 100);
   late double screenHeight, screenWidth;
-  late News currentNews;
 
   @override
   void initState() {
@@ -56,8 +51,68 @@ class _HomeRouteState extends State<HomeRoute> {
             );
           } else {
             return Scaffold(
-              floatingActionButton: FloatingActionButton.large(
-                heroTag: 'btn4',
+              appBar: AppBar(
+                centerTitle: true,
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.vertical(
+                    bottom: Radius.circular(30),
+                  ),
+                ),
+                iconTheme: const IconThemeData(
+                  color: Colors.white, //change your color here
+                ),
+                title: const Text(
+                  "LiftToLive",
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
+                actions: [
+                  IconButton(
+                      //on pressed clear token and navigate to log in page
+                      onPressed: () async {
+                        showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                title: const Text("Sign out"),
+                                content: const Text(
+                                    "Are you sure you want to sign out?"),
+                                actions: [
+                                  IconButton(
+                                      onPressed: () {
+                                        APIServices.jwtToken = "";
+                                        APIServices.myRoles.clear();
+                                        APIServices.userId = "";
+                                        Helper.pushPageWithAnimation(
+                                            context, const SignInPage());
+                                      },
+                                      icon: const Icon(
+                                        Icons.check_circle,
+                                        color: Colors.green,
+                                        size: 30,
+                                      )),
+                                  IconButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      icon: const Icon(
+                                        Icons.cancel,
+                                        color: Colors.red,
+                                        size: 30,
+                                      ))
+                                ],
+                              );
+                            });
+                      },
+                      icon: const Icon(
+                        Icons.logout,
+                        color: Colors.white,
+                      )),
+                ],
+              ),
+
+              floatingActionButton: FloatingActionButton(
                 //Floating action button on Scaffold
                 onPressed: () {
                   //code to execute on button press
@@ -132,8 +187,6 @@ class _HomeRouteState extends State<HomeRoute> {
                         ),
                       ),
                     ),
-                    const SizedBox(),
-                    const SizedBox(),
                     SizedBox.fromSize(
                       size: const Size(60, 60),
                       child: ClipOval(
@@ -179,8 +232,7 @@ class _HomeRouteState extends State<HomeRoute> {
                                 context,
                                 UserProfileRoute(
                                   userId: APIServices.userId,
-                                  nextPage: const HomeRoute(),
-                                  fromHome: true
+                                  nextPage: const HubRoute(), fromHome: true
                                 ));
                           },
                           child: Column(
@@ -209,145 +261,13 @@ class _HomeRouteState extends State<HomeRoute> {
                     fit: BoxFit.fill,
                   ),
                 ),
-                child: CustomScrollView(
-                  slivers: <Widget>[
-                    SliverAppBar(
-                      pinned: true,
-                      snap: true,
-                      floating: true,
-                      expandedHeight: 100.0,
-                      shape: const ContinuousRectangleBorder(
-                          borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(15), bottomRight: Radius.circular(15))),
-                      actions: [
-                        IconButton(
-                          //on pressed clear token and navigate to log in page
-                            onPressed: () async {
-                              showDialog(
-                                  context: context,
-                                  builder: (context) {
-                                    return AlertDialog(
-                                      title: const Text("Sign out"),
-                                      content: const Text(
-                                          "Are you sure you want to sign out?"),
-                                      actions: [
-                                        IconButton(
-                                            onPressed: () {
-                                              APIServices.jwtToken = "";
-                                              APIServices.myRoles.clear();
-                                              APIServices.userId = "";
-                                              Helper.pushPageWithAnimation(
-                                                  context, const SignInPage());
-                                            },
-                                            icon: const Icon(
-                                              Icons.check_circle,
-                                              color: Colors.green,
-                                              size: 30,
-                                            )),
-                                        IconButton(
-                                            onPressed: () {
-                                              Navigator.pop(context);
-                                            },
-                                            icon: const Icon(
-                                              Icons.cancel,
-                                              color: Colors.red,
-                                              size: 30,
-                                            ))
-                                      ],
-                                    );
-                                  });
-                            },
-                            icon: const Icon(
-                              Icons.logout,
-                              color: Colors.white,
-                            )),
-                      ],
-                      flexibleSpace: const FlexibleSpaceBar(
-                        title: Text('LiftToLive'),
-                        centerTitle: true,
-                      ),
-                    ),
-                    SliverList(
-                      delegate: SliverChildBuilderDelegate(
-                            (BuildContext context, int index) {
-                          return Hero(
-                            tag: 'logo',
-                            child: Image.asset(
-                              'assets/images/lifttolive.png',
-                              height: screenHeight / 1.5,
-                            ),
-                          );
-                        },
-                        childCount: 1,
-                      ),
-                    ),
-                    SliverToBoxAdapter(
-                      child: SizedBox(
-                        height: 20,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: const [Text('Scroll down and check what\'s new in the gym world!')],
-                        ),
-                      ),
-                    ),
-                    SliverList(
-                      delegate: SliverChildBuilderDelegate(
-                            (BuildContext context, int index) {
-                          return Container(
-                            color: index.isOdd ? Colors.white : Helper.blueColor.withOpacity(0.12),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Container(
-                                      width: 160,
-                                      height: 80,
-                                      decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(20.0),
-                                          color: Colors.white
-                                      ),
-                                      child: FittedBox(
-                                        fit: BoxFit.fill,
-                                        child: ClipRRect(borderRadius: BorderRadius.circular(20.0),child: Image.network(currentNews.articles[index].urlToImage, scale: 0.001, height: 80, width: 160,),),
-                                      ),
-                                    ),
-                                    Expanded(child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Text(currentNews.articles[index].title, style: const TextStyle(fontWeight: FontWeight.bold),),
-                                    ))
-                                  ],
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text('${currentNews.articles[index].description}\n\n${currentNews.articles[index].content}'),
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    FloatingActionButton.extended(heroTag: index.toString(),onPressed: () async {
-                                      var url = currentNews.articles[index].url;
-                                      if (!await launchUrl(
-                                        Uri.parse(url),
-                                        mode: LaunchMode.externalApplication,
-                                      )) {
-                                        throw 'Could not launch $url';
-                                      }
-
-                                    }, icon: const Icon(CupertinoIcons.arrow_turn_down_right, color: Colors.white,), label: const Text('Read More'), backgroundColor: Helper.blueColor,),
-                                    const SizedBox(width: 20,)
-                                  ],
-                                ),
-                                const SizedBox(height: 20,)
-                              ],
-                            ),
-                          );
-                        },
-                        childCount: 20,
-                      ),
-                    ),
-                  ],
+                alignment: Alignment.topCenter,
+                child: Hero(
+                  tag: 'logo',
+                  child: Image.asset(
+                    'assets/images/lifttolive.png',
+                    height: screenHeight / 1.5,
+                  ),
                 ),
               ),
               drawer: Drawer(
@@ -530,8 +450,8 @@ class _HomeRouteState extends State<HomeRoute> {
                             context,
                             UserProfileRoute(
                               userId: APIServices.userId,
-                              nextPage: const HomeRoute(),
-                                fromHome: true
+                              nextPage: const HubRoute(),
+                              fromHome: true,
                             ));
                       },
                     ),
@@ -631,34 +551,36 @@ class _HomeRouteState extends State<HomeRoute> {
         }
 
         // Displaying LoadingSpinner to indicate waiting state
-        return Container(
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage("assets/images/whitewaves.png"),
-              fit: BoxFit.fill,
-            ),
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const DefaultTextStyle(
-                style: TextStyle(fontSize: 24, color: Helper.blueColor),
-                child: Text('Loading'),
-              ),
-              const CircularProgressIndicator(color: Helper.blueColor,),
-              Container(
-                alignment: Alignment.topCenter,
-                child: Hero(
-                  tag: 'logo',
-                  child: Image.asset(
-                    'assets/images/lifttolive.png',
-                    height: screenHeight / 1.5,
-                  ),
+        return Column(
+          children: [
+            AppBar(
+              centerTitle: true,
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.vertical(
+                  bottom: Radius.circular(30),
                 ),
               ),
-              const SizedBox(height: 45,)
-            ],
-          ),
+              iconTheme: const IconThemeData(
+                color: Colors.white, //change your color here
+              ),
+              title: const Text(
+                "LiftToLive",
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+            ),
+            Container(
+              alignment: Alignment.topCenter,
+              child: Hero(
+                tag: 'logo',
+                child: Image.asset(
+                  'assets/images/lifttolive.png',
+                  height: screenHeight / 1.5,
+                ),
+              ),
+            )
+          ],
         );
       },
     );
@@ -685,9 +607,6 @@ class _HomeRouteState extends State<HomeRoute> {
                 height: 100,
               ),
             });
-
-    await APIServices.fetchNews('bodybuilding', 20, (res) => {currentNews = News.fromJson(json.decode(res.body))});
-    await Future.delayed(const Duration(seconds: 1));
 
     refresh();
   }
