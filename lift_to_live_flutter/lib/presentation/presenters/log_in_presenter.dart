@@ -3,17 +3,17 @@ import 'package:lift_to_live_flutter/domain/repositories/token_repo.dart';
 
 import '../../domain/app_state/app_state.dart';
 import '../../helper.dart';
-import '../views/token_view.dart';
+import '../views/log_in_view.dart';
 
-class TokenPresenter {
-  TokenView? _view;
+class LogInPresenter {
+  LogInView? _view;
   final TokenRepository _repository;
   late AppState _appState;
   bool _isInitialized = false;
 
-  TokenPresenter(this._repository);
+  LogInPresenter(this._repository);
 
-  void attach(TokenView view) {
+  void attach(LogInView view) {
     _view = view;
   }
 
@@ -38,7 +38,6 @@ class TokenPresenter {
         _appState.setState(email, token);
 
         _view?.navigateToHome();
-        //TODO navigate to home page
       }
       else {
         _view?.clearPassword();

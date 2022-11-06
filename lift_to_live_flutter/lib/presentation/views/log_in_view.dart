@@ -1,4 +1,4 @@
-abstract class TokenView {
+abstract class LogInView {
 
   void setInProgress(bool inProgress);
 

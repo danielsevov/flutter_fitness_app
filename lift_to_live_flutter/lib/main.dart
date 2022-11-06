@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'domain/app_state/app_state.dart';
-import 'presentation/ui/token_ui.dart';
+import 'presentation/ui/log_in_page.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -20,6 +20,6 @@ class MyApp extends StatelessWidget {
             theme: ThemeData(
               primarySwatch: Colors.blue,
             ),
-            home: const TokenUI()));
+            home: const LogInPage()));
   }
 }
