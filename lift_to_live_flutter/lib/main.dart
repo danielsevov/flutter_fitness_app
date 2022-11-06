@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'domain/app_state/app_state.dart';
+import 'presentation/ui/token_ui.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,45 +13,13 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'LiftToLive'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: const Center(
-          child: CircularProgressIndicator(
-        color: Colors.blue,
-      )), // This trailing comma makes auto-formatting nicer for build methods.
-    );
+    return Provider<AppState>(
+        create: (_) => AppState(),
+        child: MaterialApp(
+            title: 'LiftToLiveApp',
+            theme: ThemeData(
+              primarySwatch: Colors.blue,
+            ),
+            home: const TokenUI()));
   }
 }
