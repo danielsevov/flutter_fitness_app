@@ -6,6 +6,7 @@ import 'package:lift_to_live_flutter/data/datasources/backend_api.dart';
 
 import '../../domain/entities/token.dart';
 import '../../domain/repositories/token_repo.dart';
+import '../exceptions/fetch_failed_exception.dart';
 
 class TokenRepoImpl implements TokenRepository {
 
@@ -23,7 +24,7 @@ class TokenRepoImpl implements TokenRepository {
     }
     else {
       log("log in failed");
-      return '';
+      throw FetchFailedException("Failed to fetch token!\nresponse code ${response.statusCode}");
     }
   }
 

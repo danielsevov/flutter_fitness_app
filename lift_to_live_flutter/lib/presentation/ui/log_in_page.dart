@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:lift_to_live_flutter/factory/token_factory.dart';
+import 'package:lift_to_live_flutter/factory/log_in_factory.dart';
 import 'package:lift_to_live_flutter/presentation/presenters/log_in_presenter.dart';
+import 'package:lift_to_live_flutter/presentation/ui/home_page.dart';
 import 'package:provider/provider.dart';
 
 import '../state_management/app_state.dart';
@@ -15,7 +16,7 @@ class LogInPage extends StatefulWidget {
 }
 
 class LogInPageState extends State<LogInPage> implements LogInView {
-  final LogInPresenter _presenter = TokenFactory().getTokenPresenter();
+  final LogInPresenter _presenter = LogInFactory().getTokenPresenter();
   bool _isLoading = false;
   final TextEditingController _emailController = TextEditingController(),
       _passwordController = TextEditingController();
@@ -146,7 +147,7 @@ class LogInPageState extends State<LogInPage> implements LogInView {
                       child: FloatingActionButton.extended(
                         heroTag: 'btn0',
                         onPressed: () async {
-                          _presenter.loadToken(context);
+                          _presenter.logIn(context);
                         },
                         backgroundColor: Helper.blueColor,
                         icon: const Icon(
@@ -205,9 +206,7 @@ class LogInPageState extends State<LogInPage> implements LogInView {
   void navigateToHome() {
     Helper.pushPageWithAnimation(
         context,
-        Container(
-          color: Helper.blueColor,
-        ));
+        const HomePage());
   }
 
   @override

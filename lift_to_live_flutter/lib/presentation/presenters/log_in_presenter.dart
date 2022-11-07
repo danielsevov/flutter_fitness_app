@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:lift_to_live_flutter/domain/repositories/token_repo.dart';
+import 'package:lift_to_live_flutter/domain/repositories/user_repo.dart';
 
 import '../state_management/app_state.dart';
 import '../../helper.dart';
@@ -7,11 +8,12 @@ import '../views/log_in_view.dart';
 
 class LogInPresenter {
   LogInView? _view;
-  final TokenRepository _repository;
+  final TokenRepository _tokenRepository;
+  final UserRepository _userRepository;
   late AppState _appState;
   bool _isInitialized = false;
 
-  LogInPresenter(this._repository);
+  LogInPresenter(this._tokenRepository, this._userRepository);
 
   void attach(LogInView view) {
     _view = view;
@@ -26,20 +28,30 @@ class LogInPresenter {
     _isInitialized = true;
   }
 
-  Future<void> loadToken(BuildContext context) async {
+  Future<void> logIn(BuildContext context) async {
     _view?.setInProgress(true);
 
     String? email = _view?.getEmail(), pass = _view?.getPassword();
 
     if(verifyCredentials(email, pass, context)) {
-      String token = await _repository.getToken(email!, pass!);
+      String token = '';
+      try {
+         token = await _tokenRepository.getToken(email!, pass!);
 
-      if(token.isNotEmpty) {
-        _appState.setState(email, token);
+         if(token.isNotEmpty) {
 
-        _view?.navigateToHome();
+           var roles = await _userRepository.fetchUserRoles(token);
+           _appState.setState(email, token, roles);
+
+           _view?.navigateToHome();
+         }
+         else {
+           _view?.clearPassword();
+           _view?.notifyWrongCredentials();
+         }
+
       }
-      else {
+      catch(e) {
         _view?.clearPassword();
         _view?.notifyWrongCredentials();
       }
