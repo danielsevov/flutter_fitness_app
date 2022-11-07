@@ -3,7 +3,7 @@ import 'package:lift_to_live_flutter/factory/token_factory.dart';
 import 'package:lift_to_live_flutter/presentation/presenters/log_in_presenter.dart';
 import 'package:provider/provider.dart';
 
-import '../../domain/app_state/app_state.dart';
+import '../state_management/app_state.dart';
 import '../../helper.dart';
 import '../views/log_in_view.dart';
 

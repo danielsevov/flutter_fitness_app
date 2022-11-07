@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:lift_to_live_flutter/domain/repositories/token_repo.dart';
 
-import '../../domain/app_state/app_state.dart';
+import '../state_management/app_state.dart';
 import '../../helper.dart';
 import '../views/log_in_view.dart';
 

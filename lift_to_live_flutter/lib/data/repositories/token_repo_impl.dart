@@ -13,8 +13,6 @@ class TokenRepoImpl implements TokenRepository {
   Future<String> getToken(String email, String password) async {
     Response response = await BackendAPI.logIn(email, password);
 
-    await Future.delayed(const Duration(seconds: 2));
-
     if(response.statusCode  == 200) {
       log("log in success!\ntoken:${response.body}");
 
