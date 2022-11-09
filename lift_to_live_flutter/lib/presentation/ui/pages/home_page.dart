@@ -86,20 +86,17 @@ class HomePageState extends State<HomePage> implements HomePageView {
           //code to execute on button press
         },
         backgroundColor: Helper.redColor,
-        child: const Icon(
-            Icons.fitness_center_outlined), //icon inside button
+        child: const Icon(Icons.fitness_center_outlined), //icon inside button
       ),
 
-      floatingActionButtonLocation:
-      FloatingActionButtonLocation.centerDocked,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       //floating action button position to center
 
       bottomNavigationBar: BottomAppBar(
         //bottom navigation bar on scaffold
         color: Helper.blueColor,
         shape: const CircularNotchedRectangle(), //shape of notch
-        notchMargin:
-        5, //notch margin between floating button and bottom appbar
+        notchMargin: 5, //notch margin between floating button and bottom appbar
         child: Row(
           //children inside bottom appbar
           mainAxisSize: MainAxisSize.max,
@@ -221,10 +218,11 @@ class HomePageState extends State<HomePage> implements HomePageView {
               expandedHeight: 100.0,
               shape: const ContinuousRectangleBorder(
                   borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(15), bottomRight: Radius.circular(15))),
+                      bottomLeft: Radius.circular(15),
+                      bottomRight: Radius.circular(15))),
               actions: [
                 IconButton(
-                  //on pressed clear token and navigate to log in page
+                    //on pressed clear token and navigate to log in page
                     onPressed: () async {
                       showDialog(
                           context: context,
@@ -268,7 +266,7 @@ class HomePageState extends State<HomePage> implements HomePageView {
             ),
             SliverList(
               delegate: SliverChildBuilderDelegate(
-                    (BuildContext context, int index) {
+                (BuildContext context, int index) {
                   return Hero(
                     tag: 'logo',
                     child: Image.asset(
@@ -285,57 +283,107 @@ class HomePageState extends State<HomePage> implements HomePageView {
                 height: 20,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [Text('Scroll down and check what\'s new in the gym world!')],
+                  children: const [
+                    Text('Scroll down and check what\'s new in the gym world!')
+                  ],
                 ),
               ),
             ),
             SliverList(
               delegate: SliverChildBuilderDelegate(
-                    (BuildContext context, int index) {
-                  return _isLoading ? const Center(child: CircularProgressIndicator(color: Helper.blueColor,)) : Container(
-                    color: index.isOdd ? Colors.white : Helper.blueColor.withOpacity(0.12),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Container(
-                              width: 160,
-                              height: 80,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20.0),
-                                  color: Colors.white
+                (BuildContext context, int index) {
+                  return _isLoading
+                      ? const Center(
+                          child: CircularProgressIndicator(
+                          color: Helper.blueColor,
+                        ))
+                      : Container(
+                          color: index.isOdd
+                              ? Colors.white
+                              : Helper.blueColor.withOpacity(0.12),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  SizedBox(
+                                    width: 160,
+                                    height: 80,
+                                    child: FittedBox(
+                                      fit: BoxFit.fill,
+                                      child: ClipRRect(
+                                        borderRadius:
+                                            const BorderRadius.only(bottomRight: Radius.circular(20)),
+                                        child: _currentNews.articles[index]
+                                                .urlToImage.isEmpty
+                                            ? null
+                                            : Image.network(
+                                                _currentNews
+                                                    .articles[index].urlToImage,
+                                                loadingBuilder: (context, child,
+                                                        loadingProgress) =>
+                                                    (loadingProgress == null)
+                                                        ? child
+                                                        : const Center(
+                                                          child: CircularProgressIndicator(
+                                                              color: Helper
+                                                                  .blueColor,
+                                                            ),
+                                                        ),
+                                                errorBuilder: (context, error,
+                                                        stackTrace) =>
+                                                    Container(height: 80,
+                                                      width: 160, color: Colors.white,),
+                                                scale: 0.1,
+                                                height: 80,
+                                                width: 160,
+                                              ),
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                      child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(
+                                      _currentNews.articles[index].title,
+                                      style: const TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ))
+                                ],
                               ),
-                              child: FittedBox(
-                                fit: BoxFit.fill,
-                                child: ClipRRect(borderRadius: BorderRadius.circular(20.0),child: _currentNews.articles[index].urlToImage.isEmpty ? null : Image.network(_currentNews.articles[index].urlToImage, scale: 0.000001, height: 80, width: 160,),),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                    '${_currentNews.articles[index].description}\n\n${_currentNews.articles[index].content}'),
                               ),
-                            ),
-                            Expanded(child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(_currentNews.articles[index].title, style: const TextStyle(fontWeight: FontWeight.bold),),
-                            ))
-                          ],
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text('${_currentNews.articles[index].description}\n\n${_currentNews.articles[index].content}'),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            FloatingActionButton.extended(heroTag: index.toString(),onPressed: () async {
-                              _presenter.redirectToURL(index);
-
-                            }, icon: const Icon(CupertinoIcons.arrow_turn_down_right, color: Colors.white,), label: const Text('Read More'), backgroundColor: Helper.blueColor,),
-                            const SizedBox(width: 20,)
-                          ],
-                        ),
-                        const SizedBox(height: 20,)
-                      ],
-                    ),
-                  );
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  FloatingActionButton.extended(
+                                    heroTag: index.toString(),
+                                    onPressed: () async {
+                                      _presenter.redirectToURL(index);
+                                    },
+                                    icon: const Icon(
+                                      CupertinoIcons.arrow_turn_down_right,
+                                      color: Colors.white,
+                                    ),
+                                    label: const Text('Read More'),
+                                    backgroundColor: Helper.blueColor,
+                                  ),
+                                  const SizedBox(
+                                    width: 20,
+                                  )
+                                ],
+                              ),
+                              const SizedBox(
+                                height: 20,
+                              )
+                            ],
+                          ),
+                        );
                 },
                 childCount: 20,
               ),
@@ -347,8 +395,7 @@ class HomePageState extends State<HomePage> implements HomePageView {
         width: _screenWidth > 300 ? 300 : _screenWidth / 2,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
-              topRight: Radius.circular(90),
-              bottomRight: Radius.circular(0)),
+              topRight: Radius.circular(90), bottomRight: Radius.circular(0)),
         ),
         child: ListView(
           // Important: Remove any padding from the ListView.
@@ -359,27 +406,30 @@ class HomePageState extends State<HomePage> implements HomePageView {
               child: DrawerHeader(
                 decoration: const BoxDecoration(
                     color: Helper.blueColor,
-                    borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(90))),
+                    borderRadius:
+                        BorderRadius.only(topRight: Radius.circular(90))),
                 child: Wrap(
                   children: [
                     _screenHeight > 300
                         ? Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        const SizedBox(
-                          width: 50,
-                        ),
-                        Container(
-                          alignment: Alignment.center,
-                          child: ClipRRect(
-                            borderRadius:
-                            BorderRadius.circular(30.0),
-                            child: _isFetched ? _profilePicture : Image.asset('assets/images/prof_pic.png', height: 100),
-                          ),
-                        ),
-                      ],
-                    )
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              const SizedBox(
+                                width: 50,
+                              ),
+                              Container(
+                                alignment: Alignment.center,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(30.0),
+                                  child: _isFetched
+                                      ? _profilePicture
+                                      : Image.asset(
+                                          'assets/images/prof_pic.png',
+                                          height: 100),
+                                ),
+                              ),
+                            ],
+                          )
                         : const SizedBox(),
                     const SizedBox(
                       height: 10,
@@ -402,92 +452,94 @@ class HomePageState extends State<HomePage> implements HomePageView {
                     ),
                     _screenHeight > 520
                         ? Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.all(10),
-                          child: Row(
-                            mainAxisAlignment:
-                            MainAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              Column(
-                                mainAxisAlignment:
-                                MainAxisAlignment.center,
-                                crossAxisAlignment:
-                                CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                    MainAxisAlignment.center,
-                                    children: [
-                                      const Icon(
-                                        Icons.email_outlined,
-                                        color: Colors.white,
-                                      ),
-                                      const SizedBox(
-                                        width: 5,
-                                      ),
-                                      Text(
-                                        _isFetched ? _user.email : '',
-                                        style: const TextStyle(
-                                            color: Colors.white70,
-                                            fontSize: 14),
-                                      ),
-                                    ],
-                                  ),
-                                  const SizedBox(
-                                    height: 10,
-                                  ),
-                                  Row(
-                                    children: [
-                                      const Icon(
-                                        CupertinoIcons.phone,
-                                        color: Colors.white,
-                                      ),
-                                      const SizedBox(
-                                        width: 5,
-                                      ),
-                                      Text(
-                                        _isFetched ? _user.phone_number : '',
-                                        style: const TextStyle(
-                                            color: Colors.white70,
-                                            fontSize: 14),
-                                      ),
-                                    ],
-                                  ),
-                                  const SizedBox(
-                                    height: 10,
-                                  ),
-                                  Row(
-                                    children: [
-                                      const Icon(
-                                          CupertinoIcons
-                                              .location_solid,
-                                          color: Colors.white),
-                                      const SizedBox(
-                                        width: 5,
-                                      ),
-                                      Text(
-                                        _isFetched ? _user.nationality : '',
-                                        style: const TextStyle(
-                                            color: Colors.white70,
-                                            fontSize: 14),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(
-                                width: 40,
+                              Container(
+                                padding: const EdgeInsets.all(10),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
+                                    Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            const Icon(
+                                              Icons.email_outlined,
+                                              color: Colors.white,
+                                            ),
+                                            const SizedBox(
+                                              width: 5,
+                                            ),
+                                            Text(
+                                              _isFetched ? _user.email : '',
+                                              style: const TextStyle(
+                                                  color: Colors.white70,
+                                                  fontSize: 14),
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        Row(
+                                          children: [
+                                            const Icon(
+                                              CupertinoIcons.phone,
+                                              color: Colors.white,
+                                            ),
+                                            const SizedBox(
+                                              width: 5,
+                                            ),
+                                            Text(
+                                              _isFetched
+                                                  ? _user.phone_number
+                                                  : '',
+                                              style: const TextStyle(
+                                                  color: Colors.white70,
+                                                  fontSize: 14),
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        Row(
+                                          children: [
+                                            const Icon(
+                                                CupertinoIcons.location_solid,
+                                                color: Colors.white),
+                                            const SizedBox(
+                                              width: 5,
+                                            ),
+                                            Text(
+                                              _isFetched
+                                                  ? _user.nationality
+                                                  : '',
+                                              style: const TextStyle(
+                                                  color: Colors.white70,
+                                                  fontSize: 14),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      width: 40,
+                                    ),
+                                  ],
+                                ),
                               ),
                             ],
-                          ),
-                        ),
-                      ],
-                    )
+                          )
                         : const SizedBox(),
                     // const SizedBox(
                     //   height: 20,
@@ -505,8 +557,7 @@ class HomePageState extends State<HomePage> implements HomePageView {
               ),
               title: Row(
                 children: const [
-                  Icon(CupertinoIcons.profile_circled,
-                      color: Colors.white),
+                  Icon(CupertinoIcons.profile_circled, color: Colors.white),
                   SizedBox(
                     width: 10,
                   ),
@@ -554,8 +605,7 @@ class HomePageState extends State<HomePage> implements HomePageView {
               ),
               title: Row(
                 children: const [
-                  Icon(Icons.fitness_center_outlined,
-                      color: Colors.white),
+                  Icon(Icons.fitness_center_outlined, color: Colors.white),
                   SizedBox(
                     width: 10,
                   ),
@@ -572,30 +622,29 @@ class HomePageState extends State<HomePage> implements HomePageView {
             ),
             _presenter.isCoachOrAdmin()
                 ? ListTile(
-              tileColor: Helper.blueColor,
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.only(
-                    bottomRight: Radius.circular(0),
-                    topLeft: Radius.circular(0)),
-              ),
-              title: Row(
-                children: const [
-                  Icon(Icons.people, color: Colors.white),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Text(
-                    'Manage Trainees',
-                    style: TextStyle(
-                        fontSize: 22, color: Colors.white),
+                    tileColor: Helper.blueColor,
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                          bottomRight: Radius.circular(0),
+                          topLeft: Radius.circular(0)),
+                    ),
+                    title: Row(
+                      children: const [
+                        Icon(Icons.people, color: Colors.white),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          'Manage Trainees',
+                          style: TextStyle(fontSize: 22, color: Colors.white),
+                        )
+                      ],
+                    ),
+                    textColor: Helper.blueColor,
+                    onTap: () {
+                      _presenter.traineesPressed(context, false);
+                    },
                   )
-                ],
-              ),
-              textColor: Helper.blueColor,
-              onTap: () {
-                _presenter.traineesPressed(context, false);
-              },
-            )
                 : const SizedBox(),
           ],
         ),
