@@ -3,10 +3,10 @@ import 'package:lift_to_live_flutter/domain/repositories/token_repo.dart';
 import 'package:lift_to_live_flutter/domain/repositories/user_repo.dart';
 
 import '../state_management/app_state.dart';
-import '../views/log_in_view.dart';
+import '../views/log_in_page_view.dart';
 
 class LogInPresenter {
-  LogInView? _view;
+  LogInPageView? _view;
   final TokenRepository _tokenRepository;
   final UserRepository _userRepository;
   late AppState _appState;
@@ -14,7 +14,7 @@ class LogInPresenter {
 
   LogInPresenter(this._tokenRepository, this._userRepository);
 
-  void attach(LogInView view) {
+  void attach(LogInPageView view) {
     _view = view;
   }
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lift_to_live_flutter/domain/repositories/user_repo.dart';
 import 'package:lift_to_live_flutter/presentation/ui/pages/log_in_page.dart';
-import 'package:lift_to_live_flutter/presentation/views/home_view.dart';
+import 'package:lift_to_live_flutter/presentation/views/home_page_view.dart';
 
 import '../../domain/entities/news.dart';
 import '../../domain/entities/user.dart';
@@ -12,7 +12,7 @@ import '../state_management/app_state.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HomePresenter {
-  HomeView? _view;
+  HomePageView? _view;
   final NewsRepository _newsRepository;
   final UserRepository _userRepository;
   late AppState _appState;
@@ -23,7 +23,7 @@ class HomePresenter {
 
   HomePresenter(this._newsRepository, this._userRepository);
 
-  void attach(HomeView view) {
+  void attach(HomePageView view) {
     _view = view;
   }
 

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:lift_to_live_flutter/domain/entities/news.dart';
 import 'package:lift_to_live_flutter/factory/home_factory.dart';
 import 'package:lift_to_live_flutter/presentation/presenters/home_presenter.dart';
-import 'package:lift_to_live_flutter/presentation/views/home_view.dart';
+import 'package:lift_to_live_flutter/presentation/views/home_page_view.dart';
 import 'package:provider/provider.dart';
 
 import '../../../domain/entities/user.dart';
@@ -17,7 +17,7 @@ class HomePage extends StatefulWidget {
   State<StatefulWidget> createState() => HomePageState();
 }
 
-class HomePageState extends State<HomePage> implements HomeView {
+class HomePageState extends State<HomePage> implements HomePageView {
   final HomePresenter _presenter = HomeFactory().getHomePresenter();
   bool _isLoading = false, _isFetched = false;
   late News _currentNews;

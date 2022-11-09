@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 import '../../state_management/app_state.dart';
 import '../../../helper.dart';
 import '../../views/log_in_form_view.dart';
-import '../../views/log_in_view.dart';
+import '../../views/log_in_page_view.dart';
 
 class LogInPage extends StatefulWidget {
   const LogInPage({Key? key}) : super(key: key);
@@ -17,7 +17,7 @@ class LogInPage extends StatefulWidget {
   State<StatefulWidget> createState() => LogInPageState();
 }
 
-class LogInPageState extends State<LogInPage> implements LogInView {
+class LogInPageState extends State<LogInPage> implements LogInPageView {
   final LogInPresenter _presenter = LogInFactory().getTokenPresenter();
   late final LogInForm _logInForm;
   bool _isLoading = false;
