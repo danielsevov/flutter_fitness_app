@@ -3,7 +3,6 @@ import 'package:lift_to_live_flutter/domain/repositories/token_repo.dart';
 import 'package:lift_to_live_flutter/domain/repositories/user_repo.dart';
 
 import '../state_management/app_state.dart';
-import '../../helper.dart';
 import '../views/log_in_view.dart';
 
 class LogInPresenter {
@@ -31,58 +30,31 @@ class LogInPresenter {
   Future<void> logIn(BuildContext context) async {
     _view?.setInProgress(true);
 
-    String? email = _view?.getLogInForm().getEmail(), pass = _view?.getLogInForm().getPassword();
+    String? email = _view?.getLogInForm().getEmail(),
+        pass = _view?.getLogInForm().getPassword();
 
-    if(verifyCredentials(email, pass, context)) {
-      String token = '';
-      try {
-         token = await _tokenRepository.getToken(email!, pass!);
+    String token = '';
+    try {
+      token = await _tokenRepository.getToken(email!, pass!);
 
-         if(token.isNotEmpty) {
+      if (token.isNotEmpty) {
+        var roles = await _userRepository.fetchUserRoles(token);
+        _appState.setState(email, token, roles);
 
-           var roles = await _userRepository.fetchUserRoles(token);
-           _appState.setState(email, token, roles);
-
-           _view?.navigateToHome();
-         }
-         else {
-           _view?.getLogInForm().clearPassword();
-           _view?.notifyWrongCredentials();
-         }
-
-      }
-      catch(e) {
+        _view?.navigateToHome();
+      } else {
         _view?.getLogInForm().clearPassword();
         _view?.notifyWrongCredentials();
       }
+    } catch (e) {
+      _view?.getLogInForm().clearPassword();
+      _view?.notifyWrongCredentials();
     }
 
     _view?.setInProgress(false);
   }
 
-  bool verifyCredentials(String? email, String? password, BuildContext context) {
-    if(email == null || password == null) return false;
-
-    //check email format
-    if (!RegExp(
-        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-        .hasMatch(email)) {
-       Helper.makeToast(
-           context, "Email must be in the right format (xxx@xxx.xxx)!");
-       _view?.getLogInForm().clearForm();
-      return false;
-    }
-
-    //verify password
-    else if (password.length < 8) {
-      Helper.makeToast(context, "Password must be at least 8 characters long!");
-      _view?.getLogInForm().clearPassword();
-      return false;
-    }
-
-    //verified successfully
-    return true;
+  bool isInitialized() {
+    return _isInitialized;
   }
-
-  bool isInitialized() { return _isInitialized;}
 }

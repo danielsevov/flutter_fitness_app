@@ -56,8 +56,17 @@ class LogInFormState extends State<LogInForm> {
           SizedBox(
             height: widget.screenHeight/10,
             width: (widget.screenWidth / 10) * 9,
-            child: TextField(
+            child: TextFormField(
               controller: widget._emailController,
+              validator: (value) {
+                if (value != null && !RegExp(
+                    r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                    .hasMatch(value)) {
+                  widget.clearForm();
+                  return 'Email must be in the right format (xxx@xxx.xxx)!';
+                }
+                return null;
+              },
               textAlign: TextAlign.center,
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
@@ -67,7 +76,15 @@ class LogInFormState extends State<LogInForm> {
                 ),
                 focusedBorder: OutlineInputBorder(
                     borderSide:
-                    const BorderSide(color: Colors.blue, width: 1),
+                    const BorderSide(color: Helper.blueColor, width: 1),
+                    borderRadius: BorderRadius.circular(10)),
+                focusedErrorBorder: OutlineInputBorder(
+                    borderSide:
+                    const BorderSide(color: Colors.red, width: 1),
+                    borderRadius: BorderRadius.circular(10)),
+                errorBorder: OutlineInputBorder(
+                    borderSide:
+                    const BorderSide(color: Colors.red, width: 1),
                     borderRadius: BorderRadius.circular(10)),
                 enabledBorder: OutlineInputBorder(
                     borderSide:
@@ -75,10 +92,10 @@ class LogInFormState extends State<LogInForm> {
                     borderRadius: BorderRadius.circular(10)),
                 hintText: "Enter email address",
                 hintStyle: TextStyle(
-                    color: Colors.blueGrey, fontSize: widget.screenHeight/30, height: 0.8),
+                    color: Colors.blueGrey, fontSize: widget.screenHeight/35, height: 0.8),
               ),
               style: TextStyle(
-                  color: Helper.blueColor, fontSize: widget.screenHeight/30, height: 0.8),
+                  color: Helper.blueColor, fontSize: widget.screenHeight/35, height: 0.8),
             ),
           ),
           SizedBox(
@@ -89,8 +106,15 @@ class LogInFormState extends State<LogInForm> {
           SizedBox(
             height: widget.screenHeight/10,
             width: (widget.screenWidth / 10) * 9,
-            child: TextField(
+            child: TextFormField(
               controller: widget._passwordController,
+              validator: (value) {
+                if (value != null && value.length < 8) {
+                  widget.clearPassword();
+                  return 'Password must be at least 8 characters long!';
+                }
+                return null;
+              },
               textAlign: TextAlign.center,
               keyboardType: TextInputType.visiblePassword,
               obscureText: true,
@@ -99,9 +123,17 @@ class LogInFormState extends State<LogInForm> {
                   Icons.key,
                   color: Helper.blueColor,
                 ),
+                focusedErrorBorder: OutlineInputBorder(
+                    borderSide:
+                    const BorderSide(color: Colors.red, width: 1),
+                    borderRadius: BorderRadius.circular(10)),
+                errorBorder: OutlineInputBorder(
+                    borderSide:
+                    const BorderSide(color: Colors.red, width: 1),
+                    borderRadius: BorderRadius.circular(10)),
                 focusedBorder: OutlineInputBorder(
                     borderSide:
-                    const BorderSide(color: Colors.blue, width: 1),
+                    const BorderSide(color: Helper.blueColor, width: 1),
                     borderRadius: BorderRadius.circular(10)),
                 enabledBorder: OutlineInputBorder(
                     borderSide:
@@ -109,10 +141,10 @@ class LogInFormState extends State<LogInForm> {
                     borderRadius: BorderRadius.circular(10)),
                 hintText: "Enter password",
                 hintStyle: TextStyle(
-                    color: Colors.blueGrey, fontSize: widget.screenHeight/30, height: 0.8),
+                    color: Colors.blueGrey, fontSize: widget.screenHeight/35, height: 0.8),
               ),
               style: TextStyle(
-                  color: Helper.blueColor, fontSize: widget.screenHeight/30, height: 0.8),
+                  color: Helper.blueColor, fontSize: widget.screenHeight/35, height: 0.8),
             ),
           ),
           SizedBox(
@@ -128,7 +160,9 @@ class LogInFormState extends State<LogInForm> {
               child: FloatingActionButton.extended(
                 heroTag: 'btn0',
                 onPressed: () async {
-                  widget.presenter.logIn(context);
+                  if (_logInFormKey.currentState!.validate()) {
+                    widget.presenter.logIn(context);
+                  }
                 },
                 backgroundColor: Helper.blueColor,
                 icon: const Icon(
