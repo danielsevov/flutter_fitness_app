@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lift_to_live_flutter/domain/repositories/user_repo.dart';
-import 'package:lift_to_live_flutter/presentation/ui/log_in_page.dart';
+import 'package:lift_to_live_flutter/presentation/ui/pages/log_in_page.dart';
 import 'package:lift_to_live_flutter/presentation/views/home_view.dart';
 
 import '../../domain/entities/news.dart';

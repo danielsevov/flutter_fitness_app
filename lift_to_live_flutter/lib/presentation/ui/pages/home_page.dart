@@ -6,9 +6,9 @@ import 'package:lift_to_live_flutter/presentation/presenters/home_presenter.dart
 import 'package:lift_to_live_flutter/presentation/views/home_view.dart';
 import 'package:provider/provider.dart';
 
-import '../../domain/entities/user.dart';
-import '../state_management/app_state.dart';
-import '../../helper.dart';
+import '../../../domain/entities/user.dart';
+import '../../state_management/app_state.dart';
+import '../../../helper.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);

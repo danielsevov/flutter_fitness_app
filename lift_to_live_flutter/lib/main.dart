@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'presentation/state_management/app_state.dart';
-import 'presentation/ui/log_in_page.dart';
+import 'presentation/ui/pages/log_in_page.dart';
 import 'package:provider/provider.dart';
 
 void main() {
