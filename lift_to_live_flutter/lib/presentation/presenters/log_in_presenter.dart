@@ -31,7 +31,7 @@ class LogInPresenter {
   Future<void> logIn(BuildContext context) async {
     _view?.setInProgress(true);
 
-    String? email = _view?.getEmail(), pass = _view?.getPassword();
+    String? email = _view?.getLogInForm().getEmail(), pass = _view?.getLogInForm().getPassword();
 
     if(verifyCredentials(email, pass, context)) {
       String token = '';
@@ -46,13 +46,13 @@ class LogInPresenter {
            _view?.navigateToHome();
          }
          else {
-           _view?.clearPassword();
+           _view?.getLogInForm().clearPassword();
            _view?.notifyWrongCredentials();
          }
 
       }
       catch(e) {
-        _view?.clearPassword();
+        _view?.getLogInForm().clearPassword();
         _view?.notifyWrongCredentials();
       }
     }
@@ -69,14 +69,14 @@ class LogInPresenter {
         .hasMatch(email)) {
        Helper.makeToast(
            context, "Email must be in the right format (xxx@xxx.xxx)!");
-       _view?.clearForm();
+       _view?.getLogInForm().clearForm();
       return false;
     }
 
     //verify password
     else if (password.length < 8) {
       Helper.makeToast(context, "Password must be at least 8 characters long!");
-      _view?.clearPassword();
+      _view?.getLogInForm().clearPassword();
       return false;
     }
 
