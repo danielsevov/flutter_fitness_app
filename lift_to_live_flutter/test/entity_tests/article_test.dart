@@ -4,7 +4,7 @@ import 'package:lift_to_live_flutter/domain/entities/user.dart';
 import '../mock_data/mock_data.dart';
 
 void main() {
-  test('User constructor test', () {
+  test('Article constructor test', () {
     final user = MockData.test_user_1;
 
     expect(user.id, 'user@email.com');
