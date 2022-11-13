@@ -5,12 +5,12 @@ import '../data/repositories/user_repo_impl.dart';
 import '../domain/repositories/token_repo.dart';
 import '../presentation/presenters/log_in_presenter.dart';
 
-class LogInFactory {
-  static final LogInFactory _instance = LogInFactory._internal();
+class LogInPageFactory {
+  static final LogInPageFactory _instance = LogInPageFactory._internal();
 
-  LogInFactory._internal();
+  LogInPageFactory._internal();
 
-  factory LogInFactory() {
+  factory LogInPageFactory() {
     return _instance;
   }
 

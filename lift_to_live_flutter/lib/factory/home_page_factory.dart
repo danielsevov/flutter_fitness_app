@@ -5,12 +5,12 @@ import '../domain/repositories/news_repo.dart';
 import '../domain/repositories/user_repo.dart';
 import '../presentation/presenters/home_presenter.dart';
 
-class HomeFactory {
-  static final HomeFactory _instance = HomeFactory._internal();
+class HomePageFactory {
+  static final HomePageFactory _instance = HomePageFactory._internal();
 
-  HomeFactory._internal();
+  HomePageFactory._internal();
 
-  factory HomeFactory() {
+  factory HomePageFactory() {
     return _instance;
   }
 

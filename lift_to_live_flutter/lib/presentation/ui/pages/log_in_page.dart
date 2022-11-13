@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lift_to_live_flutter/factory/log_in_factory.dart';
+import 'package:lift_to_live_flutter/factory/log_in_page_factory.dart';
 import 'package:lift_to_live_flutter/presentation/presenters/log_in_presenter.dart';
 import 'package:lift_to_live_flutter/presentation/ui/pages/home_page.dart';
 import 'package:lift_to_live_flutter/presentation/ui/widgets/log_in_form.dart';
@@ -18,7 +18,7 @@ class LogInPage extends StatefulWidget {
 }
 
 class LogInPageState extends State<LogInPage> implements LogInPageView {
-  final LogInPresenter _presenter = LogInFactory().getTokenPresenter();
+  final LogInPresenter _presenter = LogInPageFactory().getTokenPresenter();
   late final LogInForm _logInForm;
   bool _isLoading = false;
   late double _screenWidth, _screenHeight;

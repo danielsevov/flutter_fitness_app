@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lift_to_live_flutter/domain/entities/news.dart';
-import 'package:lift_to_live_flutter/factory/home_factory.dart';
+import 'package:lift_to_live_flutter/factory/home_page_factory.dart';
 import 'package:lift_to_live_flutter/presentation/presenters/home_presenter.dart';
 import 'package:lift_to_live_flutter/presentation/views/home_page_view.dart';
 import 'package:provider/provider.dart';
@@ -18,7 +18,7 @@ class HomePage extends StatefulWidget {
 }
 
 class HomePageState extends State<HomePage> implements HomePageView {
-  final HomePresenter _presenter = HomeFactory().getHomePresenter();
+  final HomePresenter _presenter = HomePageFactory().getHomePresenter();
   bool _isLoading = false, _isFetched = false;
   late News _currentNews;
   late User _user;
