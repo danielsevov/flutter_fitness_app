@@ -293,10 +293,12 @@ class HomePageState extends State<HomePage> implements HomePageView {
               delegate: SliverChildBuilderDelegate(
                 (BuildContext context, int index) {
                   return _isLoading
-                      ? const Center(
-                          child: CircularProgressIndicator(
-                          color: Helper.blueColor,
-                        ))
+                      ? (index == 0
+                          ? const Center(
+                              child: CircularProgressIndicator(
+                              color: Helper.blueColor,
+                            ))
+                          : const SizedBox(height: 20,))
                       : Container(
                           color: index.isOdd
                               ? Colors.white
@@ -313,8 +315,8 @@ class HomePageState extends State<HomePage> implements HomePageView {
                                     child: FittedBox(
                                       fit: BoxFit.fill,
                                       child: ClipRRect(
-                                        borderRadius:
-                                            const BorderRadius.only(bottomRight: Radius.circular(20)),
+                                        borderRadius: const BorderRadius.only(
+                                            bottomRight: Radius.circular(20)),
                                         child: _currentNews.articles[index]
                                                 .urlToImage.isEmpty
                                             ? null
@@ -326,15 +328,19 @@ class HomePageState extends State<HomePage> implements HomePageView {
                                                     (loadingProgress == null)
                                                         ? child
                                                         : const Center(
-                                                          child: CircularProgressIndicator(
+                                                            child:
+                                                                CircularProgressIndicator(
                                                               color: Helper
                                                                   .blueColor,
                                                             ),
-                                                        ),
+                                                          ),
                                                 errorBuilder: (context, error,
                                                         stackTrace) =>
-                                                    Container(height: 80,
-                                                      width: 160, color: Colors.white,),
+                                                    Container(
+                                                  height: 80,
+                                                  width: 160,
+                                                  color: Colors.white,
+                                                ),
                                                 scale: 0.1,
                                                 height: 80,
                                                 width: 160,
