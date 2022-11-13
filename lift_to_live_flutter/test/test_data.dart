@@ -27,7 +27,7 @@ class TestData {
   static final Habit test_habit_2 = Habit(1, 'A', 'A', 'A', 'A', false, []);
   static final Habit test_habit_3 = Habit(1, 'A', 'A', 'A', 'A', true, test_list_tasks_1);
 
-  static final MyImage test_image_1 = MyImage('A', 'A', 1, 'A', 'A');
+  static final MyImage test_image_1 = MyImage('A', 'A', 1, 'A', '4444');
   static final MyImage test_image_2 = MyImage('B', 'B', 2, 'B', 'B');
 
   static final News test_news_1 = News('A', 1, [test_article_1]);

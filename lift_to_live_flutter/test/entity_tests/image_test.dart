@@ -11,7 +11,7 @@ void main() {
     expect(image.id, 1);
     expect(image.userId, 'A');
     expect(image.type, 'A');
-    expect(image.data, 'A');
+    expect(image.data, '4444');
   });
 
   group('Image toJson tests', (){
@@ -24,7 +24,7 @@ void main() {
     test('Image toJson compared to self 2', () {
       final image = TestData.test_image_1;
 
-      expect(image.toJson().toString(), '{user_id: A, type: A, id: 1, date: A, data: A}');
+      expect(image.toJson().toString(), '{user_id: A, type: A, id: 1, date: A, data: 4444}');
     });
 
     test('Image toJson compared to other', () {
@@ -61,7 +61,7 @@ void main() {
 
     test('Image equals compared to self 2', () {
       final MyImage image = TestData.test_image_1;
-      final image2 = MyImage('A', 'A', 1, 'A', 'A');
+      final image2 = MyImage('A', 'A', 1, 'A', '4444');
 
       expect(image == image2, true);
     });
@@ -83,7 +83,7 @@ void main() {
 
     test('Image hashCode compared to self 2', () {
       final image = TestData.test_image_1;
-      final image2 = MyImage('A', 'A', 1, 'A', 'A');
+      final image2 = MyImage('A', 'A', 1, 'A', '4444');
 
       expect(image.hashCode == image2.hashCode, true);
     });
@@ -101,7 +101,7 @@ void main() {
       final image = TestData.test_image_1;
       final imageToString = image.toString();
 
-      expect(imageToString == 'MyImage{userId: A, type: A, data: A, date: A, id: 1}', true);
+      expect(imageToString == 'MyImage{userId: A, type: A, data: 4444, date: A, id: 1}', true);
     });
 
     test('Image toString test', () {
