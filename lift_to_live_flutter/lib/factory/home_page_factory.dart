@@ -1,3 +1,4 @@
+import 'package:lift_to_live_flutter/data/datasources/backend_api.dart';
 import 'package:lift_to_live_flutter/data/repositories/news_repo_impl.dart';
 import 'package:lift_to_live_flutter/data/repositories/user_repo_impl.dart';
 
@@ -14,9 +15,11 @@ class HomePageFactory {
     return _instance;
   }
 
-  NewsRepository getNewsRepository() => NewsRepoImpl();
+  BackendAPI backendAPI = BackendAPI();
 
-  UserRepository getUserRepository() => UserRepoImpl();
+  NewsRepository getNewsRepository() => NewsRepoImpl(backendAPI);
+
+  UserRepository getUserRepository() => UserRepoImpl(backendAPI);
 
   HomePresenter getHomePresenter() => HomePresenter(getNewsRepository(), getUserRepository());
 }

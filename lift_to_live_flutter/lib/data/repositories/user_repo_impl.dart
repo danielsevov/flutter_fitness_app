@@ -13,9 +13,13 @@ import '../exceptions/fetch_failed_exception.dart';
 
 
 class UserRepoImpl implements UserRepository {
+  final BackendAPI backendAPI;
+
+  UserRepoImpl(this.backendAPI);
+
   @override
   Future<Image> fetchProfileImage(String userId, String jwtToken) async {
-    Response response = await BackendAPI.fetchProfileImage(userId, jwtToken);
+    Response response = await backendAPI.fetchProfileImage(userId, jwtToken);
 
     if(response.statusCode  == 200) {
       log("fetch profile picture success!");
@@ -32,7 +36,7 @@ class UserRepoImpl implements UserRepository {
 
   @override
   Future<User> fetchUser(String userId, String jwtToken) async {
-    Response response = await BackendAPI.fetchUser(userId, jwtToken);
+    Response response = await backendAPI.fetchUser(userId, jwtToken);
 
     if(response.statusCode  == 200) {
       log("fetch user details success!");
@@ -46,7 +50,7 @@ class UserRepoImpl implements UserRepository {
 
   @override
   Future<List<Role>> fetchUserRoles(String jwtToken) async {
-    Response response = await BackendAPI.fetchUserRoles(jwtToken);
+    Response response = await backendAPI.fetchUserRoles(jwtToken);
 
     if(response.statusCode  == 200) {
       log("fetch user roles success!");

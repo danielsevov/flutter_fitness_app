@@ -8,10 +8,13 @@ import 'package:lift_to_live_flutter/domain/entities/news.dart';
 import 'package:lift_to_live_flutter/domain/repositories/news_repo.dart';
 
 class NewsRepoImpl implements NewsRepository {
+  final BackendAPI backendAPI;
+
+  NewsRepoImpl(this.backendAPI);
 
   @override
-  Future<News> getNews() async {
-    Response response = await BackendAPI.fetchNews("bodybuilding", 20);
+  Future<News> getNews(String search, int count) async {
+    Response response = await backendAPI.fetchNews(search, count);
 
     if(response.statusCode  == 200) {
       log("fetch news success!");

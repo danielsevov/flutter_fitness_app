@@ -1,3 +1,4 @@
+import 'package:lift_to_live_flutter/data/datasources/backend_api.dart';
 import 'package:lift_to_live_flutter/domain/repositories/user_repo.dart';
 
 import '../data/repositories/token_repo_impl.dart';
@@ -14,8 +15,10 @@ class LogInPageFactory {
     return _instance;
   }
 
-  TokenRepository getTokenRepository() => TokenRepoImpl();
-  UserRepository getUserRepository() => UserRepoImpl();
+  BackendAPI backendAPI = BackendAPI();
+
+  TokenRepository getTokenRepository() => TokenRepoImpl(backendAPI);
+  UserRepository getUserRepository() => UserRepoImpl(backendAPI);
 
   LogInPresenter getTokenPresenter() => LogInPresenter(getTokenRepository(), getUserRepository());
 }

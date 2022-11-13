@@ -66,7 +66,7 @@ class HomePresenter {
         _appState.getUserId(), _appState.getToken());
     _profilePicture = await _userRepository.fetchProfileImage(
         _appState.getUserId(), _appState.getToken());
-    _currentNews = await _newsRepository.getNews();
+    _currentNews = await _newsRepository.getNews("bodybuilding", 20);
 
     _view?.setInProgress(false);
     _view?.setData(_user, _profilePicture, _currentNews);

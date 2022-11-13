@@ -9,10 +9,13 @@ import '../../domain/repositories/token_repo.dart';
 import '../exceptions/fetch_failed_exception.dart';
 
 class TokenRepoImpl implements TokenRepository {
+  final BackendAPI backendAPI;
+
+  TokenRepoImpl(this.backendAPI);
 
   @override
   Future<String> getToken(String email, String password) async {
-    Response response = await BackendAPI.logIn(email, password);
+    Response response = await backendAPI.logIn(email, password);
 
     if(response.statusCode  == 200) {
       log("log in success!\ntoken:${response.body}");

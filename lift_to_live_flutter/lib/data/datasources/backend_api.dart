@@ -1,10 +1,6 @@
 import 'dart:convert';
 
-import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
-
-import '../../domain/entities/habit_task.dart';
-import '../../domain/entities/role.dart';
 
 class BackendAPI {
   static const apiURL = "http://192.168.178.28:3000/"; //molensingel
@@ -153,7 +149,7 @@ class BackendAPI {
   // }
 
 //function for sending user credentials for log in, promising future
-  static Future<http.Response> logIn(String email, String password) async {
+  Future<http.Response> logIn(String email, String password) async {
     return http.post(
       Uri.parse('${apiURL}login'),
       headers: <String, String>{
@@ -167,7 +163,7 @@ class BackendAPI {
   }
 
 //function for fetching user roles, promising future
-  static Future<http.Response> fetchUserRoles(String jwtToken) async {
+  Future<http.Response> fetchUserRoles(String jwtToken) async {
     return http.get(
       Uri.parse('${apiURL}my_role'),
       headers: <String, String>{
@@ -177,7 +173,7 @@ class BackendAPI {
     );
   }
 
-  static Future<http.Response> fetchUsers(String jwtToken) async {
+  Future<http.Response> fetchUsers(String jwtToken) async {
     return http.get(
       Uri.parse('${apiURL}users'),
       headers: <String, String>{
@@ -187,7 +183,7 @@ class BackendAPI {
     );
   }
 
-  static Future<http.Response> fetchUser(String userId, String jwtToken) async {
+  Future<http.Response> fetchUser(String userId, String jwtToken) async {
     http.Response res = await http.post(
       Uri.parse('${apiURL}get_user'),
       headers: <String, String>{
@@ -201,7 +197,7 @@ class BackendAPI {
     return res;
   }
 
-  static Future<http.Response> fetchProfileImage(String userId, String jwtToken) async {
+  Future<http.Response> fetchProfileImage(String userId, String jwtToken) async {
     http.Response res = await http.post(
       Uri.parse('${apiURL}profile_images_for_user'),
       headers: <String, String>{
@@ -215,7 +211,7 @@ class BackendAPI {
     return res;
   }
 
-  static Future<http.Response> fetchNews(String search, int pageSize) async {
+  Future<http.Response> fetchNews(String search, int pageSize) async {
     var res = await http.get(
       Uri.parse('https://newsapi.org/v2/everything?q=$search&language=en&sortBy=publishedAt&pageSize=$pageSize&apiKey=21b8ce1c0a3c495bb2b09d76a16b8d61'),
     );
