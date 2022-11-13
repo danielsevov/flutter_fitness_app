@@ -15,4 +15,27 @@ class User {
     'date_of_birth': date_of_birth,
     'phone_number': phone_number,
   };
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is User &&
+          runtimeType == other.runtimeType &&
+          id == other.id &&
+          email == other.email &&
+          coach_id == other.coach_id &&
+          nationality == other.nationality &&
+          date_of_birth == other.date_of_birth &&
+          name == other.name &&
+          phone_number == other.phone_number;
+
+  @override
+  int get hashCode =>
+      id.hashCode ^
+      email.hashCode ^
+      coach_id.hashCode ^
+      nationality.hashCode ^
+      date_of_birth.hashCode ^
+      name.hashCode ^
+      phone_number.hashCode;
 }
