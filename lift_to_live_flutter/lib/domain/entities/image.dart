@@ -28,4 +28,9 @@ class MyImage {
     'date': date,
     'data': data,
   };
+
+  @override
+  String toString() {
+    return 'MyImage{userId: $userId, type: $type, data: $data, date: $date, id: $id}';
+  }
 }

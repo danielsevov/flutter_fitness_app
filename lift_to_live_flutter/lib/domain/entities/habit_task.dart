@@ -1,5 +1,3 @@
-import 'dart:collection';
-
 class HabitTask {
   String task;
   bool isCompleted;
@@ -14,4 +12,15 @@ class HabitTask {
     'task': task,
     'is_completed': isCompleted,
   };
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is HabitTask &&
+          runtimeType == other.runtimeType &&
+          task == other.task &&
+          isCompleted == other.isCompleted;
+
+  @override
+  int get hashCode => task.hashCode ^ isCompleted.hashCode;
 }

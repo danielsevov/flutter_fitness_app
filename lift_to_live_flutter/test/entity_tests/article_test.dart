@@ -1,100 +1,99 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:lift_to_live_flutter/domain/entities/user.dart';
+import 'package:lift_to_live_flutter/domain/entities/article.dart';
 
-import '../mock_data/mock_data.dart';
+import '../test_data.dart';
 
 void main() {
   test('Article constructor test', () {
-    final user = MockData.test_user_1;
-
-    expect(user.id, 'user@email.com');
-    expect(user.email, 'user@email.com');
-    expect(user.coach_id, 'coach@email.com');
-    expect(user.nationality, 'NL');
-    expect(user.date_of_birth, '23/12/1999');
-    expect(user.phone_number, '5555555555');
-    expect(user.name, 'Test User');
+    final article = TestData.test_article_1;
+    
+    expect(article.title, 'A');
+    expect(article.author, 'A');
+    expect(article.url, 'A');
+    expect(article.urlToImage, 'A');
+    expect(article.description, 'A');
+    expect(article.content, 'A');
   });
 
-  group('User toJson tests', (){
-    test('User toJson compared to self', () {
-      final user = MockData.test_user_1;
+  group('Article toJson tests', (){
+    test('Article toJson compared to self', () {
+      final article = TestData.test_article_1;
 
-      expect(user.toJson().toString() == user.toJson().toString(), true);
+      expect(article.toJson().toString() == article.toJson().toString(), true);
     });
 
-    test('User toJson compared to self 2', () {
-      final user = MockData.test_user_1;
+    test('Article toJson compared to self 2', () {
+      final article = TestData.test_article_1;
 
-      expect(user.toJson().toString() == '{id: user@email.com, name: Test User, email: user@email.com, coach_id: coach@email.com, nationality: NL, date_of_birth: 23/12/1999, phone_number: 5555555555}', true);
+      expect(article.toJson().toString(), '{author: A, title: A, description: A, url: A, urlToImage: A, content: A}');
     });
 
-    test('User toJson compared to other', () {
-      final user = MockData.test_user_1;
-      final user2 = MockData.test_coach_1;
+    test('Article toJson compared to other', () {
+      final article = TestData.test_article_1;
+      final article2 = TestData.test_article_2;
 
-      expect(user.toJson().toString() == user2.toJson().toString(), false);
-    });
-  });
-
-  group('User fromJson tests', (){
-    test('User fromJson compared to self', () {
-      final user = MockData.test_user_1;
-      final userJson = user.toJson();
-
-      expect(user == User.fromJson(userJson), true);
-    });
-
-    test('User fromJson compared to other user', () {
-      final user = MockData.test_user_1;
-      final user2 = MockData.test_coach_1;
-      final userJson = user2.toJson();
-
-      expect(user == User.fromJson(userJson), false);
+      expect(article.toJson().toString() == article2.toJson().toString(), false);
     });
   });
 
-  group('User equals tests', (){
-    test('User equals compared to self', () {
-      final user = MockData.test_user_1;
+  group('Article fromJson tests', (){
+    test('Article fromJson compared to self', () {
+      final article = TestData.test_article_1;
+      final articleJson = article.toJson();
 
-      expect(user == user, true);
+      expect(article == Article.fromJson(articleJson), true);
     });
 
-    test('User equals compared to self 2', () {
-      final user = MockData.test_user_1;
-      final user2 = User('user@email.com', 'user@email.com', 'coach@email.com', 'NL', '23/12/1999', 'Test User', '5555555555');
+    test('Article fromJson compared to other Article', () {
+      final article = TestData.test_article_1;
+      final article2 = TestData.test_article_2;
+      final articleJson = article2.toJson();
 
-      expect(user == user2, true);
-    });
-
-    test('User equals compared to other user', () {
-      final user = MockData.test_user_1;
-      final user2 = MockData.test_coach_1;
-
-      expect(user == user2, false);
+      expect(article == Article.fromJson(articleJson), false);
     });
   });
 
-  group('User hashCode tests', (){
-    test('User hashCode compared to self', () {
-      final user = MockData.test_user_1;
+  group('Article equals tests', (){
+    test('Article equals compared to self', () {
+      final article = TestData.test_article_1;
 
-      expect(user.hashCode == user.hashCode, true);
+      expect(article == article, true);
     });
 
-    test('User hashCode compared to self 2', () {
-      final user = MockData.test_user_1;
-      final user2 = User('user@email.com', 'user@email.com', 'coach@email.com', 'NL', '23/12/1999', 'Test User', '5555555555');
+    test('Article equals compared to self 2', () {
+      final Article article = TestData.test_article_1;
+      final article2 = Article('A', 'A', 'A', 'A', 'A', 'A');
 
-      expect(user.hashCode == user2.hashCode, true);
+      expect(article == article2, true);
     });
 
-    test('User hashCode compared to other user', () {
-      final user = MockData.test_user_1;
-      final user2 = MockData.test_coach_1;
+    test('Article equals compared to other Article', () {
+      final article = TestData.test_article_1;
+      final article2 = TestData.test_article_2;
 
-      expect(user.hashCode == user2.hashCode, false);
+      expect(article == article2, false);
+    });
+  });
+
+  group('Article hashCode tests', (){
+    test('Article hashCode compared to self', () {
+      final article = TestData.test_article_1;
+
+      expect(article.hashCode == article.hashCode, true);
+    });
+
+    test('Article hashCode compared to self 2', () {
+      final article = TestData.test_article_1;
+      final article2 = Article('A', 'A', 'A', 'A', 'A', 'A');
+
+      expect(article.hashCode == article2.hashCode, true);
+    });
+
+    test('Article hashCode compared to other Article', () {
+      final article = TestData.test_article_1;
+      final article2 = TestData.test_user_1;
+
+      expect(article.hashCode == article2.hashCode, false);
     });
   });
 }

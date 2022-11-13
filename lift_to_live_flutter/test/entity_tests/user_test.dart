@@ -1,11 +1,11 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:lift_to_live_flutter/domain/entities/user.dart';
 
-import '../mock_data/mock_data.dart';
+import '../test_data.dart';
 
 void main() {
   test('User constructor test', () {
-    final user = MockData.test_user_1;
+    final user = TestData.test_user_1;
 
     expect(user.id, 'user@email.com');
     expect(user.email, 'user@email.com');
@@ -18,20 +18,20 @@ void main() {
 
   group('User toJson tests', (){
     test('User toJson compared to self', () {
-      final user = MockData.test_user_1;
+      final user = TestData.test_user_1;
 
       expect(user.toJson().toString() == user.toJson().toString(), true);
     });
 
     test('User toJson compared to self 2', () {
-      final user = MockData.test_user_1;
+      final user = TestData.test_user_1;
 
       expect(user.toJson().toString() == '{id: user@email.com, name: Test User, email: user@email.com, coach_id: coach@email.com, nationality: NL, date_of_birth: 23/12/1999, phone_number: 5555555555}', true);
     });
 
     test('User toJson compared to other', () {
-      final user = MockData.test_user_1;
-      final user2 = MockData.test_coach_1;
+      final user = TestData.test_user_1;
+      final user2 = TestData.test_coach_1;
 
       expect(user.toJson().toString() == user2.toJson().toString(), false);
     });
@@ -39,15 +39,15 @@ void main() {
 
   group('User fromJson tests', (){
     test('User fromJson compared to self', () {
-      final user = MockData.test_user_1;
+      final user = TestData.test_user_1;
       final userJson = user.toJson();
 
       expect(user == User.fromJson(userJson), true);
     });
 
     test('User fromJson compared to other user', () {
-      final user = MockData.test_user_1;
-      final user2 = MockData.test_coach_1;
+      final user = TestData.test_user_1;
+      final user2 = TestData.test_coach_1;
       final userJson = user2.toJson();
 
       expect(user == User.fromJson(userJson), false);
@@ -56,21 +56,21 @@ void main() {
 
   group('User equals tests', (){
     test('User equals compared to self', () {
-      final user = MockData.test_user_1;
+      final user = TestData.test_user_1;
 
       expect(user == user, true);
     });
 
     test('User equals compared to self 2', () {
-      final user = MockData.test_user_1;
+      final user = TestData.test_user_1;
       final user2 = User('user@email.com', 'user@email.com', 'coach@email.com', 'NL', '23/12/1999', 'Test User', '5555555555');
 
       expect(user == user2, true);
     });
 
     test('User equals compared to other user', () {
-      final user = MockData.test_user_1;
-      final user2 = MockData.test_coach_1;
+      final user = TestData.test_user_1;
+      final user2 = TestData.test_coach_1;
 
       expect(user == user2, false);
     });
@@ -78,21 +78,21 @@ void main() {
 
   group('User hashCode tests', (){
     test('User hashCode compared to self', () {
-      final user = MockData.test_user_1;
+      final user = TestData.test_user_1;
 
       expect(user.hashCode == user.hashCode, true);
     });
 
     test('User hashCode compared to self 2', () {
-      final user = MockData.test_user_1;
+      final user = TestData.test_user_1;
       final user2 = User('user@email.com', 'user@email.com', 'coach@email.com', 'NL', '23/12/1999', 'Test User', '5555555555');
 
       expect(user.hashCode == user2.hashCode, true);
     });
 
     test('User hashCode compared to other user', () {
-      final user = MockData.test_user_1;
-      final user2 = MockData.test_coach_1;
+      final user = TestData.test_user_1;
+      final user2 = TestData.test_coach_1;
 
       expect(user.hashCode == user2.hashCode, false);
     });

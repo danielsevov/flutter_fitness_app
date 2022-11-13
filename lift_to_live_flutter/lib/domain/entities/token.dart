@@ -9,4 +9,14 @@ class Token {
   Map<String, dynamic> toJson() => {
     'token': token,
   };
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Token &&
+          runtimeType == other.runtimeType &&
+          token == other.token;
+
+  @override
+  int get hashCode => token.hashCode;
 }

@@ -1,5 +1,3 @@
-import 'dart:collection';
-
 import 'habit_task.dart';
 
 class Habit {
@@ -39,4 +37,27 @@ class Habit {
     'is_template': isTemplate,
     'habits': List<dynamic>.from(habits.map((x) => x.toJson())),
   };
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Habit &&
+          runtimeType == other.runtimeType &&
+          id == other.id &&
+          date == other.date &&
+          note == other.note &&
+          userId == other.userId &&
+          coachId == other.coachId &&
+          isTemplate == other.isTemplate &&
+          habits == other.habits;
+
+  @override
+  int get hashCode =>
+      id.hashCode ^
+      date.hashCode ^
+      note.hashCode ^
+      userId.hashCode ^
+      coachId.hashCode ^
+      isTemplate.hashCode ^
+      habits.hashCode;
 }

@@ -1,7 +1,4 @@
-import 'dart:collection';
-
 import 'article.dart';
-import 'habit_task.dart';
 
 class News {
   String status;
@@ -22,4 +19,16 @@ class News {
     'totalResults': totalResults,
     'articles': List<dynamic>.from(articles.map((x) => x.toJson())),
   };
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is News &&
+          runtimeType == other.runtimeType &&
+          status == other.status &&
+          totalResults == other.totalResults;
+
+  @override
+  int get hashCode =>
+      status.hashCode ^ totalResults.hashCode;
 }
