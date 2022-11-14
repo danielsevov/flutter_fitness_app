@@ -1,21 +1,32 @@
+/// Entity class for holding the details of a single user instance.
 class User {
-  final String id, email, coach_id, nationality, date_of_birth, name, phone_number;
+  final String id,     // id of the user
+      email,           // email of the user
+      coachId,        // id of the coach of the user
+      nationality,     // nationality of the user
+      dateOfBirth,   // date of birth of the user
+      name,            // name of the user
+      phoneNumber;    // phone number of the user
 
-  User(this.id, this.email, this.coach_id, this.nationality, this.date_of_birth, this.name, this.phone_number);
+  // Simple constructor for creating an instance of an Habit entry
+  User(this.id, this.email, this.coachId, this.nationality, this.dateOfBirth, this.name, this.phoneNumber);
 
+  // Function used for transforming a JSON to an User object.
   User.fromJson(Map<String, dynamic> json)
-      : id = json['id'],email = json['email'],coach_id = json['coach_id'],nationality = json['nationality'],date_of_birth = json['date_of_birth'],name = json['name'],phone_number = json['phone_number'];
+      : id = json['id'],email = json['email'],coachId = json['coach_id'],nationality = json['nationality'],dateOfBirth = json['date_of_birth'],name = json['name'],phoneNumber = json['phone_number'];
 
+  // Function used for transforming a User object to JSON map.
   Map<String, dynamic> toJson() => {
     'id': id,
     'name': name,
     'email': email,
-    'coach_id': coach_id,
+    'coach_id': coachId,
     'nationality': nationality,
-    'date_of_birth': date_of_birth,
-    'phone_number': phone_number,
+    'date_of_birth': dateOfBirth,
+    'phone_number': phoneNumber,
   };
 
+  //Equals function
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -23,19 +34,20 @@ class User {
           runtimeType == other.runtimeType &&
           id == other.id &&
           email == other.email &&
-          coach_id == other.coach_id &&
+          coachId == other.coachId &&
           nationality == other.nationality &&
-          date_of_birth == other.date_of_birth &&
+          dateOfBirth == other.dateOfBirth &&
           name == other.name &&
-          phone_number == other.phone_number;
+          phoneNumber == other.phoneNumber;
 
+  //Hashcode function
   @override
   int get hashCode =>
       id.hashCode ^
       email.hashCode ^
-      coach_id.hashCode ^
+      coachId.hashCode ^
       nationality.hashCode ^
-      date_of_birth.hashCode ^
+      dateOfBirth.hashCode ^
       name.hashCode ^
-      phone_number.hashCode;
+      phoneNumber.hashCode;
 }

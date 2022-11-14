@@ -9,10 +9,10 @@ void main() {
 
     expect(user.id, 'user@email.com');
     expect(user.email, 'user@email.com');
-    expect(user.coach_id, 'coach@email.com');
+    expect(user.coachId, 'coach@email.com');
     expect(user.nationality, 'NL');
-    expect(user.date_of_birth, '23/12/1999');
-    expect(user.phone_number, '5555555555');
+    expect(user.dateOfBirth, '23/12/1999');
+    expect(user.phoneNumber, '5555555555');
     expect(user.name, 'Test User');
   });
 

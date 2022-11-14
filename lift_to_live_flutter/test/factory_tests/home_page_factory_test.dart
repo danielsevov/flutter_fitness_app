@@ -18,7 +18,7 @@ void main() {
   });
 
   test('HomePageFactory.getHomePresenter() test', () {
-    var presenter = HomePageFactory().getHomePresenter();
+    var presenter = HomePageFactory().getHomePagePresenter();
 
     expect(presenter, isA<HomePagePresenter>());
   });

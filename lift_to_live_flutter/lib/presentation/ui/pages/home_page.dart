@@ -18,7 +18,7 @@ class HomePage extends StatefulWidget {
 }
 
 class HomePageState extends State<HomePage> implements HomePageView {
-  final HomePagePresenter _presenter = HomePageFactory().getHomePresenter();
+  final HomePagePresenter _presenter = HomePageFactory().getHomePagePresenter();
   bool _isLoading = false, _isFetched = false;
   late News _currentNews;
   late User _user;
@@ -507,7 +507,7 @@ class HomePageState extends State<HomePage> implements HomePageView {
                                             ),
                                             Text(
                                               _isFetched
-                                                  ? _user.phone_number
+                                                  ? _user.phoneNumber
                                                   : '',
                                               style: const TextStyle(
                                                   color: Colors.white70,
