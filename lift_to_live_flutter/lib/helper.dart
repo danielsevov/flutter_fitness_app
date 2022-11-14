@@ -3,25 +3,28 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+/// Helper class, holding helper methods, which can be easily reused by multiple objects and widgets
 class Helper {
-  //blue and red shades used for the logo
-  static const blueColor = Color.fromRGBO(11, 137, 156, 1), redColor = Color.fromRGBO(171, 0, 82, 1);
-  static final DateFormat formatter = DateFormat('dd/MM/yyyy');
 
+  static const blueColor = Color.fromRGBO(11, 137, 156, 1),     //blue shade used for the logo
+               redColor = Color.fromRGBO(171, 0, 82, 1);        //red shade used for the logo
+  static final DateFormat formatter = DateFormat('dd/MM/yyyy'); //date formatter used for setting a DateTime in the 'dd/MM/yyyy' format
+
+  /// Function used to generate a Blob from a image file
   static String imageToBlob(File file) {
     final bytes = file.readAsBytesSync();
     String img64 = base64Encode(bytes);
     return img64;
   }
 
-//function for making SnackBar toasts
+/// Function for making SnackBar toasts
   static void makeToast(BuildContext context, String string) {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: Text(string),
     ));
   }
 
-  //push page with animation to navigator
+  /// Function to push page with animation to navigator.
   static void pushPageWithAnimation(BuildContext context, Widget page) {
     Navigator.push(
         context,
@@ -44,7 +47,7 @@ class Helper {
     );
   }
 
-  //push page to navigator
+  /// Function to push page to navigator.
   static void pushPage(BuildContext context, Widget page) {
     Navigator.push(
         context,
@@ -54,7 +57,7 @@ class Helper {
     );
   }
 
-  //push page to navigator
+  /// Function to push page to navigator with a callback function attached.
   static void pushPageWithCallback(BuildContext context, Widget page, Function callback) {
     Navigator.push(
         context,
@@ -77,6 +80,7 @@ class Helper {
     ).then((value) => callback());
   }
 
+  /// Function to replace by the Navigator the current page with a new one.
   static void replacePage(BuildContext context, Widget page) {
     Route route = PageRouteBuilder(
       pageBuilder: (context, animation, secondaryAnimation) => page,

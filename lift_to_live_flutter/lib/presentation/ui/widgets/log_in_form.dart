@@ -4,12 +4,16 @@ import 'package:lift_to_live_flutter/presentation/views/log_in_form_view.dart';
 import '../../../helper.dart';
 import '../../presenters/log_in_presenter.dart';
 
-// Define a custom Form widget.
+/// Custom Form widget, which is nested in the LogInPage and is used for inputting user credentials
+/// and submitting them for authentication. It implements the LogInFormView abstract class.
 class LogInForm extends StatefulWidget implements LogInFormView{
-  final double screenHeight, screenWidth;
-  final TextEditingController _emailController = TextEditingController(), _passwordController = TextEditingController();
-  final LogInPagePresenter presenter;
+  final double screenHeight,                                                 // height of the context screen
+               screenWidth;                                                  // width of the context screen
+  final TextEditingController _emailController = TextEditingController(),    // controller for the email text field
+                              _passwordController = TextEditingController(); // controller for the password text field
+  final LogInPagePresenter presenter;                                        // the log in page presenter, holder of the log in page business logic
 
+  // Simple constructor for the log in form instance, which takes the context screen dimensions and the business logic object.
   LogInForm({super.key, required this.screenHeight, required this.screenWidth, required this.presenter});
 
   @override
@@ -17,29 +21,33 @@ class LogInForm extends StatefulWidget implements LogInFormView{
     return LogInFormState();
   }
 
+  /// Function to get the current email entry.
   @override
   String getEmail() {
     return _emailController.text.toString();
   }
 
+  /// Function to get the current password entry.
   @override
   String getPassword() {
     return _passwordController.text.toString();
   }
 
+  /// Function to clear the current email and password entries.
   @override
   void clearForm() {
     _emailController.clear();
     _passwordController.clear();
   }
 
+  /// Function to clear the current password entry.
   @override
   void clearPassword() {
     _passwordController.clear();
   }
 }
 
-// This class holds data related to the log in form.
+/// This class holds data and methods related to the log in form.
 class LogInFormState extends State<LogInForm> {
   // Create a global key that uniquely identifies the Form widget
   // and allows validation of the form.

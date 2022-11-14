@@ -10,6 +10,9 @@ import '../../../helper.dart';
 import '../../views/log_in_form_view.dart';
 import '../../views/log_in_page_view.dart';
 
+/// Custom widget, which is the LogInPage and is used for inputting user credentials
+/// and submitting them for authentication and communicating with the user.
+/// It is a stateful widget and its state object implements the LogInPageView abstract class.
 class LogInPage extends StatefulWidget {
   const LogInPage({Key? key}) : super(key: key);
 
@@ -17,29 +20,36 @@ class LogInPage extends StatefulWidget {
   State<StatefulWidget> createState() => LogInPageState();
 }
 
+/// State object of the LogInPage. Holds the mutable data, related to the log in page.
 class LogInPageState extends State<LogInPage> implements LogInPageView {
-  final LogInPagePresenter _presenter = LogInPageFactory().getLogInPresenter();
-  late final LogInForm _logInForm;
-  bool _isLoading = false;
-  late double _screenWidth, _screenHeight;
+  final LogInPagePresenter _presenter = LogInPageFactory().getLogInPresenter(); // The business logic object of the log in page
+  late final LogInForm _logInForm;                                              // The log in form widget, nested in the log in page
+  bool _isLoading = false;                                                      // Indicator showing if data is being fetched at the moment
+  late double _screenWidth, _screenHeight;                                      // Dimensions of the screen
 
+  // initialize the page view by attaching it to the presenter
   @override
   void initState() {
     _presenter.attach(this);
     super.initState();
   }
 
+  // detach the view from the presenter
   @override
   void deactivate() {
     _presenter.detach();
     super.deactivate();
   }
 
+  /// Build method of the log in page view
   @override
   Widget build(BuildContext context) {
+
+    // get screen dimensions
     _screenWidth = MediaQuery.of(context).size.width;
     _screenHeight = MediaQuery.of(context).size.height;
 
+    // initialize presenter and log in form, if not initialized yet
     if (!_presenter.isInitialized()) {
       _presenter.setAppState(Provider.of<AppState>(context));
       _logInForm = LogInForm(screenHeight: _screenHeight, screenWidth: _screenWidth, presenter: _presenter);
@@ -62,6 +72,7 @@ class LogInPageState extends State<LogInPage> implements LogInPageView {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+
               //logo image
               Hero(
                 tag: 'logo',
@@ -71,6 +82,7 @@ class LogInPageState extends State<LogInPage> implements LogInPageView {
                 ),
               ),
 
+              // display loading indicator if data is being processed
               _isLoading ? const Center(child: CircularProgressIndicator(color: Helper.blueColor,)) : _logInForm
             ],
           ),
@@ -79,11 +91,13 @@ class LogInPageState extends State<LogInPage> implements LogInPageView {
     );
   }
 
+  /// Function to allow access to the log in Form.
   @override
   LogInFormView getLogInForm() {
     return _logInForm;
   }
 
+  /// Function to set if data is currently being fetched and an loading indicator should be displayed.
   @override
   void setInProgress(bool inProgress) {
     setState(() {
@@ -91,6 +105,7 @@ class LogInPageState extends State<LogInPage> implements LogInPageView {
     });
   }
 
+  /// Function to trigger page change from log in page to home page, upon successful log in.
   @override
   void navigateToHome() {
     Helper.pushPageWithAnimation(
@@ -98,6 +113,7 @@ class LogInPageState extends State<LogInPage> implements LogInPageView {
         const HomePage());
   }
 
+  /// Function to display a toast message, when user cannot be authenticated.
   @override
   void notifyWrongCredentials() {
     Helper.makeToast(context, "Email or password is wrong!");
