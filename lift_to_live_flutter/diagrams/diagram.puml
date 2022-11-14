@@ -1,0 +1,354 @@
+@startuml
+set namespaceSeparator ::
+
+class "lift_to_live_flutter::data::datasources::backend_api.dart::BackendAPI" {
+  {static} +String apiURL
+  +Future<Response> logIn()
+  +Future<Response> fetchUserRoles()
+  +Future<Response> fetchUsers()
+  +Future<Response> fetchUser()
+  +Future<Response> fetchProfileImage()
+  +Future<Response> fetchNews()
+}
+
+class "lift_to_live_flutter::data::exceptions::fetch_failed_exception.dart::FetchFailedException" {
+  +String cause
+}
+
+"dart::core::Exception" <|-- "lift_to_live_flutter::data::exceptions::fetch_failed_exception.dart::FetchFailedException"
+
+class "lift_to_live_flutter::data::repositories::news_repo_impl.dart::NewsRepoImpl" {
+  +BackendAPI backendAPI
+  +Future<News> getNews()
+}
+
+"lift_to_live_flutter::data::repositories::news_repo_impl.dart::NewsRepoImpl" o-- "lift_to_live_flutter::data::datasources::backend_api.dart::BackendAPI"
+"lift_to_live_flutter::domain::repositories::news_repo.dart::NewsRepository" <|-- "lift_to_live_flutter::data::repositories::news_repo_impl.dart::NewsRepoImpl"
+
+class "lift_to_live_flutter::data::repositories::token_repo_impl.dart::TokenRepoImpl" {
+  +BackendAPI backendAPI
+  +Future<String> getToken()
+}
+
+"lift_to_live_flutter::data::repositories::token_repo_impl.dart::TokenRepoImpl" o-- "lift_to_live_flutter::data::datasources::backend_api.dart::BackendAPI"
+"lift_to_live_flutter::domain::repositories::token_repo.dart::TokenRepository" <|-- "lift_to_live_flutter::data::repositories::token_repo_impl.dart::TokenRepoImpl"
+
+class "lift_to_live_flutter::data::repositories::user_repo_impl.dart::UserRepoImpl" {
+  +BackendAPI backendAPI
+  +Future<Image> fetchProfileImage()
+  +Future<User> fetchUser()
+  +Future<List<Role>> fetchUserRoles()
+}
+
+"lift_to_live_flutter::data::repositories::user_repo_impl.dart::UserRepoImpl" o-- "lift_to_live_flutter::data::datasources::backend_api.dart::BackendAPI"
+"lift_to_live_flutter::domain::repositories::user_repo.dart::UserRepository" <|-- "lift_to_live_flutter::data::repositories::user_repo_impl.dart::UserRepoImpl"
+
+class "lift_to_live_flutter::domain::entities::article.dart::Article" {
+  +String author
+  +String title
+  +String description
+  +String url
+  +String urlToImage
+  +String content
+  +int hashCode
+  +Map<String, dynamic> toJson()
+  +bool ==()
+}
+
+class "lift_to_live_flutter::domain::entities::habit.dart::Habit" {
+  +int id
+  +String date
+  +String note
+  +String userId
+  +String coachId
+  +bool isTemplate
+  +List<HabitTask> habits
+  +int hashCode
+  +Map<String, dynamic> toJson()
+  +Map<String, dynamic> toJsonNoID()
+  +bool ==()
+}
+
+class "lift_to_live_flutter::domain::entities::habit_task.dart::HabitTask" {
+  +String task
+  +bool isCompleted
+  +int hashCode
+  +Map<String, dynamic> toJson()
+  +bool ==()
+}
+
+class "lift_to_live_flutter::domain::entities::image.dart::MyImage" {
+  +String userId
+  +String type
+  +String data
+  +String date
+  +int id
+  +int hashCode
+  +bool ==()
+  +Map<String, dynamic> toJson()
+  +String toString()
+}
+
+class "lift_to_live_flutter::domain::entities::news.dart::News" {
+  +String status
+  +int totalResults
+  +List<Article> articles
+  +int hashCode
+  +Map<String, dynamic> toJson()
+  +bool ==()
+}
+
+class "lift_to_live_flutter::domain::entities::role.dart::Role" {
+  +String userId
+  +String name
+  +int hashCode
+  +Map<String, dynamic> toJson()
+  +bool ==()
+}
+
+class "lift_to_live_flutter::domain::entities::token.dart::Token" {
+  +String token
+  +int hashCode
+  +Map<String, dynamic> toJson()
+  +bool ==()
+}
+
+class "lift_to_live_flutter::domain::entities::user.dart::User" {
+  +String id
+  +String email
+  +String coach_id
+  +String nationality
+  +String date_of_birth
+  +String name
+  +String phone_number
+  +int hashCode
+  +Map<String, dynamic> toJson()
+  +bool ==()
+}
+
+abstract class "lift_to_live_flutter::domain::repositories::news_repo.dart::NewsRepository" {
+  +Future<News> getNews()
+}
+
+abstract class "lift_to_live_flutter::domain::repositories::token_repo.dart::TokenRepository" {
+  +Future<String> getToken()
+}
+
+abstract class "lift_to_live_flutter::domain::repositories::user_repo.dart::UserRepository" {
+  +Future<List<Role>> fetchUserRoles()
+  +Future<User> fetchUser()
+  +Future<Image> fetchProfileImage()
+}
+
+class "lift_to_live_flutter::factory::home_page_factory.dart::HomePageFactory" {
+  {static} -HomePageFactory _instance
+  +BackendAPI backendAPI
+  +NewsRepository getNewsRepository()
+  +UserRepository getUserRepository()
+  +HomePagePresenter getHomePresenter()
+}
+
+"lift_to_live_flutter::factory::home_page_factory.dart::HomePageFactory" o-- "lift_to_live_flutter::factory::home_page_factory.dart::HomePageFactory"
+"lift_to_live_flutter::factory::home_page_factory.dart::HomePageFactory" o-- "lift_to_live_flutter::data::datasources::backend_api.dart::BackendAPI"
+
+class "lift_to_live_flutter::factory::log_in_page_factory.dart::LogInPageFactory" {
+  {static} -LogInPageFactory _instance
+  +BackendAPI backendAPI
+  +TokenRepository getTokenRepository()
+  +UserRepository getUserRepository()
+  +LogInPagePresenter getLogInPresenter()
+}
+
+"lift_to_live_flutter::factory::log_in_page_factory.dart::LogInPageFactory" o-- "lift_to_live_flutter::factory::log_in_page_factory.dart::LogInPageFactory"
+"lift_to_live_flutter::factory::log_in_page_factory.dart::LogInPageFactory" o-- "lift_to_live_flutter::data::datasources::backend_api.dart::BackendAPI"
+
+class "lift_to_live_flutter::helper.dart::Helper" {
+  {static} +Color blueColor
+  {static} +Color redColor
+  {static} +DateFormat formatter
+  {static} +String imageToBlob()
+  {static} +void makeToast()
+  {static} +void pushPageWithAnimation()
+  {static} +void pushPage()
+  {static} +void pushPageWithCallback()
+  {static} +void replacePage()
+}
+
+"lift_to_live_flutter::helper.dart::Helper" o-- "dart::ui::Color"
+"lift_to_live_flutter::helper.dart::Helper" o-- "intl::src::intl::date_format.dart::DateFormat"
+
+class "lift_to_live_flutter::main.dart::MyApp" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "lift_to_live_flutter::main.dart::MyApp"
+
+class "lift_to_live_flutter::presentation::presenters::home_presenter.dart::HomePagePresenter" {
+  -HomePageView? _view
+  -NewsRepository _newsRepository
+  -UserRepository _userRepository
+  -AppState _appState
+  -bool _isInitialized
+  -User _user
+  -News _currentNews
+  -Image _profilePicture
+  +void attach()
+  +void detach()
+  +void setAppState()
+  +bool isInitialized()
+  +void habitsPressed()
+  +void profilePressed()
+  +void traineesPressed()
+  +Future<void> fetchData()
+  +void logOut()
+  +void redirectToURL()
+  +dynamic isCoachOrAdmin()
+}
+
+"lift_to_live_flutter::presentation::presenters::home_presenter.dart::HomePagePresenter" o-- "lift_to_live_flutter::presentation::views::home_page_view.dart::HomePageView"
+"lift_to_live_flutter::presentation::presenters::home_presenter.dart::HomePagePresenter" o-- "lift_to_live_flutter::domain::repositories::news_repo.dart::NewsRepository"
+"lift_to_live_flutter::presentation::presenters::home_presenter.dart::HomePagePresenter" o-- "lift_to_live_flutter::domain::repositories::user_repo.dart::UserRepository"
+"lift_to_live_flutter::presentation::presenters::home_presenter.dart::HomePagePresenter" o-- "lift_to_live_flutter::presentation::state_management::app_state.dart::AppState"
+"lift_to_live_flutter::presentation::presenters::home_presenter.dart::HomePagePresenter" o-- "lift_to_live_flutter::domain::entities::user.dart::User"
+"lift_to_live_flutter::presentation::presenters::home_presenter.dart::HomePagePresenter" o-- "lift_to_live_flutter::domain::entities::news.dart::News"
+"lift_to_live_flutter::presentation::presenters::home_presenter.dart::HomePagePresenter" o-- "flutter::src::widgets::image.dart::Image"
+
+class "lift_to_live_flutter::presentation::presenters::log_in_presenter.dart::LogInPagePresenter" {
+  -LogInPageView? _view
+  -TokenRepository _tokenRepository
+  -UserRepository _userRepository
+  -AppState _appState
+  -bool _isInitialized
+  +void attach()
+  +void detach()
+  +void setAppState()
+  +Future<void> logIn()
+  +bool isInitialized()
+}
+
+"lift_to_live_flutter::presentation::presenters::log_in_presenter.dart::LogInPagePresenter" o-- "lift_to_live_flutter::presentation::views::log_in_page_view.dart::LogInPageView"
+"lift_to_live_flutter::presentation::presenters::log_in_presenter.dart::LogInPagePresenter" o-- "lift_to_live_flutter::domain::repositories::token_repo.dart::TokenRepository"
+"lift_to_live_flutter::presentation::presenters::log_in_presenter.dart::LogInPagePresenter" o-- "lift_to_live_flutter::domain::repositories::user_repo.dart::UserRepository"
+"lift_to_live_flutter::presentation::presenters::log_in_presenter.dart::LogInPagePresenter" o-- "lift_to_live_flutter::presentation::state_management::app_state.dart::AppState"
+
+class "lift_to_live_flutter::presentation::state_management::app_state.dart::AppState" {
+  -String _token
+  -String _userId
+  -List<Role> _userRoles
+  +void clearState()
+  +bool hasState()
+  +String getToken()
+  +String getUserId()
+  +List<Role> getUserRoles()
+  +void setState()
+  +bool isCoachOrAdmin()
+  +bool isAdmin()
+  +bool isCoach()
+}
+
+class "lift_to_live_flutter::presentation::ui::pages::home_page.dart::HomePage" {
+  +State<StatefulWidget> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "lift_to_live_flutter::presentation::ui::pages::home_page.dart::HomePage"
+
+class "lift_to_live_flutter::presentation::ui::pages::home_page.dart::HomePageState" {
+  -HomePagePresenter _presenter
+  -bool _isLoading
+  -bool _isFetched
+  -News _currentNews
+  -User _user
+  -Image _profilePicture
+  -double _screenWidth
+  -double _screenHeight
+  +void initState()
+  +void deactivate()
+  +void setInProgress()
+  +void setData()
+  +void setFetched()
+  +void notifyWrongURL()
+  +Widget build()
+}
+
+"lift_to_live_flutter::presentation::ui::pages::home_page.dart::HomePageState" o-- "lift_to_live_flutter::presentation::presenters::home_presenter.dart::HomePagePresenter"
+"lift_to_live_flutter::presentation::ui::pages::home_page.dart::HomePageState" o-- "lift_to_live_flutter::domain::entities::news.dart::News"
+"lift_to_live_flutter::presentation::ui::pages::home_page.dart::HomePageState" o-- "lift_to_live_flutter::domain::entities::user.dart::User"
+"lift_to_live_flutter::presentation::ui::pages::home_page.dart::HomePageState" o-- "flutter::src::widgets::image.dart::Image"
+"flutter::src::widgets::framework.dart::State" <|-- "lift_to_live_flutter::presentation::ui::pages::home_page.dart::HomePageState"
+"lift_to_live_flutter::presentation::views::home_page_view.dart::HomePageView" <|-- "lift_to_live_flutter::presentation::ui::pages::home_page.dart::HomePageState"
+
+class "lift_to_live_flutter::presentation::ui::pages::log_in_page.dart::LogInPage" {
+  +State<StatefulWidget> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "lift_to_live_flutter::presentation::ui::pages::log_in_page.dart::LogInPage"
+
+class "lift_to_live_flutter::presentation::ui::pages::log_in_page.dart::LogInPageState" {
+  -LogInPagePresenter _presenter
+  -LogInForm _logInForm
+  -bool _isLoading
+  -double _screenWidth
+  -double _screenHeight
+  +void initState()
+  +void deactivate()
+  +Widget build()
+  +LogInFormView getLogInForm()
+  +void setInProgress()
+  +void navigateToHome()
+  +void notifyWrongCredentials()
+}
+
+"lift_to_live_flutter::presentation::ui::pages::log_in_page.dart::LogInPageState" o-- "lift_to_live_flutter::presentation::presenters::log_in_presenter.dart::LogInPagePresenter"
+"lift_to_live_flutter::presentation::ui::pages::log_in_page.dart::LogInPageState" o-- "lift_to_live_flutter::presentation::ui::widgets::log_in_form.dart::LogInForm"
+"flutter::src::widgets::framework.dart::State" <|-- "lift_to_live_flutter::presentation::ui::pages::log_in_page.dart::LogInPageState"
+"lift_to_live_flutter::presentation::views::log_in_page_view.dart::LogInPageView" <|-- "lift_to_live_flutter::presentation::ui::pages::log_in_page.dart::LogInPageState"
+
+class "lift_to_live_flutter::presentation::ui::widgets::log_in_form.dart::LogInForm" {
+  +double screenHeight
+  +double screenWidth
+  -TextEditingController _emailController
+  -TextEditingController _passwordController
+  +LogInPagePresenter presenter
+  +LogInFormState createState()
+  +String getEmail()
+  +String getPassword()
+  +void clearForm()
+  +void clearPassword()
+}
+
+"lift_to_live_flutter::presentation::ui::widgets::log_in_form.dart::LogInForm" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"lift_to_live_flutter::presentation::ui::widgets::log_in_form.dart::LogInForm" o-- "lift_to_live_flutter::presentation::presenters::log_in_presenter.dart::LogInPagePresenter"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "lift_to_live_flutter::presentation::ui::widgets::log_in_form.dart::LogInForm"
+"lift_to_live_flutter::presentation::views::log_in_form_view.dart::LogInFormView" <|-- "lift_to_live_flutter::presentation::ui::widgets::log_in_form.dart::LogInForm"
+
+class "lift_to_live_flutter::presentation::ui::widgets::log_in_form.dart::LogInFormState" {
+  -GlobalKey<FormState> _logInFormKey
+  +Widget build()
+}
+
+"lift_to_live_flutter::presentation::ui::widgets::log_in_form.dart::LogInFormState" o-- "flutter::src::widgets::framework.dart::GlobalKey<FormState>"
+"flutter::src::widgets::framework.dart::State" <|-- "lift_to_live_flutter::presentation::ui::widgets::log_in_form.dart::LogInFormState"
+
+abstract class "lift_to_live_flutter::presentation::views::home_page_view.dart::HomePageView" {
+  +void setData()
+  +void setInProgress()
+  +void setFetched()
+  +void notifyWrongURL()
+}
+
+abstract class "lift_to_live_flutter::presentation::views::log_in_form_view.dart::LogInFormView" {
+  +String getPassword()
+  +String getEmail()
+  +void clearForm()
+  +void clearPassword()
+}
+
+abstract class "lift_to_live_flutter::presentation::views::log_in_page_view.dart::LogInPageView" {
+  +void setInProgress()
+  +LogInFormView getLogInForm()
+  +void navigateToHome()
+  +void notifyWrongCredentials()
+}
+
+
+@enduml
