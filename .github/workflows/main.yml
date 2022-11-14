@@ -4,7 +4,15 @@ jobs:
   drive:
     runs-on: ubuntu-latest
     steps:
+    - name: ./bin/flutter test --coverage
+      run: pushd packages/flutter;../../bin/flutter test --coverage -j 1;popd
+    - name: upload coverage
+      uses: codecov/codecov-action@81cd2dc8148241f03f5839d295e000b8f761e378
+      with:
+          files: packages/flutter/coverage/lcov.info
+          verbose: true
     - uses: actions/checkout@v1
     - uses: subosito/flutter-action@v1
     - run : flutter test 
       working-directory: lift_to_live_flutter
+    
