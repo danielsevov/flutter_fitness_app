@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lift_to_live_flutter/factory/log_in_page_factory.dart';
-import 'package:lift_to_live_flutter/presentation/presenters/log_in_presenter.dart';
+import 'package:lift_to_live_flutter/presentation/presenters/log_in_page_presenter.dart';
 import 'package:lift_to_live_flutter/presentation/ui/pages/home_page.dart';
 import 'package:lift_to_live_flutter/presentation/ui/widgets/log_in_form.dart';
 import 'package:provider/provider.dart';
@@ -22,19 +22,22 @@ class LogInPage extends StatefulWidget {
 
 /// State object of the LogInPage. Holds the mutable data, related to the log in page.
 class LogInPageState extends State<LogInPage> implements LogInPageView {
-  final LogInPagePresenter _presenter = LogInPageFactory().getLogInPresenter(); // The business logic object of the log in page
-  late final LogInForm _logInForm;                                              // The log in form widget, nested in the log in page
-  bool _isLoading = false;                                                      // Indicator showing if data is being fetched at the moment
-  late double _screenWidth, _screenHeight;                                      // Dimensions of the screen
+  final LogInPagePresenter _presenter = LogInPageFactory()
+      .getLogInPresenter(); // The business logic object of the log in page
+  late final LogInForm
+      _logInForm; // The log in form widget, nested in the log in page
+  bool _isLoading =
+      false; // Indicator showing if data is being fetched at the moment
+  late double _screenWidth, _screenHeight; // Dimensions of the screen
 
-  // initialize the page view by attaching it to the presenter
+  /// initialize the page view by attaching it to the presenter
   @override
   void initState() {
     _presenter.attach(this);
     super.initState();
   }
 
-  // detach the view from the presenter
+  /// detach the view from the presenter
   @override
   void deactivate() {
     _presenter.detach();
@@ -44,7 +47,6 @@ class LogInPageState extends State<LogInPage> implements LogInPageView {
   /// Build method of the log in page view
   @override
   Widget build(BuildContext context) {
-
     // get screen dimensions
     _screenWidth = MediaQuery.of(context).size.width;
     _screenHeight = MediaQuery.of(context).size.height;
@@ -52,7 +54,10 @@ class LogInPageState extends State<LogInPage> implements LogInPageView {
     // initialize presenter and log in form, if not initialized yet
     if (!_presenter.isInitialized()) {
       _presenter.setAppState(Provider.of<AppState>(context));
-      _logInForm = LogInForm(screenHeight: _screenHeight, screenWidth: _screenWidth, presenter: _presenter);
+      _logInForm = LogInForm(
+          screenHeight: _screenHeight,
+          screenWidth: _screenWidth,
+          presenter: _presenter);
     }
 
     return Scaffold(
@@ -64,15 +69,16 @@ class LogInPageState extends State<LogInPage> implements LogInPageView {
           height: _screenHeight - 20,
           margin: const EdgeInsets.all(10),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(30), image: const DecorationImage(
-            image: AssetImage("assets/images/whitewaves.png"),
-            fit: BoxFit.cover,
-          ),),
+            borderRadius: BorderRadius.circular(30),
+            image: const DecorationImage(
+              image: AssetImage("assets/images/whitewaves.png"),
+              fit: BoxFit.cover,
+            ),
+          ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-
               //logo image
               Hero(
                 tag: 'logo',
@@ -83,7 +89,12 @@ class LogInPageState extends State<LogInPage> implements LogInPageView {
               ),
 
               // display loading indicator if data is being processed
-              _isLoading ? const Center(child: CircularProgressIndicator(color: Helper.blueColor,)) : _logInForm
+              _isLoading
+                  ? const Center(
+                      child: CircularProgressIndicator(
+                      color: Helper.blueColor,
+                    ))
+                  : _logInForm
             ],
           ),
         ),
@@ -108,9 +119,7 @@ class LogInPageState extends State<LogInPage> implements LogInPageView {
   /// Function to trigger page change from log in page to home page, upon successful log in.
   @override
   void navigateToHome() {
-    Helper.pushPageWithAnimation(
-        context,
-        const HomePage());
+    Helper.pushPageWithAnimation(context, const HomePage());
   }
 
   /// Function to display a toast message, when user cannot be authenticated.

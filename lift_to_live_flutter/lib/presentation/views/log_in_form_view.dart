@@ -1,7 +1,6 @@
 /// API to the LogInForm view widget.
 /// Describes the methods of the log in form view implementation.
 abstract class LogInFormView {
-
   /// Function to get the current password entry.
   String getPassword();
 

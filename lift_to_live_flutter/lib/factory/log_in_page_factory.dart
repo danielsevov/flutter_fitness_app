@@ -4,7 +4,7 @@ import 'package:lift_to_live_flutter/domain/repositories/user_repo.dart';
 import '../data/repositories/token_repo_impl.dart';
 import '../data/repositories/user_repo_impl.dart';
 import '../domain/repositories/token_repo.dart';
-import '../presentation/presenters/log_in_presenter.dart';
+import '../presentation/presenters/log_in_page_presenter.dart';
 
 /// Factory object for creating a LogInPagePresenter object, by attaching the required repositories and datasources.
 /// This factory is a singleton object.
@@ -19,9 +19,12 @@ class LogInPageFactory {
 
   BackendAPI backendAPI = BackendAPI(); // datasource
 
-  TokenRepository getTokenRepository() => TokenRepoImpl(backendAPI);  // token repository
-  UserRepository getUserRepository() => UserRepoImpl(backendAPI);     // user repository
+  TokenRepository getTokenRepository() =>
+      TokenRepoImpl(backendAPI); // token repository
+  UserRepository getUserRepository() =>
+      UserRepoImpl(backendAPI); // user repository
 
   // function to get a LogInPagePresenter object.
-  LogInPagePresenter getLogInPresenter() => LogInPagePresenter(getTokenRepository(), getUserRepository());
+  LogInPagePresenter getLogInPresenter() =>
+      LogInPagePresenter(getTokenRepository(), getUserRepository());
 }

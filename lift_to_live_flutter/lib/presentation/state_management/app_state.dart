@@ -4,9 +4,10 @@ import '../../domain/entities/role.dart';
 /// It is used in combination with the Provider package to allow pages to look up the app state
 /// object in the widget tree and to access it, when needed.
 class AppState {
-  String _token = '',         // JWT token for the current session
-      _userId = '';           // user id of the current logged in user
-  List<Role> _userRoles = []; // list of the user roles of the current logged in user
+  String _token = '', // JWT token for the current session
+      _userId = ''; // user id of the current logged in user
+  List<Role> _userRoles =
+      []; // list of the user roles of the current logged in user
 
   /// Function used to restore the default app state.
   void clearState() {
@@ -44,7 +45,8 @@ class AppState {
 
   /// Function to indicate if the current logged in user is admin or coach.
   bool isCoachOrAdmin() {
-    return _userRoles.map((e) => e.name).contains("admin") || _userRoles.map((e) => e.name).contains("coach");
+    return _userRoles.map((e) => e.name).contains("admin") ||
+        _userRoles.map((e) => e.name).contains("coach");
   }
 
   /// Function to indicate if the current logged in user is admin.
@@ -56,5 +58,4 @@ class AppState {
   bool isCoach() {
     return _userRoles.map((e) => e.name).contains("coach");
   }
-
 }

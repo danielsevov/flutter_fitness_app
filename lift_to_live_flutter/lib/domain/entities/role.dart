@@ -1,7 +1,7 @@
 /// Entity class for holding details of a single user role instance.
 class Role {
   String userId, // id of the user owner of the role
-      name;      // role name (coach, admin)
+      name; // role name (coach, admin)
 
   //Simple constructor for creating a role instance
   Role(this.userId, this.name);
@@ -13,9 +13,9 @@ class Role {
 
   // Function used for transforming a Role object to JSON map.
   Map<String, dynamic> toJson() => {
-    'userId': userId,
-    'name': name,
-  };
+        'userId': userId,
+        'name': name,
+      };
 
   //Equals function
   @override

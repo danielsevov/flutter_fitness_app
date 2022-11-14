@@ -2,7 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:lift_to_live_flutter/domain/repositories/news_repo.dart';
 import 'package:lift_to_live_flutter/domain/repositories/user_repo.dart';
 import 'package:lift_to_live_flutter/factory/home_page_factory.dart';
-import 'package:lift_to_live_flutter/presentation/presenters/home_presenter.dart';
+import 'package:lift_to_live_flutter/presentation/presenters/home_page_presenter.dart';
 
 void main() {
   test('HomePageFactory.getUserRepository() test', () {

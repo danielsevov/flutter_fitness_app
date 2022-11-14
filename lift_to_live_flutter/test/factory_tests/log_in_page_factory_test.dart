@@ -2,7 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:lift_to_live_flutter/domain/repositories/token_repo.dart';
 import 'package:lift_to_live_flutter/domain/repositories/user_repo.dart';
 import 'package:lift_to_live_flutter/factory/log_in_page_factory.dart';
-import 'package:lift_to_live_flutter/presentation/presenters/log_in_presenter.dart';
+import 'package:lift_to_live_flutter/presentation/presenters/log_in_page_presenter.dart';
 
 void main() {
   test('LogInPageFactory.getUserRepository() test', () {

@@ -139,28 +139,4 @@ class MockBackendAPI extends _i1.Mock implements _i3.BackendAPI {
           ),
         )),
       ) as _i4.Future<_i2.Response>);
-  @override
-  _i4.Future<_i2.Response> fetchNews(
-    String? search,
-    int? pageSize,
-  ) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #fetchNews,
-          [
-            search,
-            pageSize,
-          ],
-        ),
-        returnValue: _i4.Future<_i2.Response>.value(_FakeResponse_0(
-          this,
-          Invocation.method(
-            #fetchNews,
-            [
-              search,
-              pageSize,
-            ],
-          ),
-        )),
-      ) as _i4.Future<_i2.Response>);
 }

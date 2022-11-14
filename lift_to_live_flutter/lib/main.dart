@@ -15,7 +15,6 @@ class MyApp extends StatelessWidget {
   /// This build method creates the widget, which is the root of the application.
   @override
   Widget build(BuildContext context) {
-
     // set the AppState provider in the root of the widget tree, so all widgets can access it.
     return Provider<AppState>(
         create: (_) => AppState(),

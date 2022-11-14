@@ -6,7 +6,6 @@ import '../entities/role.dart';
 /// API to the User repository object.
 /// Defines method to be implemented.
 abstract class UserRepository {
-
   /// This function is used for fetching a list of Role objects, describing the user role of a user.
   Future<List<Role>> fetchUserRoles(String jwtToken);
 

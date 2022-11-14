@@ -1,6 +1,6 @@
 /// Entity class for holding details of a single Habit task instance.
 class HabitTask {
-  String task;      // Task description
+  String task; // Task description
   bool isCompleted; // Indicator of completeness of the task
 
   // Simple constructor for creating a habit task instance
@@ -13,9 +13,9 @@ class HabitTask {
 
   // Function used for transforming a Habit task object to JSON map.
   Map<String, dynamic> toJson() => {
-    'task': task,
-    'is_completed': isCompleted,
-  };
+        'task': task,
+        'is_completed': isCompleted,
+      };
 
   //Equals function
   @override

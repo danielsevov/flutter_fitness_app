@@ -6,7 +6,7 @@
 import 'dart:async' as _i4;
 
 import 'package:http/http.dart' as _i2;
-import 'package:lift_to_live_flutter/data/datasources/backend_api.dart' as _i3;
+import 'package:lift_to_live_flutter/data/datasources/news_api.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -30,115 +30,14 @@ class _FakeResponse_0 extends _i1.SmartFake implements _i2.Response {
         );
 }
 
-/// A class which mocks [BackendAPI].
+/// A class which mocks [NewsAPI].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockBackendAPI extends _i1.Mock implements _i3.BackendAPI {
-  MockBackendAPI() {
+class MockNewsAPI extends _i1.Mock implements _i3.NewsAPI {
+  MockNewsAPI() {
     _i1.throwOnMissingStub(this);
   }
 
-  @override
-  _i4.Future<_i2.Response> logIn(
-    String? email,
-    String? password,
-  ) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #logIn,
-          [
-            email,
-            password,
-          ],
-        ),
-        returnValue: _i4.Future<_i2.Response>.value(_FakeResponse_0(
-          this,
-          Invocation.method(
-            #logIn,
-            [
-              email,
-              password,
-            ],
-          ),
-        )),
-      ) as _i4.Future<_i2.Response>);
-  @override
-  _i4.Future<_i2.Response> fetchUserRoles(String? jwtToken) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #fetchUserRoles,
-          [jwtToken],
-        ),
-        returnValue: _i4.Future<_i2.Response>.value(_FakeResponse_0(
-          this,
-          Invocation.method(
-            #fetchUserRoles,
-            [jwtToken],
-          ),
-        )),
-      ) as _i4.Future<_i2.Response>);
-  @override
-  _i4.Future<_i2.Response> fetchUsers(String? jwtToken) => (super.noSuchMethod(
-        Invocation.method(
-          #fetchUsers,
-          [jwtToken],
-        ),
-        returnValue: _i4.Future<_i2.Response>.value(_FakeResponse_0(
-          this,
-          Invocation.method(
-            #fetchUsers,
-            [jwtToken],
-          ),
-        )),
-      ) as _i4.Future<_i2.Response>);
-  @override
-  _i4.Future<_i2.Response> fetchUser(
-    String? userId,
-    String? jwtToken,
-  ) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #fetchUser,
-          [
-            userId,
-            jwtToken,
-          ],
-        ),
-        returnValue: _i4.Future<_i2.Response>.value(_FakeResponse_0(
-          this,
-          Invocation.method(
-            #fetchUser,
-            [
-              userId,
-              jwtToken,
-            ],
-          ),
-        )),
-      ) as _i4.Future<_i2.Response>);
-  @override
-  _i4.Future<_i2.Response> fetchProfileImage(
-    String? userId,
-    String? jwtToken,
-  ) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #fetchProfileImage,
-          [
-            userId,
-            jwtToken,
-          ],
-        ),
-        returnValue: _i4.Future<_i2.Response>.value(_FakeResponse_0(
-          this,
-          Invocation.method(
-            #fetchProfileImage,
-            [
-              userId,
-              jwtToken,
-            ],
-          ),
-        )),
-      ) as _i4.Future<_i2.Response>);
   @override
   _i4.Future<_i2.Response> fetchNews(
     String? search,

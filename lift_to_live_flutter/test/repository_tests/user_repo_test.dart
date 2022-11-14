@@ -11,7 +11,7 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 import '../test_data.dart';
-import 'news_repo_test.mocks.dart';
+import 'user_repo_test.mocks.dart';
 
 @GenerateMocks([BackendAPI])
 void main() {

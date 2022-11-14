@@ -2,19 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:lift_to_live_flutter/presentation/views/log_in_form_view.dart';
 
 import '../../../helper.dart';
-import '../../presenters/log_in_presenter.dart';
+import '../../presenters/log_in_page_presenter.dart';
 
 /// Custom Form widget, which is nested in the LogInPage and is used for inputting user credentials
 /// and submitting them for authentication. It implements the LogInFormView abstract class.
-class LogInForm extends StatefulWidget implements LogInFormView{
-  final double screenHeight,                                                 // height of the context screen
-               screenWidth;                                                  // width of the context screen
-  final TextEditingController _emailController = TextEditingController(),    // controller for the email text field
-                              _passwordController = TextEditingController(); // controller for the password text field
-  final LogInPagePresenter presenter;                                        // the log in page presenter, holder of the log in page business logic
+class LogInForm extends StatefulWidget implements LogInFormView {
+  final double screenHeight, // height of the context screen
+      screenWidth; // width of the context screen
+  final TextEditingController _emailController =
+          TextEditingController(), // controller for the email text field
+      _passwordController =
+          TextEditingController(); // controller for the password text field
+  final LogInPagePresenter
+      presenter; // the log in page presenter, holder of the log in page business logic
 
   // Simple constructor for the log in form instance, which takes the context screen dimensions and the business logic object.
-  LogInForm({super.key, required this.screenHeight, required this.screenWidth, required this.presenter});
+  LogInForm(
+      {super.key,
+      required this.screenHeight,
+      required this.screenWidth,
+      required this.presenter});
 
   @override
   LogInFormState createState() {
@@ -62,14 +69,14 @@ class LogInFormState extends State<LogInForm> {
         children: [
           //email text field
           SizedBox(
-            height: widget.screenHeight/10,
+            height: widget.screenHeight / 10,
             width: (widget.screenWidth / 10) * 9,
             child: TextFormField(
               controller: widget._emailController,
               validator: (value) {
-                if (value != null && !RegExp(
-                    r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                    .hasMatch(value)) {
+                if (value != null &&
+                    !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                        .hasMatch(value)) {
                   widget.clearForm();
                   return 'Email must be in the right format (xxx@xxx.xxx)!';
                 }
@@ -84,35 +91,37 @@ class LogInFormState extends State<LogInForm> {
                 ),
                 focusedBorder: OutlineInputBorder(
                     borderSide:
-                    const BorderSide(color: Helper.blueColor, width: 1),
+                        const BorderSide(color: Helper.blueColor, width: 1),
                     borderRadius: BorderRadius.circular(10)),
                 focusedErrorBorder: OutlineInputBorder(
-                    borderSide:
-                    const BorderSide(color: Colors.red, width: 1),
+                    borderSide: const BorderSide(color: Colors.red, width: 1),
                     borderRadius: BorderRadius.circular(10)),
                 errorBorder: OutlineInputBorder(
-                    borderSide:
-                    const BorderSide(color: Colors.red, width: 1),
+                    borderSide: const BorderSide(color: Colors.red, width: 1),
                     borderRadius: BorderRadius.circular(10)),
                 enabledBorder: OutlineInputBorder(
                     borderSide:
-                    const BorderSide(color: Helper.blueColor, width: 1),
+                        const BorderSide(color: Helper.blueColor, width: 1),
                     borderRadius: BorderRadius.circular(10)),
                 hintText: "Enter email address",
                 hintStyle: TextStyle(
-                    color: Colors.blueGrey, fontSize: widget.screenHeight/35, height: 0.8),
+                    color: Colors.blueGrey,
+                    fontSize: widget.screenHeight / 35,
+                    height: 0.8),
               ),
               style: TextStyle(
-                  color: Helper.blueColor, fontSize: widget.screenHeight/35, height: 0.8),
+                  color: Helper.blueColor,
+                  fontSize: widget.screenHeight / 35,
+                  height: 0.8),
             ),
           ),
           SizedBox(
-            height: widget.screenHeight/30,
+            height: widget.screenHeight / 30,
           ),
 
           //password text field
           SizedBox(
-            height: widget.screenHeight/10,
+            height: widget.screenHeight / 10,
             width: (widget.screenWidth / 10) * 9,
             child: TextFormField(
               controller: widget._passwordController,
@@ -132,38 +141,41 @@ class LogInFormState extends State<LogInForm> {
                   color: Helper.blueColor,
                 ),
                 focusedErrorBorder: OutlineInputBorder(
-                    borderSide:
-                    const BorderSide(color: Colors.red, width: 1),
+                    borderSide: const BorderSide(color: Colors.red, width: 1),
                     borderRadius: BorderRadius.circular(10)),
                 errorBorder: OutlineInputBorder(
-                    borderSide:
-                    const BorderSide(color: Colors.red, width: 1),
+                    borderSide: const BorderSide(color: Colors.red, width: 1),
                     borderRadius: BorderRadius.circular(10)),
                 focusedBorder: OutlineInputBorder(
                     borderSide:
-                    const BorderSide(color: Helper.blueColor, width: 1),
+                        const BorderSide(color: Helper.blueColor, width: 1),
                     borderRadius: BorderRadius.circular(10)),
                 enabledBorder: OutlineInputBorder(
                     borderSide:
-                    const BorderSide(color: Helper.blueColor, width: 1),
+                        const BorderSide(color: Helper.blueColor, width: 1),
                     borderRadius: BorderRadius.circular(10)),
                 hintText: "Enter password",
                 hintStyle: TextStyle(
-                    color: Colors.blueGrey, fontSize: widget.screenHeight/35, height: 0.8),
+                    color: Colors.blueGrey,
+                    fontSize: widget.screenHeight / 35,
+                    height: 0.8),
               ),
               style: TextStyle(
-                  color: Helper.blueColor, fontSize: widget.screenHeight/35, height: 0.8),
+                  color: Helper.blueColor,
+                  fontSize: widget.screenHeight / 35,
+                  height: 0.8),
             ),
           ),
           SizedBox(
-            height: widget.screenHeight/20,
+            height: widget.screenHeight / 20,
           ),
 
           //log in button
           SizedBox(
-            width: widget.screenWidth < widget.screenHeight ?
-            widget.screenWidth / 2 : widget.screenWidth/4,
-            height: widget.screenHeight/10,
+            width: widget.screenWidth < widget.screenHeight
+                ? widget.screenWidth / 2
+                : widget.screenWidth / 4,
+            height: widget.screenHeight / 10,
             child: FittedBox(
               child: FloatingActionButton.extended(
                 heroTag: 'btn0',

@@ -12,8 +12,8 @@ class BackendAPI {
 
   BackendAPI._internal();
 
-  static const apiURL = "http://192.168.178.28:3000/"; //molensingel
-  //static const apiURL = "http://145.93.148.199:3000/"; //fontys
+  //static const apiURL = "http://192.168.178.28:3000/"; //molensingel
+  static const apiURL = "http://145.93.149.95:3000/"; //fontys
 
   // static String jwtToken = "", userId = "";
   // static List<Role> myRoles = [];
@@ -77,7 +77,6 @@ class BackendAPI {
   //
   //   print(res.body);
   // }
-
 
   // //function to patch a habit instance
   // static void patchHabit(int id, String date, String note, String userId,
@@ -209,7 +208,8 @@ class BackendAPI {
   }
 
   /// This function is used to fetch user images for a single user, if the current user is authorized to do so.
-  Future<http.Response> fetchProfileImage(String userId, String jwtToken) async {
+  Future<http.Response> fetchProfileImage(
+      String userId, String jwtToken) async {
     http.Response res = await http.post(
       Uri.parse('${apiURL}profile_images_for_user'),
       headers: <String, String>{
@@ -219,15 +219,6 @@ class BackendAPI {
       body: jsonEncode(<String, String>{
         'user_id': userId,
       }),
-    );
-    return res;
-  }
-
-  /// This function is used to fetch news articles from the newsapi.org API.
-  /// It takes a search term and a number of articles to fetch.
-  Future<http.Response> fetchNews(String search, int pageSize) async {
-    var res = await http.get(
-      Uri.parse('https://newsapi.org/v2/everything?q=$search&language=en&sortBy=publishedAt&pageSize=$pageSize&apiKey=21b8ce1c0a3c495bb2b09d76a16b8d61'),
     );
     return res;
   }

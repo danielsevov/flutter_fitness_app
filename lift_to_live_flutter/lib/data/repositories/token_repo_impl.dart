@@ -10,7 +10,6 @@ import '../exceptions/fetch_failed_exception.dart';
 
 /// Implementation of a Token repository (implementing the TokenRepository abstract class)
 class TokenRepoImpl implements TokenRepository {
-
   // Instance of the backendAPI datasource object.
   final BackendAPI backendAPI;
 
@@ -21,12 +20,11 @@ class TokenRepoImpl implements TokenRepository {
   /// If no token can be fetched, a custom exception is thrown.
   @override
   Future<String> getToken(String email, String password) async {
-
     //fetch http response object
     Response response = await backendAPI.logIn(email, password);
 
     //proceed if fetch is successful and status code is 200
-    if(response.statusCode  == 200) {
+    if (response.statusCode == 200) {
       log("log in success!\ntoken:${response.body}");
 
       //decode Token object and extract JWT string
@@ -40,8 +38,8 @@ class TokenRepoImpl implements TokenRepository {
     //else throw an exception
     else {
       log("log in failed");
-      throw FetchFailedException("Failed to fetch token!\nresponse code ${response.statusCode}");
+      throw FetchFailedException(
+          "Failed to fetch token!\nresponse code ${response.statusCode}");
     }
   }
-
 }

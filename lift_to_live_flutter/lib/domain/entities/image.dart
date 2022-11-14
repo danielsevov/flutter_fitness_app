@@ -1,10 +1,10 @@
 /// Entity class for holding details of a single user-created image instance.
 class MyImage {
   String userId, // id of the owner user of the image
-      type,      // type of the image (profile, front, side, back)
-      data,      // image blob data
-      date;      // date of the image
-  int id;        // id of the image instance
+      type, // type of the image (profile, front, side, back)
+      data, // image blob data
+      date; // date of the image
+  int id; // id of the image instance
 
   //Simple constructor for creating a MyImage instance
   MyImage(this.userId, this.type, this.id, this.date, this.data);
@@ -29,12 +29,12 @@ class MyImage {
 
   // Function used for transforming a MyImage object to JSON map.
   Map<String, dynamic> toJson() => {
-    'user_id': userId,
-    'type': type,
-    'id': id,
-    'date': date,
-    'data': data,
-  };
+        'user_id': userId,
+        'type': type,
+        'id': id,
+        'date': date,
+        'data': data,
+      };
 
   // Function used for generating a string representation of a MyImage instance.
   @override

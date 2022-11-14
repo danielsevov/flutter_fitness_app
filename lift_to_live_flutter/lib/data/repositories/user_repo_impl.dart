@@ -13,7 +13,6 @@ import '../exceptions/fetch_failed_exception.dart';
 
 /// Implementation of a User repository (implementing the UserRepository abstract class)
 class UserRepoImpl implements UserRepository {
-
   // Instance of the backendAPI datasource object.
   final BackendAPI backendAPI;
 
@@ -23,12 +22,11 @@ class UserRepoImpl implements UserRepository {
   /// This function is used for fetching a Image object, which holds the profile picture of a user.
   @override
   Future<Image> fetchProfileImage(String userId, String jwtToken) async {
-
     //fetch http response object
     Response response = await backendAPI.fetchProfileImage(userId, jwtToken);
 
     //proceed if fetch is successful and status code is 200
-    if(response.statusCode  == 200) {
+    if (response.statusCode == 200) {
       log("fetch profile picture success!");
 
       //decode image data and return an Image object, created from that data
@@ -41,19 +39,19 @@ class UserRepoImpl implements UserRepository {
     //else throw an exception
     else {
       log("fetch profile picture failed");
-      throw FetchFailedException("Failed to fetch profile picture!\nresponse code ${response.statusCode}") ;
+      throw FetchFailedException(
+          "Failed to fetch profile picture!\nresponse code ${response.statusCode}");
     }
   }
 
   /// This function is used for fetching a User object, containing user details.
   @override
   Future<User> fetchUser(String userId, String jwtToken) async {
-
     //fetch http response object
     Response response = await backendAPI.fetchUser(userId, jwtToken);
 
     //proceed if fetch is successful and status code is 200
-    if(response.statusCode  == 200) {
+    if (response.statusCode == 200) {
       log("fetch user details success!");
 
       //return the User object, created from the response body
@@ -63,19 +61,19 @@ class UserRepoImpl implements UserRepository {
     //else throw an exception
     else {
       log("fetch user details failed");
-      throw FetchFailedException("Failed to fetch user details!\nresponse code ${response.statusCode}") ;
+      throw FetchFailedException(
+          "Failed to fetch user details!\nresponse code ${response.statusCode}");
     }
   }
 
   /// This function is used for fetching a list of Role objects, describing the user role of a user.
   @override
   Future<List<Role>> fetchUserRoles(String jwtToken) async {
-
     //fetch http response object
     Response response = await backendAPI.fetchUserRoles(jwtToken);
 
     //proceed if fetch is successful and status code is 200
-    if(response.statusCode  == 200) {
+    if (response.statusCode == 200) {
       log("fetch user roles success!");
 
       //decode response body and create a list of Role objects
@@ -92,9 +90,8 @@ class UserRepoImpl implements UserRepository {
     //else throw an exception
     else {
       log("fetch user roles failed");
-      throw FetchFailedException("Failed to fetch user roles!\nresponse code ${response.statusCode}") ;
+      throw FetchFailedException(
+          "Failed to fetch user roles!\nresponse code ${response.statusCode}");
     }
   }
-
-
 }

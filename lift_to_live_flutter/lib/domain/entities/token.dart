@@ -6,13 +6,12 @@ class Token {
   Token(this.token);
 
   // Function used for transforming a JSON to an Token object.
-  Token.fromJson(Map<String, dynamic> json)
-      : token = json['token'];
+  Token.fromJson(Map<String, dynamic> json) : token = json['token'];
 
   // Function used for transforming a Token object to JSON map.
   Map<String, dynamic> toJson() => {
-    'token': token,
-  };
+        'token': token,
+      };
 
   //Equals function
   @override

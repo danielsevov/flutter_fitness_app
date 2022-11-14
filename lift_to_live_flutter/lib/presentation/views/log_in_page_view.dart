@@ -3,7 +3,6 @@ import 'package:lift_to_live_flutter/presentation/views/log_in_form_view.dart';
 /// API to the LogInPage view widget.
 /// Describes the methods of the log in page view implementation.
 abstract class LogInPageView {
-
   /// Function to set if data is currently being fetched and an loading indicator should be displayed.
   void setInProgress(bool inProgress);
 
@@ -15,5 +14,4 @@ abstract class LogInPageView {
 
   /// Function to display a toast message, when user cannot be authenticated.
   void notifyWrongCredentials() {}
-
 }

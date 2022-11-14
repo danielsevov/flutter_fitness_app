@@ -2,7 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lift_to_live_flutter/domain/entities/news.dart';
 import 'package:lift_to_live_flutter/factory/home_page_factory.dart';
-import 'package:lift_to_live_flutter/presentation/presenters/home_presenter.dart';
+import 'package:lift_to_live_flutter/presentation/presenters/home_page_presenter.dart';
+import 'package:lift_to_live_flutter/presentation/ui/widgets/log_out_dialog.dart';
 import 'package:lift_to_live_flutter/presentation/views/home_page_view.dart';
 import 'package:provider/provider.dart';
 
@@ -10,6 +11,9 @@ import '../../../domain/entities/user.dart';
 import '../../state_management/app_state.dart';
 import '../../../helper.dart';
 
+/// Custom widget, which is the HomePage and is used as a main navigational hub for the application.
+/// It provides navigation to the main app pages, as well as a news overview and the log out functionality.
+/// It is a stateful widget and its state object implements the HomePageView abstract class.
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -17,26 +21,35 @@ class HomePage extends StatefulWidget {
   State<StatefulWidget> createState() => HomePageState();
 }
 
+/// State object of the HomePage. Holds the mutable data, related to the log in page.
 class HomePageState extends State<HomePage> implements HomePageView {
-  final HomePagePresenter _presenter = HomePageFactory().getHomePagePresenter();
-  bool _isLoading = false, _isFetched = false;
-  late News _currentNews;
-  late User _user;
-  late Image _profilePicture;
-  late double _screenWidth, _screenHeight;
+  final HomePagePresenter _presenter = HomePageFactory()
+      .getHomePagePresenter(); // The business logic object of the log in page
+  bool _isLoading =
+          false, // Indicator showing if data is being fetched at the moment
+      _isFetched = false; // Indicator showing if data is already fetched
+  late News _currentNews; // The object holding the news articles
+  late User
+      _user; // The user object holding the details of the current logged in user
+  late Image
+      _profilePicture; // The image object holding the current user profile picture
+  late double _screenWidth, _screenHeight; // The screen dimensions
 
+  /// initialize the page view by attaching it to the presenter
   @override
   void initState() {
     _presenter.attach(this);
     super.initState();
   }
 
+  /// detach the view from the presenter
   @override
   void deactivate() {
     _presenter.detach();
     super.deactivate();
   }
 
+  /// Function to set if data is currently being fetched and an loading indicator should be displayed.
   @override
   void setInProgress(bool inProgress) {
     setState(() {
@@ -44,15 +57,24 @@ class HomePageState extends State<HomePage> implements HomePageView {
     });
   }
 
+  /// Function to set and display the user details, user profile picture.
   @override
-  void setData(User user, Image profileImage, News news) {
+  void setUserData(User user, Image profileImage) {
     setState(() {
       _user = user;
-      _currentNews = news;
       _profilePicture = profileImage;
     });
   }
 
+  /// Function to set and display the list of news.
+  @override
+  void setNewsData(News news) {
+    setState(() {
+      _currentNews = news;
+    });
+  }
+
+  /// Function to indicate that the required data has been fetched, so appropriate layout can be displayed.
   @override
   void setFetched(bool fetched) {
     setState(() {
@@ -60,45 +82,51 @@ class HomePageState extends State<HomePage> implements HomePageView {
     });
   }
 
+  /// Function to show a toast message when a news URL is incorrect.
   @override
   void notifyWrongURL(String s) {
     Helper.makeToast(context, s);
   }
 
+  /// Build method of the home page view
   @override
   Widget build(BuildContext context) {
+
+    // get screen dimensions
+    _screenWidth = MediaQuery.of(context).size.width;
+    _screenHeight = MediaQuery.of(context).size.height;
+
+    // initialize presenter and log in form, if not initialized yet
     if (!_presenter.isInitialized()) {
       _presenter.setAppState(Provider.of<AppState>(context));
     }
 
+    // fetch data if it is not fetched yet
     if (!_isFetched) {
       _presenter.fetchData();
     }
-
-    _screenWidth = MediaQuery.of(context).size.width;
-    _screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
       floatingActionButton: FloatingActionButton.large(
         heroTag: 'btn4',
         //Floating action button on Scaffold
         onPressed: () {
-          //code to execute on button press
+          //TODO code to execute on button press
         },
         backgroundColor: Helper.redColor,
         child: const Icon(Icons.fitness_center_outlined), //icon inside button
       ),
 
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       //floating action button position to center
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
 
+      // bottom navigation bar on scaffold
       bottomNavigationBar: BottomAppBar(
-        //bottom navigation bar on scaffold
         color: Helper.blueColor,
         shape: const CircularNotchedRectangle(), //shape of notch
         notchMargin: 5, //notch margin between floating button and bottom appbar
-        child: Row(
-          //children inside bottom appbar
+        //children inside bottom appbar
+          child: Row(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
@@ -227,31 +255,7 @@ class HomePageState extends State<HomePage> implements HomePageView {
                       showDialog(
                           context: context,
                           builder: (context) {
-                            return AlertDialog(
-                              title: const Text("Sign out"),
-                              content: const Text(
-                                  "Are you sure you want to sign out?"),
-                              actions: [
-                                IconButton(
-                                    onPressed: () {
-                                      _presenter.logOut(context);
-                                    },
-                                    icon: const Icon(
-                                      Icons.check_circle,
-                                      color: Colors.green,
-                                      size: 30,
-                                    )),
-                                IconButton(
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                    icon: const Icon(
-                                      Icons.cancel,
-                                      color: Colors.red,
-                                      size: 30,
-                                    ))
-                              ],
-                            );
+                            return LogOutDialog(presenter: _presenter);
                           });
                     },
                     icon: const Icon(
@@ -298,7 +302,9 @@ class HomePageState extends State<HomePage> implements HomePageView {
                               child: CircularProgressIndicator(
                               color: Helper.blueColor,
                             ))
-                          : const SizedBox(height: 20,))
+                          : const SizedBox(
+                              height: 3,
+                            ))
                       : Container(
                           color: index.isOdd
                               ? Colors.white
