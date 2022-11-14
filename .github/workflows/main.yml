@@ -9,7 +9,7 @@ jobs:
     - name: upload coverage
       uses: codecov/codecov-action@81cd2dc8148241f03f5839d295e000b8f761e378
       with:
-          files: packages/flutter/coverage/lcov.info
+          files: lift_to_live_flutter/coverage/lcov.info
           verbose: true
     - uses: actions/checkout@v1
     - uses: subosito/flutter-action@v1
