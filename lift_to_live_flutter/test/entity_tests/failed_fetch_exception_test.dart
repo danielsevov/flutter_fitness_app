@@ -8,5 +8,4 @@ void main() {
     expect(exception, isA<FetchFailedException>());
     expect(exception.cause, 'cause');
   });
-
 }
