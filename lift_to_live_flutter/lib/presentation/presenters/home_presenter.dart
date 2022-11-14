@@ -11,7 +11,7 @@ import '../state_management/app_state.dart';
 
 import 'package:url_launcher/url_launcher.dart';
 
-class HomePresenter {
+class HomePagePresenter {
   HomePageView? _view;
   final NewsRepository _newsRepository;
   final UserRepository _userRepository;
@@ -21,7 +21,7 @@ class HomePresenter {
   late News _currentNews;
   late Image _profilePicture;
 
-  HomePresenter(this._newsRepository, this._userRepository);
+  HomePagePresenter(this._newsRepository, this._userRepository);
 
   void attach(HomePageView view) {
     _view = view;

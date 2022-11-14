@@ -20,5 +20,5 @@ class LogInPageFactory {
   TokenRepository getTokenRepository() => TokenRepoImpl(backendAPI);
   UserRepository getUserRepository() => UserRepoImpl(backendAPI);
 
-  LogInPresenter getTokenPresenter() => LogInPresenter(getTokenRepository(), getUserRepository());
+  LogInPagePresenter getLogInPresenter() => LogInPagePresenter(getTokenRepository(), getUserRepository());
 }

@@ -8,7 +8,7 @@ import '../../presenters/log_in_presenter.dart';
 class LogInForm extends StatefulWidget implements LogInFormView{
   final double screenHeight, screenWidth;
   final TextEditingController _emailController = TextEditingController(), _passwordController = TextEditingController();
-  final LogInPresenter presenter;
+  final LogInPagePresenter presenter;
 
   LogInForm({super.key, required this.screenHeight, required this.screenWidth, required this.presenter});
 

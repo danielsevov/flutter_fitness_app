@@ -5,14 +5,14 @@ import 'package:lift_to_live_flutter/domain/repositories/user_repo.dart';
 import '../state_management/app_state.dart';
 import '../views/log_in_page_view.dart';
 
-class LogInPresenter {
+class LogInPagePresenter {
   LogInPageView? _view;
   final TokenRepository _tokenRepository;
   final UserRepository _userRepository;
   late AppState _appState;
   bool _isInitialized = false;
 
-  LogInPresenter(this._tokenRepository, this._userRepository);
+  LogInPagePresenter(this._tokenRepository, this._userRepository);
 
   void attach(LogInPageView view) {
     _view = view;

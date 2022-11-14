@@ -21,5 +21,5 @@ class HomePageFactory {
 
   UserRepository getUserRepository() => UserRepoImpl(backendAPI);
 
-  HomePresenter getHomePresenter() => HomePresenter(getNewsRepository(), getUserRepository());
+  HomePagePresenter getHomePresenter() => HomePagePresenter(getNewsRepository(), getUserRepository());
 }

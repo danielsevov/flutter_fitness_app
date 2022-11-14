@@ -18,7 +18,7 @@ class LogInPage extends StatefulWidget {
 }
 
 class LogInPageState extends State<LogInPage> implements LogInPageView {
-  final LogInPresenter _presenter = LogInPageFactory().getTokenPresenter();
+  final LogInPagePresenter _presenter = LogInPageFactory().getLogInPresenter();
   late final LogInForm _logInForm;
   bool _isLoading = false;
   late double _screenWidth, _screenHeight;

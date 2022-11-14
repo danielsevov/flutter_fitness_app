@@ -18,7 +18,7 @@ class HomePage extends StatefulWidget {
 }
 
 class HomePageState extends State<HomePage> implements HomePageView {
-  final HomePresenter _presenter = HomePageFactory().getHomePresenter();
+  final HomePagePresenter _presenter = HomePageFactory().getHomePresenter();
   bool _isLoading = false, _isFetched = false;
   late News _currentNews;
   late User _user;
