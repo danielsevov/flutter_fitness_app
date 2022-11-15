@@ -8,7 +8,6 @@ jobs:
     - uses: subosito/flutter-action@v1
     - run : flutter test --coverage
       working-directory: lift_to_live_flutter
-    - run : lcov --remove coverage/lcov.info "lib/data/datasources/*" "lib/presentation/views/*"
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v3.1.0
       with:
