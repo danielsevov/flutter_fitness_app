@@ -1,10 +1,15 @@
 name: flutter_testflow
-on: [push, workflow_dispatch]
+on: [push, workflow_dispatch] 
 jobs:
   drive:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
     - uses: subosito/flutter-action@v1
-    - run : flutter test 
+    - run : flutter test --coverage
       working-directory: lift_to_live_flutter
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v3.1.0
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }} #required
+    

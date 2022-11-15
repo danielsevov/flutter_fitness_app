@@ -1,3 +1,5 @@
+// coverage:ignore-file
+
 /// API to the LogInForm view widget.
 /// Describes the methods of the log in form view implementation.
 abstract class LogInFormView {
