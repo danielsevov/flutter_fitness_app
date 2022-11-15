@@ -94,10 +94,15 @@ class HomePagePresenter {
   /// Function used to open an external browser application and navigate to a news article URL.
   Future<void> redirectToURL(int index) async {
     var url = _currentNews.articles[index].url;
-    if (!await launchUrl(
-      Uri.parse(url),
-      mode: LaunchMode.externalApplication,
-    )) {
+    try {
+      if (!await launchUrl(
+        Uri.parse(url),
+        mode: LaunchMode.externalApplication,
+      )) {
+        _view?.notifyWrongURL('Could not launch $url');
+      }
+    }
+    catch(e) {
       _view?.notifyWrongURL('Could not launch $url');
     }
   }
