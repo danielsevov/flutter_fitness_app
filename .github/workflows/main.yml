@@ -8,7 +8,8 @@ jobs:
     - uses: subosito/flutter-action@v1
     - run : flutter test --coverage
       working-directory: lift_to_live_flutter
-    - name: Upload coverage to codecov
-      run: curl -s https://codecov.io/bash -t $
-      shell: bash
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v3.1.0
+      with:
+        token: ${{ secrets.CODECOV }} #required
     
