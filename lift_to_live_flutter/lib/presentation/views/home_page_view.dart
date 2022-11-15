@@ -1,4 +1,4 @@
-// coverage:ignore-file
+// coverage:ignore-start
 
 import 'package:flutter/material.dart';
 
@@ -36,3 +36,5 @@ abstract class HomePageView {
   /// This is only allowed if user is admin or coach.
   void traineesPressed(BuildContext context, bool bottomBarButton);
 }
+
+// coverage:ignore-end

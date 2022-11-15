@@ -1,4 +1,4 @@
-// coverage:ignore-file
+// coverage:ignore-start
 
 import 'package:lift_to_live_flutter/presentation/views/log_in_form_view.dart';
 
@@ -17,3 +17,5 @@ abstract class LogInPageView {
   /// Function to display a toast message, when user cannot be authenticated.
   void notifyWrongCredentials() {}
 }
+
+// coverage:ignore-end

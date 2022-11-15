@@ -1,4 +1,4 @@
-// coverage:ignore-file
+// coverage:ignore-start
 
 /// API to the LogInForm view widget.
 /// Describes the methods of the log in form view implementation.
@@ -15,3 +15,5 @@ abstract class LogInFormView {
   /// Function to clear the current password entry.
   void clearPassword() {}
 }
+
+// coverage:ignore-end
