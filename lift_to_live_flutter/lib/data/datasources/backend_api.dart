@@ -1,7 +1,8 @@
+// coverage:ignore-file
+
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-// coverage:ignore-file
 /// This is a datasource object, which handles the communication with the Backend REST API.
 /// The communication is done via http requests, using the http.dart package.
 class BackendAPI {
