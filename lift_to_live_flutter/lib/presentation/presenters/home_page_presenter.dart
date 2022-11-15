@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:lift_to_live_flutter/domain/repositories/user_repo.dart';
-import 'package:lift_to_live_flutter/presentation/ui/pages/log_in_page.dart';
 import 'package:lift_to_live_flutter/presentation/views/home_page_view.dart';
 
 import '../../domain/entities/news.dart';
 import '../../domain/entities/user.dart';
 import '../../domain/repositories/news_repo.dart';
-import '../../helper.dart';
 import '../state_management/app_state.dart';
 
 import 'package:url_launcher/url_launcher.dart';
@@ -47,26 +45,24 @@ class HomePagePresenter {
     return _isInitialized;
   }
 
-  /// Function called when user wants to navigate from home to habit page
-  void habitsPressed(BuildContext context, bool bottomBarButton) {
-    if (!bottomBarButton) Navigator.of(context).pop();
-    Helper.pushPageWithAnimation(context, const Text("Habits"));
+  /// Function to clear the app state upon log out and navigate to log in page
+  void logOut() {
+    _appState.clearState();
   }
 
-  /// Function called when user wants to navigate from home to profile page
-  void profilePressed(BuildContext context, bool bottomBarButton) {
-    if (!bottomBarButton) Navigator.of(context).pop();
-    Helper.pushPageWithAnimation(context, const Text("Profile"));
+  /// Function called to indicate if user is coach or admin.
+  isCoachOrAdmin() {
+    return _appState.isCoachOrAdmin();
   }
 
-  /// Function called when user wants to navigate from home to trainees page
-  /// This is only allowed if user is admin or coach.
-  void traineesPressed(BuildContext context, bool bottomBarButton) {
-    if (!bottomBarButton) Navigator.of(context).pop();
-    if (isCoachOrAdmin()) {
-      Helper.pushPageWithAnimation(context, const Text("Trainees"));
-    } else {
-      Helper.makeToast(context, "Become coach to access this page!");
+  /// Function used to open an external browser application and navigate to a news article URL.
+  void redirectToURL(int index) async {
+    var url = _currentNews.articles[index].url;
+    if (!await launchUrl(
+      Uri.parse(url),
+      mode: LaunchMode.externalApplication,
+    )) {
+      _view?.notifyWrongURL('Could not launch $url');
     }
   }
 
@@ -104,27 +100,5 @@ class HomePagePresenter {
     _view?.setInProgress(false);
     _view?.setNewsData(_currentNews);
     _view?.setFetched(true);
-  }
-
-  /// Function to clear the app state upon log out and navigate to log in page
-  void logOut(BuildContext context) {
-    _appState.clearState();
-    Helper.pushPageWithAnimation(context, const LogInPage());
-  }
-
-  /// Function used to open an external browser application and navigate to a news article URL.
-  void redirectToURL(int index) async {
-    var url = _currentNews.articles[index].url;
-    if (!await launchUrl(
-      Uri.parse(url),
-      mode: LaunchMode.externalApplication,
-    )) {
-      _view?.notifyWrongURL('Could not launch $url');
-    }
-  }
-
-  /// Function called to indicate if user is coach or admin.
-  isCoachOrAdmin() {
-    return _appState.isCoachOrAdmin();
   }
 }

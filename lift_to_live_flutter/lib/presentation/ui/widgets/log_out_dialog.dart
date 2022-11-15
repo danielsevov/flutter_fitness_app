@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:lift_to_live_flutter/presentation/presenters/home_page_presenter.dart';
+import 'package:lift_to_live_flutter/presentation/views/home_page_view.dart';
 
 /// Custom AlertDialog widget, which is nested in the HomePage and is used for logging out of the app.
 class LogOutDialog extends StatefulWidget {
-  final HomePagePresenter presenter;
+  final HomePageView view;
 
-  const LogOutDialog({Key? key, required this.presenter}) : super(key: key);
+  const LogOutDialog({Key? key, required this.view}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -25,7 +25,7 @@ class LogOutDialogState extends State<LogOutDialog> {
       actions: [
         IconButton(
             onPressed: () {
-              widget.presenter.logOut(context);
+              widget.view.logOutPressed(context);
             },
             icon: const Icon(
               Icons.check_circle,

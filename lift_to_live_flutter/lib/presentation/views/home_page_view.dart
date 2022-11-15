@@ -22,4 +22,17 @@ abstract class HomePageView {
 
   /// Function to show a toast message when a news URL is incorrect.
   void notifyWrongURL(String s) {}
+
+  /// Function called when user wants to navigate from home to habit page
+  void habitsPressed(BuildContext context, bool bottomBarButton);
+
+  /// Function called when user wants to navigate from home to profile page
+  void profilePressed(BuildContext context, bool bottomBarButton);
+
+  /// Function called when user wants to log out
+  void logOutPressed(BuildContext context);
+
+  /// Function called when user wants to navigate from home to trainees page
+  /// This is only allowed if user is admin or coach.
+  void traineesPressed(BuildContext context, bool bottomBarButton);
 }

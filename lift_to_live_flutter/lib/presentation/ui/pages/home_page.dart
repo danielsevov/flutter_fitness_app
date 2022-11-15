@@ -10,6 +10,7 @@ import 'package:provider/provider.dart';
 import '../../../domain/entities/user.dart';
 import '../../state_management/app_state.dart';
 import '../../../helper.dart';
+import 'log_in_page.dart';
 
 /// Custom widget, which is the HomePage and is used as a main navigational hub for the application.
 /// It provides navigation to the main app pages, as well as a news overview and the log out functionality.
@@ -88,6 +89,39 @@ class HomePageState extends State<HomePage> implements HomePageView {
     Helper.makeToast(context, s);
   }
 
+  /// Function called when user wants to navigate from home to habit page
+  @override
+  void habitsPressed(BuildContext context, bool bottomBarButton) {
+    if (!bottomBarButton) Navigator.of(context).pop();
+    Helper.pushPageWithAnimation(context, const Text("Habits"));
+  }
+
+  /// Function called when user wants to navigate from home to profile page
+  @override
+  void profilePressed(BuildContext context, bool bottomBarButton) {
+    if (!bottomBarButton) Navigator.of(context).pop();
+    Helper.pushPageWithAnimation(context, const Text("Profile"));
+  }
+
+  /// Function called when user wants to navigate from home to trainees page
+  /// This is only allowed if user is admin or coach.
+  @override
+  void traineesPressed(BuildContext context, bool bottomBarButton) {
+    if (!bottomBarButton) Navigator.of(context).pop();
+    if (_presenter.isCoachOrAdmin()) {
+      Helper.pushPageWithAnimation(context, const Text("Trainees"));
+    } else {
+      Helper.makeToast(context, "Become coach to access this page!");
+    }
+  }
+
+  /// Function to clear the app state upon log out and navigate to log in page
+  @override
+  void logOutPressed(BuildContext context) {
+    _presenter.logOut();
+    Helper.pushPageWithAnimation(context, const LogInPage());
+  }
+
   /// Build method of the home page view
   @override
   Widget build(BuildContext context) {
@@ -136,7 +170,7 @@ class HomePageState extends State<HomePage> implements HomePageView {
                 child: InkWell(
                   splashColor: Colors.white,
                   onTap: () {
-                    _presenter.habitsPressed(context, true);
+                    habitsPressed(context, true);
                   },
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -184,7 +218,7 @@ class HomePageState extends State<HomePage> implements HomePageView {
                 child: InkWell(
                   splashColor: Colors.white,
                   onTap: () {
-                    _presenter.traineesPressed(context, true);
+                    traineesPressed(context, true);
                   },
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -208,7 +242,7 @@ class HomePageState extends State<HomePage> implements HomePageView {
                 child: InkWell(
                   splashColor: Colors.white,
                   onTap: () {
-                    _presenter.profilePressed(context, true);
+                    profilePressed(context, true);
                   },
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -255,7 +289,7 @@ class HomePageState extends State<HomePage> implements HomePageView {
                       showDialog(
                           context: context,
                           builder: (context) {
-                            return LogOutDialog(presenter: _presenter);
+                            return LogOutDialog(view: this);
                           });
                     },
                     icon: const Icon(
@@ -581,7 +615,7 @@ class HomePageState extends State<HomePage> implements HomePageView {
               ),
               textColor: Helper.blueColor,
               onTap: () {
-                _presenter.profilePressed(context, false);
+                profilePressed(context, false);
               },
             ),
             ListTile(
@@ -605,7 +639,7 @@ class HomePageState extends State<HomePage> implements HomePageView {
               ),
               textColor: Helper.redColor,
               onTap: () async {
-                _presenter.habitsPressed(context, false);
+                habitsPressed(context, false);
               },
             ),
             ListTile(
@@ -654,7 +688,7 @@ class HomePageState extends State<HomePage> implements HomePageView {
                     ),
                     textColor: Helper.blueColor,
                     onTap: () {
-                      _presenter.traineesPressed(context, false);
+                      traineesPressed(context, false);
                     },
                   )
                 : const SizedBox(),

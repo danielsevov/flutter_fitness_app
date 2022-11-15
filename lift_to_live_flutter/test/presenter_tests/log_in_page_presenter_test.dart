@@ -10,7 +10,7 @@ import 'package:lift_to_live_flutter/presentation/views/log_in_page_view.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-import 'log_in_presenter_test.mocks.dart';
+import 'log_in_page_presenter_test.mocks.dart';
 
 
 @GenerateMocks([TokenRepository, UserRepository, LogInPageView, LogInFormView])
