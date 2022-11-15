@@ -181,7 +181,7 @@ class LogInFormState extends State<LogInForm> {
                 heroTag: 'btn0',
                 onPressed: () async {
                   if (_logInFormKey.currentState!.validate()) {
-                    widget.presenter.logIn(context);
+                    widget.presenter.logIn();
                   }
                 },
                 backgroundColor: Helper.blueColor,

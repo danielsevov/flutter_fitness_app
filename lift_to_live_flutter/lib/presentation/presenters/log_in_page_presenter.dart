@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:lift_to_live_flutter/domain/repositories/token_repo.dart';
 import 'package:lift_to_live_flutter/domain/repositories/user_repo.dart';
 
@@ -37,7 +36,7 @@ class LogInPagePresenter {
   }
 
   /// Function, which is called upon user credentials submission and handles the authentication of the user.
-  Future<void> logIn(BuildContext context) async {
+  Future<void> logIn() async {
     // set the loading indicator to be shown on the page view
     _view?.setInProgress(true);
 
