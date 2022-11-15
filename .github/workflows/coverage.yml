@@ -4,12 +4,7 @@
 
 name: coverage
 
-on:
-  push:
-    branches:
-      - master
-    paths:
-      - 'lift_to_live_flutter/**'
+on: [push, workflow_dispatch]
 
 permissions: read-all
 
