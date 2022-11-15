@@ -1,3 +1,5 @@
+// coverage:ignore-file
+
 import 'package:lift_to_live_flutter/presentation/views/log_in_form_view.dart';
 
 /// API to the LogInPage view widget.
