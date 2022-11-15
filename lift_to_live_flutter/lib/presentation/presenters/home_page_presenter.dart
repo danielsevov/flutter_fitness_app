@@ -45,25 +45,14 @@ class HomePagePresenter {
     return _isInitialized;
   }
 
-  /// Function to clear the app state upon log out and navigate to log in page
-  void logOut() {
-    _appState.clearState();
-  }
-
   /// Function called to indicate if user is coach or admin.
   isCoachOrAdmin() {
     return _appState.isCoachOrAdmin();
   }
 
-  /// Function used to open an external browser application and navigate to a news article URL.
-  void redirectToURL(int index) async {
-    var url = _currentNews.articles[index].url;
-    if (!await launchUrl(
-      Uri.parse(url),
-      mode: LaunchMode.externalApplication,
-    )) {
-      _view?.notifyWrongURL('Could not launch $url');
-    }
+  /// Function to clear the app state upon log out and navigate to log in page
+  void logOut() {
+    _appState.clearState();
   }
 
   /// Function used for fetching the required data, which is then displayed on the home page.
@@ -100,5 +89,16 @@ class HomePagePresenter {
     _view?.setInProgress(false);
     _view?.setNewsData(_currentNews);
     _view?.setFetched(true);
+  }
+
+  /// Function used to open an external browser application and navigate to a news article URL.
+  Future<void> redirectToURL(int index) async {
+    var url = _currentNews.articles[index].url;
+    if (!await launchUrl(
+      Uri.parse(url),
+      mode: LaunchMode.externalApplication,
+    )) {
+      _view?.notifyWrongURL('Could not launch $url');
+    }
   }
 }
