@@ -1,5 +1,8 @@
 name: flutter_testflow
-on: [push, workflow_dispatch] 
+on: 
+  push:
+    branches:
+      - main
 jobs:
   drive:
     runs-on: ubuntu-latest
