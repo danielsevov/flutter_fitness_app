@@ -1,5 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:lift_to_live_flutter/domain/entities/article.dart';
+import 'package:lift_to_live_flutter/domain/entities/news.dart';
 import 'package:lift_to_live_flutter/domain/entities/role.dart';
 import 'package:lift_to_live_flutter/domain/entities/user.dart';
 import 'package:lift_to_live_flutter/domain/repositories/news_repo.dart';
@@ -159,7 +161,7 @@ void main() {
     verify(view.setUserData(any, any)).called(1);
   });
 
-  test('test navigate to url', () async {
+  test('test navigate to url no exception', () async {
     final newsRepo = MockNewsRepository();
     final userRepo = MockUserRepository();
     final appState = AppState();
@@ -179,6 +181,35 @@ void main() {
     when(view.setUserData(any, any)).thenAnswer((realInvocation) { });
     when(newsRepo.getNews(any, any)).thenAnswer(
             (_) async => TestData.test_news_1);
+    when(view.setNewsData(any)).thenAnswer((realInvocation) { });
+
+    await presenter.fetchData();
+    await presenter.redirectToURL(0);
+
+    expect(() async => await presenter.redirectToURL(0), returnsNormally);
+    verifyNever(view.notifyWrongURL(any));
+  });
+
+  test('test navigate to url', () async {
+    final newsRepo = MockNewsRepository();
+    final userRepo = MockUserRepository();
+    final appState = AppState();
+    final view = MockHomePageView();
+    final presenter = HomePagePresenter(newsRepo, userRepo);
+    presenter.setAppState(appState);
+    appState.setInitialState('email', 'token', [Role('A', 'admin')]);
+    presenter.attach(view);
+
+    when(view.setInProgress(any)).thenAnswer((realInvocation) { });
+    when(view.notifyWrongURL(any)).thenAnswer((realInvocation) { });
+    when(view.setFetched(any)).thenAnswer((realInvocation) { });
+    when(userRepo.fetchUser('email', 'token')).thenAnswer(
+            (_) async => User('email', 'email', 'coachId', 'nationality', 'dateOfBirth', 'name', 'phoneNumber'));
+    when(userRepo.fetchProfileImage('email', 'token')).thenAnswer(
+            (_) async => Image.asset('assets/images/prof_pic.png'));
+    when(view.setUserData(any, any)).thenAnswer((realInvocation) { });
+    when(newsRepo.getNews(any, any)).thenAnswer(
+            (_) async => News('ok', 12, [Article('S', 'S', 'S', 'SSSSSSSSSSSSS', 'S', 'S')]));
     when(view.setNewsData(any)).thenAnswer((realInvocation) { });
 
     await presenter.fetchData();

@@ -95,7 +95,7 @@ class HomePagePresenter {
   Future<void> redirectToURL(int index) async {
     var url = _currentNews.articles[index].url;
     try {
-      if (!await launchUrl(
+      if (url.length >= 5 && !await launchUrl(
         Uri.parse(url),
         mode: LaunchMode.externalApplication,
       )) {
