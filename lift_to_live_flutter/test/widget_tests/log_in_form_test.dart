@@ -111,7 +111,6 @@ void main() {
     await tester.runAsync(() async {
       // tests
       final presenter = MockLogInPagePresenter();
-
       final form = LogInForm(screenHeight: 800, screenWidth: 400, presenter: presenter);
 
       final fieldFinder = find.widgetWithIcon(TextFormField, Icons.email_outlined);
