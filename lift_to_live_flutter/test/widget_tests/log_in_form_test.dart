@@ -240,9 +240,7 @@ void main() {
       await tester.enterText(fieldEmailFinder, 'email@email.com');
       await tester.enterText(fieldPassFinder, 'testpassword');
       await tester.pump(const Duration(seconds: 1));
-
       form.clearPassword();
-
       await tester.pump(const Duration(seconds: 1));
       await tester.pumpAndSettle();
 
