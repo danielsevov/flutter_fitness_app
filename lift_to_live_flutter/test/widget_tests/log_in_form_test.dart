@@ -125,6 +125,7 @@ void main() {
       await tester.enterText(fieldFinder, 'email@email.com');
       await tester.pump(const Duration(seconds: 2));
       await tester.tap(buttonFinder);
+
       await tester.pump(const Duration(seconds: 2));
       await tester.pumpAndSettle();
 
