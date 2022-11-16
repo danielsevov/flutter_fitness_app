@@ -1,20 +1,17 @@
 import 'package:lift_to_live_flutter/domain/repositories/token_repo.dart';
 import 'package:lift_to_live_flutter/domain/repositories/user_repo.dart';
+import 'package:lift_to_live_flutter/presentation/presenters/base_presenter.dart';
 
-import '../state_management/app_state.dart';
 import '../views/log_in_page_view.dart';
 
 /// This is the object, which holds the business logic, related to the Log In Page view.
 /// It is the mediator between the LogIn view (UI) and the repositories (Data).
-class LogInPagePresenter {
+class LogInPagePresenter extends BasePresenter{
   LogInPageView? _view; // the log in view UI component
   final TokenRepository
       _tokenRepository; // the repository used for fetching the JWT token
   final UserRepository
       _userRepository; // the repository used for fetching the user roles
-  late AppState _appState; // the app state object
-  bool _isInitialized =
-      false; // indicator if the presenter has been initialized with the app state object yet
 
   /// Simple constructor for passing the required repositories
   LogInPagePresenter(this._tokenRepository, this._userRepository);
@@ -27,12 +24,6 @@ class LogInPagePresenter {
   /// Function to detach the view from the presenter
   void detach() {
     _view = null;
-  }
-
-  /// Function to pass the app state object to the presenter
-  void setAppState(AppState appState) {
-    _appState = appState;
-    _isInitialized = true;
   }
 
   /// Function, which is called upon user credentials submission and handles the authentication of the user.
@@ -54,7 +45,7 @@ class LogInPagePresenter {
         var roles = await _userRepository.fetchUserRoles(token);
 
         // set the user roles in the app state object
-        _appState.setInitialState(email, token, roles);
+        super.appState.setInitialState(email, token, roles);
 
         // navigate from log in to home page view
         _view?.navigateToHome();
@@ -72,10 +63,5 @@ class LogInPagePresenter {
 
     // stop the loading indicator as data processing is finished
     _view?.setInProgress(false);
-  }
-
-  /// Getter for the indicator, showing if the presenter has been initialized with the app state object
-  bool isInitialized() {
-    return _isInitialized;
   }
 }
