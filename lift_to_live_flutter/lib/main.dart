@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'factory/log_in_page_factory.dart';
 import 'presentation/state_management/app_state.dart';
 import 'presentation/ui/pages/log_in_page.dart';
 import 'package:provider/provider.dart';
@@ -29,6 +30,6 @@ class MyApp extends StatelessWidget {
             ),
 
             // set the entry page to be log in page
-            home: const LogInPage()));
+            home: LogInPage(presenter: LogInPageFactory().getLogInPresenter())));
   }
 }

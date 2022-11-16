@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:lift_to_live_flutter/factory/log_in_page_factory.dart';
 import 'package:lift_to_live_flutter/presentation/presenters/log_in_page_presenter.dart';
 import 'package:lift_to_live_flutter/presentation/ui/pages/home_page.dart';
 import 'package:lift_to_live_flutter/presentation/ui/widgets/log_in_form.dart';
 import 'package:provider/provider.dart';
 
+import '../../../factory/home_page_factory.dart';
 import '../../state_management/app_state.dart';
 import '../../../helper.dart';
 import '../../views/log_in_form_view.dart';
@@ -14,7 +14,10 @@ import '../../views/log_in_page_view.dart';
 /// and submitting them for authentication and communicating with the user.
 /// It is a stateful widget and its state object implements the LogInPageView abstract class.
 class LogInPage extends StatefulWidget {
-  const LogInPage({Key? key}) : super(key: key);
+  final LogInPagePresenter presenter;
+
+  const LogInPage({super.key, required this.presenter}); // The business logic object of the log in page
+
 
   @override
   State<StatefulWidget> createState() => LogInPageState();
@@ -22,8 +25,6 @@ class LogInPage extends StatefulWidget {
 
 /// State object of the LogInPage. Holds the mutable data, related to the log in page.
 class LogInPageState extends State<LogInPage> implements LogInPageView {
-  final LogInPagePresenter _presenter = LogInPageFactory()
-      .getLogInPresenter(); // The business logic object of the log in page
   late final LogInForm
       _logInForm; // The log in form widget, nested in the log in page
   bool _isLoading =
@@ -33,14 +34,14 @@ class LogInPageState extends State<LogInPage> implements LogInPageView {
   /// initialize the page view by attaching it to the presenter
   @override
   void initState() {
-    _presenter.attach(this);
+    widget.presenter.attach(this);
     super.initState();
   }
 
   /// detach the view from the presenter
   @override
   void deactivate() {
-    _presenter.detach();
+    widget.presenter.detach();
     super.deactivate();
   }
 
@@ -52,12 +53,12 @@ class LogInPageState extends State<LogInPage> implements LogInPageView {
     _screenHeight = MediaQuery.of(context).size.height;
 
     // initialize presenter and log in form, if not initialized yet
-    if (!_presenter.isInitialized()) {
-      _presenter.setAppState(Provider.of<AppState>(context));
+    if (!widget.presenter.isInitialized()) {
+      widget.presenter.setAppState(Provider.of<AppState>(context));
       _logInForm = LogInForm(
           screenHeight: _screenHeight,
           screenWidth: _screenWidth,
-          presenter: _presenter);
+          presenter: widget.presenter);
     }
 
     return Scaffold(
@@ -119,7 +120,8 @@ class LogInPageState extends State<LogInPage> implements LogInPageView {
   /// Function to trigger page change from log in page to home page, upon successful log in.
   @override
   void navigateToHome() {
-    Helper.pushPageWithAnimation(context, const HomePage());
+    Helper.pushPageWithAnimation(context, HomePage(presenter: HomePageFactory()
+        .getHomePagePresenter(),));
   }
 
   /// Function to display a toast message, when user cannot be authenticated.
