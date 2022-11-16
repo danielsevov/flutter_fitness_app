@@ -33,6 +33,29 @@ void main() {
     });
   });
 
+  testWidgets('LogInForm test constructor 2', (tester) async {
+    await tester.runAsync(() async {
+      // tests
+      final presenter = MockLogInPagePresenter();
+
+      final form = LogInForm(screenHeight: 400, screenWidth: 800, presenter: presenter);
+
+      final titleFinder = find.text('Sign In');
+      final iconFinder = find.byIcon(Icons.email_outlined);
+      final icon2Finder = find.byIcon(Icons.key);
+
+      await tester.pumpWidget(MaterialApp(
+          title: 'Flutter Demo', home: Scaffold(body: Center(child: form,))));
+
+      await tester.pump(const Duration(seconds: 5));
+      await tester.pumpAndSettle();
+
+      expect(titleFinder, findsOneWidget);
+      expect(iconFinder, findsOneWidget);
+      expect(icon2Finder, findsOneWidget);
+    });
+  });
+
   testWidgets('LogInForm test click validation missing email and password', (tester) async {
     await tester.runAsync(() async {
       // tests
