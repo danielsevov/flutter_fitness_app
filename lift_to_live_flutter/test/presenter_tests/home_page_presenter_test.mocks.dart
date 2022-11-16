@@ -12,12 +12,10 @@ import 'package:lift_to_live_flutter/domain/entities/role.dart' as _i10;
 import 'package:lift_to_live_flutter/domain/entities/user.dart' as _i3;
 import 'package:lift_to_live_flutter/domain/repositories/news_repo.dart' as _i7;
 import 'package:lift_to_live_flutter/domain/repositories/user_repo.dart' as _i9;
-import 'package:lift_to_live_flutter/presentation/presenters/home_page_presenter.dart'
-    as _i5;
 import 'package:lift_to_live_flutter/presentation/ui/widgets/log_out_dialog.dart'
-    as _i12;
-import 'package:lift_to_live_flutter/presentation/views/home_page_view.dart'
     as _i11;
+import 'package:lift_to_live_flutter/presentation/views/home_page_view.dart'
+    as _i5;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -65,9 +63,8 @@ class _FakeImage_2 extends _i1.SmartFake implements _i4.Image {
       super.toString();
 }
 
-class _FakeHomePagePresenter_3 extends _i1.SmartFake
-    implements _i5.HomePagePresenter {
-  _FakeHomePagePresenter_3(
+class _FakeHomePageView_3 extends _i1.SmartFake implements _i5.HomePageView {
+  _FakeHomePageView_3(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -228,7 +225,7 @@ class MockUserRepository extends _i1.Mock implements _i9.UserRepository {
 /// A class which mocks [HomePageView].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockHomePageView extends _i1.Mock implements _i11.HomePageView {
+class MockHomePageView extends _i1.Mock implements _i5.HomePageView {
   MockHomePageView() {
     _i1.throwOnMissingStub(this);
   }
@@ -280,24 +277,77 @@ class MockHomePageView extends _i1.Mock implements _i11.HomePageView {
         ),
         returnValueForMissingStub: null,
       );
+  @override
+  void habitsPressed(
+    _i4.BuildContext? context,
+    bool? bottomBarButton,
+  ) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #habitsPressed,
+          [
+            context,
+            bottomBarButton,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  void profilePressed(
+    _i4.BuildContext? context,
+    bool? bottomBarButton,
+  ) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #profilePressed,
+          [
+            context,
+            bottomBarButton,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  void logOutPressed(_i4.BuildContext? context) => super.noSuchMethod(
+        Invocation.method(
+          #logOutPressed,
+          [context],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  void traineesPressed(
+    _i4.BuildContext? context,
+    bool? bottomBarButton,
+  ) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #traineesPressed,
+          [
+            context,
+            bottomBarButton,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
 }
 
 /// A class which mocks [LogOutDialog].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockLogOutDialog extends _i1.Mock implements _i12.LogOutDialog {
+class MockLogOutDialog extends _i1.Mock implements _i11.LogOutDialog {
   MockLogOutDialog() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i5.HomePagePresenter get presenter => (super.noSuchMethod(
-        Invocation.getter(#presenter),
-        returnValue: _FakeHomePagePresenter_3(
+  _i5.HomePageView get view => (super.noSuchMethod(
+        Invocation.getter(#view),
+        returnValue: _FakeHomePageView_3(
           this,
-          Invocation.getter(#presenter),
+          Invocation.getter(#view),
         ),
-      ) as _i5.HomePagePresenter);
+      ) as _i5.HomePageView);
   @override
   _i4.State<_i4.StatefulWidget> createState() => (super.noSuchMethod(
         Invocation.method(

@@ -14,7 +14,7 @@ void main() {
     final appState = AppState();
 
     expect(appState.hasState(), false);
-    appState.setState('email', 'token', [TestData.test_role_1]);
+    appState.setInitialState('email', 'token', [TestData.test_role_1]);
     expect(appState.hasState(), true);
     expect(appState.getToken(), 'token');
     expect(appState.getUserRoles(), [TestData.test_role_1]);
@@ -25,7 +25,7 @@ void main() {
     final appState = AppState();
 
     expect(appState.hasState(), false);
-    appState.setState('email', 'token', [TestData.test_role_1]);
+    appState.setInitialState('email', 'token', [TestData.test_role_1]);
     expect(appState.hasState(), true);
     appState.clearState();
     expect(appState.hasState(), false);
@@ -35,7 +35,7 @@ void main() {
     final appState = AppState();
 
     expect(appState.hasState(), false);
-    appState.setState('email', 'token', [Role('email', 'admin')]);
+    appState.setInitialState('email', 'token', [Role('email', 'admin')]);
     expect(appState.isAdmin(), true);
   });
 
@@ -43,7 +43,7 @@ void main() {
     final appState = AppState();
 
     expect(appState.hasState(), false);
-    appState.setState('email', 'token', [Role('email', 'coach')]);
+    appState.setInitialState('email', 'token', [Role('email', 'coach')]);
     expect(appState.isCoach(), true);
   });
 
@@ -51,7 +51,7 @@ void main() {
     final appState = AppState();
 
     expect(appState.hasState(), false);
-    appState.setState('email', 'token', [Role('email', 'admin')]);
+    appState.setInitialState('email', 'token', [Role('email', 'admin')]);
     expect(appState.isCoach(), false);
   });
 
@@ -59,7 +59,7 @@ void main() {
     final appState = AppState();
 
     expect(appState.hasState(), false);
-    appState.setState('email', 'token', [Role('email', 'coach')]);
+    appState.setInitialState('email', 'token', [Role('email', 'coach')]);
     expect(appState.isAdmin(), false);
   });
 
@@ -67,7 +67,7 @@ void main() {
     final appState = AppState();
 
     expect(appState.hasState(), false);
-    appState.setState('email', 'token', [Role('email', 'admin')]);
+    appState.setInitialState('email', 'token', [Role('email', 'admin')]);
     expect(appState.isCoachOrAdmin(), true);
   });
 
@@ -75,7 +75,7 @@ void main() {
     final appState = AppState();
 
     expect(appState.hasState(), false);
-    appState.setState('email', 'token', []);
+    appState.setInitialState('email', 'token', []);
 
     final c = appState.isCoach();
     final a = appState.isAdmin();

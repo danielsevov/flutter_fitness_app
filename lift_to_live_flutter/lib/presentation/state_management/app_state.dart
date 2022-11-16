@@ -37,7 +37,7 @@ class AppState {
   }
 
   /// Setter for the app state
-  void setState(String email, String token, List<Role> roles) {
+  void setInitialState(String email, String token, List<Role> roles) {
     _userId = email;
     _token = token;
     _userRoles = roles;

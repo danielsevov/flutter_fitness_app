@@ -46,7 +46,7 @@ void main() {
     presenter.setAppState(appState);
 
     expect(appState.hasState(), false);
-    appState.setState('email', 'token', []);
+    appState.setInitialState('email', 'token', []);
 
     expect(appState.hasState(), true);
     presenter.logOut();
@@ -59,7 +59,7 @@ void main() {
     final appState = AppState();
     final presenter = HomePagePresenter(newsRepo, userRepo);
     presenter.setAppState(appState);
-    appState.setState('email', 'token', []);
+    appState.setInitialState('email', 'token', []);
 
     expect(presenter.isCoachOrAdmin(), false);
   });
@@ -70,7 +70,7 @@ void main() {
     final appState = AppState();
     final presenter = HomePagePresenter(newsRepo, userRepo);
     presenter.setAppState(appState);
-    appState.setState('email', 'token', [Role('A', 'admin')]);
+    appState.setInitialState('email', 'token', [Role('A', 'admin')]);
 
     expect(presenter.isCoachOrAdmin(), true);
   });
@@ -110,7 +110,7 @@ void main() {
     final view = MockHomePageView();
     final presenter = HomePagePresenter(newsRepo, userRepo);
     presenter.setAppState(appState);
-    appState.setState('email', 'token', [Role('A', 'admin')]);
+    appState.setInitialState('email', 'token', [Role('A', 'admin')]);
     presenter.attach(view);
 
     when(view.setInProgress(any)).thenAnswer((realInvocation) { });
@@ -135,7 +135,7 @@ void main() {
     final view = MockHomePageView();
     final presenter = HomePagePresenter(newsRepo, userRepo);
     presenter.setAppState(appState);
-    appState.setState('email', 'token', [Role('A', 'admin')]);
+    appState.setInitialState('email', 'token', [Role('A', 'admin')]);
     presenter.attach(view);
 
     when(view.setInProgress(any)).thenAnswer((realInvocation) { });
@@ -166,7 +166,7 @@ void main() {
     final view = MockHomePageView();
     final presenter = HomePagePresenter(newsRepo, userRepo);
     presenter.setAppState(appState);
-    appState.setState('email', 'token', [Role('A', 'admin')]);
+    appState.setInitialState('email', 'token', [Role('A', 'admin')]);
     presenter.attach(view);
 
     when(view.setInProgress(any)).thenAnswer((realInvocation) { });

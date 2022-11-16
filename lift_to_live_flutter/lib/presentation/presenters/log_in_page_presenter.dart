@@ -54,7 +54,7 @@ class LogInPagePresenter {
         var roles = await _userRepository.fetchUserRoles(token);
 
         // set the user roles in the app state object
-        _appState.setState(email, token, roles);
+        _appState.setInitialState(email, token, roles);
 
         // navigate from log in to home page view
         _view?.navigateToHome();
