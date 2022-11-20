@@ -8,7 +8,7 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 import '../test_data.dart';
-import 'home_page_presenter_test.mocks.dart';
+import 'profile_page_presenter_test.mocks.dart';
 
 
 @GenerateMocks([UserRepository, ProfilePageView])
@@ -16,6 +16,9 @@ void main() {
   test('test presenter constructor', () {
     final userRepo = MockUserRepository();
     final presenter = ProfilePagePresenter(userRepo, 'email@email.com');
+    final view = MockProfilePageView();
+    presenter.attach(view);
+    presenter.detach();
 
     expect(presenter, isA<ProfilePagePresenter>());
     expect(presenter.isInitialized(), false);
@@ -81,7 +84,7 @@ void main() {
     final presenter = ProfilePagePresenter(userRepo, 'email@email.com');
     expect(presenter.isInitialized(), false);
 
-    when(userRepo.fetchUser(any, any)).thenThrow(FetchFailedException('fail'));
+    when(userRepo.fetchUser(any, any)).thenAnswer((realInvocation) async => TestData.test_user_1);
     when(userRepo.fetchProfileImage(any, any)).thenThrow(FetchFailedException('fail'));
 
     appState.setInitialState('email@email.com', '', []);
