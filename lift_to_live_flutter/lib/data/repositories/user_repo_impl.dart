@@ -1,7 +1,5 @@
 import 'dart:convert';
 import 'dart:developer';
-
-import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:lift_to_live_flutter/domain/entities/image.dart';
 import 'package:lift_to_live_flutter/domain/entities/role.dart';
@@ -19,9 +17,21 @@ class UserRepoImpl implements UserRepository {
   //Simple constructor for passing the datasource to the repository.
   UserRepoImpl(this.backendAPI);
 
+  /// This function is used for patching a Image object, which holds the picture of a user.
+  @override
+  void patchImage(int id, String userId, String date, String data, String type, String token){
+    backendAPI.patchImage(id, userId, date, data, type, token);
+  }
+
+  /// This function is used for posting a Image object, which holds the picture of a user.
+  @override
+  void postImage(String userId, String date, String data, String type, String token){
+    backendAPI.postImage(userId, date, data, type, token);
+  }
+
   /// This function is used for fetching a Image object, which holds the profile picture of a user.
   @override
-  Future<Image> fetchProfileImage(String userId, String jwtToken) async {
+  Future<MyImage> fetchProfileImage(String userId, String jwtToken) async {
     //fetch http response object
     Response response = await backendAPI.fetchProfileImage(userId, jwtToken);
 
@@ -30,10 +40,7 @@ class UserRepoImpl implements UserRepository {
       log("fetch profile picture success!");
 
       //decode image data and return an Image object, created from that data
-      return Image.memory(
-        base64Decode(MyImage.fromJson(jsonDecode(response.body)[0]).data),
-        height: 100,
-      );
+      return MyImage.fromJson(jsonDecode(response.body)[0]);
     }
 
     //else throw an exception

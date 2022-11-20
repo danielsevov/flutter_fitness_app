@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-
+import '../entities/image.dart';
 import '../entities/user.dart';
 import '../entities/role.dart';
 
@@ -13,5 +12,11 @@ abstract class UserRepository {
   Future<User> fetchUser(String userId, String jwtToken);
 
   /// This function is used for fetching a Image object, which holds the profile picture of a user.
-  Future<Image> fetchProfileImage(String userId, String jwtToken);
+  Future<MyImage> fetchProfileImage(String userId, String jwtToken);
+
+  /// This function is used for patching a Image object, which holds the picture of a user.
+  void patchImage(int id, String userId, String date, String encoded, String type, String jwtToken);
+
+  /// This function is used for posting a Image object, which holds the picture of a user.
+  void postImage(String userId, String date, String encoded, String type, String jwtToken);
 }

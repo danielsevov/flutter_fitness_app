@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:lift_to_live_flutter/domain/repositories/user_repo.dart';
 import 'package:lift_to_live_flutter/presentation/presenters/base_presenter.dart';
@@ -51,8 +53,18 @@ class HomePagePresenter extends BasePresenter{
     // fetch the user details and profile picture
     _user = await _userRepository.fetchUser(
         super.appState.getUserId(), super.appState.getToken());
-    _profilePicture = await _userRepository.fetchProfileImage(
-        super.appState.getUserId(), super.appState.getToken());
+
+    try {
+      var myImage = await _userRepository.fetchProfileImage(
+          super.appState.getUserId(), super.appState.getToken());
+      _profilePicture = Image.memory(
+        base64Decode(myImage.data),
+        height: 150,
+      );
+    }
+    catch (e) {
+      _profilePicture = Image.asset('assets/images/prof_pic.png', height: 150,);
+    }
 
     // display the fetched user data
     _view?.setInProgress(false);

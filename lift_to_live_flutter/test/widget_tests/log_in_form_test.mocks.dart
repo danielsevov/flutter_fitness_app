@@ -6,11 +6,11 @@
 import 'dart:async' as _i5;
 
 import 'package:lift_to_live_flutter/presentation/presenters/log_in_page_presenter.dart'
-    as _i2;
-import 'package:lift_to_live_flutter/presentation/state_management/app_state.dart'
-    as _i4;
-import 'package:lift_to_live_flutter/presentation/views/log_in_page_view.dart'
     as _i3;
+import 'package:lift_to_live_flutter/presentation/state_management/app_state.dart'
+    as _i2;
+import 'package:lift_to_live_flutter/presentation/views/log_in_page_view.dart'
+    as _i4;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -24,17 +24,35 @@ import 'package:mockito/mockito.dart' as _i1;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
+class _FakeAppState_0 extends _i1.SmartFake implements _i2.AppState {
+  _FakeAppState_0(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
 /// A class which mocks [LogInPagePresenter].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockLogInPagePresenter extends _i1.Mock
-    implements _i2.LogInPagePresenter {
+    implements _i3.LogInPagePresenter {
   MockLogInPagePresenter() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  void attach(_i3.LogInPageView? view) => super.noSuchMethod(
+  _i2.AppState get appState => (super.noSuchMethod(
+        Invocation.getter(#appState),
+        returnValue: _FakeAppState_0(
+          this,
+          Invocation.getter(#appState),
+        ),
+      ) as _i2.AppState);
+  @override
+  void attach(_i4.LogInPageView? view) => super.noSuchMethod(
         Invocation.method(
           #attach,
           [view],
@@ -50,14 +68,6 @@ class MockLogInPagePresenter extends _i1.Mock
         returnValueForMissingStub: null,
       );
   @override
-  void setAppState(_i4.AppState? appState) => super.noSuchMethod(
-        Invocation.method(
-          #setAppState,
-          [appState],
-        ),
-        returnValueForMissingStub: null,
-      );
-  @override
   _i5.Future<void> logIn() => (super.noSuchMethod(
         Invocation.method(
           #logIn,
@@ -66,6 +76,14 @@ class MockLogInPagePresenter extends _i1.Mock
         returnValue: _i5.Future<void>.value(),
         returnValueForMissingStub: _i5.Future<void>.value(),
       ) as _i5.Future<void>);
+  @override
+  void setAppState(_i2.AppState? appState) => super.noSuchMethod(
+        Invocation.method(
+          #setAppState,
+          [appState],
+        ),
+        returnValueForMissingStub: null,
+      );
   @override
   bool isInitialized() => (super.noSuchMethod(
         Invocation.method(

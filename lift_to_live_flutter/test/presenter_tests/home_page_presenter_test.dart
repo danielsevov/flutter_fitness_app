@@ -1,4 +1,3 @@
-import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:lift_to_live_flutter/domain/entities/article.dart';
 import 'package:lift_to_live_flutter/domain/entities/news.dart';
@@ -145,7 +144,7 @@ void main() {
     when(userRepo.fetchUser('email', 'token')).thenAnswer(
             (_) async => User('email', 'email', 'coachId', 'nationality', 'dateOfBirth', 'name', 'phoneNumber'));
     when(userRepo.fetchProfileImage('email', 'token')).thenAnswer(
-            (_) async => Image.asset('assets/images/prof_pic.png'));
+            (_) async => TestData.test_image_1);
     when(view.setUserData(any, any)).thenAnswer((realInvocation) { });
     when(newsRepo.getNews(any, any)).thenAnswer(
             (_) async => TestData.test_news_1);
@@ -177,7 +176,7 @@ void main() {
     when(userRepo.fetchUser('email', 'token')).thenAnswer(
             (_) async => User('email', 'email', 'coachId', 'nationality', 'dateOfBirth', 'name', 'phoneNumber'));
     when(userRepo.fetchProfileImage('email', 'token')).thenAnswer(
-            (_) async => Image.asset('assets/images/prof_pic.png'));
+            (_) async => TestData.test_image_1);
     when(view.setUserData(any, any)).thenAnswer((realInvocation) { });
     when(newsRepo.getNews(any, any)).thenAnswer(
             (_) async => TestData.test_news_1);
@@ -206,7 +205,7 @@ void main() {
     when(userRepo.fetchUser('email', 'token')).thenAnswer(
             (_) async => User('email', 'email', 'coachId', 'nationality', 'dateOfBirth', 'name', 'phoneNumber'));
     when(userRepo.fetchProfileImage('email', 'token')).thenAnswer(
-            (_) async => Image.asset('assets/images/prof_pic.png'));
+            (_) async => TestData.test_image_1);
     when(view.setUserData(any, any)).thenAnswer((realInvocation) { });
     when(newsRepo.getNews(any, any)).thenAnswer(
             (_) async => News('ok', 12, [Article('S', 'S', 'S', 'SSSSSSSSSSSSS', 'S', 'S')]));

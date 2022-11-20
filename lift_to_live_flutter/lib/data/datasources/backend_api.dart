@@ -1,6 +1,7 @@
 // coverage:ignore-file
 
 import 'dart:convert';
+import 'dart:developer';
 import 'package:http/http.dart' as http;
 
 /// This is a datasource object, which handles the communication with the Backend REST API.
@@ -21,65 +22,64 @@ class BackendAPI {
   // static String jwtToken = "", userId = "";
   // static List<Role> myRoles = [];
 
-  // static void patchImage(int id, String userId, String date, String data, String type) async {
-  //   var res = await http.patch(
-  //     Uri.parse('${apiURL}images/$id'),
-  //     headers: <String, String>{
-  //       'Content-Type': 'application/json; charset=UTF-8',
-  //       'Authorization': 'Bearer $jwtToken',
-  //     },
-  //     body: jsonEncode(<String, String>{
-  //       'date': date,
-  //       'data': data,
-  //       'user_id': userId,
-  //       'type': type,
-  //     }),
-  //   );
-  //
-  //   print(res.body);
-  // }
-  //
-  // static Future<http.Response> getImages(String userId) async {
-  //   return http.post(
-  //     Uri.parse('${apiURL}images_for_user/'),
-  //     headers: <String, String>{
-  //       'Content-Type': 'application/json; charset=UTF-8',
-  //       'Authorization': 'Bearer $jwtToken',
-  //     },
-  //     body: jsonEncode(<String, String>{
-  //       'user_id': userId,
-  //     }),
-  //   );
-  // }
-  //
-  //
-  // static void deleteImage(int id) async {
-  //   http.delete(
-  //     Uri.parse('${apiURL}images/$id'),
-  //     headers: <String, String>{
-  //       'Content-Type': 'application/json; charset=UTF-8',
-  //       'Authorization': 'Bearer $jwtToken',
-  //     },
-  //   );
-  // }
-  //
-  // static Future<void> postImage(String userId, String date, String data, String type) async {
-  //   var res = await http.post(
-  //     Uri.parse('${apiURL}images/'),
-  //     headers: <String, String>{
-  //       'Content-Type': 'application/json; charset=UTF-8',
-  //       'Authorization': 'Bearer $jwtToken',
-  //     },
-  //     body: jsonEncode(<String, String>{
-  //       'date': date,
-  //       'data': data,
-  //       'user_id': userId,
-  //       'type': type,
-  //     }),
-  //   );
-  //
-  //   print(res.body);
-  // }
+  void patchImage(int id, String userId, String date, String data, String type, String token) async {
+    var res = await http.patch(
+      Uri.parse('${apiURL}images/$id'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer $token',
+      },
+      body: jsonEncode(<String, String>{
+        'date': date,
+        'data': data,
+        'user_id': userId,
+        'type': type,
+      }),
+    );
+    log(res.body);
+  }
+
+
+  Future<http.Response> getImages(String userId, String jwtToken) async {
+    return http.post(
+      Uri.parse('${apiURL}images_for_user/'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer $jwtToken',
+      },
+      body: jsonEncode(<String, String>{
+        'user_id': userId,
+      }),
+    );
+  }
+
+
+  void deleteImage(int id, String jwtToken) async {
+    http.delete(
+      Uri.parse('${apiURL}images/$id'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer $jwtToken',
+      },
+    );
+  }
+
+  Future<void> postImage(String userId, String date, String data, String type, String jwtToken) async {
+    var res = await http.post(
+      Uri.parse('${apiURL}images/'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer $jwtToken',
+      },
+      body: jsonEncode(<String, String>{
+        'date': date,
+        'data': data,
+        'user_id': userId,
+        'type': type,
+      }),
+    );
+    log(res.body);
+  }
 
   // //function to patch a habit instance
   // static void patchHabit(int id, String date, String note, String userId,

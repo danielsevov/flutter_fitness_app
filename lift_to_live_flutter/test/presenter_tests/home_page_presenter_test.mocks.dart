@@ -3,17 +3,19 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i8;
+import 'dart:async' as _i9;
 
-import 'package:flutter/foundation.dart' as _i6;
-import 'package:flutter/material.dart' as _i4;
+import 'package:flutter/foundation.dart' as _i7;
+import 'package:flutter/material.dart' as _i6;
+import 'package:lift_to_live_flutter/domain/entities/image.dart' as _i4;
 import 'package:lift_to_live_flutter/domain/entities/news.dart' as _i2;
-import 'package:lift_to_live_flutter/domain/entities/role.dart' as _i10;
+import 'package:lift_to_live_flutter/domain/entities/role.dart' as _i11;
 import 'package:lift_to_live_flutter/domain/entities/user.dart' as _i3;
-import 'package:lift_to_live_flutter/domain/repositories/news_repo.dart' as _i7;
-import 'package:lift_to_live_flutter/domain/repositories/user_repo.dart' as _i9;
+import 'package:lift_to_live_flutter/domain/repositories/news_repo.dart' as _i8;
+import 'package:lift_to_live_flutter/domain/repositories/user_repo.dart'
+    as _i10;
 import 'package:lift_to_live_flutter/presentation/ui/widgets/log_out_dialog.dart'
-    as _i11;
+    as _i12;
 import 'package:lift_to_live_flutter/presentation/views/home_page_view.dart'
     as _i5;
 import 'package:mockito/mockito.dart' as _i1;
@@ -49,18 +51,14 @@ class _FakeUser_1 extends _i1.SmartFake implements _i3.User {
         );
 }
 
-class _FakeImage_2 extends _i1.SmartFake implements _i4.Image {
-  _FakeImage_2(
+class _FakeMyImage_2 extends _i1.SmartFake implements _i4.MyImage {
+  _FakeMyImage_2(
     Object parent,
     Invocation parentInvocation,
   ) : super(
           parent,
           parentInvocation,
         );
-
-  @override
-  String toString({_i4.DiagnosticLevel? minLevel = _i4.DiagnosticLevel.info}) =>
-      super.toString();
 }
 
 class _FakeHomePageView_3 extends _i1.SmartFake implements _i5.HomePageView {
@@ -73,8 +71,8 @@ class _FakeHomePageView_3 extends _i1.SmartFake implements _i5.HomePageView {
         );
 }
 
-class _FakeState_4<T extends _i4.StatefulWidget> extends _i1.SmartFake
-    implements _i4.State<T> {
+class _FakeState_4<T extends _i6.StatefulWidget> extends _i1.SmartFake
+    implements _i6.State<T> {
   _FakeState_4(
     Object parent,
     Invocation parentInvocation,
@@ -84,12 +82,12 @@ class _FakeState_4<T extends _i4.StatefulWidget> extends _i1.SmartFake
         );
 
   @override
-  String toString({_i4.DiagnosticLevel? minLevel = _i4.DiagnosticLevel.info}) =>
+  String toString({_i6.DiagnosticLevel? minLevel = _i6.DiagnosticLevel.info}) =>
       super.toString();
 }
 
 class _FakeStatefulElement_5 extends _i1.SmartFake
-    implements _i4.StatefulElement {
+    implements _i6.StatefulElement {
   _FakeStatefulElement_5(
     Object parent,
     Invocation parentInvocation,
@@ -99,12 +97,12 @@ class _FakeStatefulElement_5 extends _i1.SmartFake
         );
 
   @override
-  String toString({_i4.DiagnosticLevel? minLevel = _i4.DiagnosticLevel.info}) =>
+  String toString({_i6.DiagnosticLevel? minLevel = _i6.DiagnosticLevel.info}) =>
       super.toString();
 }
 
 class _FakeDiagnosticsNode_6 extends _i1.SmartFake
-    implements _i4.DiagnosticsNode {
+    implements _i6.DiagnosticsNode {
   _FakeDiagnosticsNode_6(
     Object parent,
     Invocation parentInvocation,
@@ -115,8 +113,8 @@ class _FakeDiagnosticsNode_6 extends _i1.SmartFake
 
   @override
   String toString({
-    _i6.TextTreeConfiguration? parentConfiguration,
-    _i4.DiagnosticLevel? minLevel = _i4.DiagnosticLevel.info,
+    _i7.TextTreeConfiguration? parentConfiguration,
+    _i6.DiagnosticLevel? minLevel = _i6.DiagnosticLevel.info,
   }) =>
       super.toString();
 }
@@ -124,13 +122,13 @@ class _FakeDiagnosticsNode_6 extends _i1.SmartFake
 /// A class which mocks [NewsRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockNewsRepository extends _i1.Mock implements _i7.NewsRepository {
+class MockNewsRepository extends _i1.Mock implements _i8.NewsRepository {
   MockNewsRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i8.Future<_i2.News> getNews(
+  _i9.Future<_i2.News> getNews(
     String? search,
     int? count,
   ) =>
@@ -142,7 +140,7 @@ class MockNewsRepository extends _i1.Mock implements _i7.NewsRepository {
             count,
           ],
         ),
-        returnValue: _i8.Future<_i2.News>.value(_FakeNews_0(
+        returnValue: _i9.Future<_i2.News>.value(_FakeNews_0(
           this,
           Invocation.method(
             #getNews,
@@ -152,28 +150,28 @@ class MockNewsRepository extends _i1.Mock implements _i7.NewsRepository {
             ],
           ),
         )),
-      ) as _i8.Future<_i2.News>);
+      ) as _i9.Future<_i2.News>);
 }
 
 /// A class which mocks [UserRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockUserRepository extends _i1.Mock implements _i9.UserRepository {
+class MockUserRepository extends _i1.Mock implements _i10.UserRepository {
   MockUserRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i8.Future<List<_i10.Role>> fetchUserRoles(String? jwtToken) =>
+  _i9.Future<List<_i11.Role>> fetchUserRoles(String? jwtToken) =>
       (super.noSuchMethod(
         Invocation.method(
           #fetchUserRoles,
           [jwtToken],
         ),
-        returnValue: _i8.Future<List<_i10.Role>>.value(<_i10.Role>[]),
-      ) as _i8.Future<List<_i10.Role>>);
+        returnValue: _i9.Future<List<_i11.Role>>.value(<_i11.Role>[]),
+      ) as _i9.Future<List<_i11.Role>>);
   @override
-  _i8.Future<_i3.User> fetchUser(
+  _i9.Future<_i3.User> fetchUser(
     String? userId,
     String? jwtToken,
   ) =>
@@ -185,7 +183,7 @@ class MockUserRepository extends _i1.Mock implements _i9.UserRepository {
             jwtToken,
           ],
         ),
-        returnValue: _i8.Future<_i3.User>.value(_FakeUser_1(
+        returnValue: _i9.Future<_i3.User>.value(_FakeUser_1(
           this,
           Invocation.method(
             #fetchUser,
@@ -195,9 +193,9 @@ class MockUserRepository extends _i1.Mock implements _i9.UserRepository {
             ],
           ),
         )),
-      ) as _i8.Future<_i3.User>);
+      ) as _i9.Future<_i3.User>);
   @override
-  _i8.Future<_i4.Image> fetchProfileImage(
+  _i9.Future<_i4.MyImage> fetchProfileImage(
     String? userId,
     String? jwtToken,
   ) =>
@@ -209,7 +207,7 @@ class MockUserRepository extends _i1.Mock implements _i9.UserRepository {
             jwtToken,
           ],
         ),
-        returnValue: _i8.Future<_i4.Image>.value(_FakeImage_2(
+        returnValue: _i9.Future<_i4.MyImage>.value(_FakeMyImage_2(
           this,
           Invocation.method(
             #fetchProfileImage,
@@ -219,7 +217,7 @@ class MockUserRepository extends _i1.Mock implements _i9.UserRepository {
             ],
           ),
         )),
-      ) as _i8.Future<_i4.Image>);
+      ) as _i9.Future<_i4.MyImage>);
 }
 
 /// A class which mocks [HomePageView].
@@ -233,7 +231,7 @@ class MockHomePageView extends _i1.Mock implements _i5.HomePageView {
   @override
   void setUserData(
     _i3.User? user,
-    _i4.Image? profilePicture,
+    _i6.Image? profilePicture,
   ) =>
       super.noSuchMethod(
         Invocation.method(
@@ -279,7 +277,7 @@ class MockHomePageView extends _i1.Mock implements _i5.HomePageView {
       );
   @override
   void habitsPressed(
-    _i4.BuildContext? context,
+    _i6.BuildContext? context,
     bool? bottomBarButton,
   ) =>
       super.noSuchMethod(
@@ -294,7 +292,7 @@ class MockHomePageView extends _i1.Mock implements _i5.HomePageView {
       );
   @override
   void profilePressed(
-    _i4.BuildContext? context,
+    _i6.BuildContext? context,
     bool? bottomBarButton,
   ) =>
       super.noSuchMethod(
@@ -308,7 +306,7 @@ class MockHomePageView extends _i1.Mock implements _i5.HomePageView {
         returnValueForMissingStub: null,
       );
   @override
-  void logOutPressed(_i4.BuildContext? context) => super.noSuchMethod(
+  void logOutPressed(_i6.BuildContext? context) => super.noSuchMethod(
         Invocation.method(
           #logOutPressed,
           [context],
@@ -317,7 +315,7 @@ class MockHomePageView extends _i1.Mock implements _i5.HomePageView {
       );
   @override
   void traineesPressed(
-    _i4.BuildContext? context,
+    _i6.BuildContext? context,
     bool? bottomBarButton,
   ) =>
       super.noSuchMethod(
@@ -335,7 +333,7 @@ class MockHomePageView extends _i1.Mock implements _i5.HomePageView {
 /// A class which mocks [LogOutDialog].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockLogOutDialog extends _i1.Mock implements _i11.LogOutDialog {
+class MockLogOutDialog extends _i1.Mock implements _i12.LogOutDialog {
   MockLogOutDialog() {
     _i1.throwOnMissingStub(this);
   }
@@ -349,21 +347,21 @@ class MockLogOutDialog extends _i1.Mock implements _i11.LogOutDialog {
         ),
       ) as _i5.HomePageView);
   @override
-  _i4.State<_i4.StatefulWidget> createState() => (super.noSuchMethod(
+  _i6.State<_i6.StatefulWidget> createState() => (super.noSuchMethod(
         Invocation.method(
           #createState,
           [],
         ),
-        returnValue: _FakeState_4<_i4.StatefulWidget>(
+        returnValue: _FakeState_4<_i6.StatefulWidget>(
           this,
           Invocation.method(
             #createState,
             [],
           ),
         ),
-      ) as _i4.State<_i4.StatefulWidget>);
+      ) as _i6.State<_i6.StatefulWidget>);
   @override
-  _i4.StatefulElement createElement() => (super.noSuchMethod(
+  _i6.StatefulElement createElement() => (super.noSuchMethod(
         Invocation.method(
           #createElement,
           [],
@@ -375,7 +373,7 @@ class MockLogOutDialog extends _i1.Mock implements _i11.LogOutDialog {
             [],
           ),
         ),
-      ) as _i4.StatefulElement);
+      ) as _i6.StatefulElement);
   @override
   String toStringShort() => (super.noSuchMethod(
         Invocation.method(
@@ -385,7 +383,7 @@ class MockLogOutDialog extends _i1.Mock implements _i11.LogOutDialog {
         returnValue: '',
       ) as String);
   @override
-  void debugFillProperties(_i6.DiagnosticPropertiesBuilder? properties) =>
+  void debugFillProperties(_i7.DiagnosticPropertiesBuilder? properties) =>
       super.noSuchMethod(
         Invocation.method(
           #debugFillProperties,
@@ -396,7 +394,7 @@ class MockLogOutDialog extends _i1.Mock implements _i11.LogOutDialog {
   @override
   String toStringShallow({
     String? joiner = r', ',
-    _i4.DiagnosticLevel? minLevel = _i4.DiagnosticLevel.debug,
+    _i6.DiagnosticLevel? minLevel = _i6.DiagnosticLevel.debug,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -413,7 +411,7 @@ class MockLogOutDialog extends _i1.Mock implements _i11.LogOutDialog {
   String toStringDeep({
     String? prefixLineOne = r'',
     String? prefixOtherLines,
-    _i4.DiagnosticLevel? minLevel = _i4.DiagnosticLevel.debug,
+    _i6.DiagnosticLevel? minLevel = _i6.DiagnosticLevel.debug,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -428,9 +426,9 @@ class MockLogOutDialog extends _i1.Mock implements _i11.LogOutDialog {
         returnValue: '',
       ) as String);
   @override
-  _i4.DiagnosticsNode toDiagnosticsNode({
+  _i6.DiagnosticsNode toDiagnosticsNode({
     String? name,
-    _i6.DiagnosticsTreeStyle? style,
+    _i7.DiagnosticsTreeStyle? style,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -452,16 +450,16 @@ class MockLogOutDialog extends _i1.Mock implements _i11.LogOutDialog {
             },
           ),
         ),
-      ) as _i4.DiagnosticsNode);
+      ) as _i6.DiagnosticsNode);
   @override
-  List<_i4.DiagnosticsNode> debugDescribeChildren() => (super.noSuchMethod(
+  List<_i6.DiagnosticsNode> debugDescribeChildren() => (super.noSuchMethod(
         Invocation.method(
           #debugDescribeChildren,
           [],
         ),
-        returnValue: <_i4.DiagnosticsNode>[],
-      ) as List<_i4.DiagnosticsNode>);
+        returnValue: <_i6.DiagnosticsNode>[],
+      ) as List<_i6.DiagnosticsNode>);
   @override
-  String toString({_i4.DiagnosticLevel? minLevel = _i4.DiagnosticLevel.info}) =>
+  String toString({_i6.DiagnosticLevel? minLevel = _i6.DiagnosticLevel.info}) =>
       super.toString();
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'helper.dart';
 import 'presentation/state_management/app_state.dart';
 import 'presentation/ui/pages/log_in_page.dart';
 import 'package:provider/provider.dart';
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
 
             //set the primary color of the app
             theme: ThemeData(
-              primarySwatch: Colors.blue,
+              backgroundColor: Helper.blueColor,
             ),
 
             // set the entry page to be log in page

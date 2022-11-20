@@ -5,7 +5,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i6;
 
-import 'package:flutter/material.dart' as _i3;
+import 'package:lift_to_live_flutter/domain/entities/image.dart' as _i3;
 import 'package:lift_to_live_flutter/domain/entities/role.dart' as _i8;
 import 'package:lift_to_live_flutter/domain/entities/user.dart' as _i2;
 import 'package:lift_to_live_flutter/domain/repositories/token_repo.dart'
@@ -38,18 +38,14 @@ class _FakeUser_0 extends _i1.SmartFake implements _i2.User {
         );
 }
 
-class _FakeImage_1 extends _i1.SmartFake implements _i3.Image {
-  _FakeImage_1(
+class _FakeMyImage_1 extends _i1.SmartFake implements _i3.MyImage {
+  _FakeMyImage_1(
     Object parent,
     Invocation parentInvocation,
   ) : super(
           parent,
           parentInvocation,
         );
-
-  @override
-  String toString({_i3.DiagnosticLevel? minLevel = _i3.DiagnosticLevel.info}) =>
-      super.toString();
 }
 
 class _FakeLogInFormView_2 extends _i1.SmartFake implements _i4.LogInFormView {
@@ -129,7 +125,7 @@ class MockUserRepository extends _i1.Mock implements _i7.UserRepository {
         )),
       ) as _i6.Future<_i2.User>);
   @override
-  _i6.Future<_i3.Image> fetchProfileImage(
+  _i6.Future<_i3.MyImage> fetchProfileImage(
     String? userId,
     String? jwtToken,
   ) =>
@@ -141,7 +137,7 @@ class MockUserRepository extends _i1.Mock implements _i7.UserRepository {
             jwtToken,
           ],
         ),
-        returnValue: _i6.Future<_i3.Image>.value(_FakeImage_1(
+        returnValue: _i6.Future<_i3.MyImage>.value(_FakeMyImage_1(
           this,
           Invocation.method(
             #fetchProfileImage,
@@ -151,7 +147,7 @@ class MockUserRepository extends _i1.Mock implements _i7.UserRepository {
             ],
           ),
         )),
-      ) as _i6.Future<_i3.Image>);
+      ) as _i6.Future<_i3.MyImage>);
 }
 
 /// A class which mocks [LogInPageView].

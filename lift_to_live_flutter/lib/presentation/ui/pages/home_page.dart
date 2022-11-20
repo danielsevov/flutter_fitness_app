@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:lift_to_live_flutter/domain/entities/news.dart';
 import 'package:lift_to_live_flutter/factory/home_page_factory.dart';
 import 'package:lift_to_live_flutter/presentation/presenters/home_page_presenter.dart';
+import 'package:lift_to_live_flutter/presentation/ui/pages/profile_page.dart';
 import 'package:lift_to_live_flutter/presentation/ui/widgets/log_out_dialog.dart';
 import 'package:lift_to_live_flutter/presentation/views/home_page_view.dart';
 import 'package:provider/provider.dart';
@@ -22,7 +23,7 @@ class HomePage extends StatefulWidget {
   State<StatefulWidget> createState() => HomePageState();
 }
 
-/// State object of the HomePage. Holds the mutable data, related to the log in page.
+/// State object of the HomePage. Holds the mutable data, related to the home page.
 class HomePageState extends State<HomePage> implements HomePageView {
   final HomePagePresenter _presenter = HomePageFactory()
       .getHomePagePresenter(); // The business logic object of the log in page
@@ -100,7 +101,7 @@ class HomePageState extends State<HomePage> implements HomePageView {
   @override
   void profilePressed(BuildContext context, bool bottomBarButton) {
     if (!bottomBarButton) Navigator.of(context).pop();
-    Helper.pushPageWithAnimation(context, const Text("Profile"));
+    Helper.pushPageWithAnimation(context, ProfilePage(userId: _user.id, fromHome: true,));
   }
 
   /// Function called when user wants to navigate from home to trainees page
@@ -448,7 +449,7 @@ class HomePageState extends State<HomePage> implements HomePageView {
           padding: EdgeInsets.zero,
           children: [
             SizedBox(
-              height: _screenHeight / 2,
+              height: _screenHeight / 7*4,
               child: DrawerHeader(
                 decoration: const BoxDecoration(
                     color: Helper.blueColor,
@@ -461,7 +462,7 @@ class HomePageState extends State<HomePage> implements HomePageView {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               const SizedBox(
-                                width: 50,
+                                width: 20,
                               ),
                               Container(
                                 alignment: Alignment.center,
@@ -478,7 +479,7 @@ class HomePageState extends State<HomePage> implements HomePageView {
                           )
                         : const SizedBox(),
                     const SizedBox(
-                      height: 10,
+                      height: 20,
                       width: 10,
                     ),
                     Row(

@@ -1,11 +1,10 @@
 import 'dart:io';
-
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart';
 import 'package:lift_to_live_flutter/data/datasources/backend_api.dart';
 import 'package:lift_to_live_flutter/data/exceptions/fetch_failed_exception.dart';
 import 'package:lift_to_live_flutter/data/repositories/user_repo_impl.dart';
+import 'package:lift_to_live_flutter/domain/entities/image.dart';
 import 'package:lift_to_live_flutter/domain/repositories/user_repo.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -54,7 +53,7 @@ void main() {
 
       UserRepository repository = UserRepoImpl(backendAPI);
 
-      expect(await repository.fetchProfileImage('A', 'A'), isA<Image>());
+      expect(await repository.fetchProfileImage('A', 'A'), isA<MyImage>());
     });
 
     test('throws an exception if the http call completes with an error', () async {
