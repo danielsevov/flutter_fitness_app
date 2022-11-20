@@ -90,6 +90,7 @@ class HomePagePresenter extends BasePresenter{
     _view?.setFetched(true);
   }
 
+  // coverage:ignore-start
   /// Function used to open an external browser application and navigate to a news article URL.
   Future<void> redirectToURL(int index) async {
     var url = _currentNews.articles[index].url;
@@ -105,4 +106,5 @@ class HomePagePresenter extends BasePresenter{
       _view?.notifyWrongURL('Could not launch $url');
     }
   }
+// coverage:ignore-end
 }

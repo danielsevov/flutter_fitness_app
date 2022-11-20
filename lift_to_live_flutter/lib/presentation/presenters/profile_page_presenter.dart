@@ -74,6 +74,8 @@ class ProfilePagePresenter extends BasePresenter{
     }
   }
 
+  // coverage:ignore-start
+  /// Function used for picking a new profile picture, storing it and displaying it on the profile page.
   changeProfilePicture() async {
     PickedFile? pickedFile = await ImagePicker().getImage(
       source: ImageSource.gallery,
@@ -100,4 +102,5 @@ class ProfilePagePresenter extends BasePresenter{
       _view?.changeProfilePicture(img);
     }
   }
+// coverage:ignore-end
 }

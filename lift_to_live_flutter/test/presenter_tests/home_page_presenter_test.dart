@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:lift_to_live_flutter/data/exceptions/fetch_failed_exception.dart';
 import 'package:lift_to_live_flutter/domain/entities/article.dart';
 import 'package:lift_to_live_flutter/domain/entities/news.dart';
 import 'package:lift_to_live_flutter/domain/entities/role.dart';
@@ -158,6 +159,29 @@ void main() {
     verify(newsRepo.getNews(any, any)).called(1);
     verify(view.setNewsData(any)).called(1);
     verify(view.setUserData(any, any)).called(1);
+  });
+
+  test('test fetch data with exception', () async {
+    final newsRepo = MockNewsRepository();
+    final userRepo = MockUserRepository();
+    final appState = AppState();
+    final view = MockHomePageView();
+    final presenter = HomePagePresenter(newsRepo, userRepo);
+    presenter.setAppState(appState);
+    appState.setInitialState('email', 'token', [Role('A', 'admin')]);
+    presenter.attach(view);
+
+    when(view.setInProgress(any)).thenAnswer((realInvocation) { });
+    when(view.setFetched(any)).thenAnswer((realInvocation) { });
+    when(userRepo.fetchUser('email', 'token')).thenAnswer(
+            (_) async => User('email', 'email', 'coachId', 'nationality', 'dateOfBirth', 'name', 'phoneNumber'));
+    when(userRepo.fetchProfileImage('email', 'token')).thenThrow(FetchFailedException(''));
+    when(view.setUserData(any, any)).thenAnswer((realInvocation) { });
+    when(newsRepo.getNews(any, any)).thenAnswer(
+            (_) async => TestData.test_news_1);
+    when(view.setNewsData(any)).thenAnswer((realInvocation) { });
+
+    expect(() => presenter.fetchData(), returnsNormally);
   });
 
   test('test navigate to url no exception', () async {
