@@ -49,6 +49,7 @@
     "!*/__tests__"
   ],
   "dependencies": {
+    "@emailjs/browser": "^3.7.0",
     "@loopback/authentication": "^9.0.1",
     "@loopback/authentication-jwt": "^0.12.1",
     "@loopback/boot": "^5.0.1",
@@ -57,8 +58,14 @@
     "@loopback/rest": "^12.0.1",
     "@loopback/rest-explorer": "^5.0.1",
     "@loopback/service-proxy": "^5.0.1",
+    "emailjs": "^4.0.1",
+    "emailjs-com": "^3.2.0",
     "loopback-connector-mysql": "^6.1.0",
-    "tslib": "^2.0.0"
+    "loopback-connector-rest": "^3.7.0",
+    "nodemailer": "^6.7.8",
+    "tslib": "^2.0.0",
+    "xhr2": "^0.2.1",
+    "xmlhttprequest": "^1.8.0"
   },
   "devDependencies": {
     "@loopback/build": "^9.0.1",

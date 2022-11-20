@@ -52,6 +52,18 @@ export class Workout extends Entity {
     type: 'string',
   })
   created_on?: string;
+  
+  @property({
+    type: 'boolean',
+	default: false,
+  })
+  is_template?: boolean;
+  
+  @property({
+    type: 'string',
+	default: '0',
+  })
+  duration?: string;
 
 
   constructor(data?: Partial<Workout>) {
