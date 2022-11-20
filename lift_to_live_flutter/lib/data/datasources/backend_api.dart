@@ -64,7 +64,7 @@ class BackendAPI {
     );
   }
 
-  Future<void> postImage(String userId, String date, String data, String type, String jwtToken) async {
+  void postImage(String userId, String date, String data, String type, String jwtToken) async {
     var res = await http.post(
       Uri.parse('${apiURL}images/'),
       headers: <String, String>{

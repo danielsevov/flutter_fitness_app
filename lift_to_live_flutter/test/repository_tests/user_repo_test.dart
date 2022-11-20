@@ -70,6 +70,26 @@ void main() {
     });
   });
 
+  test('test post image', () async {
+    final backendAPI = MockBackendAPI();
+
+    when(backendAPI.postImage('', '', '', '', '')).thenAnswer((realInvocation) async => {});
+
+    UserRepository repository = UserRepoImpl(backendAPI);
+
+    expect(() => repository.postImage('', '', '', '', ''), returnsNormally);
+  });
+
+  test('test patch image', () async {
+    final backendAPI = MockBackendAPI();
+
+    when(backendAPI.patchImage(1 ,'', '', '', '', '')).thenAnswer((realInvocation) async => {});
+
+    UserRepository repository = UserRepoImpl(backendAPI);
+
+    expect(() async => repository.patchImage(1, '', '', '', '', ''), returnsNormally);
+  });
+
   group('mock test user repository to fetch user roles', () {
     test('returns response if the http call completes successfully', () async {
       final backendAPI = MockBackendAPI();

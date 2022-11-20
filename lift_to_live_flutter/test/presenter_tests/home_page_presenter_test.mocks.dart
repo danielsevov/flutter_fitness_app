@@ -218,6 +218,50 @@ class MockUserRepository extends _i1.Mock implements _i10.UserRepository {
           ),
         )),
       ) as _i9.Future<_i4.MyImage>);
+  @override
+  void patchImage(
+    int? id,
+    String? userId,
+    String? date,
+    String? encoded,
+    String? type,
+    String? jwtToken,
+  ) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #patchImage,
+          [
+            id,
+            userId,
+            date,
+            encoded,
+            type,
+            jwtToken,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  void postImage(
+    String? userId,
+    String? date,
+    String? encoded,
+    String? type,
+    String? jwtToken,
+  ) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #postImage,
+          [
+            userId,
+            date,
+            encoded,
+            type,
+            jwtToken,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
 }
 
 /// A class which mocks [HomePageView].

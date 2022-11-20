@@ -39,6 +39,89 @@ class MockBackendAPI extends _i1.Mock implements _i3.BackendAPI {
   }
 
   @override
+  void patchImage(
+    int? id,
+    String? userId,
+    String? date,
+    String? data,
+    String? type,
+    String? token,
+  ) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #patchImage,
+          [
+            id,
+            userId,
+            date,
+            data,
+            type,
+            token,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  _i4.Future<_i2.Response> getImages(
+    String? userId,
+    String? jwtToken,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getImages,
+          [
+            userId,
+            jwtToken,
+          ],
+        ),
+        returnValue: _i4.Future<_i2.Response>.value(_FakeResponse_0(
+          this,
+          Invocation.method(
+            #getImages,
+            [
+              userId,
+              jwtToken,
+            ],
+          ),
+        )),
+      ) as _i4.Future<_i2.Response>);
+  @override
+  void deleteImage(
+    int? id,
+    String? jwtToken,
+  ) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #deleteImage,
+          [
+            id,
+            jwtToken,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  void postImage(
+    String? userId,
+    String? date,
+    String? data,
+    String? type,
+    String? jwtToken,
+  ) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #postImage,
+          [
+            userId,
+            date,
+            data,
+            type,
+            jwtToken,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
   _i4.Future<_i2.Response> logIn(
     String? email,
     String? password,
