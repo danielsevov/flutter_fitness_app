@@ -39,7 +39,7 @@ class MockBackendAPI extends _i1.Mock implements _i3.BackendAPI {
   }
 
   @override
-  void patchImage(
+  _i4.Future<void> patchImage(
     int? id,
     String? userId,
     String? date,
@@ -47,7 +47,7 @@ class MockBackendAPI extends _i1.Mock implements _i3.BackendAPI {
     String? type,
     String? token,
   ) =>
-      super.noSuchMethod(
+      (super.noSuchMethod(
         Invocation.method(
           #patchImage,
           [
@@ -59,8 +59,9 @@ class MockBackendAPI extends _i1.Mock implements _i3.BackendAPI {
             token,
           ],
         ),
-        returnValueForMissingStub: null,
-      );
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
   @override
   _i4.Future<_i2.Response> getImages(
     String? userId,
@@ -86,11 +87,11 @@ class MockBackendAPI extends _i1.Mock implements _i3.BackendAPI {
         )),
       ) as _i4.Future<_i2.Response>);
   @override
-  void deleteImage(
+  _i4.Future<void> deleteImage(
     int? id,
     String? jwtToken,
   ) =>
-      super.noSuchMethod(
+      (super.noSuchMethod(
         Invocation.method(
           #deleteImage,
           [
@@ -98,17 +99,18 @@ class MockBackendAPI extends _i1.Mock implements _i3.BackendAPI {
             jwtToken,
           ],
         ),
-        returnValueForMissingStub: null,
-      );
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
   @override
-  void postImage(
+  _i4.Future<void> postImage(
     String? userId,
     String? date,
     String? data,
     String? type,
     String? jwtToken,
   ) =>
-      super.noSuchMethod(
+      (super.noSuchMethod(
         Invocation.method(
           #postImage,
           [
@@ -119,8 +121,9 @@ class MockBackendAPI extends _i1.Mock implements _i3.BackendAPI {
             jwtToken,
           ],
         ),
-        returnValueForMissingStub: null,
-      );
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
   @override
   _i4.Future<_i2.Response> logIn(
     String? email,

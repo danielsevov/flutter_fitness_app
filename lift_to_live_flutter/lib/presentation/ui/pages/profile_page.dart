@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:lift_to_live_flutter/presentation/ui/pages/picture_page.dart';
 import 'package:provider/provider.dart';
 
 import '../../../domain/entities/user.dart';
@@ -90,7 +91,7 @@ class ProfilePageState extends State<ProfilePage> implements ProfilePageView {
   /// Function called when user wants to navigate from profile page to pictures page.
   @override
   void picturesPressed(BuildContext context) {
-    Helper.pushPageWithAnimation(context, const Text("Pictures"));
+    Helper.pushPageWithAnimation(context, PicturePage(userId: _user.id, name: _user.name.split(" ")[0],));
   }
 
   /// Build method of the home page view
@@ -152,6 +153,47 @@ class ProfilePageState extends State<ProfilePage> implements ProfilePageView {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
+                        Wrap( //will break to another line on overflow
+                          direction: Axis.horizontal,
+                          alignment: WrapAlignment.spaceAround,//use vertical to show  on vertical axis
+                          children: <Widget>[
+                            Container(
+                                margin:const EdgeInsets.all(10),
+                                child: FloatingActionButton.extended(
+                                  heroTag: 'btn5',
+                                  backgroundColor: Helper.blueColor,
+                                  label: const Text('View Pictures'),
+                                  onPressed: () async {
+                                    if(_presenter.isAuthorized()) {
+                                      Helper.pushPageWithAnimation(context, PicturePage(userId: _user.id, name: _user.name.split(" ")[0],));
+                                    }
+                                    else {
+                                      Helper.makeToast(context, 'You are not authorized to see this page!');
+                                    }
+                                  },
+                                  icon: const Icon(
+                                    Icons.photo_library_rounded,
+                                    color: Colors.white,
+                                  ),
+                                )
+                            ), // button second
+                            const SizedBox(height: 10,),
+                            Container(
+                                margin:const EdgeInsets.all(10),
+                                child: FloatingActionButton.extended(
+                                  heroTag: 'btn6',
+                                  backgroundColor: Helper.redColor,
+                                  icon: const Icon(Icons.task),
+                                  label: const Text('View Habits'),
+                                  onPressed: () {
+                                    Helper.pushPageWithAnimation(context, const Text('Habits'));
+                                  },
+                                )
+                            ), // button third
+
+                            // Add more buttons here
+                          ],
+                        ),
                         const SizedBox(height: 20,),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -280,47 +322,6 @@ class ProfilePageState extends State<ProfilePage> implements ProfilePageView {
                                 ],
                               ),
                             ),
-                          ],
-                        ),
-                        Wrap( //will break to another line on overflow
-                          direction: Axis.horizontal,
-                          alignment: WrapAlignment.spaceAround,//use vertical to show  on vertical axis
-                          children: <Widget>[
-                            Container(
-                                margin:const EdgeInsets.all(10),
-                                child: FloatingActionButton.extended(
-                                  heroTag: 'btn5',
-                                  backgroundColor: Helper.blueColor,
-                                  label: const Text('View Pictures'),
-                                  onPressed: () async {
-                                    if(_presenter.isAuthorized()) {
-                                      Helper.pushPageWithAnimation(context, const Text('Pictures'));
-                                    }
-                                    else {
-                                      Helper.makeToast(context, 'You are not authorized to see this page!');
-                                    }
-                                  },
-                                  icon: const Icon(
-                                    Icons.photo_library_rounded,
-                                    color: Colors.white,
-                                  ),
-                                )
-                            ), // button second
-                            const SizedBox(height: 10,),
-                            Container(
-                                margin:const EdgeInsets.all(10),
-                                child: FloatingActionButton.extended(
-                                  heroTag: 'btn6',
-                                  backgroundColor: Helper.redColor,
-                                  icon: const Icon(Icons.task),
-                                  label: const Text('View Habits'),
-                                  onPressed: () {
-                                    Helper.pushPageWithAnimation(context, const Text('Habits'));
-                                  },
-                                )
-                            ), // button third
-
-                            // Add more buttons here
                           ],
                         ),
                         const SizedBox(

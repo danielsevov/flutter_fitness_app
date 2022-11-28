@@ -19,14 +19,14 @@ class UserRepoImpl implements UserRepository {
 
   /// This function is used for patching a Image object, which holds the picture of a user.
   @override
-  void patchImage(int id, String userId, String date, String data, String type, String token){
-    backendAPI.patchImage(id, userId, date, data, type, token);
+  Future<void> patchImage(int id, String userId, String date, String data, String type, String token)async {
+    await backendAPI.patchImage(id, userId, date, data, type, token);
   }
 
   /// This function is used for posting a Image object, which holds the picture of a user.
   @override
-  void postImage(String userId, String date, String data, String type, String token){
-    backendAPI.postImage(userId, date, data, type, token);
+  Future<void> postImage(String userId, String date, String data, String type, String token)async {
+    await backendAPI.postImage(userId, date, data, type, token);
   }
 
   /// This function is used for fetching a Image object, which holds the profile picture of a user.
@@ -73,6 +73,34 @@ class UserRepoImpl implements UserRepository {
     }
   }
 
+  @override
+  Future<List<MyImage>> getUserImages(String userId, String jwtToken) async {
+    //fetch http response object
+    Response response = await backendAPI.getImages(userId, jwtToken);
+
+    //proceed if fetch is successful and status code is 200
+    if (response.statusCode == 200) {
+      log("fetch user images success!");
+
+      //decode response body and create a list of Role objects
+      List<MyImage> myImages = [];
+      List<dynamic> list = json.decode(response.body);
+      for (var element in list) {
+        myImages.add(MyImage.fromJson(element));
+      }
+
+      //return the list of Role objects
+      return myImages;
+    }
+
+    //else throw an exception
+    else {
+      log("fetch user images failed");
+      throw FetchFailedException(
+          "Failed to fetch user images!\nresponse code ${response.statusCode}");
+    }
+  }
+
   /// This function is used for fetching a list of Role objects, describing the user role of a user.
   @override
   Future<List<Role>> fetchUserRoles(String jwtToken) async {
@@ -99,6 +127,18 @@ class UserRepoImpl implements UserRepository {
       log("fetch user roles failed");
       throw FetchFailedException(
           "Failed to fetch user roles!\nresponse code ${response.statusCode}");
+    }
+  }
+
+  @override
+  Future<void> deleteImage(int id, String jwtToken) async {
+    try {
+      await backendAPI.deleteImage(id, jwtToken);
+    }
+    catch(e) {
+      log("fetch user details failed");
+      throw FetchFailedException(
+          "Failed to fetch user details!\n$e");
     }
   }
 }

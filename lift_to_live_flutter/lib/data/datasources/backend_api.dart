@@ -16,13 +16,13 @@ class BackendAPI {
   BackendAPI._internal();
 
 
-  static const apiURL = "http://192.168.178.28:3000/"; //molensingel
-  //static const apiURL = "http://145.93.149.95:3000/"; //fontys
+  //static const apiURL = "http://192.168.178.30:3000/"; //molensingel
+  static const apiURL = "http://145.93.150.49:3000/"; //fontys
 
   // static String jwtToken = "", userId = "";
   // static List<Role> myRoles = [];
 
-  void patchImage(int id, String userId, String date, String data, String type, String token) async {
+  Future<void> patchImage(int id, String userId, String date, String data, String type, String token) async {
     var res = await http.patch(
       Uri.parse('${apiURL}images/$id'),
       headers: <String, String>{
@@ -54,7 +54,7 @@ class BackendAPI {
   }
 
 
-  void deleteImage(int id, String jwtToken) async {
+  Future<void> deleteImage(int id, String jwtToken) async {
     http.delete(
       Uri.parse('${apiURL}images/$id'),
       headers: <String, String>{
@@ -64,7 +64,7 @@ class BackendAPI {
     );
   }
 
-  void postImage(String userId, String date, String data, String type, String jwtToken) async {
+  Future<void> postImage(String userId, String date, String data, String type, String jwtToken) async {
     var res = await http.post(
       Uri.parse('${apiURL}images/'),
       headers: <String, String>{

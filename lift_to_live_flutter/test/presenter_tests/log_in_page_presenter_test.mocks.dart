@@ -125,6 +125,21 @@ class MockUserRepository extends _i1.Mock implements _i7.UserRepository {
         )),
       ) as _i6.Future<_i2.User>);
   @override
+  _i6.Future<List<_i3.MyImage>> getUserImages(
+    String? userId,
+    String? jwtToken,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getUserImages,
+          [
+            userId,
+            jwtToken,
+          ],
+        ),
+        returnValue: _i6.Future<List<_i3.MyImage>>.value(<_i3.MyImage>[]),
+      ) as _i6.Future<List<_i3.MyImage>>);
+  @override
   _i6.Future<_i3.MyImage> fetchProfileImage(
     String? userId,
     String? jwtToken,
@@ -149,7 +164,7 @@ class MockUserRepository extends _i1.Mock implements _i7.UserRepository {
         )),
       ) as _i6.Future<_i3.MyImage>);
   @override
-  void patchImage(
+  _i6.Future<void> patchImage(
     int? id,
     String? userId,
     String? date,
@@ -157,7 +172,7 @@ class MockUserRepository extends _i1.Mock implements _i7.UserRepository {
     String? type,
     String? jwtToken,
   ) =>
-      super.noSuchMethod(
+      (super.noSuchMethod(
         Invocation.method(
           #patchImage,
           [
@@ -169,17 +184,18 @@ class MockUserRepository extends _i1.Mock implements _i7.UserRepository {
             jwtToken,
           ],
         ),
-        returnValueForMissingStub: null,
-      );
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
   @override
-  void postImage(
+  _i6.Future<void> postImage(
     String? userId,
     String? date,
     String? encoded,
     String? type,
     String? jwtToken,
   ) =>
-      super.noSuchMethod(
+      (super.noSuchMethod(
         Invocation.method(
           #postImage,
           [
@@ -190,8 +206,25 @@ class MockUserRepository extends _i1.Mock implements _i7.UserRepository {
             jwtToken,
           ],
         ),
-        returnValueForMissingStub: null,
-      );
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
+  @override
+  _i6.Future<void> deleteImage(
+    int? id,
+    String? jwtToken,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #deleteImage,
+          [
+            id,
+            jwtToken,
+          ],
+        ),
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
 }
 
 /// A class which mocks [LogInPageView].
