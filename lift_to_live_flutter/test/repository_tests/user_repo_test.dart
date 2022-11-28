@@ -80,6 +80,26 @@ void main() {
     expect(() => repository.postImage('', '', '', '', ''), returnsNormally);
   });
 
+  test('test delete image', () async {
+    final backendAPI = MockBackendAPI();
+
+    when(backendAPI.deleteImage( 1 ,'')).thenAnswer((realInvocation) async => {});
+
+    UserRepository repository = UserRepoImpl(backendAPI);
+
+    expect(() => repository.deleteImage( 1 ,''), returnsNormally);
+  });
+
+  test('test delete image exception', () async {
+    final backendAPI = MockBackendAPI();
+
+    when(backendAPI.deleteImage( 1 ,'')).thenThrow(FetchFailedException(''));
+
+    UserRepository repository = UserRepoImpl(backendAPI);
+
+    expect(() => repository.deleteImage( 1 ,''), throwsA(isA<FetchFailedException>()));
+  });
+
   test('test patch image', () async {
     final backendAPI = MockBackendAPI();
 
