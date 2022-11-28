@@ -90,6 +90,31 @@ void main() {
     expect(() async => repository.patchImage(1, '', '', '', '', ''), returnsNormally);
   });
 
+  test('test get images', () async {
+    final backendAPI = MockBackendAPI();
+
+    when(backendAPI.getImages(any, any)).thenAnswer((realInvocation) async => Response('[{"user_id": "A", "type": "A", "id": 1, "date": "A", "data": "4444"}]', 200, headers: {
+      HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8',
+    }));
+
+    UserRepository repository = UserRepoImpl(backendAPI);
+
+    expect(await repository.getUserImages('A', 'A'), isA<List<MyImage>>());
+  });
+
+  test('test get images with exception', () async {
+    final backendAPI = MockBackendAPI();
+
+    when(backendAPI.getImages(any, any)).thenAnswer(
+            (_) async => Response('', 404, headers: {
+          HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8',
+        }));
+
+    UserRepository repository = UserRepoImpl(backendAPI);
+
+    expect(() async => await repository.getUserImages('A', 'A'), throwsA(isA<FetchFailedException>()));
+  });
+
   group('mock test user repository to fetch user roles', () {
     test('returns response if the http call completes successfully', () async {
       final backendAPI = MockBackendAPI();

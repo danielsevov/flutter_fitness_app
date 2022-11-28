@@ -138,7 +138,7 @@ class UserRepoImpl implements UserRepository {
     catch(e) {
       log("fetch user details failed");
       throw FetchFailedException(
-          "Failed to fetch user details!\n$e");
+          "Failed to delete image!\n$e");
     }
   }
 }
