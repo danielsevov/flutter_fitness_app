@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:lift_to_live_flutter/data/exceptions/fetch_failed_exception.dart';
+import 'package:lift_to_live_flutter/domain/entities/image.dart';
 import 'package:lift_to_live_flutter/domain/repositories/user_repo.dart';
 import 'package:lift_to_live_flutter/presentation/presenters/picture_page_presenter.dart';
 import 'package:lift_to_live_flutter/presentation/state_management/app_state.dart';
@@ -54,6 +55,20 @@ void main() {
     expect(presenter.isInitialized(), false);
 
     when(userRepo.getUserImages(any, any)).thenAnswer((realInvocation) async => [TestData.test_image_1, TestData.test_image_2]);
+
+    appState.setInitialState('email@email.com', '', []);
+    presenter.setAppState(appState);
+
+    expect(() => presenter.fetchData(), returnsNormally);
+  });
+
+  test('test fetch data side back front', () {
+    final userRepo = MockUserRepository();
+    final appState = AppState();
+    final presenter = PicturePagePresenter(userRepo, 'email@email.com');
+    expect(presenter.isInitialized(), false);
+
+    when(userRepo.getUserImages(any, any)).thenAnswer((realInvocation) async => [MyImage('A', 'A', 1, 'side', '4444'), MyImage('A', 'A', 1, 'front', '4444'), MyImage('A', 'A', 1, 'back', '4444')]);
 
     appState.setInitialState('email@email.com', '', []);
     presenter.setAppState(appState);
