@@ -92,7 +92,7 @@ class PicturePagePresenter extends BasePresenter{
   }
 
   // coverage:ignore-start
-  /// Function used for picking a new profile picture, storing it and displaying it on the profile page.
+  /// Function used for picking a new profile picture, storing it and displaying it on the picture page.
   addPicture(String type) async {
     PickedFile? pickedFile = await ImagePicker().getImage(
       source: ImageSource.gallery,
