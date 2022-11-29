@@ -80,6 +80,39 @@ void main() {
 
       expect(imageFinder, findsOneWidget);
       expect(dateFinder, findsOneWidget);
+
+      await tester.tap(imageFinder);
+
+      await tester.pump(const Duration(seconds: 2));
+      await tester.pumpAndSettle();
+
+      expect(imageFinder, findsWidgets);
+    });
+  });
+
+  testWidgets('Image holder test constructor', (tester) async {
+    await tester.runAsync(() async {
+      // tests
+      final presenter = MockPicturePagePresenter();
+
+      final img = Image.asset('assets/images/prof_pic.png');
+      String date = '1669722779000';
+      int id = 12;
+
+
+      final screen = MyImageHolder(img: img, date: date, id: id, presenter: presenter);
+
+      final imageFinder = find.image(img.image);
+      final dateFinder = find.text('29/11/2022');
+
+      await tester.pumpWidget(MaterialApp(
+          title: 'Flutter Demo', home: Scaffold(body: Center(child: screen,))));
+
+      await tester.pump(const Duration(seconds: 2));
+      await tester.pumpAndSettle();
+
+      expect(imageFinder, findsOneWidget);
+      expect(dateFinder, findsOneWidget);
     });
   });
 
