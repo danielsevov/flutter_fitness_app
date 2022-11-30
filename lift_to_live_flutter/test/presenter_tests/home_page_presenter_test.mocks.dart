@@ -195,6 +195,21 @@ class MockUserRepository extends _i1.Mock implements _i10.UserRepository {
         )),
       ) as _i9.Future<_i3.User>);
   @override
+  _i9.Future<List<_i3.User>> fetchMyTrainees(
+    String? userId,
+    String? jwtToken,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #fetchMyTrainees,
+          [
+            userId,
+            jwtToken,
+          ],
+        ),
+        returnValue: _i9.Future<List<_i3.User>>.value(<_i3.User>[]),
+      ) as _i9.Future<List<_i3.User>>);
+  @override
   _i9.Future<List<_i4.MyImage>> getUserImages(
     String? userId,
     String? jwtToken,

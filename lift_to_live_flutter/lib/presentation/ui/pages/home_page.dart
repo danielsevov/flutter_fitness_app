@@ -4,6 +4,7 @@ import 'package:lift_to_live_flutter/domain/entities/news.dart';
 import 'package:lift_to_live_flutter/factory/home_page_factory.dart';
 import 'package:lift_to_live_flutter/presentation/presenters/home_page_presenter.dart';
 import 'package:lift_to_live_flutter/presentation/ui/pages/profile_page.dart';
+import 'package:lift_to_live_flutter/presentation/ui/pages/trainees_page.dart';
 import 'package:lift_to_live_flutter/presentation/ui/widgets/log_out_dialog.dart';
 import 'package:lift_to_live_flutter/presentation/views/home_page_view.dart';
 import 'package:provider/provider.dart';
@@ -101,7 +102,7 @@ class HomePageState extends State<HomePage> implements HomePageView {
   @override
   void profilePressed(BuildContext context, bool bottomBarButton) {
     if (!bottomBarButton) Navigator.of(context).pop();
-    Helper.pushPageWithAnimation(context, ProfilePage(userId: _user.id, fromHome: true,));
+    Helper.pushPageWithAnimation(context, ProfilePage(userId: _user.id, originPage: 'home',));
   }
 
   /// Function called when user wants to navigate from home to trainees page
@@ -110,7 +111,7 @@ class HomePageState extends State<HomePage> implements HomePageView {
   void traineesPressed(BuildContext context, bool bottomBarButton) {
     if (!bottomBarButton) Navigator.of(context).pop();
     if (_presenter.isCoachOrAdmin()) {
-      Helper.pushPageWithAnimation(context, const Text("Trainees"));
+      Helper.pushPageWithAnimation(context, const TraineesPage());
     } else {
       Helper.makeToast(context, "Become coach to access this page!");
     }

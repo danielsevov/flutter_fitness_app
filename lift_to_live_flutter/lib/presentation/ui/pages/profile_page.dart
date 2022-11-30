@@ -16,9 +16,9 @@ import 'home_page.dart';
 /// It is a stateful widget and its state object implements the ProfilePageView abstract class.
 class ProfilePage extends StatefulWidget {
   final String userId;
-  final bool fromHome;
+  final String originPage;
 
-  const ProfilePage({Key? key, required this.userId, required this.fromHome}) : super(key: key);
+  const ProfilePage({Key? key, required this.userId, required this.originPage}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => ProfilePageState();
@@ -115,7 +115,7 @@ class ProfilePageState extends State<ProfilePage> implements ProfilePageView {
           backgroundColor: Helper.blueColor,
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(
-              bottom: Radius.circular(30),
+              bottom: Radius.circular(15),
             ),
           ),
           pinned: true,
@@ -127,8 +127,11 @@ class ProfilePageState extends State<ProfilePage> implements ProfilePageView {
           leading: IconButton(
               icon: const Icon(Icons.arrow_back, color: Colors.white),
               onPressed: () {
-                if(widget.fromHome) {
+                if(widget.originPage == 'home') {
                   Helper.replacePage(context, const HomePage());
+                }
+                else if(widget.originPage == 'trainees') {
+                  Navigator.pop(context);
                 }
                 else {
                   Navigator.pop(context);

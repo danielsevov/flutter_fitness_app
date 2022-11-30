@@ -73,6 +73,33 @@ class UserRepoImpl implements UserRepository {
     }
   }
 
+  /// This function is used for fetching all trainees profiles of the current user.
+  @override
+  Future<List<User>> fetchMyTrainees(String userId, String jwtToken) async {
+    //fetch http response object
+    Response response = await backendAPI.fetchMyTrainees(jwtToken);
+
+    //proceed if fetch is successful and status code is 200
+    if (response.statusCode == 200) {
+      log("fetch trainee details success!");
+
+      //decode response body and create a list of User objects
+      List<User> myTrainees = [];
+      List<dynamic> list = json.decode(response.body);
+      for (var element in list) {
+        myTrainees.add(User.fromJson(element));
+      }
+      return myTrainees;
+    }
+
+    //else throw an exception
+    else {
+      log("fetch trainee details failed");
+      throw FetchFailedException(
+          "Failed to fetch user details!\nresponse code ${response.statusCode}");
+    }
+  }
+
   @override
   Future<List<MyImage>> getUserImages(String userId, String jwtToken) async {
     //fetch http response object

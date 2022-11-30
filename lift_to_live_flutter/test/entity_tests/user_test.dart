@@ -6,6 +6,7 @@ import '../test_data.dart';
 void main() {
   test('User constructor test', () {
     final user = TestData.test_user_1;
+    user.profilePicture = TestData.test_image_1;
 
     expect(user.id, 'user@email.com');
     expect(user.email, 'user@email.com');
@@ -14,6 +15,7 @@ void main() {
     expect(user.dateOfBirth, '23/12/1999');
     expect(user.phoneNumber, '5555555555');
     expect(user.name, 'Test User');
+    expect(user.profilePicture, TestData.test_image_1);
   });
 
   group('User toJson tests', (){

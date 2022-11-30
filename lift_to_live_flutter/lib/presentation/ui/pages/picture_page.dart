@@ -85,7 +85,7 @@ class PicturePageState extends State<PicturePage> implements PicturePageView {
         title: Text("${widget.name}'s Photo Album"),
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(30),
+            bottom: Radius.circular(15),
           ),
         ),
         iconTheme: const IconThemeData(

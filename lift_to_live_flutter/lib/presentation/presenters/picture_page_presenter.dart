@@ -51,7 +51,7 @@ class PicturePagePresenter extends BasePresenter{
 
       try {
         _myImages = await _userRepository.getUserImages(
-            super.appState.getUserId(), super.appState.getToken());
+            _userId, super.appState.getToken());
 
         for (var element in _myImages) {
           _pictures.add(Image.memory(

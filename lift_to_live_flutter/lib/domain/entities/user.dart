@@ -1,3 +1,5 @@
+import 'package:lift_to_live_flutter/domain/entities/image.dart';
+
 /// Entity class for holding the details of a single user instance.
 class User {
   final String id, // id of the user
@@ -7,6 +9,8 @@ class User {
       dateOfBirth, // date of birth of the user
       name, // name of the user
       phoneNumber; // phone number of the user
+
+  MyImage? profilePicture;
 
   // Simple constructor for creating an instance of an Habit entry
   User(this.id, this.email, this.coachId, this.nationality, this.dateOfBirth,

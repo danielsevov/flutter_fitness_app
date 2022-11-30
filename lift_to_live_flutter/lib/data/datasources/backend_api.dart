@@ -17,7 +17,7 @@ class BackendAPI {
 
 
   //static const apiURL = "http://192.168.178.30:3000/"; //molensingel
-  static const apiURL = "http://145.93.150.49:3000/"; //fontys
+  static const apiURL = "http://145.93.150.0:3000/"; //fontys
 
   // static String jwtToken = "", userId = "";
   // static List<Role> myRoles = [];
@@ -188,6 +188,17 @@ class BackendAPI {
   Future<http.Response> fetchUsers(String jwtToken) async {
     return http.get(
       Uri.parse('${apiURL}users'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer $jwtToken',
+      },
+    );
+  }
+
+  /// This function is used for fetching all trainees of the current user in the database, if the current user is authorized to do so.
+  Future<http.Response> fetchMyTrainees(String jwtToken) async {
+    return http.get(
+      Uri.parse('${apiURL}my_trainees'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization': 'Bearer $jwtToken',

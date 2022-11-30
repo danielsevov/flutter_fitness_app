@@ -49,11 +49,11 @@ class ProfilePagePresenter extends BasePresenter{
     // fetch the user details and profile picture
     try {
       _user = await _userRepository.fetchUser(
-          super.appState.getUserId(), super.appState.getToken());
+          _userId, super.appState.getToken());
 
       try {
         _myImage = await _userRepository.fetchProfileImage(
-            super.appState.getUserId(), super.appState.getToken());
+            _userId, super.appState.getToken());
         _profilePicture = Image.memory(
           base64Decode(_myImage.data),
           height: 300,

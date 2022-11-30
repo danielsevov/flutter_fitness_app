@@ -42,6 +42,34 @@ void main() {
     });
   });
 
+  group('mock test user repository to fetch my trainees', () {
+    test('returns response if the http call completes successfully', () async {
+      final backendAPI = MockBackendAPI();
+
+      when(backendAPI.fetchMyTrainees('A')).thenAnswer(
+              (_) async => Response('[{"id": "user@email.com", "name": "Test User", "email": "user@email.com", "coach_id": "coach@email.com", "nationality": "NL", "date_of_birth": "23/12/1999", "phone_number": "5555555555"}]', 200, headers: {
+            HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8',
+          }));
+
+      UserRepository repository = UserRepoImpl(backendAPI);
+
+      expect(await repository.fetchMyTrainees('A', 'A'), [TestData.test_user_1]);
+    });
+
+    test('throws an exception if the http call completes with an error', () async {
+      final backendAPI = MockBackendAPI();
+
+      when(backendAPI.fetchMyTrainees('A')).thenAnswer(
+              (_) async => Response('', 404, headers: {
+            HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8',
+          }));
+
+      UserRepository repository = UserRepoImpl(backendAPI);
+
+      expect(() async => await repository.fetchMyTrainees('A', 'A'), throwsA(isA<FetchFailedException>()));
+    });
+  });
+
   group('mock test user repository to fetch profile image', () {
     test('returns response if the http call completes successfully', () async {
       final backendAPI = MockBackendAPI();

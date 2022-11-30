@@ -11,6 +11,9 @@ abstract class UserRepository {
   /// This function is used for fetching a User object, containing user details.
   Future<User> fetchUser(String userId, String jwtToken);
 
+  /// This function is used for fetching all trainees profiles of the current user.
+  Future<List<User>> fetchMyTrainees(String userId, String jwtToken);
+
   /// This function is used for fetching all Image objects of a user.
   Future<List<MyImage>> getUserImages(String userId, String jwtToken);
 
