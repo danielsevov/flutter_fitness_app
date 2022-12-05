@@ -149,8 +149,8 @@ class HomePageState extends State<HomePage> implements HomePageView {
         onPressed: () {
           //TODO code to execute on button press
         },
-        backgroundColor: Helper.redColor,
-        child: const Icon(Icons.fitness_center_outlined), //icon inside button
+        backgroundColor: Helper.actionButtonColor,
+        child: const Icon(Icons.fitness_center_outlined, color: Helper.actionButtonTextColor,), //icon inside button
       ),
 
       //floating action button position to center
@@ -158,7 +158,7 @@ class HomePageState extends State<HomePage> implements HomePageView {
 
       // bottom navigation bar on scaffold
       bottomNavigationBar: BottomAppBar(
-        color: Helper.blueColor,
+        color: Helper.pageBackgroundColor,
         shape: const CircularNotchedRectangle(), //shape of notch
         notchMargin: 5, //notch margin between floating button and bottom appbar
         //children inside bottom appbar
@@ -170,7 +170,7 @@ class HomePageState extends State<HomePage> implements HomePageView {
               size: const Size(60, 60),
               child: ClipOval(
                 child: InkWell(
-                  splashColor: Colors.white,
+                  splashColor: Helper.whiteColor,
                   onTap: () {
                     habitsPressed(context, true);
                   },
@@ -179,11 +179,11 @@ class HomePageState extends State<HomePage> implements HomePageView {
                     children: const <Widget>[
                       Icon(
                         Icons.task,
-                        color: Colors.white,
+                        color: Helper.bottomBarIconColor,
                       ), // <-- Icon
                       Text(
                         "Habits",
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(color: Helper.bottomBarTextColor),
                       ), // <-- Text
                     ],
                   ),
@@ -194,18 +194,18 @@ class HomePageState extends State<HomePage> implements HomePageView {
               size: const Size(60, 60),
               child: ClipOval(
                 child: InkWell(
-                  splashColor: Colors.white,
+                  splashColor: Helper.whiteColor,
                   onTap: () {},
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: const <Widget>[
                       Icon(
                         Icons.edit_calendar,
-                        color: Colors.white,
+                        color: Helper.bottomBarIconColor,
                       ), // <-- Icon
                       Text(
                         "Calendar",
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(color: Helper.bottomBarTextColor),
                       ), // <-- Text
                     ],
                   ),
@@ -218,7 +218,7 @@ class HomePageState extends State<HomePage> implements HomePageView {
               size: const Size(60, 60),
               child: ClipOval(
                 child: InkWell(
-                  splashColor: Colors.white,
+                  splashColor: Helper.whiteColor,
                   onTap: () {
                     traineesPressed(context, true);
                   },
@@ -227,11 +227,11 @@ class HomePageState extends State<HomePage> implements HomePageView {
                     children: const <Widget>[
                       Icon(
                         Icons.people,
-                        color: Colors.white,
+                        color: Helper.bottomBarIconColor,
                       ), // <-- Icon
                       Text(
                         "Trainees",
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(color: Helper.bottomBarTextColor),
                       ), // <-- Text
                     ],
                   ),
@@ -242,7 +242,7 @@ class HomePageState extends State<HomePage> implements HomePageView {
               size: const Size(60, 60),
               child: ClipOval(
                 child: InkWell(
-                  splashColor: Colors.white,
+                  splashColor: Helper.whiteColor,
                   onTap: () {
                     profilePressed(context, true);
                   },
@@ -251,11 +251,11 @@ class HomePageState extends State<HomePage> implements HomePageView {
                     children: const <Widget>[
                       Icon(
                         CupertinoIcons.profile_circled,
-                        color: Colors.white,
+                        color: Helper.bottomBarIconColor,
                       ), // <-- Icon
                       Text(
                         "Profile",
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(color: Helper.bottomBarTextColor),
                       ), // <-- Text
                     ],
                   ),
@@ -268,14 +268,17 @@ class HomePageState extends State<HomePage> implements HomePageView {
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("assets/images/whitewaves.png"),
+            image: AssetImage(Helper.pageBackgroundImage),
             fit: BoxFit.fill,
           ),
         ),
         child: CustomScrollView(
           slivers: <Widget>[
             SliverAppBar(
-              backgroundColor: Helper.blueColor,
+              backgroundColor: Helper.pageBackgroundColor.withOpacity(0.7),
+              iconTheme: const IconThemeData(
+                color: Helper.darkHeadlineColor, //change your color here
+              ),
               pinned: true,
               snap: true,
               floating: true,
@@ -296,11 +299,11 @@ class HomePageState extends State<HomePage> implements HomePageView {
                     },
                     icon: const Icon(
                       Icons.logout,
-                      color: Colors.white,
+                      color: Helper.darkHeadlineColor,
                     )),
               ],
               flexibleSpace: const FlexibleSpaceBar(
-                title: Text("LiftToLive"),
+                title: Text("L I F T    T O    L I V E", style: TextStyle(color: Helper.headerBarTextColor),),
                 centerTitle: true,
               ),
             ),
@@ -309,9 +312,13 @@ class HomePageState extends State<HomePage> implements HomePageView {
                 (BuildContext context, int index) {
                   return Hero(
                     tag: 'logo',
-                    child: Image.asset(
-                      "assets/images/lifttolive.png",
-                      height: _screenHeight / 1.5,
+                    child: Container(
+                      padding: const EdgeInsets.fromLTRB(20, 20, 20, 100),
+                      child: Image.asset(
+                        Helper.logoImage,
+                        width: _screenWidth * 0.8,
+                        height: _screenHeight * 0.5,
+                      ),
                     ),
                   );
                 },
@@ -324,7 +331,7 @@ class HomePageState extends State<HomePage> implements HomePageView {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
-                    Text('Scroll down and check what\'s new in the gym world!')
+                    Text('Scroll down and check what\'s new in the gym world!', style: TextStyle(color: Helper.lightHeadlineColor),)
                   ],
                 ),
               ),
@@ -336,7 +343,7 @@ class HomePageState extends State<HomePage> implements HomePageView {
                       ? (index == 0
                           ? const Center(
                               child: CircularProgressIndicator(
-                              color: Helper.blueColor,
+                              color: Helper.yellowColor,
                             ))
                           : const SizedBox(
                               height: 3,
@@ -344,7 +351,7 @@ class HomePageState extends State<HomePage> implements HomePageView {
                       : Container(
                           color: index.isOdd
                               ? Colors.white
-                              : Helper.blueColor.withOpacity(0.12),
+                              : Helper.paragraphBackgroundColor.withOpacity(0.12),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
@@ -373,7 +380,7 @@ class HomePageState extends State<HomePage> implements HomePageView {
                                                             child:
                                                                 CircularProgressIndicator(
                                                               color: Helper
-                                                                  .blueColor,
+                                                                  .pageBackgroundColor,
                                                             ),
                                                           ),
                                                 errorBuilder: (context, error,
@@ -381,7 +388,7 @@ class HomePageState extends State<HomePage> implements HomePageView {
                                                     Container(
                                                   height: 80,
                                                   width: 160,
-                                                  color: Colors.white,
+                                                  color: Helper.backgroundColor,
                                                 ),
                                                 scale: 0.1,
                                                 height: 80,
@@ -396,6 +403,7 @@ class HomePageState extends State<HomePage> implements HomePageView {
                                     child: Text(
                                       _currentNews.articles[index].title,
                                       style: const TextStyle(
+                                        color: Helper.defaultTextColor,
                                           fontWeight: FontWeight.bold),
                                     ),
                                   ))
@@ -404,7 +412,7 @@ class HomePageState extends State<HomePage> implements HomePageView {
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Text(
-                                    '${_currentNews.articles[index].description}\n\n${_currentNews.articles[index].content}'),
+                                    '${_currentNews.articles[index].description}\n\n${_currentNews.articles[index].content}', style: const TextStyle(color: Helper.defaultTextColor,),),
                               ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
@@ -416,10 +424,10 @@ class HomePageState extends State<HomePage> implements HomePageView {
                                     },
                                     icon: const Icon(
                                       CupertinoIcons.arrow_turn_down_right,
-                                      color: Colors.white,
+                                      color: Helper.actionButtonTextColor,
                                     ),
                                     label: const Text('Read More'),
-                                    backgroundColor: Helper.blueColor,
+                                    backgroundColor: Helper.actionButtonColor,
                                   ),
                                   const SizedBox(
                                     width: 20,
@@ -453,7 +461,7 @@ class HomePageState extends State<HomePage> implements HomePageView {
               height: _screenHeight / 7*4,
               child: DrawerHeader(
                 decoration: const BoxDecoration(
-                    color: Helper.blueColor,
+                    color: Helper.pageBackgroundColor,
                     borderRadius:
                         BorderRadius.only(topRight: Radius.circular(90))),
                 child: Wrap(
@@ -492,7 +500,7 @@ class HomePageState extends State<HomePage> implements HomePageView {
                         Text(
                           _isFetched ? _user.name : '',
                           style: const TextStyle(
-                              color: Colors.white,
+                              color: Helper.defaultTextColor,
                               fontSize: 24,
                               fontWeight: FontWeight.bold),
                         ),
@@ -522,7 +530,7 @@ class HomePageState extends State<HomePage> implements HomePageView {
                                           children: [
                                             const Icon(
                                               Icons.email_outlined,
-                                              color: Colors.white,
+                                              color: Helper.yellowColor,
                                             ),
                                             const SizedBox(
                                               width: 5,
@@ -530,7 +538,7 @@ class HomePageState extends State<HomePage> implements HomePageView {
                                             Text(
                                               _isFetched ? _user.email : '',
                                               style: const TextStyle(
-                                                  color: Colors.white70,
+                                                  color: Helper.defaultTextColor,
                                                   fontSize: 14),
                                             ),
                                           ],
@@ -542,7 +550,7 @@ class HomePageState extends State<HomePage> implements HomePageView {
                                           children: [
                                             const Icon(
                                               CupertinoIcons.phone,
-                                              color: Colors.white,
+                                                color: Helper.yellowColor,
                                             ),
                                             const SizedBox(
                                               width: 5,
@@ -552,7 +560,7 @@ class HomePageState extends State<HomePage> implements HomePageView {
                                                   ? _user.phoneNumber
                                                   : '',
                                               style: const TextStyle(
-                                                  color: Colors.white70,
+                                                  color: Helper.defaultTextColor,
                                                   fontSize: 14),
                                             ),
                                           ],
@@ -564,7 +572,7 @@ class HomePageState extends State<HomePage> implements HomePageView {
                                           children: [
                                             const Icon(
                                                 CupertinoIcons.location_solid,
-                                                color: Colors.white),
+                                              color: Helper.yellowColor,),
                                             const SizedBox(
                                               width: 5,
                                             ),
@@ -573,7 +581,7 @@ class HomePageState extends State<HomePage> implements HomePageView {
                                                   ? _user.nationality
                                                   : '',
                                               style: const TextStyle(
-                                                  color: Colors.white70,
+                                                  color: Helper.defaultTextColor,
                                                   fontSize: 14),
                                             ),
                                           ],
@@ -605,23 +613,22 @@ class HomePageState extends State<HomePage> implements HomePageView {
               ),
               title: Row(
                 children: const [
-                  Icon(CupertinoIcons.profile_circled, color: Colors.white),
+                  Icon(CupertinoIcons.profile_circled, color: Helper.yellowColor,),
                   SizedBox(
                     width: 10,
                   ),
                   Text(
                     'My Profile',
-                    style: TextStyle(fontSize: 22, color: Colors.white),
+                    style: TextStyle(fontSize: 22, color: Helper.defaultTextColor,),
                   )
                 ],
               ),
-              textColor: Helper.blueColor,
               onTap: () {
                 profilePressed(context, false);
               },
             ),
             ListTile(
-              tileColor: Helper.redColor,
+              tileColor: Helper.lightBlueColor,
               shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.only(
                     bottomRight: Radius.circular(0),
@@ -629,23 +636,22 @@ class HomePageState extends State<HomePage> implements HomePageView {
               ),
               title: Row(
                 children: const [
-                  Icon(Icons.task_alt_outlined, color: Colors.white),
+                  Icon(Icons.task_alt_outlined, color: Helper.yellowColor),
                   SizedBox(
                     width: 10,
                   ),
                   Text(
                     'My Habits',
-                    style: TextStyle(fontSize: 22, color: Colors.white),
+                    style: TextStyle(fontSize: 22, color: Helper.defaultTextColor),
                   )
                 ],
               ),
-              textColor: Helper.redColor,
               onTap: () async {
                 habitsPressed(context, false);
               },
             ),
             ListTile(
-              tileColor: Colors.black,
+              tileColor: Helper.blueColor,
               shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.only(
                     bottomRight: Radius.circular(0),
@@ -653,24 +659,23 @@ class HomePageState extends State<HomePage> implements HomePageView {
               ),
               title: Row(
                 children: const [
-                  Icon(Icons.fitness_center_outlined, color: Colors.white),
+                  Icon(Icons.fitness_center_outlined, color: Helper.yellowColor,),
                   SizedBox(
                     width: 10,
                   ),
                   Text(
                     'Manage Workouts',
-                    style: TextStyle(fontSize: 22, color: Colors.white),
+                    style: TextStyle(fontSize: 22, color: Helper.defaultTextColor,),
                   )
                 ],
               ),
-              textColor: Colors.black,
               onTap: () {
                 Navigator.pop(context);
               },
             ),
             _presenter.isCoachOrAdmin()
                 ? ListTile(
-                    tileColor: Helper.blueColor,
+                    tileColor: Helper.lightBlueColor,
                     shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.only(
                           bottomRight: Radius.circular(0),
@@ -678,17 +683,16 @@ class HomePageState extends State<HomePage> implements HomePageView {
                     ),
                     title: Row(
                       children: const [
-                        Icon(Icons.people, color: Colors.white),
+                        Icon(Icons.people, color: Helper.yellowColor,),
                         SizedBox(
                           width: 10,
                         ),
                         Text(
                           'Manage Trainees',
-                          style: TextStyle(fontSize: 22, color: Colors.white),
+                          style: TextStyle(fontSize: 22, color: Helper.defaultTextColor,),
                         )
                       ],
                     ),
-                    textColor: Helper.blueColor,
                     onTap: () {
                       traineesPressed(context, false);
                     },

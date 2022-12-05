@@ -5,11 +5,48 @@ import 'package:intl/intl.dart';
 
 /// Helper class, holding helper methods, which can be easily reused by multiple objects and widgets
 class Helper {
-  static const blueColor =
-          Color.fromRGBO(11, 137, 156, 1), //blue shade used for the logo
-      redColor = Color.fromRGBO(171, 0, 82, 1); //red shade used for the logo
+  static const
+  // color palette
+  blueColor = Color.fromRGBO(20, 33, 61, 1), // blue shade used for the logo
+  lightBlueColor = Color.fromRGBO(27, 44, 79, 1.0), // blue shade used for the logo
+  redColor = Color.fromRGBO(157, 31, 88, 1), // red shade used for the logo
+  yellowColor = Color.fromRGBO(252, 163, 17, 1), // yellow shade used for the logo,
+  blackColor = Colors.black, // black shade used for the logo
+  whiteColor = Colors.white, // black shade used for the logo
+  hintGreyColor = Color.fromRGBO(229, 229, 229, 1), // blue grey used for the text hint
+
+  // default color scheme
+  defaultTextColor = whiteColor, // default color of the text
+  textFieldHintColor = hintGreyColor, // color of the text field hint text
+  textFieldTextColor = whiteColor, // color of the text field text
+  textFieldBorderColor = whiteColor, // color of the text field border
+  textFieldErrorColor = yellowColor, // color of the text field error
+  textFieldIconColor = whiteColor, // color of the text field icon
+  pageBackgroundColor = lightBlueColor, // color of the page border
+  actionButtonColor = yellowColor, // color of the action button
+  confirmButtonColor = Colors.green, // color of the confirm button
+  cancelButtonColor = Colors.red, // color of the cancel button
+  actionButtonTextColor = blueColor, // color of the action button text
+  confirmButtonTextColor = whiteColor, // color of the confirm button text
+  cancelButtonTextColor = whiteColor, // color of the cancel button text
+  backgroundColor = whiteColor, // color of the page background
+  bottomBarIconColor = yellowColor, // color of the bottom nav bar icons
+  bottomBarTextColor = yellowColor, // color of the bottom nav bar text
+  headerBarIconColor = whiteColor, // color of the header nav bar icons
+  headerBarTextColor = whiteColor, // color of the header nav bar text
+  iconBackgroundColor = yellowColor, // color of the header nav bar text
+  paragraphBackgroundColor = blueColor, // color of the paragraph background
+  paragraphTextColor = whiteColor, // color of the paragraph text
+  paragraphIconColor = yellowColor, // color of the paragraph icon
+  darkHeadlineColor = yellowColor, // color of the darker headline
+  lightHeadlineColor = whiteColor, // color of the lighter headline
+  dividerColor = yellowColor; // color of the page divider
+
   static final DateFormat formatter = DateFormat(
       'dd/MM/yyyy'); //date formatter used for setting a DateTime in the 'dd/MM/yyyy' format
+
+  static const pageBackgroundImage = 'assets/images/bluewaves.png',
+      logoImage = 'assets/images/lift-to-live-high-resolution-logo-white-on-transparent-background.png';
 
   /// Function used to generate a Blob from a image file
   static String imageToBlob(File file) {

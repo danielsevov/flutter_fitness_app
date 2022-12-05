@@ -15,9 +15,8 @@ class BackendAPI {
 
   BackendAPI._internal();
 
-
-  //static const apiURL = "http://192.168.178.30:3000/"; //molensingel
-  static const apiURL = "http://145.93.150.0:3000/"; //fontys
+  static const apiURL = "http://192.168.178.30:3000/"; //molensingel
+  //static const apiURL = "http://145.93.150.0:3000/"; //fontys
 
   // static String jwtToken = "", userId = "";
   // static List<Role> myRoles = [];

@@ -69,8 +69,8 @@ class LogInFormState extends State<LogInForm> {
         children: [
           //email text field
           SizedBox(
-            height: widget.screenHeight / 10,
-            width: (widget.screenWidth / 10) * 9,
+            height: widget.screenHeight * 0.1,
+            width: widget.screenWidth * 0.9,
             child: TextFormField(
               controller: widget._emailController,
               validator: (value) {
@@ -87,30 +87,32 @@ class LogInFormState extends State<LogInForm> {
               decoration: InputDecoration(
                 prefixIcon: const Icon(
                   Icons.email_outlined,
-                  color: Helper.blueColor,
+                  color: Helper.textFieldIconColor,
                 ),
+                filled : true, fillColor : Helper.blueColor,
+                errorStyle: const TextStyle(color: Helper.textFieldErrorColor),
                 focusedBorder: OutlineInputBorder(
                     borderSide:
-                        const BorderSide(color: Helper.blueColor, width: 1),
+                        const BorderSide(color: Helper.textFieldBorderColor, width: 1),
                     borderRadius: BorderRadius.circular(10)),
                 focusedErrorBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(color: Colors.red, width: 1),
+                    borderSide: const BorderSide(color: Helper.textFieldErrorColor, width: 1),
                     borderRadius: BorderRadius.circular(10)),
                 errorBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(color: Colors.red, width: 1),
+                    borderSide: const BorderSide(color: Helper.textFieldErrorColor, width: 1),
                     borderRadius: BorderRadius.circular(10)),
                 enabledBorder: OutlineInputBorder(
                     borderSide:
-                        const BorderSide(color: Helper.blueColor, width: 1),
+                        const BorderSide(color: Helper.textFieldBorderColor, width: 1),
                     borderRadius: BorderRadius.circular(10)),
                 hintText: "Enter email address",
                 hintStyle: TextStyle(
-                    color: Colors.blueGrey,
+                    color: Helper.textFieldHintColor,
                     fontSize: widget.screenHeight / 35,
                     height: 0.8),
               ),
               style: TextStyle(
-                  color: Helper.blueColor,
+                  color: Helper.textFieldTextColor,
                   fontSize: widget.screenHeight / 35,
                   height: 0.8),
             ),
@@ -138,30 +140,32 @@ class LogInFormState extends State<LogInForm> {
               decoration: InputDecoration(
                 prefixIcon: const Icon(
                   Icons.key,
-                  color: Helper.blueColor,
+                  color: Helper.textFieldIconColor,
                 ),
+                filled : true, fillColor : Helper.blueColor,
+                errorStyle: const TextStyle(color: Helper.textFieldErrorColor),
                 focusedErrorBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(color: Colors.red, width: 1),
+                    borderSide: const BorderSide(color: Helper.textFieldErrorColor, width: 1),
                     borderRadius: BorderRadius.circular(10)),
                 errorBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(color: Colors.red, width: 1),
+                    borderSide: const BorderSide(color: Helper.textFieldErrorColor, width: 1),
                     borderRadius: BorderRadius.circular(10)),
                 focusedBorder: OutlineInputBorder(
                     borderSide:
-                        const BorderSide(color: Helper.blueColor, width: 1),
+                        const BorderSide(color: Helper.textFieldBorderColor, width: 1),
                     borderRadius: BorderRadius.circular(10)),
                 enabledBorder: OutlineInputBorder(
                     borderSide:
-                        const BorderSide(color: Helper.blueColor, width: 1),
+                        const BorderSide(color: Helper.textFieldBorderColor, width: 1),
                     borderRadius: BorderRadius.circular(10)),
                 hintText: "Enter password",
                 hintStyle: TextStyle(
-                    color: Colors.blueGrey,
+                    color: Helper.textFieldHintColor,
                     fontSize: widget.screenHeight / 35,
                     height: 0.8),
               ),
               style: TextStyle(
-                  color: Helper.blueColor,
+                  color: Helper.textFieldTextColor,
                   fontSize: widget.screenHeight / 35,
                   height: 0.8),
             ),
@@ -184,14 +188,14 @@ class LogInFormState extends State<LogInForm> {
                     widget.presenter.logIn();
                   }
                 },
-                backgroundColor: Helper.blueColor,
+                backgroundColor: Helper.yellowColor,
                 icon: const Icon(
                   Icons.login,
-                  color: Colors.white,
+                  color: Helper.blueColor,
                 ),
                 label: const Text(
                   "Sign In",
-                  style: TextStyle(color: Colors.white, fontSize: 24),
+                  style: TextStyle(color: Helper.blueColor, fontSize: 24),
                 ),
               ),
             ),

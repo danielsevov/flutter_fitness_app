@@ -26,7 +26,8 @@ class MyApp extends StatelessWidget {
 
             //set the primary color of the app
             theme: ThemeData(
-              backgroundColor: Helper.blueColor,
+              backgroundColor: Helper.pageBackgroundColor,
+              canvasColor: Helper.blueColor
             ),
 
             // set the entry page to be log in page

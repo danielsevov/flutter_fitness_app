@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lift_to_live_flutter/helper.dart';
 import 'package:lift_to_live_flutter/presentation/views/home_page_view.dart';
 
 /// Custom AlertDialog widget, which is nested in the HomePage and is used for logging out of the app.
@@ -19,9 +20,10 @@ class LogOutDialogState extends State<LogOutDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Text("Sign out"),
+      backgroundColor: Helper.paragraphBackgroundColor,
+      title: const Text("Sign out", style: TextStyle(color: Helper.defaultTextColor),),
       content: const Text(
-          "Are you sure you want to sign out?"),
+          "Are you sure you want to sign out?", style: TextStyle(color: Helper.defaultTextColor),),
       actions: [
         IconButton(
             onPressed: () {
@@ -29,7 +31,7 @@ class LogOutDialogState extends State<LogOutDialog> {
             },
             icon: const Icon(
               Icons.check_circle,
-              color: Colors.green,
+              color: Helper.confirmButtonColor,
               size: 30,
             )),
         IconButton(
@@ -38,7 +40,7 @@ class LogOutDialogState extends State<LogOutDialog> {
             },
             icon: const Icon(
               Icons.cancel,
-              color: Colors.red,
+              color: Helper.cancelButtonColor,
               size: 30,
             ))
       ],

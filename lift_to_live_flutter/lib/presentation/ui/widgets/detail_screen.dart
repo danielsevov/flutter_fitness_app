@@ -12,7 +12,7 @@ class DetailScreen extends StatelessWidget {
     return Scaffold(
       body: GestureDetector(
         child: Container(
-          color: Helper.blueColor.withOpacity(0.3),
+          color: Helper.paragraphBackgroundColor.withOpacity(0.3),
           width: double.infinity,
           height: double.infinity,
           child: FittedBox(

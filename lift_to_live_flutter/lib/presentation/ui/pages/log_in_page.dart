@@ -61,7 +61,7 @@ class LogInPageState extends State<LogInPage> implements LogInPageView {
     }
 
     return Scaffold(
-      backgroundColor: Helper.blueColor,
+      backgroundColor: Helper.pageBackgroundColor,
       resizeToAvoidBottomInset: true,
       body: SingleChildScrollView(
         child: Container(
@@ -71,7 +71,7 @@ class LogInPageState extends State<LogInPage> implements LogInPageView {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(30),
             image: const DecorationImage(
-              image: AssetImage("assets/images/whitewaves.png"),
+              image: AssetImage(Helper.pageBackgroundImage),
               fit: BoxFit.cover,
             ),
           ),
@@ -83,8 +83,9 @@ class LogInPageState extends State<LogInPage> implements LogInPageView {
               Hero(
                 tag: 'logo',
                 child: Image.asset(
-                  "assets/images/lifttolive.png",
-                  height: _screenHeight / 2,
+                  Helper.logoImage,
+                  height: _screenHeight * 0.5,
+                  width: _screenWidth * 0.8,
                 ),
               ),
 
@@ -92,7 +93,7 @@ class LogInPageState extends State<LogInPage> implements LogInPageView {
               _isLoading
                   ? const Center(
                       child: CircularProgressIndicator(
-                      color: Helper.blueColor,
+                      color: Helper.yellowColor,
                     ))
                   : _logInForm
             ],

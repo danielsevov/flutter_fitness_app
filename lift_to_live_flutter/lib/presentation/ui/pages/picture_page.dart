@@ -80,22 +80,22 @@ class PicturePageState extends State<PicturePage> implements PicturePageView {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Helper.blueColor,
+        backgroundColor: Helper.pageBackgroundColor.withOpacity(0.7),
         centerTitle: true,
-        title: Text("${widget.name}'s Photo Album"),
+        title: Text("${widget.name}'s Photo Album", style: const TextStyle(color: Helper.lightHeadlineColor),),
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
             bottom: Radius.circular(15),
           ),
         ),
         iconTheme: const IconThemeData(
-          color: Colors.white, //change your color here
+            color: Helper.darkHeadlineColor, //change your color here
         ),
       ),
       body: _isLoading
           ? const Center(
         child: CircularProgressIndicator(
-          color: Helper.blueColor,
+          color: Helper.pageBackgroundColor,
         ),
       )
           : SingleChildScrollView(
@@ -103,7 +103,7 @@ class PicturePageState extends State<PicturePage> implements PicturePageView {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(30),
                   image: const DecorationImage(
-                    image: AssetImage("assets/images/whitewaves.png"),
+                    image: AssetImage(Helper.pageBackgroundImage),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -115,7 +115,7 @@ class PicturePageState extends State<PicturePage> implements PicturePageView {
                       height: 20,
                     ),
                     const Divider(
-                      color: Helper.blueColor,
+                      color: Helper.dividerColor,
                       thickness: 1,
                     ),
                     Row(
@@ -124,26 +124,26 @@ class PicturePageState extends State<PicturePage> implements PicturePageView {
                         const Text(
                           "Front Photos",
                           style:
-                              TextStyle(color: Helper.blueColor, fontSize: 24),
+                              TextStyle(color: Helper.lightHeadlineColor, fontSize: 24),
                         ),
                         const SizedBox(
                           width: 10,
                         ),
                         _presenter.isAuthorized()
                             ? CircleAvatar(
-                                backgroundColor: Helper.blueColor,
+                                backgroundColor: Helper.actionButtonColor,
                                 child: IconButton(
                                     onPressed: () {
                                       _presenter.addPicture("front");
                                     },
                                     icon: const Icon(Icons.add,
-                                        color: Colors.white)),
+                                        color: Helper.actionButtonTextColor)),
                               )
                             : const SizedBox()
                       ],
                     ),
                     const Divider(
-                      color: Helper.blueColor,
+                      color: Helper.dividerColor,
                       thickness: 1,
                     ),
                     Container(
@@ -158,7 +158,7 @@ class PicturePageState extends State<PicturePage> implements PicturePageView {
                       height: 20,
                     ),
                     const Divider(
-                      color: Helper.blueColor,
+                      color: Helper.dividerColor,
                       thickness: 1,
                     ),
                     Row(
@@ -167,26 +167,26 @@ class PicturePageState extends State<PicturePage> implements PicturePageView {
                         const Text(
                           "Back Photos",
                           style:
-                              TextStyle(color: Helper.blueColor, fontSize: 24),
+                              TextStyle(color: Helper.lightHeadlineColor, fontSize: 24),
                         ),
                         const SizedBox(
                           width: 10,
                         ),
                         _presenter.isAuthorized()
                             ? CircleAvatar(
-                                backgroundColor: Helper.blueColor,
+                                backgroundColor: Helper.actionButtonColor,
                                 child: IconButton(
                                     onPressed: () {
                                       _presenter.addPicture("back");
                                     },
                                     icon: const Icon(Icons.add,
-                                        color: Colors.white)),
+                                        color: Helper.actionButtonTextColor)),
                               )
                             : const SizedBox()
                       ],
                     ),
                     const Divider(
-                      color: Helper.blueColor,
+                      color: Helper.dividerColor,
                       thickness: 1,
                     ),
                     Container(
@@ -201,7 +201,7 @@ class PicturePageState extends State<PicturePage> implements PicturePageView {
                       height: 20,
                     ),
                     const Divider(
-                      color: Helper.blueColor,
+                      color: Helper.dividerColor,
                       thickness: 1,
                     ),
                     Row(
@@ -210,26 +210,26 @@ class PicturePageState extends State<PicturePage> implements PicturePageView {
                         const Text(
                           "Side Photos",
                           style:
-                              TextStyle(color: Helper.blueColor, fontSize: 24),
+                              TextStyle(color: Helper.lightHeadlineColor, fontSize: 24),
                         ),
                         const SizedBox(
                           width: 10,
                         ),
                         _presenter.isAuthorized()
                             ? CircleAvatar(
-                                backgroundColor: Helper.blueColor,
+                                backgroundColor: Helper.actionButtonColor,
                                 child: IconButton(
                                     onPressed: () {
                                       _presenter.addPicture("side");
                                     },
                                     icon: const Icon(Icons.add,
-                                        color: Colors.white)),
+                                        color: Helper.actionButtonTextColor)),
                               )
                             : const SizedBox()
                       ],
                     ),
                     const Divider(
-                      color: Helper.blueColor,
+                      color: Helper.dividerColor,
                       thickness: 1,
                     ),
                     Container(

@@ -20,7 +20,7 @@ class TraineeSearchWidget extends StatelessWidget {
         margin: const EdgeInsets.all(3),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
-            color: Helper.blueColor
+            color: Helper.lightBlueColor
         ),
         child : Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -30,15 +30,15 @@ class TraineeSearchWidget extends StatelessWidget {
               height: 150,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20.0),
-                  color: Colors.white
+                  color: Helper.yellowColor
               ),
               child: FittedBox(
                 fit: BoxFit.fill,
                 child: ClipRRect(borderRadius: BorderRadius.circular(15.0),
                   child: user.profilePicture != null ? Image.memory(
                   base64Decode(user.profilePicture!.data),
-                  height: 200,
-                ) : Image.asset('assets/images/prof_pic.png'),),
+                  width: 200,
+                ) : Image.asset('assets/images/prof_pic.png', color: Helper.blackColor,),),
               ),
             ),
             Expanded(
@@ -48,15 +48,15 @@ class TraineeSearchWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    Text(user.name, style: const TextStyle(color: Colors.white, fontSize: 20)),
-                    FittedBox(fit: BoxFit.fitWidth,child: Text(user.id, style: const TextStyle(color: Colors.white)),),
+                    Text(user.name, style: const TextStyle(color: Helper.defaultTextColor, fontSize: 20)),
+                    FittedBox(fit: BoxFit.fitWidth,child: Text(user.id, style: const TextStyle(color: Helper.defaultTextColor))),
                     const SizedBox(height: 20,),
                     SizedBox(
                       width: 60,
                       height: 60,
-                      child: IconButton(onPressed: () {
+                      child: IconButton(color: Helper.actionButtonColor,onPressed: () {
                         view.navigateToProfilePage(user.id);
-                      }, icon: const Icon(CupertinoIcons.arrow_right_circle_fill, size: 60, color: Colors.white,)),
+                      }, icon: const Icon(CupertinoIcons.arrow_right_circle_fill, size: 60, color: Helper.yellowColor,)),
                     )
                   ],
                 ),

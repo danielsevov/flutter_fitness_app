@@ -112,32 +112,32 @@ class TraineesPageState extends State<TraineesPage>
 
     return Scaffold(
       floatingActionButton: FloatingActionButton.extended(
-        backgroundColor: Helper.redColor,
+        backgroundColor: Helper.actionButtonColor,
         heroTag: "btn3",
-        icon: const Icon(CupertinoIcons.profile_circled),
-        label: const Text('Register User'),
+        icon: const Icon(CupertinoIcons.profile_circled, color: Helper.blackColor,),
+        label: const Text('Register User', style: TextStyle(color: Helper.blackColor),),
         onPressed: () {
           registerPressed(context);
         },
       ),
       appBar: AppBar(
-        backgroundColor: Helper.blueColor,
+        backgroundColor: Helper.pageBackgroundColor.withOpacity(0.7),
         centerTitle: true,
-        title: const Text("My Trainees"),
+        title: const Text("My Trainees", style: TextStyle(color: Helper.headerBarTextColor),),
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
             bottom: Radius.circular(15),
           ),
         ),
         iconTheme: const IconThemeData(
-          color: Colors.white, //change your color here
+          color: Helper.yellowColor, //change your color here
         ),
       ),
       body: SingleChildScrollView(
         child: Container(
           decoration: const BoxDecoration(
             image: DecorationImage(
-              image: AssetImage("assets/images/whitewaves.png"),
+              image: AssetImage(Helper.pageBackgroundImage),
               fit: BoxFit.fill,
             ),
           ),
@@ -159,28 +159,28 @@ class TraineesPageState extends State<TraineesPage>
                   decoration: InputDecoration(
                     focusedBorder: OutlineInputBorder(
                         borderSide:
-                            const BorderSide(color: Colors.blue, width: 1),
+                            const BorderSide(color: Helper.textFieldBorderColor, width: 1),
                         borderRadius: BorderRadius.circular(10)),
                     enabledBorder: OutlineInputBorder(
                         borderSide:
-                            const BorderSide(color: Helper.blueColor, width: 1),
+                            const BorderSide(color: Helper.dividerColor, width: 1),
                         borderRadius: BorderRadius.circular(10)),
                     prefixIcon: const Icon(
                       Icons.search,
-                      color: Helper.blueColor,
+                      color: Helper.dividerColor,
                     ),
                     hintText: "Search user",
                     hintStyle: const TextStyle(
-                        color: Colors.grey, fontSize: 24, height: 0.8),
+                        color: Helper.textFieldHintColor, fontSize: 24, height: 0.8),
                   ),
                   style: const TextStyle(
-                      color: Helper.blueColor, fontSize: 20, height: 0.8),
+                      color: Helper.textFieldTextColor, fontSize: 20, height: 0.8),
                 ),
               ),
               _isLoading
                   ? const Center(
                     child: CircularProgressIndicator(
-                        color: Helper.blueColor,
+                        color: Helper.pageBackgroundColor,
                       ),
                   )
                   : Column(

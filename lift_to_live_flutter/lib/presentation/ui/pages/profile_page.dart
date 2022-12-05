@@ -112,7 +112,7 @@ class ProfilePageState extends State<ProfilePage> implements ProfilePageView {
       body: CustomScrollView(
         slivers: <Widget>[
         SliverAppBar(centerTitle: true,
-          backgroundColor: Helper.blueColor,
+          backgroundColor: Helper.pageBackgroundColor,
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(
               bottom: Radius.circular(15),
@@ -122,10 +122,10 @@ class ProfilePageState extends State<ProfilePage> implements ProfilePageView {
           snap: true,
           floating: true,
           iconTheme: const IconThemeData(
-            color: Colors.white, //change your color here
+            color: Helper.headerBarIconColor, //change your color here
           ),
           leading: IconButton(
-              icon: const Icon(Icons.arrow_back, color: Colors.white),
+              icon: const Icon(Icons.arrow_back, color: Helper.yellowColor),
               onPressed: () {
                 if(widget.originPage == 'home') {
                   Helper.replacePage(context, const HomePage());
@@ -140,16 +140,16 @@ class ProfilePageState extends State<ProfilePage> implements ProfilePageView {
           ),
           expandedHeight: 100.0,
           flexibleSpace: FlexibleSpaceBar(
-            title: _isFetched ? Text(_user.name, style: const TextStyle(fontSize: 25),) : const Text('Profile Page', style: TextStyle(fontWeight: FontWeight.w600),),
+            title: _isFetched ? Text(_user.name, style: const TextStyle(fontSize: 25, color: Helper.lightHeadlineColor),) : const Text('Profile Page', style: TextStyle(fontWeight: FontWeight.w600, color: Helper.lightHeadlineColor),),
             centerTitle: true,
           ),),
           SliverList(
             delegate: SliverChildBuilderDelegate(
                   (BuildContext context, int index) {
-                return _isLoading ? const Center(child: CircularProgressIndicator(color: Helper.blueColor,)) : SingleChildScrollView(
+                return _isLoading ? const Center(child: CircularProgressIndicator(color: Helper.pageBackgroundColor,)) : SingleChildScrollView(
                   child: Container(
                     decoration: const BoxDecoration(image: DecorationImage(
-                      image: AssetImage("assets/images/whitewaves.png"),
+                      image: AssetImage(Helper.pageBackgroundImage),
                       fit: BoxFit.fill,
                     ),),
                     child: Column(
@@ -164,8 +164,8 @@ class ProfilePageState extends State<ProfilePage> implements ProfilePageView {
                                 margin:const EdgeInsets.all(10),
                                 child: FloatingActionButton.extended(
                                   heroTag: 'btn5',
-                                  backgroundColor: Helper.blueColor,
-                                  label: const Text('View Pictures'),
+                                  backgroundColor: Helper.actionButtonColor,
+                                  label: const Text('View Pictures', style: TextStyle(color: Helper.actionButtonTextColor),),
                                   onPressed: () async {
                                     if(_presenter.isAuthorized()) {
                                       Helper.pushPageWithAnimation(context, PicturePage(userId: _user.id, name: _user.name.split(" ")[0],));
@@ -176,7 +176,7 @@ class ProfilePageState extends State<ProfilePage> implements ProfilePageView {
                                   },
                                   icon: const Icon(
                                     Icons.photo_library_rounded,
-                                    color: Colors.white,
+                                    color: Helper.actionButtonTextColor,
                                   ),
                                 )
                             ), // button second
@@ -185,11 +185,11 @@ class ProfilePageState extends State<ProfilePage> implements ProfilePageView {
                                 margin:const EdgeInsets.all(10),
                                 child: FloatingActionButton.extended(
                                   heroTag: 'btn6',
-                                  backgroundColor: Helper.redColor,
-                                  icon: const Icon(Icons.task),
-                                  label: const Text('View Habits'),
+                                  backgroundColor: Helper.yellowColor,
+                                  icon: const Icon(Icons.task, color: Helper.actionButtonTextColor,),
+                                  label: const Text('View Habits', style: TextStyle(color: Helper.actionButtonTextColor),),
                                   onPressed: () {
-                                    Helper.pushPageWithAnimation(context, const Text('Habits'));
+                                    Helper.pushPageWithAnimation(context, const Text('Habits', style: TextStyle(color: Helper.actionButtonTextColor),));
                                   },
                                 )
                             ), // button third
@@ -203,17 +203,18 @@ class ProfilePageState extends State<ProfilePage> implements ProfilePageView {
                           children: [
                             _presenter.isAuthorized() ? const SizedBox(width: 50,) : const SizedBox(),
                             Container(
+                              color: Helper.blackColor,
                               alignment: Alignment.center,
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(10.0),
                                 child: _isFetched ? _profilePicture : null,
                               ),
                             ),
-                            _presenter.isAuthorized() && _isFetched ? IconButton(onPressed: () {_presenter.changeProfilePicture();}, icon: const Icon(CupertinoIcons.camera_fill, color: Colors.black, size: 30,)) : const SizedBox()
+                            _presenter.isAuthorized() && _isFetched ? IconButton(onPressed: () {_presenter.changeProfilePicture();}, icon: const Icon(CupertinoIcons.camera_fill, color: Helper.iconBackgroundColor, size: 30,)) : const SizedBox()
                           ],
                         ),
                         const SizedBox(height: 20,),
-                        const Text('User details:', style: TextStyle(color: Helper.blueColor, fontSize: 22, fontWeight: FontWeight.w600),),
+                        const Text('User details:', style: TextStyle(color: Helper.lightHeadlineColor, fontSize: 22, fontWeight: FontWeight.w600),),
                         const SizedBox(height: 5,),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -222,8 +223,8 @@ class ProfilePageState extends State<ProfilePage> implements ProfilePageView {
                               padding: const EdgeInsets.fromLTRB(10, 20, 10, 20),
                               width: 400,
                               decoration: BoxDecoration(
-                                  color: Helper.blueColor,
-                                  borderRadius: BorderRadius.circular(30)),
+                                  color: Helper.paragraphBackgroundColor,
+                                  borderRadius: BorderRadius.circular(15)),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
@@ -239,7 +240,7 @@ class ProfilePageState extends State<ProfilePage> implements ProfilePageView {
                                         children: [
                                           const Icon(
                                             Icons.email_outlined,
-                                            color: Colors.white, size: 25,
+                                            color: Helper.paragraphIconColor, size: 25,
                                           ),
                                           const SizedBox(
                                             width: 15,
@@ -247,7 +248,7 @@ class ProfilePageState extends State<ProfilePage> implements ProfilePageView {
                                           Text(
                                             _user.email,
                                             style: const TextStyle(
-                                                color: Colors.white, fontSize: 18),
+                                                color: Helper.paragraphTextColor, fontSize: 18),
                                           ),
                                         ],
                                       ),
@@ -257,7 +258,7 @@ class ProfilePageState extends State<ProfilePage> implements ProfilePageView {
                                         children: [
                                           const Icon(
                                             CupertinoIcons.phone,
-                                            color: Colors.white, size: 25,
+                                            color: Helper.paragraphIconColor, size: 25,
                                           ),
                                           const SizedBox(
                                             width: 15,
@@ -265,7 +266,7 @@ class ProfilePageState extends State<ProfilePage> implements ProfilePageView {
                                           Text(
                                             _user.phoneNumber,
                                             style: const TextStyle(
-                                                color: Colors.white, fontSize: 18),
+                                                color: Helper.paragraphTextColor, fontSize: 18),
                                           ),
                                         ],
                                       ),
@@ -274,14 +275,14 @@ class ProfilePageState extends State<ProfilePage> implements ProfilePageView {
                                         mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
                                           const Icon(CupertinoIcons.location_solid,
-                                              color: Colors.white, size: 25),
+                                              color: Helper.paragraphIconColor, size: 25),
                                           const SizedBox(
                                             width: 15,
                                           ),
                                           Text(
                                             _user.nationality,
                                             style: const TextStyle(
-                                                color: Colors.white, fontSize: 18),
+                                                color: Helper.paragraphTextColor, fontSize: 18),
                                           ),
                                         ],
                                       ),
@@ -290,14 +291,14 @@ class ProfilePageState extends State<ProfilePage> implements ProfilePageView {
                                         mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
                                           const Icon(Icons.date_range,
-                                              color: Colors.white, size: 25),
+                                              color: Helper.paragraphIconColor, size: 25),
                                           const SizedBox(
                                             width: 15,
                                           ),
                                           Text(
                                             _user.dateOfBirth,
                                             style: const TextStyle(
-                                                color: Colors.white, fontSize: 18),
+                                                color: Helper.paragraphTextColor, fontSize: 18),
                                           ),
                                         ],
                                       ),
@@ -306,14 +307,14 @@ class ProfilePageState extends State<ProfilePage> implements ProfilePageView {
                                         mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
                                           const Icon(Icons.fitness_center_outlined,
-                                            color: Colors.white, size: 25,),
+                                            color: Helper.paragraphIconColor, size: 25,),
                                           const SizedBox(
                                             width: 15,
                                           ),
                                           Text(
                                             _user.coachId,
                                             style: const TextStyle(
-                                                color: Colors.white, fontSize: 18),
+                                                color: Helper.paragraphTextColor, fontSize: 18),
                                           ),
                                         ],
                                       ),

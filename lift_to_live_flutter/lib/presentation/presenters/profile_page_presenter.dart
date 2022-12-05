@@ -61,7 +61,7 @@ class ProfilePagePresenter extends BasePresenter{
       }
       catch (e) {
         _myImage = MyImage('', 'profile', 0, '', '');
-        _profilePicture = Image.asset('assets/images/prof_pic.png', height: 300,);
+        _profilePicture = Image.asset('assets/images/prof_pic.png', height: 300, color: Helper.yellowColor,);
       }
 
       // display the fetched user data
