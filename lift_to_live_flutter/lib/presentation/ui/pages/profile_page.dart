@@ -4,12 +4,12 @@ import 'package:lift_to_live_flutter/presentation/ui/pages/picture_page.dart';
 import 'package:provider/provider.dart';
 
 import '../../../domain/entities/user.dart';
+import '../../../factory/home_page_factory.dart';
 import '../../../factory/profile_page_factory.dart';
 import '../../presenters/profile_page_presenter.dart';
 import '../../state_management/app_state.dart';
 import '../../../helper.dart';
 import '../../views/profile_page_view.dart';
-import 'home_page.dart';
 
 /// Custom ProfilePage widget used as a main overview of a user.
 /// It provides navigation to the user's pictures and habits pages.
@@ -128,7 +128,7 @@ class ProfilePageState extends State<ProfilePage> implements ProfilePageView {
               icon: const Icon(Icons.arrow_back, color: Helper.yellowColor),
               onPressed: () {
                 if(widget.originPage == 'home') {
-                  Helper.replacePage(context, const HomePage());
+                  Helper.replacePage(context, HomePageFactory().getWrappedHomePage());
                 }
                 else if(widget.originPage == 'trainees') {
                   Navigator.pop(context);
@@ -185,9 +185,9 @@ class ProfilePageState extends State<ProfilePage> implements ProfilePageView {
                                 margin:const EdgeInsets.all(10),
                                 child: FloatingActionButton.extended(
                                   heroTag: 'btn6',
-                                  backgroundColor: Helper.yellowColor,
-                                  icon: const Icon(Icons.task, color: Helper.actionButtonTextColor,),
-                                  label: const Text('View Habits', style: TextStyle(color: Helper.actionButtonTextColor),),
+                                  backgroundColor: Helper.redColor,
+                                  icon: const Icon(Icons.task, color: Helper.whiteColor,),
+                                  label: const Text('View Habits', style: TextStyle(color: Helper.whiteColor),),
                                   onPressed: () {
                                     Helper.pushPageWithAnimation(context, const Text('Habits', style: TextStyle(color: Helper.actionButtonTextColor),));
                                   },

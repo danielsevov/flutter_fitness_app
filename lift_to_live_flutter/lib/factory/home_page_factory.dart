@@ -1,7 +1,10 @@
+import 'package:expandable_bottom_bar/expandable_bottom_bar.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:lift_to_live_flutter/data/datasources/backend_api.dart';
 import 'package:lift_to_live_flutter/data/datasources/news_api.dart';
 import 'package:lift_to_live_flutter/data/repositories/news_repo_impl.dart';
 import 'package:lift_to_live_flutter/data/repositories/user_repo_impl.dart';
+import 'package:lift_to_live_flutter/presentation/ui/pages/home_page.dart';
 
 import '../domain/repositories/news_repo.dart';
 import '../domain/repositories/user_repo.dart';
@@ -30,4 +33,6 @@ class HomePageFactory {
   // function to get a HomePagePresenter object.
   HomePagePresenter getHomePagePresenter() =>
       HomePagePresenter(getNewsRepository(), getUserRepository());
+
+  Widget getWrappedHomePage() => DefaultBottomBarController(child:const HomePage());
 }

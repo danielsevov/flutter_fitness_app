@@ -179,9 +179,12 @@ class TraineesPageState extends State<TraineesPage>
               ),
               _isLoading
                   ? const Center(
-                    child: CircularProgressIndicator(
-                        color: Helper.pageBackgroundColor,
-                      ),
+                    child: Padding(
+                      padding: EdgeInsets.all(15.0),
+                      child: CircularProgressIndicator(
+                          color: Helper.yellowColor,
+                        ),
+                    ),
                   )
                   : Column(
                       mainAxisAlignment: MainAxisAlignment.start,

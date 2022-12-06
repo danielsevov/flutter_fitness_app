@@ -19,7 +19,7 @@ class PicturePageFactory {
   UserRepository getUserRepository() =>
       UserRepoImpl(backendAPI); // user repository
 
-  // function to get a HomePagePresenter object.
+  // function to get a PicturePagePresenter object.
   PicturePagePresenter getPicturePagePresenter(String userId) =>
       PicturePagePresenter(getUserRepository(), userId);
 }

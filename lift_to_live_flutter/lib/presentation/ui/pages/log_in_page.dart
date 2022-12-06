@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:lift_to_live_flutter/factory/home_page_factory.dart';
 import 'package:lift_to_live_flutter/factory/log_in_page_factory.dart';
 import 'package:lift_to_live_flutter/presentation/presenters/log_in_page_presenter.dart';
-import 'package:lift_to_live_flutter/presentation/ui/pages/home_page.dart';
 import 'package:lift_to_live_flutter/presentation/ui/widgets/log_in_form.dart';
 import 'package:provider/provider.dart';
 
@@ -120,7 +120,8 @@ class LogInPageState extends State<LogInPage> implements LogInPageView {
   /// Function to trigger page change from log in page to home page, upon successful log in.
   @override
   void navigateToHome() {
-    Helper.pushPageWithAnimation(context, const HomePage());
+    Helper.pushPageWithAnimation(
+        context, HomePageFactory().getWrappedHomePage());
   }
 
   /// Function to display a toast message, when user cannot be authenticated.
