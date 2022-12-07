@@ -129,7 +129,7 @@ void main() {
       final screen = MyImageHolder(img: img, date: date, id: id, presenter: presenter);
 
       final imageFinder = find.image(img.image);
-      final deleteIconFinder = find.byIcon(CupertinoIcons.delete_solid);
+      final deleteIconFinder = find.byIcon(Icons.cancel_rounded);
       final cancelFinder = find.byIcon(Icons.cancel);
       final agreeFinder = find.byIcon(Icons.check_circle);
 
@@ -165,7 +165,7 @@ void main() {
       final screen = MyImageHolder(img: img, date: date, id: id, presenter: presenter);
 
       final imageFinder = find.image(img.image);
-      final deleteIconFinder = find.byIcon(CupertinoIcons.delete_solid);
+      final deleteIconFinder = find.byIcon(Icons.cancel_rounded);
       final cancelFinder = find.byIcon(Icons.cancel);
       final agreeFinder = find.byIcon(Icons.check_circle);
 
@@ -210,7 +210,7 @@ void main() {
       final screen = MyImageHolder(img: img, date: date, id: id, presenter: presenter);
 
       final imageFinder = find.image(img.image);
-      final deleteIconFinder = find.byIcon(CupertinoIcons.delete_solid);
+      final deleteIconFinder = find.byIcon(Icons.cancel_rounded);
       final cancelFinder = find.byIcon(Icons.cancel);
       final agreeFinder = find.byIcon(Icons.check_circle);
 

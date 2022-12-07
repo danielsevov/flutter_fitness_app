@@ -76,7 +76,7 @@ class MyImageHolder extends StatelessWidget {
                         });
                   },
                   icon: const Icon(
-                    Icons.cancel,
+                    Icons.cancel_rounded,
                     color: Helper.cancelButtonColor,
                   ))
             ],
