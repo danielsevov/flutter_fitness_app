@@ -182,7 +182,7 @@ class HomePageState extends State<HomePage> implements HomePageView {
           child: SingleChildScrollView(
             child: Column(children: [
               const SizedBox(height: 60,),
-              FloatingActionButton.extended(heroTag: 'startworkoutbutton', onPressed: () {},icon: const Icon(Icons.fitness_center),backgroundColor: Helper.yellowColor, label: const Text('Start Workout', style: TextStyle(fontSize: 24, color: Helper.paragraphTextColor),)),
+              FloatingActionButton.extended(heroTag: 'startworkoutbutton', onPressed: () {},icon: const Icon(Icons.fitness_center, color: Helper.blackColor,),backgroundColor: Helper.yellowColor, label: const Text('Start Workout', style: TextStyle(fontSize: 24, color: Helper.blackColor),)),
               const SizedBox(height: 10,),
               FloatingActionButton.extended(heroTag: 'edittemplatesbutton', onPressed: () {},icon: const Icon(Icons.edit_note),backgroundColor: Helper.redColor, label: const Text('Edit Templates', style: TextStyle(fontSize: 24, color: Helper.paragraphTextColor),)),
               const SizedBox(height: 10,),
@@ -469,7 +469,7 @@ class HomePageState extends State<HomePage> implements HomePageView {
                                       CupertinoIcons.arrow_turn_down_right,
                                       color: Helper.actionButtonTextColor,
                                     ),
-                                    label: const Text('Read More'),
+                                    label: const Text('Read More', style: TextStyle(color: Helper.blackColor),),
                                     backgroundColor: Helper.actionButtonColor,
                                   ),
                                   const SizedBox(

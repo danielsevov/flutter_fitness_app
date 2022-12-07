@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lift_to_live_flutter/presentation/ui/pages/edit_habits_page.dart';
 import 'package:provider/provider.dart';
 import '../../presenters/habits_page_presenter.dart';
 import '../../../factory/habits_page_factory.dart';
@@ -29,8 +30,7 @@ class HabitsPageState extends State<HabitsPage> implements HabitsPageView {
   /// initialize the page view by attaching it to the presenter
   @override
   void initState() {
-    _presenter = HabitsPagePresenter(
-        HabitsPageFactory().getHabitsRepository(), widget.userId);
+    _presenter = HabitsPageFactory().getHabitsPagePresenter(widget.userId);
     _presenter.attach(this);
     super.initState();
   }
@@ -112,7 +112,7 @@ class HabitsPageState extends State<HabitsPage> implements HabitsPageView {
                           onPressed: () async {
                             if (_presenter.isAuthorized()) {
                               Helper.replacePage(
-                                  context, const Text('Edit habits'));
+                                  context, EditHabitsPage(userId: widget.userId,));
                             } else {
                               Helper.makeToast(context,
                                   "You don't have the permission to edit habits!");

@@ -95,7 +95,7 @@ class PicturePageState extends State<PicturePage> implements PicturePageView {
       body: _isLoading
           ? const Center(
         child: CircularProgressIndicator(
-          color: Helper.pageBackgroundColor,
+          color: Helper.yellowColor,
         ),
       )
           : SingleChildScrollView(
@@ -113,10 +113,6 @@ class PicturePageState extends State<PicturePage> implements PicturePageView {
                   children: [
                     const SizedBox(
                       height: 20,
-                    ),
-                    const Divider(
-                      color: Helper.dividerColor,
-                      thickness: 1,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -143,7 +139,7 @@ class PicturePageState extends State<PicturePage> implements PicturePageView {
                       ],
                     ),
                     const Divider(
-                      color: Helper.dividerColor,
+                      color: Helper.whiteColor,
                       thickness: 1,
                     ),
                     Container(
@@ -156,10 +152,6 @@ class PicturePageState extends State<PicturePage> implements PicturePageView {
                     ),
                     const SizedBox(
                       height: 20,
-                    ),
-                    const Divider(
-                      color: Helper.dividerColor,
-                      thickness: 1,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -186,7 +178,7 @@ class PicturePageState extends State<PicturePage> implements PicturePageView {
                       ],
                     ),
                     const Divider(
-                      color: Helper.dividerColor,
+                      color: Helper.whiteColor,
                       thickness: 1,
                     ),
                     Container(
@@ -199,10 +191,6 @@ class PicturePageState extends State<PicturePage> implements PicturePageView {
                     ),
                     const SizedBox(
                       height: 20,
-                    ),
-                    const Divider(
-                      color: Helper.dividerColor,
-                      thickness: 1,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -229,7 +217,7 @@ class PicturePageState extends State<PicturePage> implements PicturePageView {
                       ],
                     ),
                     const Divider(
-                      color: Helper.dividerColor,
+                      color: Helper.whiteColor,
                       thickness: 1,
                     ),
                     Container(
