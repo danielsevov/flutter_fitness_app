@@ -1,5 +1,6 @@
+import 'dart:developer';
+
 import 'package:expandable_bottom_bar/expandable_bottom_bar.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lift_to_live_flutter/domain/entities/news.dart';
 import 'package:lift_to_live_flutter/factory/home_page_factory.dart';
@@ -7,7 +8,10 @@ import 'package:lift_to_live_flutter/presentation/presenters/home_page_presenter
 import 'package:lift_to_live_flutter/presentation/ui/pages/habits_page.dart';
 import 'package:lift_to_live_flutter/presentation/ui/pages/profile_page.dart';
 import 'package:lift_to_live_flutter/presentation/ui/pages/trainees_page.dart';
+import 'package:lift_to_live_flutter/presentation/ui/widgets/custom_bottom_bar.dart';
+import 'package:lift_to_live_flutter/presentation/ui/widgets/custom_drawer.dart';
 import 'package:lift_to_live_flutter/presentation/ui/widgets/log_out_dialog.dart';
+import 'package:lift_to_live_flutter/presentation/ui/widgets/news_article_holder.dart';
 import 'package:lift_to_live_flutter/presentation/views/home_page_view.dart';
 import 'package:provider/provider.dart';
 
@@ -39,6 +43,24 @@ class HomePageState extends State<HomePage> implements HomePageView {
   late Image
       _profilePicture; // The image object holding the current user profile picture
   late double _screenWidth, _screenHeight; // The screen dimensions
+
+  @override
+  get screenWidth => _screenWidth;
+
+  @override
+  get screenHeight => _screenHeight;
+
+  @override
+  get userData => _user;
+
+  @override
+  get isFetched => _isFetched;
+
+  @override
+  get profilePicture => _profilePicture;
+
+  @override
+  get currentNews => _currentNews;
 
   /// initialize the page view by attaching it to the presenter
   @override
@@ -100,6 +122,12 @@ class HomePageState extends State<HomePage> implements HomePageView {
     Helper.pushPageWithAnimation(context, HabitsPage(userId: _user.id));
   }
 
+  /// Function to redirect user to URL
+  @override
+  void redirectToUrl(int index) {
+    _presenter.redirectToURL(index);
+  }
+
   /// Function called when user wants to navigate from home to profile page
   @override
   void profilePressed(BuildContext context, bool bottomBarButton) {
@@ -154,11 +182,12 @@ class HomePageState extends State<HomePage> implements HomePageView {
         heroTag: 'btn4',
         //Floating action button on Scaffold
         onPressed: () {
-          //TODO code to execute on button press
           try {
             DefaultBottomBarController.of(context).swap();
           }
-          catch (e) {}
+          catch (e) {
+            log(e.toString());
+          }
         },
         backgroundColor: Helper.actionButtonColor,
         child: const Icon(
@@ -171,132 +200,7 @@ class HomePageState extends State<HomePage> implements HomePageView {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
 
       // bottom navigation bar on scaffold
-      bottomNavigationBar: BottomExpandableAppBar(
-        bottomAppBarColor: Helper.pageBackgroundColor,
-        expandedHeight: 230,
-        expandedBody: Container(
-          width: _screenWidth * 0.7,
-          decoration: const BoxDecoration(
-              color: Helper.lightBlueColor,
-              borderRadius: BorderRadius.all(Radius.circular(30))),
-          child: SingleChildScrollView(
-            child: Column(children: [
-              const SizedBox(height: 60,),
-              FloatingActionButton.extended(heroTag: 'startworkoutbutton', onPressed: () {},icon: const Icon(Icons.fitness_center, color: Helper.blackColor,),backgroundColor: Helper.yellowColor, label: const Text('Start Workout', style: TextStyle(fontSize: 24, color: Helper.blackColor),)),
-              const SizedBox(height: 10,),
-              FloatingActionButton.extended(heroTag: 'edittemplatesbutton', onPressed: () {},icon: const Icon(Icons.edit_note),backgroundColor: Helper.redColor, label: const Text('Edit Templates', style: TextStyle(fontSize: 24, color: Helper.paragraphTextColor),)),
-              const SizedBox(height: 10,),
-              FloatingActionButton.extended(heroTag: 'viewhistorybutton', onPressed: () {},icon: const Icon(Icons.history),backgroundColor: Helper.blackColor, label: const Text('View History', style: TextStyle(fontSize: 24, color: Helper.paragraphTextColor),)),
-              const SizedBox(height: 10,),
-            ],),
-          ),
-        ),
-        shape: const CircularNotchedRectangle(), //shape of notch
-        notchMargin: 5, //notch margin between floating button and bottom appbar
-        //children inside bottom appbar
-        bottomAppBarBody: Row(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            SizedBox.fromSize(
-              size: const Size(60, 60),
-              child: ClipOval(
-                child: InkWell(
-                  splashColor: Helper.whiteColor,
-                  onTap: () {
-                    habitsPressed(context, true);
-                  },
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const <Widget>[
-                      Icon(
-                        Icons.task,
-                        color: Helper.bottomBarIconColor,
-                      ), // <-- Icon
-                      Text(
-                        "Habits",
-                        style: TextStyle(color: Helper.bottomBarTextColor),
-                      ), // <-- Text
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            SizedBox.fromSize(
-              size: const Size(60, 60),
-              child: ClipOval(
-                child: InkWell(
-                  splashColor: Helper.whiteColor,
-                  onTap: () {},
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const <Widget>[
-                      Icon(
-                        Icons.edit_calendar,
-                        color: Helper.bottomBarIconColor,
-                      ), // <-- Icon
-                      Text(
-                        "Calendar",
-                        style: TextStyle(color: Helper.bottomBarTextColor),
-                      ), // <-- Text
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(),
-            const SizedBox(),
-            SizedBox.fromSize(
-              size: const Size(60, 60),
-              child: ClipOval(
-                child: InkWell(
-                  splashColor: Helper.whiteColor,
-                  onTap: () {
-                    traineesPressed(context, true);
-                  },
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const <Widget>[
-                      Icon(
-                        Icons.people,
-                        color: Helper.bottomBarIconColor,
-                      ), // <-- Icon
-                      Text(
-                        "Trainees",
-                        style: TextStyle(color: Helper.bottomBarTextColor),
-                      ), // <-- Text
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            SizedBox.fromSize(
-              size: const Size(60, 60),
-              child: ClipOval(
-                child: InkWell(
-                  splashColor: Helper.whiteColor,
-                  onTap: () {
-                    profilePressed(context, true);
-                  },
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const <Widget>[
-                      Icon(
-                        CupertinoIcons.profile_circled,
-                        color: Helper.bottomBarIconColor,
-                      ), // <-- Icon
-                      Text(
-                        "Profile",
-                        style: TextStyle(color: Helper.bottomBarTextColor),
-                      ), // <-- Text
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
+      bottomNavigationBar: CustomBottomBar(view: this),
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
@@ -386,103 +290,7 @@ class HomePageState extends State<HomePage> implements HomePageView {
                           : const SizedBox(
                               height: 3,
                             ))
-                      : Container(
-                          color: index.isOdd
-                              ? Helper.lightBlueColor
-                              : Helper.paragraphBackgroundColor
-                                  .withOpacity(0.12),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  SizedBox(
-                                    width: 160,
-                                    height: 80,
-                                    child: FittedBox(
-                                      fit: BoxFit.fill,
-                                      child: ClipRRect(
-                                        borderRadius: const BorderRadius.only(
-                                            bottomRight: Radius.circular(20)),
-                                        child: _currentNews.articles[index]
-                                                .urlToImage.isEmpty
-                                            ? null
-                                            : Image.network(
-                                                _currentNews
-                                                    .articles[index].urlToImage,
-                                                loadingBuilder: (context, child,
-                                                        loadingProgress) =>
-                                                    (loadingProgress == null)
-                                                        ? child
-                                                        : const Center(
-                                                            child:
-                                                                CircularProgressIndicator(
-                                                              color: Helper
-                                                                  .pageBackgroundColor,
-                                                            ),
-                                                          ),
-                                                errorBuilder: (context, error,
-                                                        stackTrace) =>
-                                                    Container(
-                                                  height: 80,
-                                                  width: 160,
-                                                  color: Helper.backgroundColor,
-                                                ),
-                                                scale: 0.1,
-                                                height: 80,
-                                                width: 160,
-                                              ),
-                                      ),
-                                    ),
-                                  ),
-                                  Expanded(
-                                      child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Text(
-                                      _currentNews.articles[index].title,
-                                      style: const TextStyle(
-                                          color: Helper.defaultTextColor,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ))
-                                ],
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  '${_currentNews.articles[index].description}\n\n${_currentNews.articles[index].content}',
-                                  style: const TextStyle(
-                                    color: Helper.defaultTextColor,
-                                  ),
-                                ),
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  FloatingActionButton.extended(
-                                    heroTag: index.toString(),
-                                    onPressed: () async {
-                                      _presenter.redirectToURL(index);
-                                    },
-                                    icon: const Icon(
-                                      CupertinoIcons.arrow_turn_down_right,
-                                      color: Helper.actionButtonTextColor,
-                                    ),
-                                    label: const Text('Read More', style: TextStyle(color: Helper.blackColor),),
-                                    backgroundColor: Helper.actionButtonColor,
-                                  ),
-                                  const SizedBox(
-                                    width: 20,
-                                  )
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 20,
-                              )
-                            ],
-                          ),
-                        );
+                      : NewsArticleHolder(view: this, index: index);
                 },
                 childCount: 20,
               ),
@@ -490,283 +298,7 @@ class HomePageState extends State<HomePage> implements HomePageView {
           ],
         ),
       ),
-      drawer: Drawer(
-        width: _screenWidth > 300 ? 300 : _screenWidth / 2,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-              topRight: Radius.circular(90), bottomRight: Radius.circular(0)),
-        ),
-        child: ListView(
-          // Important: Remove any padding from the ListView.
-          padding: EdgeInsets.zero,
-          children: [
-            SizedBox(
-              height: _screenHeight / 7 * 4,
-              child: DrawerHeader(
-                decoration: const BoxDecoration(
-                    color: Helper.pageBackgroundColor,
-                    borderRadius:
-                        BorderRadius.only(topRight: Radius.circular(90))),
-                child: Wrap(
-                  children: [
-                    _screenHeight > 300
-                        ? Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              const SizedBox(
-                                width: 20,
-                              ),
-                              Container(
-                                alignment: Alignment.center,
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(30.0),
-                                  child: _isFetched
-                                      ? _profilePicture
-                                      : Image.asset(
-                                          'assets/images/prof_pic.png',
-                                          height: 100),
-                                ),
-                              ),
-                            ],
-                          )
-                        : const SizedBox(),
-                    const SizedBox(
-                      height: 20,
-                      width: 10,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        const SizedBox(
-                          width: 20,
-                        ),
-                        Text(
-                          _isFetched ? _user.name : '',
-                          style: const TextStyle(
-                              color: Helper.defaultTextColor,
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ],
-                    ),
-                    _screenHeight > 520
-                        ? Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Container(
-                                padding: const EdgeInsets.all(10),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    const SizedBox(
-                                      width: 10,
-                                    ),
-                                    Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            const Icon(
-                                              Icons.email_outlined,
-                                              color: Helper.yellowColor,
-                                            ),
-                                            const SizedBox(
-                                              width: 5,
-                                            ),
-                                            Text(
-                                              _isFetched ? _user.email : '',
-                                              style: const TextStyle(
-                                                  color:
-                                                      Helper.defaultTextColor,
-                                                  fontSize: 14),
-                                            ),
-                                          ],
-                                        ),
-                                        const SizedBox(
-                                          height: 10,
-                                        ),
-                                        Row(
-                                          children: [
-                                            const Icon(
-                                              CupertinoIcons.phone,
-                                              color: Helper.yellowColor,
-                                            ),
-                                            const SizedBox(
-                                              width: 5,
-                                            ),
-                                            Text(
-                                              _isFetched
-                                                  ? _user.phoneNumber
-                                                  : '',
-                                              style: const TextStyle(
-                                                  color:
-                                                      Helper.defaultTextColor,
-                                                  fontSize: 14),
-                                            ),
-                                          ],
-                                        ),
-                                        const SizedBox(
-                                          height: 10,
-                                        ),
-                                        Row(
-                                          children: [
-                                            const Icon(
-                                              CupertinoIcons.location_solid,
-                                              color: Helper.yellowColor,
-                                            ),
-                                            const SizedBox(
-                                              width: 5,
-                                            ),
-                                            Text(
-                                              _isFetched
-                                                  ? _user.nationality
-                                                  : '',
-                                              style: const TextStyle(
-                                                  color:
-                                                      Helper.defaultTextColor,
-                                                  fontSize: 14),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                    const SizedBox(
-                                      width: 40,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          )
-                        : const SizedBox(),
-                    // const SizedBox(
-                    //   height: 20,
-                    // ),
-                  ],
-                ),
-              ),
-            ),
-            ListTile(
-              tileColor: Helper.blueColor,
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.only(
-                    bottomRight: Radius.circular(0),
-                    topLeft: Radius.circular(0)),
-              ),
-              title: Row(
-                children: const [
-                  Icon(
-                    CupertinoIcons.profile_circled,
-                    color: Helper.yellowColor,
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Text(
-                    'My Profile',
-                    style: TextStyle(
-                      fontSize: 22,
-                      color: Helper.defaultTextColor,
-                    ),
-                  )
-                ],
-              ),
-              onTap: () {
-                profilePressed(context, false);
-              },
-            ),
-            ListTile(
-              tileColor: Helper.lightBlueColor,
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.only(
-                    bottomRight: Radius.circular(0),
-                    topRight: Radius.circular(0)),
-              ),
-              title: Row(
-                children: const [
-                  Icon(Icons.task_alt_outlined, color: Helper.yellowColor),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Text(
-                    'My Habits',
-                    style:
-                        TextStyle(fontSize: 22, color: Helper.defaultTextColor),
-                  )
-                ],
-              ),
-              onTap: () async {
-                habitsPressed(context, false);
-              },
-            ),
-            ListTile(
-              tileColor: Helper.blueColor,
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.only(
-                    bottomRight: Radius.circular(0),
-                    topLeft: Radius.circular(0)),
-              ),
-              title: Row(
-                children: const [
-                  Icon(
-                    Icons.fitness_center_outlined,
-                    color: Helper.yellowColor,
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Text(
-                    'Manage Workouts',
-                    style: TextStyle(
-                      fontSize: 22,
-                      color: Helper.defaultTextColor,
-                    ),
-                  )
-                ],
-              ),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            _presenter.isCoachOrAdmin()
-                ? ListTile(
-                    tileColor: Helper.lightBlueColor,
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                          bottomRight: Radius.circular(0),
-                          topLeft: Radius.circular(0)),
-                    ),
-                    title: Row(
-                      children: const [
-                        Icon(
-                          Icons.people,
-                          color: Helper.yellowColor,
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Text(
-                          'Manage Trainees',
-                          style: TextStyle(
-                            fontSize: 22,
-                            color: Helper.defaultTextColor,
-                          ),
-                        )
-                      ],
-                    ),
-                    onTap: () {
-                      traineesPressed(context, false);
-                    },
-                  )
-                : const SizedBox(),
-          ],
-        ),
-      ),
+      drawer: CustomDrawer(view: this),
     );
   }
 }

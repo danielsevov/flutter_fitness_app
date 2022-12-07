@@ -8,6 +8,18 @@ import '../../domain/entities/user.dart';
 /// API to the HomePage view widget.
 /// Describes the methods of the home page view implementation.
 abstract class HomePageView {
+  get screenWidth;
+
+  get screenHeight;
+
+  get isFetched;
+
+  get userData;
+
+  get profilePicture;
+
+  get currentNews;
+
   /// Function to set and display the user details, user profile picture.
   void setUserData(User user, Image profilePicture);
 
@@ -35,6 +47,9 @@ abstract class HomePageView {
   /// Function called when user wants to navigate from home to trainees page
   /// This is only allowed if user is admin or coach.
   void traineesPressed(BuildContext context, bool bottomBarButton);
+
+  /// Function to call when button pressed to redirect user to URL
+  void redirectToUrl(int index);
 }
 
 // coverage:ignore-end
