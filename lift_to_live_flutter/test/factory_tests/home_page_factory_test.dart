@@ -1,3 +1,4 @@
+import 'package:expandable_bottom_bar/expandable_bottom_bar.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:lift_to_live_flutter/domain/repositories/news_repo.dart';
 import 'package:lift_to_live_flutter/domain/repositories/user_repo.dart';
@@ -21,5 +22,11 @@ void main() {
     var presenter = HomePageFactory().getHomePagePresenter();
 
     expect(presenter, isA<HomePagePresenter>());
+  });
+
+  test('HomePageFactory.getWrappedHomePage() test', () {
+    var presenter = HomePageFactory().getWrappedHomePage();
+
+    expect(presenter, isA<DefaultBottomBarController>());
   });
 }

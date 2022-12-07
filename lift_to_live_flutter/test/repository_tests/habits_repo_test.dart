@@ -72,6 +72,25 @@ void main() {
       expect(obj.habits.length, 4);
     });
 
+    test('returns response if the http call completes successfully but no habits were found', () async {
+      final backendAPI = MockBackendAPI();
+
+      when(backendAPI.fetchTemplate('A', 'A')).thenAnswer((_) async => Response(
+          '[]',
+          200,
+          headers: {
+            HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8',
+          }));
+
+      HabitsRepository repository = HabitsRepoImpl(backendAPI);
+
+      var obj = await repository.fetchTemplate('A', 'A');
+
+      expect(obj.id, 0);
+      expect(obj.userId, '');
+      expect(obj.habits.length, 1);
+    });
+
     test('throws an exception if the http call completes with an error',
             () async {
           final backendAPI = MockBackendAPI();

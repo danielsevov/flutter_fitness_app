@@ -1,5 +1,4 @@
 import 'package:expandable_bottom_bar/expandable_bottom_bar.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:lift_to_live_flutter/data/datasources/backend_api.dart';
 import 'package:lift_to_live_flutter/data/datasources/news_api.dart';
 import 'package:lift_to_live_flutter/data/repositories/news_repo_impl.dart';
@@ -34,5 +33,5 @@ class HomePageFactory {
   HomePagePresenter getHomePagePresenter() =>
       HomePagePresenter(getNewsRepository(), getUserRepository());
 
-  Widget getWrappedHomePage() => DefaultBottomBarController(child:const HomePage());
+  DefaultBottomBarController getWrappedHomePage() => DefaultBottomBarController(child:const HomePage());
 }
