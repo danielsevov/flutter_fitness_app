@@ -60,43 +60,50 @@ class LogInPageState extends State<LogInPage> implements LogInPageView {
           presenter: _presenter);
     }
 
-    return Scaffold(
-      backgroundColor: Helper.pageBackgroundColor,
-      resizeToAvoidBottomInset: true,
-      body: SingleChildScrollView(
-        child: Container(
-          width: _screenWidth,
-          height: _screenHeight - 20,
-          margin: const EdgeInsets.all(10),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(30),
-            image: const DecorationImage(
-              image: AssetImage(Helper.pageBackgroundImage),
-              fit: BoxFit.cover,
-            ),
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              //logo image
-              Hero(
-                tag: 'logo',
-                child: Image.asset(
-                  Helper.logoImage,
-                  height: _screenHeight * 0.5,
-                  width: _screenWidth * 0.8,
-                ),
-              ),
+    Future<bool> _onWillPop() async {
+      return false; //<-- SEE HERE
+    }
 
-              // display loading indicator if data is being processed
-              _isLoading
-                  ? const Center(
-                      child: CircularProgressIndicator(
-                      color: Helper.yellowColor,
-                    ))
-                  : _logInForm
-            ],
+    return WillPopScope(
+      onWillPop: _onWillPop,
+      child: Scaffold(
+        backgroundColor: Helper.pageBackgroundColor,
+        resizeToAvoidBottomInset: true,
+        body: SingleChildScrollView(
+          child: Container(
+            width: _screenWidth,
+            height: _screenHeight - 20,
+            margin: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(30),
+              image: const DecorationImage(
+                image: AssetImage(Helper.pageBackgroundImage),
+                fit: BoxFit.cover,
+              ),
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                //logo image
+                Hero(
+                  tag: 'logo',
+                  child: Image.asset(
+                    Helper.logoImage,
+                    height: _screenHeight * 0.5,
+                    width: _screenWidth * 0.8,
+                  ),
+                ),
+
+                // display loading indicator if data is being processed
+                _isLoading
+                    ? const Center(
+                        child: CircularProgressIndicator(
+                        color: Helper.yellowColor,
+                      ))
+                    : _logInForm
+              ],
+            ),
           ),
         ),
       ),

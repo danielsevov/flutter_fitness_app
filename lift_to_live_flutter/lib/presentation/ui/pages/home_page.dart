@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:lift_to_live_flutter/domain/entities/news.dart';
 import 'package:lift_to_live_flutter/factory/home_page_factory.dart';
 import 'package:lift_to_live_flutter/presentation/presenters/home_page_presenter.dart';
+import 'package:lift_to_live_flutter/presentation/ui/pages/habits_page.dart';
 import 'package:lift_to_live_flutter/presentation/ui/pages/profile_page.dart';
 import 'package:lift_to_live_flutter/presentation/ui/pages/trainees_page.dart';
 import 'package:lift_to_live_flutter/presentation/ui/widgets/log_out_dialog.dart';
@@ -96,7 +97,7 @@ class HomePageState extends State<HomePage> implements HomePageView {
   @override
   void habitsPressed(BuildContext context, bool bottomBarButton) {
     if (!bottomBarButton) Navigator.of(context).pop();
-    Helper.pushPageWithAnimation(context, const Text("Habits"));
+    Helper.pushPageWithAnimation(context, HabitsPage(userId: _user.id));
   }
 
   /// Function called when user wants to navigate from home to profile page
@@ -178,15 +179,17 @@ class HomePageState extends State<HomePage> implements HomePageView {
           decoration: const BoxDecoration(
               color: Helper.lightBlueColor,
               borderRadius: BorderRadius.all(Radius.circular(30))),
-          child: Column(children: [
-            const SizedBox(height: 60,),
-            FloatingActionButton.extended(heroTag: 'startworkoutbutton', onPressed: () {},icon: const Icon(Icons.fitness_center),backgroundColor: Helper.yellowColor, label: const Text('Start Workout', style: TextStyle(fontSize: 24, color: Helper.paragraphTextColor),)),
-            const SizedBox(height: 10,),
-            FloatingActionButton.extended(heroTag: 'edittemplatesbutton', onPressed: () {},icon: const Icon(Icons.edit_note),backgroundColor: Helper.redColor, label: const Text('Edit Templates', style: TextStyle(fontSize: 24, color: Helper.paragraphTextColor),)),
-            const SizedBox(height: 10,),
-            FloatingActionButton.extended(heroTag: 'viewhistorybutton', onPressed: () {},icon: const Icon(Icons.history),backgroundColor: Helper.blackColor, label: const Text('View History', style: TextStyle(fontSize: 24, color: Helper.paragraphTextColor),)),
-            const SizedBox(height: 10,),
-          ],),
+          child: SingleChildScrollView(
+            child: Column(children: [
+              const SizedBox(height: 60,),
+              FloatingActionButton.extended(heroTag: 'startworkoutbutton', onPressed: () {},icon: const Icon(Icons.fitness_center),backgroundColor: Helper.yellowColor, label: const Text('Start Workout', style: TextStyle(fontSize: 24, color: Helper.paragraphTextColor),)),
+              const SizedBox(height: 10,),
+              FloatingActionButton.extended(heroTag: 'edittemplatesbutton', onPressed: () {},icon: const Icon(Icons.edit_note),backgroundColor: Helper.redColor, label: const Text('Edit Templates', style: TextStyle(fontSize: 24, color: Helper.paragraphTextColor),)),
+              const SizedBox(height: 10,),
+              FloatingActionButton.extended(heroTag: 'viewhistorybutton', onPressed: () {},icon: const Icon(Icons.history),backgroundColor: Helper.blackColor, label: const Text('View History', style: TextStyle(fontSize: 24, color: Helper.paragraphTextColor),)),
+              const SizedBox(height: 10,),
+            ],),
+          ),
         ),
         shape: const CircularNotchedRectangle(), //shape of notch
         notchMargin: 5, //notch margin between floating button and bottom appbar

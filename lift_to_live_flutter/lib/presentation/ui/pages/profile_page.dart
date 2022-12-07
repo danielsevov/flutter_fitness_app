@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:lift_to_live_flutter/presentation/ui/pages/habits_page.dart';
 import 'package:lift_to_live_flutter/presentation/ui/pages/picture_page.dart';
 import 'package:provider/provider.dart';
 
@@ -34,6 +35,7 @@ class ProfilePageState extends State<ProfilePage> implements ProfilePageView {
       _user; // The user object holding the details of the current logged in user
   late Image
       _profilePicture; // The image object holding the current user profile picture
+  late double _screenWidth, _screenHeight; // The screen dimensions
 
   /// initialize the page view by attaching it to the presenter
   @override
@@ -85,7 +87,7 @@ class ProfilePageState extends State<ProfilePage> implements ProfilePageView {
   /// Function called when user wants to navigate from the users profile to the users habit page.
   @override
   void habitsPressed(BuildContext context) {
-    Helper.pushPageWithAnimation(context, const Text("Habits"));
+    Helper.pushPageWithAnimation(context, HabitsPage(userId: _user.id));
   }
 
   /// Function called when user wants to navigate from profile page to pictures page.
@@ -97,7 +99,10 @@ class ProfilePageState extends State<ProfilePage> implements ProfilePageView {
   /// Build method of the home page view
   @override
   Widget build(BuildContext context) {
-    
+    // get screen dimensions
+    _screenWidth = MediaQuery.of(context).size.width;
+    _screenHeight = MediaQuery.of(context).size.height;
+
     // initialize presenter and log in form, if not initialized yet
     if (!_presenter.isInitialized()) {
       _presenter.setAppState(Provider.of<AppState>(context));
@@ -189,7 +194,7 @@ class ProfilePageState extends State<ProfilePage> implements ProfilePageView {
                                   icon: const Icon(Icons.task, color: Helper.whiteColor,),
                                   label: const Text('View Habits', style: TextStyle(color: Helper.whiteColor),),
                                   onPressed: () {
-                                    Helper.pushPageWithAnimation(context, const Text('Habits', style: TextStyle(color: Helper.actionButtonTextColor),));
+                                    habitsPressed(context);
                                   },
                                 )
                             ), // button third
@@ -203,8 +208,12 @@ class ProfilePageState extends State<ProfilePage> implements ProfilePageView {
                           children: [
                             _presenter.isAuthorized() ? const SizedBox(width: 50,) : const SizedBox(),
                             Container(
-                              color: Helper.blackColor,
+                              height: _screenWidth / 2,
                               alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                color: Helper.blackColor,
+                                borderRadius: BorderRadius.circular(15),
+                              ),
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(10.0),
                                 child: _isFetched ? _profilePicture : null,
@@ -221,10 +230,11 @@ class ProfilePageState extends State<ProfilePage> implements ProfilePageView {
                           children: [
                             Container(
                               padding: const EdgeInsets.fromLTRB(10, 20, 10, 20),
-                              width: 400,
+                              width: _screenWidth * 0.8,
                               decoration: BoxDecoration(
                                   color: Helper.paragraphBackgroundColor,
-                                  borderRadius: BorderRadius.circular(15)),
+                                  borderRadius: BorderRadius.circular(15),
+                                border: Border.all(color: Helper.whiteColor),),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
@@ -247,8 +257,8 @@ class ProfilePageState extends State<ProfilePage> implements ProfilePageView {
                                           ),
                                           Text(
                                             _user.email,
-                                            style: const TextStyle(
-                                                color: Helper.paragraphTextColor, fontSize: 18),
+                                            style: TextStyle(
+                                                color: Helper.paragraphTextColor, fontSize: _screenHeight/45),
                                           ),
                                         ],
                                       ),
@@ -265,8 +275,8 @@ class ProfilePageState extends State<ProfilePage> implements ProfilePageView {
                                           ),
                                           Text(
                                             _user.phoneNumber,
-                                            style: const TextStyle(
-                                                color: Helper.paragraphTextColor, fontSize: 18),
+                                            style: TextStyle(
+                                                color: Helper.paragraphTextColor, fontSize: _screenHeight/45),
                                           ),
                                         ],
                                       ),
@@ -281,8 +291,8 @@ class ProfilePageState extends State<ProfilePage> implements ProfilePageView {
                                           ),
                                           Text(
                                             _user.nationality,
-                                            style: const TextStyle(
-                                                color: Helper.paragraphTextColor, fontSize: 18),
+                                            style: TextStyle(
+                                                color: Helper.paragraphTextColor, fontSize: _screenHeight/45),
                                           ),
                                         ],
                                       ),
@@ -297,8 +307,8 @@ class ProfilePageState extends State<ProfilePage> implements ProfilePageView {
                                           ),
                                           Text(
                                             _user.dateOfBirth,
-                                            style: const TextStyle(
-                                                color: Helper.paragraphTextColor, fontSize: 18),
+                                            style: TextStyle(
+                                                color: Helper.paragraphTextColor, fontSize: _screenHeight/45),
                                           ),
                                         ],
                                       ),
@@ -313,8 +323,8 @@ class ProfilePageState extends State<ProfilePage> implements ProfilePageView {
                                           ),
                                           Text(
                                             _user.coachId,
-                                            style: const TextStyle(
-                                                color: Helper.paragraphTextColor, fontSize: 18),
+                                            style: TextStyle(
+                                                color: Helper.paragraphTextColor, fontSize: _screenHeight/45),
                                           ),
                                         ],
                                       ),

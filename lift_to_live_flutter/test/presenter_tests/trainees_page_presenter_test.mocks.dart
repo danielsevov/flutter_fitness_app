@@ -10,7 +10,7 @@ import 'package:lift_to_live_flutter/domain/entities/image.dart' as _i3;
 import 'package:lift_to_live_flutter/domain/entities/role.dart' as _i6;
 import 'package:lift_to_live_flutter/domain/entities/user.dart' as _i2;
 import 'package:lift_to_live_flutter/domain/repositories/user_repo.dart' as _i4;
-import 'package:lift_to_live_flutter/presentation/ui/widgets/trainee_search_widget.dart'
+import 'package:lift_to_live_flutter/presentation/ui/widgets/trainee_search_holder.dart'
     as _i8;
 import 'package:lift_to_live_flutter/presentation/views/trainees_page_view.dart'
     as _i7;
@@ -215,7 +215,7 @@ class MockTraineesPageView extends _i1.Mock implements _i7.TraineesPageView {
   }
 
   @override
-  void setUserData(List<_i8.TraineeSearchWidget>? users) => super.noSuchMethod(
+  void setUserData(List<_i8.TraineeSearchHolder>? users) => super.noSuchMethod(
         Invocation.method(
           #setUserData,
           [users],

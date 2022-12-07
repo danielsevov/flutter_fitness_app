@@ -1,13 +1,13 @@
 // coverage:ignore-start
 
 import 'package:flutter/material.dart';
-import '../ui/widgets/trainee_search_widget.dart';
+import '../ui/widgets/trainee_search_holder.dart';
 
 /// API to the TraineesPage view widget.
 /// Describes the methods of the home page view implementation.
 abstract class TraineesPageView {
   /// Function to set and display the user details, user profile picture.
-  void setUserData(List<TraineeSearchWidget> users);
+  void setUserData(List<TraineeSearchHolder> users);
 
   /// Function to set if data is currently being fetched and an loading indicator should be displayed.
   void setInProgress(bool inProgress);

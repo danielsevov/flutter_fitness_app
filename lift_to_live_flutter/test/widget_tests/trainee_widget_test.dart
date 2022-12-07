@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:lift_to_live_flutter/domain/entities/user.dart';
-import 'package:lift_to_live_flutter/presentation/ui/widgets/trainee_search_widget.dart';
+import 'package:lift_to_live_flutter/presentation/ui/widgets/trainee_search_holder.dart';
 import 'package:lift_to_live_flutter/presentation/views/trainees_page_view.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -21,7 +21,7 @@ void main() {
 
       final TraineesPageView view = MockTraineesPageView();
 
-      final widget = TraineeSearchWidget(user: user, view: view,);
+      final widget = TraineeSearchHolder(user: user, view: view,);
 
       final imageFinder = find.byType(Image);
       final nameFinder = find.text('Test User');
@@ -48,7 +48,7 @@ void main() {
 
       final TraineesPageView view = MockTraineesPageView();
 
-      final widget = TraineeSearchWidget(user: user, view: view);
+      final widget = TraineeSearchHolder(user: user, view: view);
 
       final imageFinder = find.byType(Image);
       final nameFinder = find.text('Test User');
@@ -75,7 +75,7 @@ void main() {
 
       final TraineesPageView view = MockTraineesPageView();
 
-      final widget = TraineeSearchWidget(user: user, view: view);
+      final widget = TraineeSearchHolder(user: user, view: view);
 
       final imageFinder = find.byType(Image);
       final nameFinder = find.text('Test User');

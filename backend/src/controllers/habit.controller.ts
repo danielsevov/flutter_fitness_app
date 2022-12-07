@@ -168,6 +168,31 @@ export class HabitController {
 	@inject(SecurityBindings.USER) currentUserProfile: UserProfile): Promise<Habit[]> {
     return this.habitRepository.find({where: {userId:habit.userId, is_template:true}});
   }
+  
+  
+  @post('/user_habits')
+  @response(200, {
+    description: 'Array of Habit model instances',
+    content: {
+      'application/json': {
+        schema: {
+          type: 'array',
+          items: getModelSchemaRef(Habit, {includeRelations: true}),
+        },
+      },
+    },
+  })
+  async findUserHabits(@requestBody({
+      content: {
+        'application/json': {
+          schema: getModelSchemaRef(Habit, {partial: true}),
+        },
+      },
+    })
+    habit: Habit, 
+	@inject(SecurityBindings.USER) currentUserProfile: UserProfile): Promise<Habit[]> {
+    return this.habitRepository.find({where: {userId:habit.userId, is_template:false}});
+  }
 
 
 

@@ -2,7 +2,7 @@ import 'dart:developer';
 import 'package:lift_to_live_flutter/domain/entities/image.dart';
 import 'package:lift_to_live_flutter/domain/repositories/user_repo.dart';
 import 'package:lift_to_live_flutter/presentation/presenters/base_presenter.dart';
-import 'package:lift_to_live_flutter/presentation/ui/widgets/trainee_search_widget.dart';
+import 'package:lift_to_live_flutter/presentation/ui/widgets/trainee_search_holder.dart';
 import '../../domain/entities/user.dart';
 import '../views/trainees_page_view.dart';
 
@@ -34,8 +34,6 @@ class TraineesPagePresenter extends BasePresenter{
 
   /// Function used for fetching the required data, which is then displayed on the profile page.
   Future<void> fetchData() async {
-    log('idk why');
-
     // set the loading indicator to be displayed on the home page view
     _view?.setInProgress(true);
 
@@ -43,7 +41,7 @@ class TraineesPagePresenter extends BasePresenter{
     try {
       _users = await _userRepository.fetchMyTrainees(appState.getUserId(), appState.getToken());
 
-      List<TraineeSearchWidget> widgets = [];
+      List<TraineeSearchHolder> widgets = [];
       MyImage currentImage;
       for (var element in _users) {
 
@@ -55,7 +53,7 @@ class TraineesPagePresenter extends BasePresenter{
           log('missing profile picture');
         }
 
-        widgets.add(TraineeSearchWidget(user: element, view: _view!,));
+        widgets.add(TraineeSearchHolder(user: element, view: _view!,));
       }
 
       _view?.setInProgress(false);

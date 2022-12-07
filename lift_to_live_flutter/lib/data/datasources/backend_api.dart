@@ -4,6 +4,8 @@ import 'dart:convert';
 import 'dart:developer';
 import 'package:http/http.dart' as http;
 
+import '../../domain/entities/habit_task.dart';
+
 /// This is a datasource object, which handles the communication with the Backend REST API.
 /// The communication is done via http requests, using the http.dart package.
 class BackendAPI {
@@ -17,9 +19,6 @@ class BackendAPI {
 
   static const apiURL = "http://192.168.178.30:3000/"; //molensingel
   //static const apiURL = "http://145.93.150.0:3000/"; //fontys
-
-  // static String jwtToken = "", userId = "";
-  // static List<Role> myRoles = [];
 
   Future<void> patchImage(int id, String userId, String date, String data, String type, String token) async {
     var res = await http.patch(
@@ -80,83 +79,82 @@ class BackendAPI {
     log(res.body);
   }
 
-  // //function to patch a habit instance
-  // static void patchHabit(int id, String date, String note, String userId,
-  //     String coachId, List<HabitTask> habits) async {
-  //   String inner = jsonEncode(habits);
-  //
-  //   await http.patch(
-  //     Uri.parse('${apiURL}habits/$id'),
-  //     headers: <String, String>{
-  //       'Content-Type': 'application/json; charset=UTF-8',
-  //       'Authorization': 'Bearer $jwtToken',
-  //     },
-  //     body: "${jsonEncode(<String, String>{
-  //       'date': date,
-  //       'note': note,
-  //       'userId': userId,
-  //       'coachId': coachId,
-  //     }).replaceAll("}", "")}, \"habits\" : $inner}",
-  //   );
-  // }
-  //
-  // //function for fetching habits template
-  // static Future<http.Response> fetchTemplate(String userId, Function(http.Response res) callback) async {
-  //   http.Response res = await http.post(
-  //     Uri.parse('${apiURL}user_template_habit'),
-  //     headers: <String, String>{
-  //       'Content-Type': 'application/json; charset=UTF-8',
-  //       'Authorization': 'Bearer $jwtToken',
-  //     },
-  //     body: jsonEncode(<String, String>{
-  //       'userId': userId,
-  //     }),
-  //   );
-  //   callback(res);
-  //   return res;
-  // }
-  //
-  // static Future<http.Response> fetchHabits(String userId, Function(http.Response res) callback) async {
-  //   fetchTemplate(userId, callback);
-  //   return http.get(
-  //     Uri.parse('${apiURL}habits'),
-  //     headers: <String, String>{
-  //       'Content-Type': 'application/json; charset=UTF-8',
-  //       'Authorization': 'Bearer $jwtToken',
-  //     },
-  //   );
-  // }
+  /// function to patch a habit instance
+  Future<void> patchHabit(int id, String date, String note, String userId,
+      String coachId, List<HabitTask> habits, String jwtToken) async {
+    String inner = jsonEncode(habits);
 
-  // //function for posting habits
-  // static Future<http.Response> postHabit(
-  //     BuildContext context,
-  //     String date,
-  //     String note,
-  //     String userId,
-  //     String coachId,
-  //     bool isTemplate,
-  //     List<HabitTask> habits,
-  //     Function(http.Response res) callback) async {
-  //   String inner = jsonEncode(habits);
-  //
-  //   http.Response res = await http.post(
-  //     Uri.parse('${apiURL}habits'),
-  //     headers: <String, String>{
-  //       'Content-Type': 'application/json; charset=UTF-8',
-  //       'Authorization': 'Bearer $jwtToken',
-  //     },
-  //     body: "${jsonEncode(<String, dynamic>{
-  //       'date': date,
-  //       'note': note,
-  //       'userId': userId,
-  //       'coachId': coachId,
-  //       'is_template': isTemplate,
-  //     }).replaceAll("}", "")}, \"habits\" : $inner}",
-  //   );
-  //
-  //   callback(res);
-  //   return res;
-  // }
+    await http.patch(
+      Uri.parse('${apiURL}habits/$id'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer $jwtToken',
+      },
+      body: "${jsonEncode(<String, String>{
+        'date': date,
+        'note': note,
+        'userId': userId,
+        'coachId': coachId,
+      }).replaceAll("}", "")}, \"habits\" : $inner}",
+    );
+  }
+
+  /// function for fetching habits template
+  Future<http.Response> fetchTemplate(String userId, String jwtToken) async {
+    http.Response res = await http.post(
+      Uri.parse('${apiURL}user_template_habit'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer $jwtToken',
+      },
+      body: jsonEncode(<String, String>{
+        'userId': userId,
+      }),
+    );
+    return res;
+  }
+
+  Future<http.Response> fetchHabits(String userId, String jwtToken) async {
+    fetchTemplate(userId, jwtToken);
+    return http.post(
+      Uri.parse('${apiURL}user_habits'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer $jwtToken',
+      },
+      body: jsonEncode(<String, String>{
+        'userId': userId,
+      }),
+    );
+  }
+
+  /// function for posting habits
+  Future<http.Response> postHabit(
+      String date,
+      String note,
+      String userId,
+      String coachId,
+      bool isTemplate,
+      List<HabitTask> habits,
+      String jwtToken) async {
+    String inner = jsonEncode(habits);
+
+    http.Response res = await http.post(
+      Uri.parse('${apiURL}habits'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer $jwtToken',
+      },
+      body: "${jsonEncode(<String, dynamic>{
+        'date': date,
+        'note': note,
+        'userId': userId,
+        'coachId': coachId,
+        'is_template': isTemplate,
+      }).replaceAll("}", "")}, \"habits\" : $inner}",
+    );
+    return res;
+  }
 
   /// This function is used for sending user credentials for log in and receiving a token upon authentication.
   Future<http.Response> logIn(String email, String password) async {

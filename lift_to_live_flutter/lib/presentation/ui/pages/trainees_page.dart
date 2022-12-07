@@ -7,7 +7,7 @@ import '../../presenters/trainees_page_presenter.dart';
 import '../../state_management/app_state.dart';
 import '../../../helper.dart';
 import '../../views/trainees_page_view.dart';
-import '../widgets/trainee_search_widget.dart';
+import '../widgets/trainee_search_holder.dart';
 
 /// Custom TraineesPage widget used as a main overview of a user.
 /// It provides navigation to the trainees's profile pages.
@@ -26,7 +26,7 @@ class TraineesPageState extends State<TraineesPage>
   bool _isLoading =
           false, // Indicator showing if data is being fetched at the moment
       _isFetched = false;
-  late List<TraineeSearchWidget> _userWidgets;
+  late List<TraineeSearchHolder> _userWidgets;
   final TextEditingController searchController = TextEditingController();
   late double screenHeight, screenWidth;
 
@@ -63,7 +63,7 @@ class TraineesPageState extends State<TraineesPage>
 
   /// Function to set and display the user details, user profile picture.
   @override
-  void setUserData(List<TraineeSearchWidget> users) {
+  void setUserData(List<TraineeSearchHolder> users) {
     setState(() {
       _userWidgets = users;
       _isFetched = true;
@@ -159,11 +159,11 @@ class TraineesPageState extends State<TraineesPage>
                   decoration: InputDecoration(
                     focusedBorder: OutlineInputBorder(
                         borderSide:
-                            const BorderSide(color: Helper.textFieldBorderColor, width: 1),
+                            const BorderSide(color: Helper.yellowColor, width: 1),
                         borderRadius: BorderRadius.circular(10)),
                     enabledBorder: OutlineInputBorder(
                         borderSide:
-                            const BorderSide(color: Helper.dividerColor, width: 1),
+                            const BorderSide(color: Helper.whiteColor, width: 1),
                         borderRadius: BorderRadius.circular(10)),
                     prefixIcon: const Icon(
                       Icons.search,
