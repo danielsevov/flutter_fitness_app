@@ -51,7 +51,7 @@ class HabitsPagePresenter extends BasePresenter{
     // fetch the user details and profile picture
     try {
       template = await _habitsRepository.fetchTemplate(
-          _userId, appState.getUserId(), appState.getToken());
+          _userId, appState.getUserId());
 
       //create template if not present\
       if(template.id == 0) {
@@ -65,7 +65,7 @@ class HabitsPagePresenter extends BasePresenter{
             appState.getToken());
 
         template = await _habitsRepository.fetchTemplate(
-            _userId, appState.getUserId(), appState.getToken());
+            _userId, appState.getUserId());
       }
 
       _habits = await _habitsRepository.fetchHabits(

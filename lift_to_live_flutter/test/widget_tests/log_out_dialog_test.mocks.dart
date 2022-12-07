@@ -129,4 +129,12 @@ class MockHomePageView extends _i1.Mock implements _i2.HomePageView {
         ),
         returnValueForMissingStub: null,
       );
+  @override
+  void redirectToUrl(int? index) => super.noSuchMethod(
+        Invocation.method(
+          #redirectToUrl,
+          [index],
+        ),
+        returnValueForMissingStub: null,
+      );
 }

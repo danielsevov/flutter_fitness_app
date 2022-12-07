@@ -42,7 +42,7 @@ class EditHabitsPagePresenter extends BasePresenter{
     // fetch the user details and profile picture
     try {
       template = await _habitsRepository.fetchTemplate(
-          _userId, appState.getUserId(), appState.getToken());
+          _userId, appState.getUserId());
 
       for (var element in template.habits) {
         _view?.addTaskElement(element.task, () => _view?.refresh());

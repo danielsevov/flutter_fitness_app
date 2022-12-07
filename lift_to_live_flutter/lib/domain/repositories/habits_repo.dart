@@ -9,7 +9,7 @@ abstract class HabitsRepository {
       String coachId, List<HabitTask> habits, String jwtToken);
 
   /// function for fetching habits template
-  Future<Habit> fetchTemplate(String userId, String coachId, String jwtToken);
+  Future<Habit> fetchTemplate(String userId, String jwtToken);
 
   Future<List<Habit>> fetchHabits(String userId, String jwtToken);
 

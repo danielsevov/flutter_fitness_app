@@ -7,6 +7,7 @@ import 'dart:async' as _i4;
 
 import 'package:http/http.dart' as _i2;
 import 'package:lift_to_live_flutter/data/datasources/backend_api.dart' as _i3;
+import 'package:lift_to_live_flutter/domain/entities/habit_task.dart' as _i5;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -124,6 +125,119 @@ class MockBackendAPI extends _i1.Mock implements _i3.BackendAPI {
         returnValue: _i4.Future<void>.value(),
         returnValueForMissingStub: _i4.Future<void>.value(),
       ) as _i4.Future<void>);
+  @override
+  _i4.Future<void> patchHabit(
+    int? id,
+    String? date,
+    String? note,
+    String? userId,
+    String? coachId,
+    List<_i5.HabitTask>? habits,
+    String? jwtToken,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #patchHabit,
+          [
+            id,
+            date,
+            note,
+            userId,
+            coachId,
+            habits,
+            jwtToken,
+          ],
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
+  @override
+  _i4.Future<_i2.Response> fetchTemplate(
+    String? userId,
+    String? jwtToken,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #fetchTemplate,
+          [
+            userId,
+            jwtToken,
+          ],
+        ),
+        returnValue: _i4.Future<_i2.Response>.value(_FakeResponse_0(
+          this,
+          Invocation.method(
+            #fetchTemplate,
+            [
+              userId,
+              jwtToken,
+            ],
+          ),
+        )),
+      ) as _i4.Future<_i2.Response>);
+  @override
+  _i4.Future<_i2.Response> fetchHabits(
+    String? userId,
+    String? jwtToken,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #fetchHabits,
+          [
+            userId,
+            jwtToken,
+          ],
+        ),
+        returnValue: _i4.Future<_i2.Response>.value(_FakeResponse_0(
+          this,
+          Invocation.method(
+            #fetchHabits,
+            [
+              userId,
+              jwtToken,
+            ],
+          ),
+        )),
+      ) as _i4.Future<_i2.Response>);
+  @override
+  _i4.Future<_i2.Response> postHabit(
+    String? date,
+    String? note,
+    String? userId,
+    String? coachId,
+    bool? isTemplate,
+    List<_i5.HabitTask>? habits,
+    String? jwtToken,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #postHabit,
+          [
+            date,
+            note,
+            userId,
+            coachId,
+            isTemplate,
+            habits,
+            jwtToken,
+          ],
+        ),
+        returnValue: _i4.Future<_i2.Response>.value(_FakeResponse_0(
+          this,
+          Invocation.method(
+            #postHabit,
+            [
+              date,
+              note,
+              userId,
+              coachId,
+              isTemplate,
+              habits,
+              jwtToken,
+            ],
+          ),
+        )),
+      ) as _i4.Future<_i2.Response>);
   @override
   _i4.Future<_i2.Response> logIn(
     String? email,

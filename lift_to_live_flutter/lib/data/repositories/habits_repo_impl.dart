@@ -46,7 +46,7 @@ class HabitsRepoImpl implements HabitsRepository {
   }
 
   @override
-  Future<Habit> fetchTemplate(String userId, String coachId, String jwtToken) async {
+  Future<Habit> fetchTemplate(String userId, String jwtToken) async {
     //fetch http response object
     Response response = await backendAPI.fetchTemplate(userId, jwtToken);
 
