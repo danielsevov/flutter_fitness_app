@@ -139,6 +139,24 @@ void main() {
     verify(habitsRepo.postHabit(any, any, any, any, false, any, any)).called(1);
   });
 
+  test('test fetch habits empty', () async {
+    final habitsRepo = MockHabitsRepository();
+    when(habitsRepo.fetchTemplate(any, any)).thenAnswer((realInvocation) async => Habit(1, '', '', '', '', true, [HabitTask('My Task 1', false)]));
+    when(habitsRepo.fetchHabits(any, any)).thenAnswer((realInvocation) async => [Habit(1, '946681200000', '', '', '', false, [HabitTask('My Task 1', false)])]);
+
+    final presenter = HabitsPagePresenter(habitsRepo, 'A');
+    final appState = AppState();
+    appState.setInitialState('A', 'token', [Role('A', 'admin')]);
+
+    final view = MockHabitsPageView();
+    presenter.attach(view);
+
+    presenter.setAppState(appState);
+    await presenter.fetchData();
+
+    verify(habitsRepo.postHabit(any, any, any, any, false, any, any)).called(1);
+  });
+
   test('test fetch data success', () async {
     final habitsRepo = MockHabitsRepository();
     when(habitsRepo.fetchTemplate(any, any)).thenAnswer((realInvocation) async => Habit(1, '', '', '', '', true, [HabitTask('My Task 1', false)]));
