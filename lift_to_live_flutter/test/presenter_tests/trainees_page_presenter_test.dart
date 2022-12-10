@@ -99,8 +99,8 @@ void main() {
     final presenter = TraineesPagePresenter(userRepo);
     expect(presenter.isInitialized(), false);
 
-    when(userRepo.fetchMyTrainees(any, any)).thenThrow(FetchFailedException('fail'));
-    when(userRepo.fetchProfileImage(any, any)).thenAnswer((realInvocation) async => TestData.test_image_complete);
+    when(userRepo.fetchMyTrainees(any, any)).thenAnswer((realInvocation) async => [TestData.test_user_1]);
+    when(userRepo.fetchProfileImage(any, any)).thenThrow(FetchFailedException('fail'));
 
     appState.setInitialState('email@email.com', '', []);
     presenter.setAppState(appState);
