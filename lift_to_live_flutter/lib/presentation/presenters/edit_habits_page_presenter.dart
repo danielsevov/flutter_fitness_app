@@ -42,7 +42,7 @@ class EditHabitsPagePresenter extends BasePresenter{
     // fetch the user details and profile picture
     try {
       template = await _habitsRepository.fetchTemplate(
-          _userId, appState.getUserId());
+          _userId, appState.getToken());
 
       for (var element in template.habits) {
         _view?.addTaskElement(element.task, () => _view?.refresh());
@@ -58,10 +58,6 @@ class EditHabitsPagePresenter extends BasePresenter{
     }
   }
 
-  void patchHabit(int id, String date, String note, String userId, String coachId, List<HabitTask> habits) {
-    _habitsRepository.patchHabit(id, date, note, userId, coachId, habits, appState.getToken());
-  }
-
   void saveChanges() {
     List<HabitTask> newTasks = [];
     var controllers = _view?.getControllers();
@@ -70,13 +66,14 @@ class EditHabitsPagePresenter extends BasePresenter{
       if(element.isNotEmpty) newTasks.add(HabitTask(element, false));
     });
 
-    patchHabit(
+    _habitsRepository.patchHabit(
         template.id,
         (DateTime.now().millisecondsSinceEpoch).toString(),
         template.note,
         _userId,
         appState.getUserId(),
-        newTasks);
+        newTasks,
+        appState.getToken());
 
     _view?.notifySavedChanges();
   }

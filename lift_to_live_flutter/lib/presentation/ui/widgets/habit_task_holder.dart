@@ -68,7 +68,7 @@ class HabitTaskHolder extends StatelessWidget {
                     setState(() => habitTask
                         .isCompleted = value!);
                     log("id ${habit.id}");
-                    presenter.patchHabit(
+                    presenter.updateHabitEntry(
                         habit.id,
                         habit.date,
                         habit.note,

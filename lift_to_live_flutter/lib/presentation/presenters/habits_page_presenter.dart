@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:lift_to_live_flutter/domain/entities/habit_task.dart';
 import 'package:lift_to_live_flutter/domain/repositories/habits_repo.dart';
 import 'package:lift_to_live_flutter/presentation/presenters/base_presenter.dart';
-import 'package:lift_to_live_flutter/presentation/ui/widgets/calendar_widget.dart';
 import '../../domain/entities/habit.dart';
 import '../ui/widgets/habit_holder.dart';
 import '../ui/widgets/habit_task_holder.dart';
@@ -37,11 +36,8 @@ class HabitsPagePresenter extends BasePresenter{
     return super.appState.isCoachOrAdmin();
   }
 
-  /// Function to create a calendar widget
-  Widget getCalendarWidget() {
-    //add calendar on top of all widgets
-    return CalendarWidget(habits: _habits);
-  }
+  /// Function to get all habits
+  List<Habit> get habits => _habits;
 
   /// Function used for fetching the required data, which is then displayed on the habits page.
   Future<void> fetchData() async {
@@ -51,7 +47,7 @@ class HabitsPagePresenter extends BasePresenter{
     // fetch the user details and profile picture
     try {
       template = await _habitsRepository.fetchTemplate(
-          _userId, appState.getUserId());
+          _userId, appState.getToken());
 
       //create template if not present\
       if(template.id == 0) {
@@ -65,7 +61,7 @@ class HabitsPagePresenter extends BasePresenter{
             appState.getToken());
 
         template = await _habitsRepository.fetchTemplate(
-            _userId, appState.getUserId());
+            _userId, appState.getToken());
       }
 
       _habits = await _habitsRepository.fetchHabits(
@@ -127,7 +123,7 @@ class HabitsPagePresenter extends BasePresenter{
     }
   }
 
-  void patchHabit(int id, String date, String note, String userId, String coachId, List<HabitTask> habits) {
+  void updateHabitEntry(int id, String date, String note, String userId, String coachId, List<HabitTask> habits) {
     _habitsRepository.patchHabit(id, date, note, userId, coachId, habits, appState.getToken());
   }
 }

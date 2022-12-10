@@ -39,7 +39,7 @@ class HabitsRepoImpl implements HabitsRepository {
 
     //else throw an exception
     else {
-      log("fetch habits failed");
+      log("fetch habits failed\nresponse code ${response.statusCode}");
       throw FetchFailedException(
           "Failed to fetch Habits!\nresponse code ${response.statusCode}");
     }
@@ -72,7 +72,7 @@ class HabitsRepoImpl implements HabitsRepository {
 
     //else throw an exception
     else {
-      log("fetch template habit failed");
+      log("fetch template habit failed\nresponse code ${response.statusCode}");
       throw FetchFailedException(
           "Failed to fetch Habits!\nresponse code ${response.statusCode}");
     }
