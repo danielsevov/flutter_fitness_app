@@ -45,6 +45,7 @@ void main() {
     await tester.runAsync(() async {
       // tests
       final User user = TestData.test_user_1;
+      user.profilePicture = null;
 
       final TraineesPageView view = MockTraineesPageView();
 

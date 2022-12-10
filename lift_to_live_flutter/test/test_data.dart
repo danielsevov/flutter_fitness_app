@@ -13,6 +13,7 @@ class TestData {
 
   static final Article test_article_1 = Article('A', 'A', 'A', 'A', 'A', 'A');
   static final Article test_article_2 = Article('B', 'B', 'B', 'B', 'B', 'B');
+  static final Article test_article_3 = Article('author', 'title', 'description', 'url', 'urlToImage', 'This is the content');
 
   static final HabitTask test_habit_task_1 = HabitTask('A', false);
   static final HabitTask test_habit_task_2 = HabitTask('B', false);
@@ -33,6 +34,7 @@ class TestData {
 
   static final News test_news_1 = News('A', 1, [test_article_1]);
   static final News test_news_2 = News('B', 2, [test_article_1, test_article_2]);
+  static final News test_news_3 = News('A', 1, [test_article_3]);
 
   static final Token test_token_1 = Token('A');
   static final Token test_token_2 = Token('B');
