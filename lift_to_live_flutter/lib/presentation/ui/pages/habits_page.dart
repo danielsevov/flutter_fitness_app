@@ -8,6 +8,7 @@ import '../../../helper.dart';
 import '../../views/habits_page_view.dart';
 import '../widgets/calendar_widget.dart';
 
+// coverage:ignore-file
 /// Custom HabitsPage widget used as a main overview of the habit entries of a user.
 /// It is a stateful widget and its state object implements the HabitsPageView abstract class.
 class HabitsPage extends StatefulWidget {

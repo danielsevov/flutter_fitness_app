@@ -9,6 +9,7 @@ import '../../../helper.dart';
 import '../../views/trainees_page_view.dart';
 import '../widgets/trainee_search_holder.dart';
 
+// coverage:ignore-file
 /// Custom TraineesPage widget used as a main overview of a user.
 /// It provides navigation to the trainees's profile pages.
 /// It is a stateful widget and its state object implements the TraineesPageView abstract class.

@@ -12,6 +12,7 @@ import '../../state_management/app_state.dart';
 import '../../../helper.dart';
 import '../../views/profile_page_view.dart';
 
+// coverage:ignore-file
 /// Custom ProfilePage widget used as a main overview of a user.
 /// It provides navigation to the user's pictures and habits pages.
 /// It is a stateful widget and its state object implements the ProfilePageView abstract class.

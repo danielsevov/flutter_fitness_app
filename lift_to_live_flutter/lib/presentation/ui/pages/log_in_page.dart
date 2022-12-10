@@ -10,6 +10,7 @@ import '../../../helper.dart';
 import '../../views/log_in_form_view.dart';
 import '../../views/log_in_page_view.dart';
 
+// coverage:ignore-file
 /// Custom widget, which is the LogInPage and is used for inputting user credentials
 /// and submitting them for authentication and communicating with the user.
 /// It is a stateful widget and its state object implements the LogInPageView abstract class.
