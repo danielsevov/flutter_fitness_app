@@ -75,7 +75,7 @@ void main() {
     appState.setInitialState('email@email.com', '', []);
     presenter.setAppState(appState);
 
-    expect(() => presenter.fetchData(), returnsNormally);
+    expect(() async => await presenter.fetchData(), returnsNormally);
   });
 
   test('test fetch data 2', () {
@@ -90,7 +90,7 @@ void main() {
     appState.setInitialState('email@email.com', '', []);
     presenter.setAppState(appState);
 
-    expect(() => presenter.fetchData(), returnsNormally);
+    expect(() async => await presenter.fetchData(), returnsNormally);
   });
 
   test('test fetch data 3', () {
@@ -105,6 +105,6 @@ void main() {
     appState.setInitialState('email@email.com', '', []);
     presenter.setAppState(appState);
 
-    expect(() => presenter.fetchData(), returnsNormally);
+    expect(() async => await presenter.fetchData(), returnsNormally);
   });
 }

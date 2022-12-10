@@ -73,7 +73,7 @@ void main() {
     appState.setInitialState('email@email.com', '', []);
     presenter.setAppState(appState);
 
-    expect(() => presenter.fetchData(), returnsNormally);
+    expect(() async => await presenter.fetchData(), returnsNormally);
   });
 
   test('test fetch data failed', () {
