@@ -56,6 +56,7 @@ class TraineesPagePresenter extends BasePresenter{
         widgets.add(TraineeSearchHolder(user: element, view: _view!,));
       }
 
+      log('reached here');
       _view?.setInProgress(false);
       _view?.setUserData(widgets);
       _view?.setFetched(true);

@@ -63,10 +63,13 @@ void main() {
     expect(presenter.isAuthorized(), true);
   });
 
-  test('test fetch data', () {
+  test('test fetch data', () async {
     final userRepo = MockUserRepository();
     final appState = AppState();
     final presenter = TraineesPagePresenter(userRepo);
+    final view = MockTraineesPageView();
+    presenter.attach(view);
+
     expect(presenter.isInitialized(), false);
 
     when(userRepo.fetchMyTrainees(any, any)).thenAnswer((realInvocation) async => [TestData.test_user_1]);
@@ -75,6 +78,8 @@ void main() {
     appState.setInitialState('email@email.com', '', []);
     presenter.setAppState(appState);
 
+    await presenter.fetchData();
+
     expect(() async => await presenter.fetchData(), returnsNormally);
   });
 
@@ -82,6 +87,9 @@ void main() {
     final userRepo = MockUserRepository();
     final appState = AppState();
     final presenter = TraineesPagePresenter(userRepo);
+    final view = MockTraineesPageView();
+    presenter.attach(view);
+
     expect(presenter.isInitialized(), false);
 
     when(userRepo.fetchMyTrainees(any, any)).thenThrow(FetchFailedException('fail'));
@@ -97,6 +105,9 @@ void main() {
     final userRepo = MockUserRepository();
     final appState = AppState();
     final presenter = TraineesPagePresenter(userRepo);
+    final view = MockTraineesPageView();
+    presenter.attach(view);
+
     expect(presenter.isInitialized(), false);
 
     when(userRepo.fetchMyTrainees(any, any)).thenAnswer((realInvocation) async => [TestData.test_user_1]);
