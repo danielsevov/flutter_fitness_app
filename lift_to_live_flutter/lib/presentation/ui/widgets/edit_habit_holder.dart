@@ -26,7 +26,6 @@ class EditHabitHolder extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               IconButton(
-                //on pressed clear token and navigate to log in page
                   onPressed: () {
                     int index = controllers.indexOf(newController);
                     controllers.removeAt(index);

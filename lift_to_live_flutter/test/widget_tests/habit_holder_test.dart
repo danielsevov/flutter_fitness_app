@@ -6,10 +6,8 @@ import 'package:lift_to_live_flutter/helper.dart';
 import 'package:lift_to_live_flutter/presentation/presenters/habits_page_presenter.dart';
 import 'package:lift_to_live_flutter/presentation/ui/widgets/habit_holder.dart';
 import 'package:lift_to_live_flutter/presentation/ui/widgets/habit_task_holder.dart';
-import 'package:mockito/annotations.dart';
 import 'habit_task_holder_test.mocks.dart';
 
-@GenerateMocks([HabitsPagePresenter])
 void main() {
 
   testWidgets('HabitHolderWidget test constructor thumb up', (tester) async {
@@ -58,7 +56,7 @@ void main() {
     });
   });
 
-  testWidgets('HabitHolderWidget test constructor thumb down', (tester) async {
+  testWidgets('HabitHolderWidget test constructor thumb up and down', (tester) async {
     await tester.runAsync(() async {
       // tests
       final HabitsPagePresenter presenter = MockHabitsPagePresenter();
