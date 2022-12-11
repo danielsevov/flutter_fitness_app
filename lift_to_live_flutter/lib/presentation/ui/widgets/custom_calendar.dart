@@ -4,10 +4,10 @@ import 'package:table_calendar/table_calendar.dart';
 import '../../../domain/entities/habit.dart';
 import '../../../helper.dart';
 
-class CalendarWidget extends StatelessWidget {
+class CustomCalendar extends StatelessWidget {
   final List<Habit> habits;
 
-  const CalendarWidget({super.key, required this.habits});
+  const CustomCalendar({super.key, required this.habits});
 
   @override
   Widget build(BuildContext context) {

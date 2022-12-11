@@ -112,10 +112,10 @@ void main() {
       expect(workoutFinder, findsOneWidget);
       expect(traineesFinder, findsOneWidget);
 
+      await tester.tap(traineesFinder);
       await tester.tap(accountFinder);
       await tester.tap(habitFinder);
       await tester.tap(workoutFinder);
-      await tester.tap(traineesFinder);
     });
   });
 

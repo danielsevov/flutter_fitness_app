@@ -6,7 +6,7 @@ import '../../../factory/habits_page_factory.dart';
 import '../../state_management/app_state.dart';
 import '../../../helper.dart';
 import '../../views/habits_page_view.dart';
-import '../widgets/calendar_widget.dart';
+import '../widgets/custom_calendar.dart';
 
 // coverage:ignore-file
 /// Custom HabitsPage widget used as a main overview of the habit entries of a user.
@@ -129,7 +129,7 @@ class HabitsPageState extends State<HabitsPage> implements HabitsPageView {
                   SliverList(
                     delegate: SliverChildBuilderDelegate(
                       (BuildContext context, int index) {
-                        return _isFetched ? CalendarWidget(habits: _presenter.habits) : const SizedBox();
+                        return _isFetched ? CustomCalendar(habits: _presenter.habits) : const SizedBox();
                       },
                       childCount: 1,
                     ),
