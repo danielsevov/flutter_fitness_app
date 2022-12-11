@@ -9,7 +9,7 @@ import '../../../helper.dart';
 import '../../views/edit_habits_page_view.dart';
 import '../widgets/edit_habit_holder.dart';
 
-// coverage:ignore-file
+
 /// Custom EditHabitsPage widget used as a main editorial page of the habit template of a user.
 /// It is a stateful widget and its state object implements the EditHabitsPageView abstract class.
 class EditHabitsPage extends StatefulWidget {

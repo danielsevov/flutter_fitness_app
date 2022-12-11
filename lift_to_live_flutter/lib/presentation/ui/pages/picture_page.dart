@@ -7,7 +7,7 @@ import '../../state_management/app_state.dart';
 import '../../../helper.dart';
 import '../../views/picture_page_view.dart';
 
-// coverage:ignore-file
+
 /// Custom PicturePage widget used as a main overview of the pictures of a user.
 /// It provides overview of the user's pictures.
 /// It is a stateful widget and its state object implements the PicturePageView abstract class.

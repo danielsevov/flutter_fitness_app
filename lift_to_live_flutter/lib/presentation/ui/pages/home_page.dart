@@ -20,7 +20,7 @@ import '../../state_management/app_state.dart';
 import '../../../helper.dart';
 import 'log_in_page.dart';
 
-// coverage:ignore-file
+
 /// Custom widget, which is the HomePage and is used as a main navigational hub for the application.
 /// It provides navigation to the main app pages, as well as a news overview and the log out functionality.
 /// It is a stateful widget and its state object implements the HomePageView abstract class.
