@@ -46,6 +46,28 @@ void main() {
     expect(presenter.isAuthorized(), true);
   });
 
+  test('test isOwner()', () {
+    final habitsRepo = MockHabitsRepository();
+    final presenter = HabitsPagePresenter(habitsRepo, 'A');
+    final appState = AppState();
+    appState.setInitialState('A', 'token', [Role('A', 'admin')]);
+
+    presenter.setAppState(appState);
+
+    expect(presenter.isOwner(), true);
+  });
+
+  test('test fail isOwner()', () {
+    final habitsRepo = MockHabitsRepository();
+    final presenter = HabitsPagePresenter(habitsRepo, 'A');
+    final appState = AppState();
+    appState.setInitialState('B', 'token', [Role('A', 'admin')]);
+
+    presenter.setAppState(appState);
+
+    expect(presenter.isOwner(), false);
+  });
+
   test('test habits getter', () {
     final habitsRepo = MockHabitsRepository();
     final presenter = HabitsPagePresenter(habitsRepo, 'A');

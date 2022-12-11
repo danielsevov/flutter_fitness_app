@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lift_to_live_flutter/domain/entities/habit_task.dart';
 import 'package:lift_to_live_flutter/domain/repositories/habits_repo.dart';
+import 'package:lift_to_live_flutter/helper.dart';
 import 'package:lift_to_live_flutter/presentation/presenters/base_presenter.dart';
 import '../../domain/entities/habit.dart';
 import '../ui/widgets/habit_holder.dart';
@@ -34,6 +35,11 @@ class HabitsPagePresenter extends BasePresenter{
   /// Function called to indicate if user is authorized to view private pages.
   isAuthorized() {
     return super.appState.isCoachOrAdmin();
+  }
+
+  /// Function called to indicate if user is the owner of the page.
+  isOwner() {
+    return super.appState.getUserId() == _userId;
   }
 
   /// Function to get all habits
@@ -72,10 +78,7 @@ class HabitsPagePresenter extends BasePresenter{
 
       //create today's habit if not present
       if ((_habits.isEmpty ||
-          DateTime.fromMicrosecondsSinceEpoch(
-              int.parse(_habits.first.date) * 1000)
-              .isBefore(DateTime(DateTime.now().year, DateTime.now().month,
-              DateTime.now().day)))) {
+          Helper.isDateBeforeToday(_habits.first.date))) {
         await _habitsRepository.postHabit(
             (DateTime.now().millisecondsSinceEpoch).toString(),
             template.note,
@@ -98,7 +101,7 @@ class HabitsPagePresenter extends BasePresenter{
         Habit habit = element;
         for (var element in habit.habits) {
           habitTaskWidgets.add(HabitTaskHolder(
-            habitTask: element, habit: habit, userId: _userId, currentUserId: appState.getUserId(), presenter: this,));
+            habitTask: element, habit: habit, presenter: this,));
         }
 
         //add habit tasks to the habit instance widget

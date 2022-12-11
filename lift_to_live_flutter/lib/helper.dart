@@ -76,9 +76,9 @@ class Helper {
             var tween =
                 Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
 
-            return FadeTransition(
-              //position: animation.drive(tween),
-              opacity: animation,
+            return SlideTransition(
+              position: animation.drive(tween),
+              //opacity: animation,
               child: child,
             );
           },
@@ -109,9 +109,9 @@ class Helper {
             var tween =
                 Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
 
-            return FadeTransition(
-              //position: animation.drive(tween),
-              opacity: animation,
+            return SlideTransition(
+              position: animation.drive(tween),
+              //opacity: animation,
               child: child,
             );
           },
@@ -130,14 +130,25 @@ class Helper {
         var tween =
             Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
 
-        return FadeTransition(
-          //position: animation.drive(tween),
-          opacity: animation,
+        return SlideTransition(
+          position: animation.drive(tween),
+          //opacity: animation,
           child: child,
         );
       },
     );
     //MaterialPageRoute(builder: (context) => page);
     Navigator.pushReplacement(context, route);
+  }
+
+  /// Function to check if a date is before the current date
+  static bool isDateBeforeToday(String date) {
+    return DateTime.fromMicrosecondsSinceEpoch(
+        int.parse(date) *
+            1000)
+        .isBefore(DateTime(
+        DateTime.now().year,
+        DateTime.now().month,
+        DateTime.now().day));
   }
 }

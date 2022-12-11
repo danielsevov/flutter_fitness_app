@@ -9,11 +9,10 @@ import '../../../helper.dart';
 
 
 class HabitTaskHolder extends StatelessWidget {
-  const HabitTaskHolder({Key? key, required this.habit, required this.habitTask, required this.userId, required this.currentUserId, required this.presenter}) : super(key: key);
+  const HabitTaskHolder({Key? key, required this.habit, required this.habitTask, required this.presenter}) : super(key: key);
 
   final Habit habit;
   final HabitTask habitTask;
-  final String userId, currentUserId;
   final HabitsPagePresenter presenter;
 
 
@@ -45,29 +44,17 @@ class HabitTaskHolder extends StatelessWidget {
                       color: Helper.yellowColor, width: 2),
                   checkColor: Helper.blackColor,
                   fillColor:
-                  MaterialStateProperty.all(DateTime.fromMicrosecondsSinceEpoch(
-                      int.parse(habit.date) *
-                          1000)
-                      .isBefore(DateTime(
-                      DateTime.now().year,
-                      DateTime.now().month,
-                      DateTime.now().day)) || currentUserId != userId
+                  MaterialStateProperty.all(Helper.isDateBeforeToday(habit.date) || !presenter.isOwner()
                       ? Helper.yellowColor.withOpacity(0.3)
                       : Helper.yellowColor.withOpacity(1)),
                   value: habitTask.isCompleted,
                   onChanged:
-                  DateTime.fromMicrosecondsSinceEpoch(
-                      int.parse(habit.date) *
-                          1000)
-                      .isBefore(DateTime(
-                      DateTime.now().year,
-                      DateTime.now().month,
-                      DateTime.now().day)) || currentUserId != userId
+                  Helper.isDateBeforeToday(habit.date) || !presenter.isOwner()
                       ? null
                       : (value) {
                     setState(() => habitTask
                         .isCompleted = value!);
-                    log("id ${habit.id}");
+                    log("updated habit ${habit.id}");
                     presenter.updateHabitEntry(
                         habit.id,
                         habit.date,

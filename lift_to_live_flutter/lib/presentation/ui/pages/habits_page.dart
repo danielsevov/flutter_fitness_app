@@ -113,7 +113,7 @@ class HabitsPageState extends State<HabitsPage> implements HabitsPageView {
                       IconButton(
                           onPressed: () async {
                             if (_presenter.isAuthorized()) {
-                              Helper.replacePage(
+                              Helper.pushPageWithAnimation(
                                   context, EditHabitsPage(userId: widget.userId,));
                             } else {
                               Helper.makeToast(context,

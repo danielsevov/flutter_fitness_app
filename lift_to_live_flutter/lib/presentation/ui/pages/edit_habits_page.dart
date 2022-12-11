@@ -29,6 +29,7 @@ class EditHabitsPageState extends State<EditHabitsPage>
           false, // Indicator showing if data is being fetched at the moment
       _isFetched = false;
   late double screenHeight, screenWidth;
+  bool _isChanged = false;
 
   //lists of widgets and text controllers for managing listview
   List<Widget> bodyElements = [];
@@ -39,6 +40,7 @@ class EditHabitsPageState extends State<EditHabitsPage>
   /// initialize the page view by attaching it to the presenter
   @override
   void initState() {
+    _isChanged = false;
     _presenter = HabitsPageFactory().getEditHabitsPagePresenter(widget.userId);
     _presenter.attach(this);
     super.initState();
@@ -90,7 +92,7 @@ class EditHabitsPageState extends State<EditHabitsPage>
         leading: IconButton(
             icon: const Icon(Icons.arrow_back, color: Helper.yellowColor),
             onPressed: () => {
-                  Helper.replacePage(context, HabitsPage(userId: widget.userId))
+                  _isChanged ? goBack() : Navigator.pop(context)
                 }),
         centerTitle: true,
         shape: const RoundedRectangleBorder(
@@ -219,6 +221,12 @@ class EditHabitsPageState extends State<EditHabitsPage>
 
   @override
   void notifySavedChanges() {
+    _isChanged = true;
     Helper.makeToast(context, "All habit changes have been saved!");
+  }
+
+  void goBack() {
+    Navigator.pop(context);
+    Helper.replacePage(context, HabitsPage(userId: widget.userId));
   }
 }
