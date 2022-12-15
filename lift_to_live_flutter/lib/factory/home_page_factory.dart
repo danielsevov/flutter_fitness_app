@@ -33,5 +33,6 @@ class HomePageFactory {
   HomePagePresenter getHomePagePresenter() =>
       HomePagePresenter(getNewsRepository(), getUserRepository());
 
+  // function to get a HomePagePresenter object wrapped in a BottomBarController so that the expandable bottom nav bar can be used.
   DefaultBottomBarController getWrappedHomePage() => DefaultBottomBarController(child:const HomePage());
 }

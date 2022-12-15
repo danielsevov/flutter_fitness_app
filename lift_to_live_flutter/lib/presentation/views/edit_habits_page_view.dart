@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 
 /// API to the EditHabitsPage view widget.
-/// Describes the methods of the home page view implementation.
+/// Describes the methods of the edit habits page view implementation.
 abstract class EditHabitsPageView {
   /// Function to set and display the habit data.
   void addTaskElement(String name, Function() callback);

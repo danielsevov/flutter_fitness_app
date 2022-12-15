@@ -61,12 +61,12 @@ class LogInPageState extends State<LogInPage> implements LogInPageView {
           presenter: _presenter);
     }
 
-    Future<bool> _onWillPop() async {
+    Future<bool> onWillPop() async {
       return false; //<-- SEE HERE
     }
 
     return WillPopScope(
-      onWillPop: _onWillPop,
+      onWillPop: onWillPop,
       child: Scaffold(
         backgroundColor: Helper.pageBackgroundColor,
         resizeToAvoidBottomInset: true,

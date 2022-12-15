@@ -7,6 +7,7 @@ import 'package:lift_to_live_flutter/presentation/views/trainees_page_view.dart'
 import '../../../domain/entities/user.dart';
 import '../../../helper.dart';
 
+/// Holder widget for a single trainee, placed on the trainees search page view.
 class TraineeSearchHolder extends StatelessWidget {
   final User user;
   final TraineesPageView view;

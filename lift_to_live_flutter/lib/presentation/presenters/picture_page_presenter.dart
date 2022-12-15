@@ -39,42 +39,43 @@ class PicturePagePresenter extends BasePresenter{
     return appState.getUserId() == _userId;
   }
 
-  /// Function used for fetching the required data, which is then displayed on the profile page.
+  /// Function used for fetching the required data, which is then displayed on the picture page.
   Future<void> fetchData() async {
 
-    // set the loading indicator to be displayed on the home page view
+    // set the loading indicator to be displayed on the picture page view
     _view?.setInProgress(true);
 
     _myImages = [];
     _pictures = [];
-    var sPics = <Widget>[], bPics = <Widget>[], fPics = <Widget>[];
+    var sidePictures = <Widget>[], backPictures = <Widget>[], frontPictures = <Widget>[];
 
+    // try fetching the user images
       try {
-        _myImages = await _userRepository.getUserImages(
+        _myImages = await _userRepository.fetchUserImages(
             _userId, super.appState.getToken());
 
+        // extract images from the list of MyImage objects.
         for (var element in _myImages) {
           _pictures.add(Image.memory(
             base64Decode(element.data),
             height: 200,
           ));
 
+          // sort the images by type and add to separate lists
           if(element.type == 'side') {
-            sPics.add(MyImageHolder(img: Image.memory(
+            sidePictures.add(MyImageHolder(img: Image.memory(
               base64Decode(element.data),
               height: 200,
             ), date: element.date, id: element.id, presenter: this));
           }
-
-          if(element.type == 'back') {
-            bPics.add(MyImageHolder(img: Image.memory(
+          else if(element.type == 'back') {
+            backPictures.add(MyImageHolder(img: Image.memory(
               base64Decode(element.data),
               height: 200,
             ), date: element.date, id: element.id, presenter: this));
           }
-
-          if(element.type == 'front') {
-            fPics.add(MyImageHolder(img: Image.memory(
+          else if(element.type == 'front') {
+            frontPictures.add(MyImageHolder(img: Image.memory(
               base64Decode(element.data),
               height: 200,
             ), date: element.date, id: element.id, presenter: this));
@@ -86,9 +87,15 @@ class PicturePagePresenter extends BasePresenter{
         _pictures = [];
       }
 
-      // display the fetched user data
+      // display the fetched picture data
       _view?.setInProgress(false);
-      _view?.setPictures(sPics, bPics, fPics);
+      _view?.setPictures(sidePictures, frontPictures, backPictures);
+  }
+
+  /// Function for deleting an image entry.
+  Future<void> deleteImage(int id) async {
+    await _userRepository.deleteImage(id, super.appState.getToken());
+    fetchData();
   }
 
   // coverage:ignore-start
@@ -100,19 +107,17 @@ class PicturePagePresenter extends BasePresenter{
       maxHeight: 1800,
     );
 
+    // check if image was picked
     if (pickedFile != null) {
       File imageFile = File(pickedFile.path);
       String encoded = Helper.imageToBlob(imageFile);
 
-        await _userRepository.postImage(_userId, (DateTime.now().millisecondsSinceEpoch).toString(), encoded, type, appState.getToken());
+      // store the image
+      await _userRepository.postImage(_userId, (DateTime.now().millisecondsSinceEpoch).toString(), encoded, type, appState.getToken());
 
+      // re-fetch the picture data
       fetchData();
     }
   }
-
-  Future<void> deleteImage(int id) async {
-    await _userRepository.deleteImage(id, super.appState.getToken());
-    fetchData();
-  }
-// coverage:ignore-end
+  // coverage:ignore-end
 }

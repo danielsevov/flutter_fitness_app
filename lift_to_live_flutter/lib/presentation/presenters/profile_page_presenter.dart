@@ -36,8 +36,8 @@ class ProfilePagePresenter extends BasePresenter{
   }
 
   /// Function called to indicate if user is authorized to view private pages.
-  isAuthorized() {
-    return appState.getUserId() == _userId || super.appState.isCoachOrAdmin();
+  isAuthorized(bool changePicture) {
+    return appState.getUserId() == _userId || ( super.appState.isCoachOrAdmin() && !changePicture);
   }
 
   /// Function used for fetching the required data, which is then displayed on the profile page.

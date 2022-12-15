@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../ui/widgets/trainee_search_holder.dart';
 
 /// API to the TraineesPage view widget.
-/// Describes the methods of the home page view implementation.
+/// Describes the methods of the trainees page view implementation.
 abstract class TraineesPageView {
   /// Function to set and display the user details, user profile picture.
   void setUserData(List<TraineeSearchHolder> users);

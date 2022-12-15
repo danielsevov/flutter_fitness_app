@@ -5,6 +5,7 @@ import 'package:lift_to_live_flutter/presentation/views/home_page_view.dart';
 
 import '../../../helper.dart';
 
+/// A custom Bottom navigational bar widget, placed on the home page and used for navigation.
 class CustomBottomBar extends StatelessWidget {
   final HomePageView view;
 

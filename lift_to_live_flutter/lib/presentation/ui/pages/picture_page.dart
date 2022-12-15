@@ -21,7 +21,7 @@ class PicturePage extends StatefulWidget {
   State<StatefulWidget> createState() => PicturePageState();
 }
 
-/// State object of the PicturePage. Holds the mutable data, related to the profile page.
+/// State object of the PicturePage. Holds the mutable data, related to the page.
 class PicturePageState extends State<PicturePage> implements PicturePageView {
   late PicturePagePresenter
       _presenter; // The business logic object of the log in page
@@ -53,7 +53,7 @@ class PicturePageState extends State<PicturePage> implements PicturePageView {
     });
   }
 
-  /// Function to set and display the user details, user profile picture.
+  /// Function to set and display the user pictures.
   @override
   void setPictures(List<Widget> pictureSide, List<Widget> pictureFront,
       List<Widget> pictureBack) {
@@ -65,7 +65,7 @@ class PicturePageState extends State<PicturePage> implements PicturePageView {
     });
   }
 
-  /// Build method of the home page view
+  /// Build method of the picture page view
   @override
   Widget build(BuildContext context) {
     // initialize presenter and log in form, if not initialized yet
@@ -237,6 +237,7 @@ class PicturePageState extends State<PicturePage> implements PicturePageView {
     );
   }
 
+  /// Function to add a new image entry.
   @override
   void addNewPicture(Image img, String type) {
     setState(() {

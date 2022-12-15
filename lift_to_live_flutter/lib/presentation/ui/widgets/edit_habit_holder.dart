@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import '../../../helper.dart';
 
+/// A holder widget for editing a habit task,
+/// placed on the edit habits page view.
 class EditHabitHolder extends StatelessWidget {
   final TextEditingController newController;
   final List<Widget> bodyElements;

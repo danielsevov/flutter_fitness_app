@@ -69,7 +69,7 @@ class EditHabitsPageState extends State<EditHabitsPage>
     });
   }
 
-  /// Build method of the home page view
+  /// Build method of the edit habits page view
   @override
   Widget build(BuildContext context) {
     //get screen size values
@@ -187,6 +187,7 @@ class EditHabitsPageState extends State<EditHabitsPage>
     );
   }
 
+  /// Function to set and display the habit data.
   @override
   void addTaskElement(String name, Function() callback) {
     setState(() {
@@ -203,28 +204,33 @@ class EditHabitsPageState extends State<EditHabitsPage>
     });
   }
 
+  /// Clear controllers
   @override
   void clear() {
     controllers.clear();
     bodyElements.clear();
   }
 
+  /// Refresh page
   @override
   refresh() {
     setState(() {});
   }
 
+  /// Get text editing controllers to save changes
   @override
   List<TextEditingController> getControllers() {
     return controllers;
   }
 
+  ///Notify user when changes are saved
   @override
   void notifySavedChanges() {
     _isChanged = true;
     Helper.makeToast(context, "All habit changes have been saved!");
   }
 
+  /// Function for returning from this page to the previous one.
   void goBack() {
     Navigator.pop(context);
     Helper.replacePage(context, HabitsPage(userId: widget.userId));

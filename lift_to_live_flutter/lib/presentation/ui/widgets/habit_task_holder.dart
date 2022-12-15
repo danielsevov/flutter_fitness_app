@@ -7,7 +7,8 @@ import '../../../domain/entities/habit.dart';
 import '../../../domain/entities/habit_task.dart';
 import '../../../helper.dart';
 
-
+/// A holder for a single habit task, part of a habit entry.
+/// Placed in a habit holder instance, on the habits page view.
 class HabitTaskHolder extends StatelessWidget {
   const HabitTaskHolder({Key? key, required this.habit, required this.habitTask, required this.presenter}) : super(key: key);
 

@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 
 /// API to the HabitsPage view widget.
-/// Describes the methods of the home page view implementation.
+/// Describes the methods of the habits page view implementation.
 abstract class HabitsPageView {
   /// Function to set and display the habit data.
   void setHabitData(List<Widget> list);

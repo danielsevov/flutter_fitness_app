@@ -27,14 +27,14 @@ class TraineesPagePresenter extends BasePresenter{
     _view = null;
   }
 
-  /// Function called to indicate if user is authorized to view private pages.
+  /// Function called to indicate if user is authorized to search trainees.
   isAuthorized() {
     return super.appState.isCoachOrAdmin();
   }
 
-  /// Function used for fetching the required data, which is then displayed on the profile page.
+  /// Function used for fetching the required data, which is then displayed on the trainees search page.
   Future<void> fetchData() async {
-    // set the loading indicator to be displayed on the home page view
+    // set the loading indicator to be displayed on the trainees page view
     _view?.setInProgress(true);
 
     // fetch the user details and profile picture

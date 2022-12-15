@@ -4,6 +4,7 @@ import 'package:lift_to_live_flutter/presentation/views/home_page_view.dart';
 
 import '../../../helper.dart';
 
+/// Custom drawer widget used for navigation, placed on the home page view.
 class CustomDrawer extends StatelessWidget {
   final HomePageView view;
 

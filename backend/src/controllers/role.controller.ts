@@ -123,4 +123,25 @@ export class RoleController {
 	
     return roles;
   }
+  
+  
+  @get('/coaches_roles')
+  @response(200, {
+    description: 'Role model instances',
+    content: {
+      'application/json': {
+        schema: {
+          type: 'array',
+          items: getModelSchemaRef(Role, {includeRelations: true}),
+        },
+      },
+    },
+  })
+  async findCoachRoles(
+    @inject(SecurityBindings.USER) currentUserProfile: UserProfile,
+  ): Promise<object> {
+	  
+	let roles = (await this.roleRepository.find({where: {name:'coach'}}));
+    return roles;
+  }
 }

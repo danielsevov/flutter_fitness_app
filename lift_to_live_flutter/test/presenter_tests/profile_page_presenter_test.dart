@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:lift_to_live_flutter/data/exceptions/fetch_failed_exception.dart';
+import 'package:lift_to_live_flutter/domain/entities/role.dart';
 import 'package:lift_to_live_flutter/domain/repositories/user_repo.dart';
 import 'package:lift_to_live_flutter/presentation/presenters/profile_page_presenter.dart';
 import 'package:lift_to_live_flutter/presentation/state_management/app_state.dart';
@@ -45,7 +46,20 @@ void main() {
     presenter.setAppState(appState);
 
 
-    expect(presenter.isAuthorized(), true);
+    expect(presenter.isAuthorized(false), true);
+  });
+
+  test('test set app state', () {
+    final userRepo = MockUserRepository();
+    final appState = AppState();
+    final presenter = ProfilePagePresenter(userRepo, 'emaill@email.com');
+    expect(presenter.isInitialized(), false);
+
+    appState.setInitialState('email@email.com', '', [Role('emaill@email.com', 'admin')]);
+    presenter.setAppState(appState);
+
+
+    expect(presenter.isAuthorized(true), false);
   });
 
   test('test fetch data', () {

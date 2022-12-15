@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../../domain/entities/user.dart';
 
 /// API to the ProfilePage view widget.
-/// Describes the methods of the home page view implementation.
+/// Describes the methods of the profile page view implementation.
 abstract class ProfilePageView {
   /// Function to set and display the user details, user profile picture.
   void setUserData(User user, Image profilePicture);

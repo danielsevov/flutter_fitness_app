@@ -1,10 +1,10 @@
-import 'package:expandable_bottom_bar/expandable_bottom_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lift_to_live_flutter/presentation/views/home_page_view.dart';
 
 import '../../../helper.dart';
 
+/// Holder widget for a single news article, placed on the home page view.
 class NewsArticleHolder extends StatelessWidget {
   final HomePageView view;
   final int index;

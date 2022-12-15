@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lift_to_live_flutter/presentation/ui/pages/profile_page.dart';
+import 'package:lift_to_live_flutter/presentation/ui/pages/register_page.dart';
 import 'package:provider/provider.dart';
 import '../../../factory/trainees_page_factory.dart';
 import '../../presenters/trainees_page_presenter.dart';
@@ -10,7 +11,7 @@ import '../../views/trainees_page_view.dart';
 import '../widgets/trainee_search_holder.dart';
 
 
-/// Custom TraineesPage widget used as a main overview of a user.
+/// Custom TraineesPage widget used by coaches to search and overview trainees.
 /// It provides navigation to the trainees's profile pages.
 /// It is a stateful widget and its state object implements the TraineesPageView abstract class.
 class TraineesPage extends StatefulWidget {
@@ -83,10 +84,10 @@ class TraineesPageState extends State<TraineesPage>
     Helper.pushPageWithAnimation(context, ProfilePage(userId: id, originPage: 'trainees',));
   }
 
-  /// Function called when user wants to navigate from profile page to pictures page.
+  /// Function called when user wants to navigate to the user regsitration page.
   @override
   void registerPressed(BuildContext context) {
-    Helper.pushPageWithAnimation(context, const Text('Register'));
+    Helper.replacePage(context, const RegisterPage());
   }
 
   /// Function to apply the search term filter on the trainees

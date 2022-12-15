@@ -17,6 +17,7 @@ class HabitsRepoImpl implements HabitsRepository {
   //Simple constructor for passing the datasource to the repository.
   HabitsRepoImpl(this.backendAPI);
 
+  /// This function is used for fetching all habit entries for a user.
   @override
   Future<List<Habit>> fetchHabits(String userId, String jwtToken) async {
     //fetch http response object
@@ -26,7 +27,7 @@ class HabitsRepoImpl implements HabitsRepository {
     if (response.statusCode == 200) {
       log("fetch habits!\nHabits:${response.body}");
 
-      //decode Habits object and extract JWT string
+      //decode Habits objects
       List<Habit> myHabits = [];
       List<dynamic> list = json.decode(response.body);
       for (var element in list) {
@@ -45,6 +46,7 @@ class HabitsRepoImpl implements HabitsRepository {
     }
   }
 
+  /// This function is used for fetching the habits template for a user.
   @override
   Future<Habit> fetchTemplate(String userId, String jwtToken) async {
     //fetch http response object
@@ -54,7 +56,7 @@ class HabitsRepoImpl implements HabitsRepository {
     if (response.statusCode == 200) {
       log("fetch template habits success!\nHabits:${response.body}");
 
-      //decode Habits object and extract JWT string
+      //decode template Habits object
       List<Habit> myHabits = [];
       List<dynamic> list = json.decode(response.body);
       for (var element in list) {
@@ -78,6 +80,7 @@ class HabitsRepoImpl implements HabitsRepository {
     }
   }
 
+  /// This function is used to patch a habit instance.
   @override
   Future<void> patchHabit(int id, String date, String note, String userId,
       String coachId, List<HabitTask> habits, String jwtToken) async {
@@ -97,6 +100,7 @@ class HabitsRepoImpl implements HabitsRepository {
     }
   }
 
+  /// This function is used for posting habit entries.
   @override
   Future<void> postHabit(String date,
       String note,

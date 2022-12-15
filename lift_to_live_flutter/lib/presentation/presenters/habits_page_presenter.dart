@@ -32,7 +32,7 @@ class HabitsPagePresenter extends BasePresenter{
     _view = null;
   }
 
-  /// Function called to indicate if user is authorized to view private pages.
+  /// Function called to indicate if user is authorized to edit the habit template for the page owner.
   isAuthorized() {
     return super.appState.isCoachOrAdmin();
   }
@@ -42,7 +42,7 @@ class HabitsPagePresenter extends BasePresenter{
     return super.appState.getUserId() == _userId;
   }
 
-  /// Function to get all habits
+  /// Function to get all habit entries.
   List<Habit> get habits => _habits;
 
   /// Function used for fetching the required data, which is then displayed on the habits page.
@@ -50,7 +50,7 @@ class HabitsPagePresenter extends BasePresenter{
     // set the loading indicator to be displayed on the home page view
     _view?.setInProgress(true);
 
-    // fetch the user details and profile picture
+    // fetch the user habit template
     try {
       template = await _habitsRepository.fetchTemplate(
           _userId, appState.getToken());
@@ -66,10 +66,12 @@ class HabitsPagePresenter extends BasePresenter{
             template.habits,
             appState.getToken());
 
+        // re-fetch the habit template
         template = await _habitsRepository.fetchTemplate(
             _userId, appState.getToken());
       }
 
+      // fetch all user habit entries
       _habits = await _habitsRepository.fetchHabits(
           _userId, appState.getToken());
 
@@ -109,10 +111,12 @@ class HabitsPagePresenter extends BasePresenter{
             .add(HabitHolder(habit: habit, habitTaskWidgets: habitTaskWidgets));
       }
 
+      // add the bottom margin space
       _habitWidgets.add(const SizedBox(
         height: 10,
       ));
 
+      // notify the page view that the fetch is complete
       _view?.setInProgress(false);
       _view?.setHabitData(_habitWidgets);
       _view?.setFetched(true);
@@ -126,6 +130,7 @@ class HabitsPagePresenter extends BasePresenter{
     }
   }
 
+  /// Function for updating a habit entry.
   void updateHabitEntry(int id, String date, String note, String userId, String coachId, List<HabitTask> habits) {
     _habitsRepository.patchHabit(id, date, note, userId, coachId, habits, appState.getToken());
   }

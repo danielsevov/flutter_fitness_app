@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import '../../../domain/entities/habit.dart';
 import '../../../helper.dart';
 
+/// A habit holder widget for overviewing a single habit entry.
+/// Placed in a habit list on the habits page view.
 class HabitHolder extends StatelessWidget {
   final Habit habit;
   final List<Widget> habitTaskWidgets;

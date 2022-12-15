@@ -15,7 +15,7 @@ abstract class UserRepository {
   Future<List<User>> fetchMyTrainees(String userId, String jwtToken);
 
   /// This function is used for fetching all Image objects of a user.
-  Future<List<MyImage>> getUserImages(String userId, String jwtToken);
+  Future<List<MyImage>> fetchUserImages(String userId, String jwtToken);
 
   /// This function is used for fetching a Image object, which holds the profile picture of a user.
   Future<MyImage> fetchProfileImage(String userId, String jwtToken);
@@ -26,6 +26,12 @@ abstract class UserRepository {
   /// This function is used for posting a Image object, which holds the picture of a user.
   Future<void> postImage(String userId, String date, String encoded, String type, String jwtToken);
 
-  // This function is used to delete a image
+  /// This function is used to delete a image.
   Future<void> deleteImage(int id, String jwtToken);
+
+  /// This function is used for fetching a list of all coach Role objects.
+  Future<List<Role>> fetchCoachRoles(String jwtToken);
+
+  /// This function is used for registering a user.
+  Future<void> registerUser(String userId, String coachId, String password, String name, String phoneNumber, String nationality, String dateOfBirth, String jwtToken);
 }

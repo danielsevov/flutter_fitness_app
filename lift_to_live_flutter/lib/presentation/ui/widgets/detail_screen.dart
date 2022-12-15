@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../helper.dart';
 
+/// Custom widget used for viewing a picture in fullscreen.
 class DetailScreen extends StatelessWidget {
   final Image img;
 

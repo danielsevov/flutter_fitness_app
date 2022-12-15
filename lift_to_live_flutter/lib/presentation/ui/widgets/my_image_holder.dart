@@ -1,10 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lift_to_live_flutter/presentation/presenters/picture_page_presenter.dart';
 
 import '../../../helper.dart';
 import 'detail_screen.dart';
 
+/// Holder widget for a single image, placed on the user pictures page view.
 class MyImageHolder extends StatelessWidget {
   final Image img;
   final String date;

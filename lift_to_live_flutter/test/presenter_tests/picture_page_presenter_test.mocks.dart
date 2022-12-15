@@ -102,7 +102,7 @@ class MockUserRepository extends _i1.Mock implements _i4.UserRepository {
         returnValue: _i5.Future<List<_i2.User>>.value(<_i2.User>[]),
       ) as _i5.Future<List<_i2.User>>);
   @override
-  _i5.Future<List<_i3.MyImage>> getUserImages(
+  _i5.Future<List<_i3.MyImage>> fetchUserImages(
     String? userId,
     String? jwtToken,
   ) =>
@@ -196,6 +196,43 @@ class MockUserRepository extends _i1.Mock implements _i4.UserRepository {
           #deleteImage,
           [
             id,
+            jwtToken,
+          ],
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
+  @override
+  _i5.Future<List<_i6.Role>> fetchCoachRoles(String? jwtToken) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #fetchCoachRoles,
+          [jwtToken],
+        ),
+        returnValue: _i5.Future<List<_i6.Role>>.value(<_i6.Role>[]),
+      ) as _i5.Future<List<_i6.Role>>);
+  @override
+  _i5.Future<void> registerUser(
+    String? userId,
+    String? coachId,
+    String? password,
+    String? name,
+    String? phoneNumber,
+    String? nationality,
+    String? dateOfBirth,
+    String? jwtToken,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #registerUser,
+          [
+            userId,
+            coachId,
+            password,
+            name,
+            phoneNumber,
+            nationality,
+            dateOfBirth,
             jwtToken,
           ],
         ),

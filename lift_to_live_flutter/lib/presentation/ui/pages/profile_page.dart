@@ -36,7 +36,7 @@ class ProfilePageState extends State<ProfilePage> implements ProfilePageView {
       _user; // The user object holding the details of the current logged in user
   late Image
       _profilePicture; // The image object holding the current user profile picture
-  late double _screenWidth, _screenHeight; // The screen dimensions
+  late double _screenWidth; // The screen dimensions
 
   /// initialize the page view by attaching it to the presenter
   @override
@@ -97,12 +97,11 @@ class ProfilePageState extends State<ProfilePage> implements ProfilePageView {
     Helper.pushPageWithAnimation(context, PicturePage(userId: _user.id, name: _user.name.split(" ")[0],));
   }
 
-  /// Build method of the home page view
+  /// Build method of the profile page view
   @override
   Widget build(BuildContext context) {
     // get screen dimensions
     _screenWidth = MediaQuery.of(context).size.width;
-    _screenHeight = MediaQuery.of(context).size.height;
 
     // initialize presenter and log in form, if not initialized yet
     if (!_presenter.isInitialized()) {
@@ -173,7 +172,7 @@ class ProfilePageState extends State<ProfilePage> implements ProfilePageView {
                                   backgroundColor: Helper.actionButtonColor,
                                   label: const Text('View Pictures', style: TextStyle(color: Helper.actionButtonTextColor),),
                                   onPressed: () async {
-                                    if(_presenter.isAuthorized()) {
+                                    if(_presenter.isAuthorized(false)) {
                                       Helper.pushPageWithAnimation(context, PicturePage(userId: _user.id, name: _user.name.split(" ")[0],));
                                     }
                                     else {
@@ -207,7 +206,7 @@ class ProfilePageState extends State<ProfilePage> implements ProfilePageView {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            _presenter.isAuthorized() ? const SizedBox(width: 50,) : const SizedBox(),
+                            _presenter.isAuthorized(true) ? const SizedBox(width: 50,) : const SizedBox(),
                             Container(
                               height: _screenWidth / 2,
                               alignment: Alignment.center,
@@ -220,7 +219,7 @@ class ProfilePageState extends State<ProfilePage> implements ProfilePageView {
                                 child: _isFetched ? _profilePicture : null,
                               ),
                             ),
-                            _presenter.isAuthorized() && _isFetched ? IconButton(onPressed: () {_presenter.changeProfilePicture();}, icon: const Icon(CupertinoIcons.camera_fill, color: Helper.iconBackgroundColor, size: 30,)) : const SizedBox()
+                            _presenter.isAuthorized(true) && _isFetched ? IconButton(onPressed: () {_presenter.changeProfilePicture();}, icon: const Icon(CupertinoIcons.camera_fill, color: Helper.iconBackgroundColor, size: 30,)) : const SizedBox()
                           ],
                         ),
                         const SizedBox(height: 20,),
@@ -229,112 +228,116 @@ class ProfilePageState extends State<ProfilePage> implements ProfilePageView {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Container(
-                              padding: const EdgeInsets.fromLTRB(10, 20, 10, 20),
-                              width: _screenWidth * 0.8,
-                              decoration: BoxDecoration(
-                                  color: Helper.paragraphBackgroundColor,
-                                  borderRadius: BorderRadius.circular(15),
-                                border: Border.all(color: Helper.whiteColor),),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  const SizedBox(
-                                    width: 10,
-                                  ),
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: [
-                                          const Icon(
-                                            Icons.email_outlined,
-                                            color: Helper.paragraphIconColor, size: 25,
-                                          ),
-                                          const SizedBox(
-                                            width: 15,
-                                          ),
-                                          Text(
-                                            _user.email,
-                                            style: TextStyle(
-                                                color: Helper.paragraphTextColor, fontSize: _screenHeight/45),
-                                          ),
-                                        ],
-                                      ),
-                                      const Divider(),
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: [
-                                          const Icon(
-                                            CupertinoIcons.phone,
-                                            color: Helper.paragraphIconColor, size: 25,
-                                          ),
-                                          const SizedBox(
-                                            width: 15,
-                                          ),
-                                          Text(
-                                            _user.phoneNumber,
-                                            style: TextStyle(
-                                                color: Helper.paragraphTextColor, fontSize: _screenHeight/45),
-                                          ),
-                                        ],
-                                      ),
-                                      const Divider(),
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: [
-                                          const Icon(CupertinoIcons.location_solid,
-                                              color: Helper.paragraphIconColor, size: 25),
-                                          const SizedBox(
-                                            width: 15,
-                                          ),
-                                          Text(
-                                            _user.nationality,
-                                            style: TextStyle(
-                                                color: Helper.paragraphTextColor, fontSize: _screenHeight/45),
-                                          ),
-                                        ],
-                                      ),
-                                      const Divider(),
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: [
-                                          const Icon(Icons.date_range,
-                                              color: Helper.paragraphIconColor, size: 25),
-                                          const SizedBox(
-                                            width: 15,
-                                          ),
-                                          Text(
-                                            _user.dateOfBirth,
-                                            style: TextStyle(
-                                                color: Helper.paragraphTextColor, fontSize: _screenHeight/45),
-                                          ),
-                                        ],
-                                      ),
-                                      const Divider(),
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: [
-                                          const Icon(Icons.fitness_center_outlined,
-                                            color: Helper.paragraphIconColor, size: 25,),
-                                          const SizedBox(
-                                            width: 15,
-                                          ),
-                                          Text(
-                                            _user.coachId,
-                                            style: TextStyle(
-                                                color: Helper.paragraphTextColor, fontSize: _screenHeight/45),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                  const SizedBox(
-                                    width: 40,
-                                  ),
-                                ],
+                            SizedBox(
+                              child: Container(
+                                padding: const EdgeInsets.fromLTRB(10, 20, 10, 20),
+                                width: _screenWidth * 0.8,
+                                decoration: BoxDecoration(
+                                    color: Helper.paragraphBackgroundColor,
+                                    borderRadius: BorderRadius.circular(15),
+                                  border: Border.all(color: Helper.whiteColor),),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
+                                    Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                            const Icon(
+                                              Icons.email_outlined,
+                                              color: Helper.paragraphIconColor, size: 25,
+                                            ),
+                                            const SizedBox(
+                                              width: 15,
+                                            ),
+                                            SizedBox(
+                                              child: Text(
+                                                _user.email,
+                                                style: const TextStyle(
+                                                    color: Helper.paragraphTextColor),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        const Divider(),
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                            const Icon(
+                                              CupertinoIcons.phone,
+                                              color: Helper.paragraphIconColor, size: 25,
+                                            ),
+                                            const SizedBox(
+                                              width: 15,
+                                            ),
+                                            Text(
+                                              _user.phoneNumber,
+                                              style: const TextStyle(
+                                                  color: Helper.paragraphTextColor),
+                                            ),
+                                          ],
+                                        ),
+                                        const Divider(),
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                            const Icon(CupertinoIcons.location_solid,
+                                                color: Helper.paragraphIconColor, size: 25),
+                                            const SizedBox(
+                                              width: 15,
+                                            ),
+                                            Text(
+                                              _user.nationality,
+                                              style: const TextStyle(
+                                                  color: Helper.paragraphTextColor),
+                                            ),
+                                          ],
+                                        ),
+                                        const Divider(),
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                            const Icon(Icons.date_range,
+                                                color: Helper.paragraphIconColor, size: 25),
+                                            const SizedBox(
+                                              width: 15,
+                                            ),
+                                            Text(
+                                              _user.dateOfBirth,
+                                              style: const TextStyle(
+                                                  color: Helper.paragraphTextColor),
+                                            ),
+                                          ],
+                                        ),
+                                        const Divider(),
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                            const Icon(Icons.fitness_center_outlined,
+                                              color: Helper.paragraphIconColor, size: 25,),
+                                            const SizedBox(
+                                              width: 15,
+                                            ),
+                                            Text(
+                                              _user.coachId,
+                                              style: const TextStyle(
+                                                  color: Helper.paragraphTextColor),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      width: 40,
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ],

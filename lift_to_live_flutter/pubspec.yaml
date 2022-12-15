@@ -42,6 +42,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: any
   expandable_bottom_bar: ^2.0.2
+  country_picker: ^2.0.18
 
 dev_dependencies:
   mockito: any

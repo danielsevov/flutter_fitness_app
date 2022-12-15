@@ -101,21 +101,49 @@ void main() {
   test('test post image', () async {
     final backendAPI = MockBackendAPI();
 
-    when(backendAPI.postImage('', '', '', '', '')).thenAnswer((realInvocation) async => {});
+    when(backendAPI.postImage('', '', '', '', '')).thenAnswer((realInvocation) async => Response('', 200, headers: {
+      HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8',
+    }));
 
     UserRepository repository = UserRepoImpl(backendAPI);
 
     expect(() => repository.postImage('', '', '', '', ''), returnsNormally);
   });
 
+  test('test post image fail', () async {
+    final backendAPI = MockBackendAPI();
+
+    when(backendAPI.postImage('', '', '', '', '')).thenAnswer((realInvocation) async => Response('', 404, headers: {
+      HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8',
+    }));
+
+    UserRepository repository = UserRepoImpl(backendAPI);
+
+    expect(() => repository.postImage('', '', '', '', ''), throwsException);
+  });
+
   test('test delete image', () async {
     final backendAPI = MockBackendAPI();
 
-    when(backendAPI.deleteImage( 1 ,'')).thenAnswer((realInvocation) async => {});
+    when(backendAPI.deleteImage( 1 ,'')).thenAnswer((realInvocation) async => Response('', 200, headers: {
+      HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8',
+    }));
 
     UserRepository repository = UserRepoImpl(backendAPI);
 
     expect(() => repository.deleteImage( 1 ,''), returnsNormally);
+  });
+
+  test('test delete image fail', () async {
+    final backendAPI = MockBackendAPI();
+
+    when(backendAPI.deleteImage( 1 ,'')).thenAnswer((realInvocation) async => Response('', 404, headers: {
+      HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8',
+    }));
+
+    UserRepository repository = UserRepoImpl(backendAPI);
+
+    expect(() => repository.deleteImage( 1 ,''), throwsException);
   });
 
   test('test delete image exception', () async {
@@ -131,36 +159,50 @@ void main() {
   test('test patch image', () async {
     final backendAPI = MockBackendAPI();
 
-    when(backendAPI.patchImage(1 ,'', '', '', '', '')).thenAnswer((realInvocation) async => {});
+    when(backendAPI.patchImage(1 ,'', '', '', '', '')).thenAnswer((realInvocation) async => Response('', 200, headers: {
+      HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8',
+    }));
 
     UserRepository repository = UserRepoImpl(backendAPI);
 
     expect(() async => repository.patchImage(1, '', '', '', '', ''), returnsNormally);
   });
 
-  test('test get images', () async {
+  test('test patch image', () async {
     final backendAPI = MockBackendAPI();
 
-    when(backendAPI.getImages(any, any)).thenAnswer((realInvocation) async => Response('[{"user_id": "A", "type": "A", "id": 1, "date": "A", "data": "4444"}]', 200, headers: {
+    when(backendAPI.patchImage(1 ,'', '', '', '', '')).thenAnswer((realInvocation) async => Response('', 404, headers: {
       HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8',
     }));
 
     UserRepository repository = UserRepoImpl(backendAPI);
 
-    expect(await repository.getUserImages('A', 'A'), isA<List<MyImage>>());
+    expect(() async => repository.patchImage(1, '', '', '', '', ''), throwsException);
+  });
+
+  test('test get images', () async {
+    final backendAPI = MockBackendAPI();
+
+    when(backendAPI.fetchImages(any, any)).thenAnswer((realInvocation) async => Response('[{"user_id": "A", "type": "A", "id": 1, "date": "A", "data": "4444"}]', 200, headers: {
+      HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8',
+    }));
+
+    UserRepository repository = UserRepoImpl(backendAPI);
+
+    expect(await repository.fetchUserImages('A', 'A'), isA<List<MyImage>>());
   });
 
   test('test get images with exception', () async {
     final backendAPI = MockBackendAPI();
 
-    when(backendAPI.getImages(any, any)).thenAnswer(
+    when(backendAPI.fetchImages(any, any)).thenAnswer(
             (_) async => Response('', 404, headers: {
           HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8',
         }));
 
     UserRepository repository = UserRepoImpl(backendAPI);
 
-    expect(() async => await repository.getUserImages('A', 'A'), throwsA(isA<FetchFailedException>()));
+    expect(() async => await repository.fetchUserImages('A', 'A'), throwsA(isA<FetchFailedException>()));
   });
 
   group('mock test user repository to fetch user roles', () {
@@ -188,6 +230,34 @@ void main() {
       UserRepository repository = UserRepoImpl(backendAPI);
 
       expect(() async => await repository.fetchUserRoles('A'), throwsA(isA<FetchFailedException>()));
+    });
+  });
+
+  group('mock test user repository to fetch coach roles', () {
+    test('returns response if the http call completes successfully', () async {
+      final backendAPI = MockBackendAPI();
+
+      when(backendAPI.fetchCoachRoles('A')).thenAnswer(
+              (_) async => Response('[{"userId": "A", "name": "A"}]', 200, headers: {
+            HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8',
+          }));
+
+      UserRepository repository = UserRepoImpl(backendAPI);
+
+      expect(await repository.fetchCoachRoles('A'), [TestData.test_role_1]);
+    });
+
+    test('throws an exception if the http call completes with an error', () async {
+      final backendAPI = MockBackendAPI();
+
+      when(backendAPI.fetchCoachRoles('A')).thenAnswer(
+              (_) async => Response('', 404, headers: {
+            HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8',
+          }));
+
+      UserRepository repository = UserRepoImpl(backendAPI);
+
+      expect(() async => await repository.fetchCoachRoles('A'), throwsA(isA<FetchFailedException>()));
     });
   });
 }

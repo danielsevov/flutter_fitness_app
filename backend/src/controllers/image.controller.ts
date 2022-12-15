@@ -53,6 +53,9 @@ export class ImageController {
   }
   
   @get('/images')
+  @response(200, {
+    description: 'Image DELETE success',
+  })
   async request_images(
   @inject(SecurityBindings.USER) currentUserProfile: UserProfile,
   ) : Promise<Image[]> {
@@ -61,6 +64,9 @@ export class ImageController {
   
   //Upload picture to spot
   @post('/images')
+  @response(200, {
+    description: 'Image DELETE success',
+  })
   async upload_image(
   @inject(SecurityBindings.USER) currentUserProfile: UserProfile,
   @requestBody(
@@ -95,6 +101,9 @@ export class ImageController {
   
   //Upload picture to spot
   @patch('/images')
+  @response(200, {
+    description: 'Image DELETE success',
+  })
   async reupload_image(
   @inject(SecurityBindings.USER) currentUserProfile: UserProfile,
   @requestBody(
@@ -134,7 +143,7 @@ export class ImageController {
   }
   
   @del('/images/{id}')
-  @response(204, {
+  @response(200, {
     description: 'Image DELETE success',
   })
   async deleteById(@param.path.number('id') id: number): Promise<void> {
@@ -142,7 +151,7 @@ export class ImageController {
   }
   
   @post('/images_for_user')
-  @response(204, {
+  @response(200, {
     description: 'Image for user success',
   })
   async findImagesForUser(@requestBody(
@@ -167,7 +176,7 @@ export class ImageController {
   }
   
   @patch('/images/{id}')
-  @response(204, {
+  @response(200, {
     description: 'Image PATCH success',
   })
   async updateById(
@@ -185,7 +194,7 @@ export class ImageController {
   }
   
   @post('/profile_images_for_user')
-  @response(204, {
+  @response(200, {
     description: 'Image for user success',
   })
   async findProfileImagesForUser(@requestBody(

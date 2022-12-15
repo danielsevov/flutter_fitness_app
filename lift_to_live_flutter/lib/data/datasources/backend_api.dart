@@ -17,10 +17,12 @@ class BackendAPI {
 
   BackendAPI._internal();
 
-  static const apiURL = "http://192.168.178.30:3000/"; //molensingel
+  //static const apiURL = "http://192.168.178.30:3000/"; //molensingel
   //static const apiURL = "http://145.93.150.0:3000/"; //fontys
+  static const apiURL = "http://192.168.13.108:3000/"; // sofia
 
-  Future<void> patchImage(int id, String userId, String date, String data, String type, String token) async {
+  /// This function is used for patching an image entry.
+  Future<http.Response> patchImage(int id, String userId, String date, String data, String type, String token) async {
     var res = await http.patch(
       Uri.parse('${apiURL}images/$id'),
       headers: <String, String>{
@@ -35,10 +37,11 @@ class BackendAPI {
       }),
     );
     log(res.body);
+    return res;
   }
 
-
-  Future<http.Response> getImages(String userId, String jwtToken) async {
+  /// This function is used for fetching all image entries for a user.
+  Future<http.Response> fetchImages(String userId, String jwtToken) async {
     return http.post(
       Uri.parse('${apiURL}images_for_user/'),
       headers: <String, String>{
@@ -51,18 +54,20 @@ class BackendAPI {
     );
   }
 
-
-  Future<void> deleteImage(int id, String jwtToken) async {
-    http.delete(
+  /// This function is used for deleting an image entry.
+  Future<http.Response> deleteImage(int id, String jwtToken) async {
+    var res = await http.delete(
       Uri.parse('${apiURL}images/$id'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization': 'Bearer $jwtToken',
       },
     );
+    return res;
   }
 
-  Future<void> postImage(String userId, String date, String data, String type, String jwtToken) async {
+  /// This function is used for posting a new image.
+  Future<http.Response> postImage(String userId, String date, String data, String type, String jwtToken) async {
     var res = await http.post(
       Uri.parse('${apiURL}images/'),
       headers: <String, String>{
@@ -77,14 +82,15 @@ class BackendAPI {
       }),
     );
     log(res.body);
+    return res;
   }
 
-  /// function to patch a habit instance
-  Future<void> patchHabit(int id, String date, String note, String userId,
+  /// This function is used to patch a habit instance.
+  Future<http.Response> patchHabit(int id, String date, String note, String userId,
       String coachId, List<HabitTask> habits, String jwtToken) async {
     String inner = jsonEncode(habits);
 
-    await http.patch(
+    var res = await http.patch(
       Uri.parse('${apiURL}habits/$id'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
@@ -97,9 +103,10 @@ class BackendAPI {
         'coachId': coachId,
       }).replaceAll("}", "")}, \"habits\" : $inner}",
     );
+    return res;
   }
 
-  /// function for fetching habits template
+  /// This function is used for fetching the habits template of a user.
   Future<http.Response> fetchTemplate(String userId, String jwtToken) async {
     http.Response res = await http.post(
       Uri.parse('${apiURL}user_template_habit'),
@@ -114,6 +121,7 @@ class BackendAPI {
     return res;
   }
 
+  /// This function is used for fetching all habit entries for a user.
   Future<http.Response> fetchHabits(String userId, String jwtToken) async {
     fetchTemplate(userId, jwtToken);
     return http.post(
@@ -170,10 +178,43 @@ class BackendAPI {
     );
   }
 
+  /// This function is used to post the user data of a single user.
+  Future<http.Response> registerUser(String userId, String coachId, String password, String name, String phoneNumber, String nationality, String dateOfBirth, String jwtToken) async {
+    http.Response res = await http.post(
+      Uri.parse('${apiURL}signup'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer $jwtToken',
+      },
+      body: jsonEncode(<String, String>{
+        'id': userId,
+        'email': userId,
+        'password': password,
+        'name': name,
+        'phone_number': phoneNumber,
+        'nationality': nationality,
+        'date_of_birth': dateOfBirth,
+        'coach_id': coachId,
+      }),
+    );
+    return res;
+  }
+
   /// This function is used for fetching the user roles of the authenticated current user.
   Future<http.Response> fetchUserRoles(String jwtToken) async {
     return http.get(
       Uri.parse('${apiURL}my_role'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer $jwtToken',
+      },
+    );
+  }
+
+  /// This function is used for fetching all coach user roles.
+  Future<http.Response> fetchCoachRoles(String jwtToken) async {
+    return http.get(
+      Uri.parse('${apiURL}coaches_roles'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization': 'Bearer $jwtToken',

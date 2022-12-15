@@ -4,6 +4,8 @@ import 'package:table_calendar/table_calendar.dart';
 import '../../../domain/entities/habit.dart';
 import '../../../helper.dart';
 
+/// Custom calendar widget for overviewing habit entries.
+/// Placed on the habits page view.
 class CustomCalendar extends StatelessWidget {
   final List<Habit> habits;
 

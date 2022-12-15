@@ -20,7 +20,7 @@ class HabitsPage extends StatefulWidget {
   State<StatefulWidget> createState() => HabitsPageState();
 }
 
-/// State object of the HabitsPage. Holds the mutable data, related to the profile page.
+/// State object of the HabitsPage. Holds the mutable data, related to the page.
 class HabitsPageState extends State<HabitsPage> implements HabitsPageView {
   late HabitsPagePresenter _presenter; // The business logic object
   bool _isLoading =
@@ -60,7 +60,7 @@ class HabitsPageState extends State<HabitsPage> implements HabitsPageView {
     });
   }
 
-  /// Build method of the home page view
+  /// Build method of the habits page view
   @override
   Widget build(BuildContext context) {
     //get screen size values
@@ -167,12 +167,14 @@ class HabitsPageState extends State<HabitsPage> implements HabitsPageView {
     );
   }
 
+  /// Function to notify if no habits were found
   @override
   void notifyNoHabitsFound() {
     Helper.makeToast(context,
         'No habit template was found! Ask your coach to set up your habit tasks!');
   }
 
+  /// Function to set and display the habit data.
   @override
   void setHabitData(List<Widget> list) {
     setState(() {

@@ -40,7 +40,7 @@ class MockBackendAPI extends _i1.Mock implements _i3.BackendAPI {
   }
 
   @override
-  _i4.Future<void> patchImage(
+  _i4.Future<_i2.Response> patchImage(
     int? id,
     String? userId,
     String? date,
@@ -60,11 +60,23 @@ class MockBackendAPI extends _i1.Mock implements _i3.BackendAPI {
             token,
           ],
         ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+        returnValue: _i4.Future<_i2.Response>.value(_FakeResponse_0(
+          this,
+          Invocation.method(
+            #patchImage,
+            [
+              id,
+              userId,
+              date,
+              data,
+              type,
+              token,
+            ],
+          ),
+        )),
+      ) as _i4.Future<_i2.Response>);
   @override
-  _i4.Future<_i2.Response> getImages(
+  _i4.Future<_i2.Response> fetchImages(
     String? userId,
     String? jwtToken,
   ) =>
@@ -88,7 +100,7 @@ class MockBackendAPI extends _i1.Mock implements _i3.BackendAPI {
         )),
       ) as _i4.Future<_i2.Response>);
   @override
-  _i4.Future<void> deleteImage(
+  _i4.Future<_i2.Response> deleteImage(
     int? id,
     String? jwtToken,
   ) =>
@@ -100,11 +112,19 @@ class MockBackendAPI extends _i1.Mock implements _i3.BackendAPI {
             jwtToken,
           ],
         ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+        returnValue: _i4.Future<_i2.Response>.value(_FakeResponse_0(
+          this,
+          Invocation.method(
+            #deleteImage,
+            [
+              id,
+              jwtToken,
+            ],
+          ),
+        )),
+      ) as _i4.Future<_i2.Response>);
   @override
-  _i4.Future<void> postImage(
+  _i4.Future<_i2.Response> postImage(
     String? userId,
     String? date,
     String? data,
@@ -122,11 +142,22 @@ class MockBackendAPI extends _i1.Mock implements _i3.BackendAPI {
             jwtToken,
           ],
         ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+        returnValue: _i4.Future<_i2.Response>.value(_FakeResponse_0(
+          this,
+          Invocation.method(
+            #postImage,
+            [
+              userId,
+              date,
+              data,
+              type,
+              jwtToken,
+            ],
+          ),
+        )),
+      ) as _i4.Future<_i2.Response>);
   @override
-  _i4.Future<void> patchHabit(
+  _i4.Future<_i2.Response> patchHabit(
     int? id,
     String? date,
     String? note,
@@ -148,9 +179,22 @@ class MockBackendAPI extends _i1.Mock implements _i3.BackendAPI {
             jwtToken,
           ],
         ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+        returnValue: _i4.Future<_i2.Response>.value(_FakeResponse_0(
+          this,
+          Invocation.method(
+            #patchHabit,
+            [
+              id,
+              date,
+              note,
+              userId,
+              coachId,
+              habits,
+              jwtToken,
+            ],
+          ),
+        )),
+      ) as _i4.Future<_i2.Response>);
   @override
   _i4.Future<_i2.Response> fetchTemplate(
     String? userId,
@@ -263,6 +307,48 @@ class MockBackendAPI extends _i1.Mock implements _i3.BackendAPI {
         )),
       ) as _i4.Future<_i2.Response>);
   @override
+  _i4.Future<_i2.Response> registerUser(
+    String? userId,
+    String? coachId,
+    String? password,
+    String? name,
+    String? phoneNumber,
+    String? nationality,
+    String? dateOfBirth,
+    String? jwtToken,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #registerUser,
+          [
+            userId,
+            coachId,
+            password,
+            name,
+            phoneNumber,
+            nationality,
+            dateOfBirth,
+            jwtToken,
+          ],
+        ),
+        returnValue: _i4.Future<_i2.Response>.value(_FakeResponse_0(
+          this,
+          Invocation.method(
+            #registerUser,
+            [
+              userId,
+              coachId,
+              password,
+              name,
+              phoneNumber,
+              nationality,
+              dateOfBirth,
+              jwtToken,
+            ],
+          ),
+        )),
+      ) as _i4.Future<_i2.Response>);
+  @override
   _i4.Future<_i2.Response> fetchUserRoles(String? jwtToken) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -273,6 +359,21 @@ class MockBackendAPI extends _i1.Mock implements _i3.BackendAPI {
           this,
           Invocation.method(
             #fetchUserRoles,
+            [jwtToken],
+          ),
+        )),
+      ) as _i4.Future<_i2.Response>);
+  @override
+  _i4.Future<_i2.Response> fetchCoachRoles(String? jwtToken) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #fetchCoachRoles,
+          [jwtToken],
+        ),
+        returnValue: _i4.Future<_i2.Response>.value(_FakeResponse_0(
+          this,
+          Invocation.method(
+            #fetchCoachRoles,
             [jwtToken],
           ),
         )),
