@@ -1,12 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:lift_to_live_flutter/presentation/ui/pages/habits_page.dart';
-import 'package:lift_to_live_flutter/presentation/ui/pages/picture_page.dart';
+import 'package:lift_to_live_flutter/factory/page_factory.dart';
 import 'package:provider/provider.dart';
-
 import '../../../domain/entities/user.dart';
-import '../../../factory/home_page_factory.dart';
-import '../../../factory/profile_page_factory.dart';
 import '../../presenters/profile_page_presenter.dart';
 import '../../state_management/app_state.dart';
 import '../../../helper.dart';
@@ -17,10 +13,11 @@ import '../../views/profile_page_view.dart';
 /// It provides navigation to the user's pictures and habits pages.
 /// It is a stateful widget and its state object implements the ProfilePageView abstract class.
 class ProfilePage extends StatefulWidget {
+  final ProfilePagePresenter presenter; // The business logic object of the log in page
   final String userId;
   final String originPage;
 
-  const ProfilePage({Key? key, required this.userId, required this.originPage}) : super(key: key);
+  const ProfilePage({Key? key, required this.userId, required this.originPage, required this.presenter}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => ProfilePageState();
@@ -28,7 +25,6 @@ class ProfilePage extends StatefulWidget {
 
 /// State object of the ProfilePage. Holds the mutable data, related to the profile page.
 class ProfilePageState extends State<ProfilePage> implements ProfilePageView {
-  late ProfilePagePresenter _presenter; // The business logic object of the log in page
   bool _isLoading =
           false, // Indicator showing if data is being fetched at the moment
   _isFetched = false;
@@ -41,15 +37,14 @@ class ProfilePageState extends State<ProfilePage> implements ProfilePageView {
   /// initialize the page view by attaching it to the presenter
   @override
   void initState() {
-    _presenter = ProfilePageFactory().getProfilePagePresenter(widget.userId);
-    _presenter.attach(this);
+    widget.presenter.attach(this);
     super.initState();
   }
 
-  /// detach the view from the presenter
+  /// detach the view from the widget.presenter
   @override
   void deactivate() {
-    _presenter.detach();
+    widget.presenter.detach();
     super.deactivate();
   }
 
@@ -88,13 +83,13 @@ class ProfilePageState extends State<ProfilePage> implements ProfilePageView {
   /// Function called when user wants to navigate from the users profile to the users habit page.
   @override
   void habitsPressed(BuildContext context) {
-    Helper.pushPageWithAnimation(context, HabitsPage(userId: _user.id));
+    Helper.pushPageWithAnimation(context, PageFactory().getHabitsPage(_user.id));
   }
 
   /// Function called when user wants to navigate from profile page to pictures page.
   @override
   void picturesPressed(BuildContext context) {
-    Helper.pushPageWithAnimation(context, PicturePage(userId: _user.id, name: _user.name.split(" ")[0],));
+    Helper.pushPageWithAnimation(context, PageFactory().getPicturePage(_user.id, _user.name.split(" ")[0],));
   }
 
   /// Build method of the profile page view
@@ -103,14 +98,14 @@ class ProfilePageState extends State<ProfilePage> implements ProfilePageView {
     // get screen dimensions
     _screenWidth = MediaQuery.of(context).size.width;
 
-    // initialize presenter and log in form, if not initialized yet
-    if (!_presenter.isInitialized()) {
-      _presenter.setAppState(Provider.of<AppState>(context));
+    // initialize widget.presenter and log in form, if not initialized yet
+    if (!widget.presenter.isInitialized()) {
+      widget.presenter.setAppState(Provider.of<AppState>(context));
     }
 
     // fetch data if it is not fetched yet
     if (!_isFetched) {
-      _presenter.fetchData();
+      widget.presenter.fetchData();
     }
 
     return Scaffold(
@@ -133,7 +128,7 @@ class ProfilePageState extends State<ProfilePage> implements ProfilePageView {
               icon: const Icon(Icons.arrow_back, color: Helper.yellowColor),
               onPressed: () {
                 if(widget.originPage == 'home') {
-                  Helper.replacePage(context, HomePageFactory().getWrappedHomePage());
+                  Helper.replacePage(context, PageFactory().getWrappedHomePage());
                 }
                 else if(widget.originPage == 'trainees') {
                   Navigator.pop(context);
@@ -151,7 +146,10 @@ class ProfilePageState extends State<ProfilePage> implements ProfilePageView {
           SliverList(
             delegate: SliverChildBuilderDelegate(
                   (BuildContext context, int index) {
-                return _isLoading ? const Center(child: CircularProgressIndicator(color: Helper.pageBackgroundColor,)) : SingleChildScrollView(
+                return _isLoading ? const Center(child: Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: CircularProgressIndicator(color: Helper.yellowColor,),
+                )) : SingleChildScrollView(
                   child: Container(
                     decoration: const BoxDecoration(image: DecorationImage(
                       image: AssetImage(Helper.pageBackgroundImage),
@@ -172,8 +170,8 @@ class ProfilePageState extends State<ProfilePage> implements ProfilePageView {
                                   backgroundColor: Helper.actionButtonColor,
                                   label: const Text('View Pictures', style: TextStyle(color: Helper.actionButtonTextColor),),
                                   onPressed: () async {
-                                    if(_presenter.isAuthorized(false)) {
-                                      Helper.pushPageWithAnimation(context, PicturePage(userId: _user.id, name: _user.name.split(" ")[0],));
+                                    if(widget.presenter.isAuthorized(false)) {
+                                      Helper.pushPageWithAnimation(context, PageFactory().getPicturePage(_user.id, _user.name.split(" ")[0],));
                                     }
                                     else {
                                       Helper.makeToast(context, 'You are not authorized to see this page!');
@@ -206,7 +204,7 @@ class ProfilePageState extends State<ProfilePage> implements ProfilePageView {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            _presenter.isAuthorized(true) ? const SizedBox(width: 50,) : const SizedBox(),
+                            widget.presenter.isAuthorized(true) ? const SizedBox(width: 50,) : const SizedBox(),
                             Container(
                               height: _screenWidth / 2,
                               alignment: Alignment.center,
@@ -219,7 +217,7 @@ class ProfilePageState extends State<ProfilePage> implements ProfilePageView {
                                 child: _isFetched ? _profilePicture : null,
                               ),
                             ),
-                            _presenter.isAuthorized(true) && _isFetched ? IconButton(onPressed: () {_presenter.changeProfilePicture();}, icon: const Icon(CupertinoIcons.camera_fill, color: Helper.iconBackgroundColor, size: 30,)) : const SizedBox()
+                            widget.presenter.isAuthorized(true) && _isFetched ? IconButton(onPressed: () {widget.presenter.changeProfilePicture();}, icon: const Icon(CupertinoIcons.camera_fill, color: Helper.iconBackgroundColor, size: 30,)) : const SizedBox()
                           ],
                         ),
                         const SizedBox(height: 20,),

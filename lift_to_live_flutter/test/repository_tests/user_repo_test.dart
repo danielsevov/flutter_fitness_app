@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart';
 import 'package:lift_to_live_flutter/data/datasources/backend_api.dart';
+import 'package:lift_to_live_flutter/data/exceptions/duplicated_id_exception.dart';
 import 'package:lift_to_live_flutter/data/exceptions/fetch_failed_exception.dart';
 import 'package:lift_to_live_flutter/data/repositories/user_repo_impl.dart';
 import 'package:lift_to_live_flutter/domain/entities/image.dart';
@@ -258,6 +259,47 @@ void main() {
       UserRepository repository = UserRepoImpl(backendAPI);
 
       expect(() async => await repository.fetchCoachRoles('A'), throwsA(isA<FetchFailedException>()));
+    });
+  });
+
+  group('mock test user repository to register user', () {
+    test('returns response if the http call completes successfully 200', () async {
+      final backendAPI = MockBackendAPI();
+
+      when(backendAPI.registerUser(any, any, any, any, any, any, any, any)).thenAnswer(
+              (_) async => Response('', 200, headers: {
+            HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8',
+          }));
+
+      UserRepository repository = UserRepoImpl(backendAPI);
+
+      expect(() async => await repository.registerUser('', '', '', '', '', '', '', ''), returnsNormally);
+    });
+
+    test('throws an exception if the http call completes with an error 409', () async {
+      final backendAPI = MockBackendAPI();
+
+      when(backendAPI.registerUser(any, any, any, any, any, any, any, any)).thenAnswer(
+              (_) async => Response('', 409, headers: {
+            HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8',
+          }));
+
+      UserRepository repository = UserRepoImpl(backendAPI);
+
+      expect(() async =>  await repository.registerUser('', '', '', '', '', '', '', ''), throwsA(isA<DuplicatedIdException>()));
+    });
+
+    test('throws an exception if the http call completes with an error 404', () async {
+      final backendAPI = MockBackendAPI();
+
+      when(backendAPI.registerUser(any, any, any, any, any, any, any, any)).thenAnswer(
+              (_) async => Response('', 404, headers: {
+            HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8',
+          }));
+
+      UserRepository repository = UserRepoImpl(backendAPI);
+
+      expect(() async =>  await repository.registerUser('', '', '', '', '', '', '', ''), throwsA(isA<FetchFailedException>()));
     });
   });
 }

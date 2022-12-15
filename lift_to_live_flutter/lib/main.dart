@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'factory/page_factory.dart';
 import 'helper.dart';
 import 'presentation/state_management/app_state.dart';
-import 'presentation/ui/pages/log_in_page.dart';
 import 'package:provider/provider.dart';
 
 /// The main file of the application.
@@ -31,6 +31,6 @@ class MyApp extends StatelessWidget {
             ),
 
             // set the entry page to be log in page
-            home: const LogInPage()));
+            home: PageFactory().getLogInPage()));
   }
 }

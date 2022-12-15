@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import '../../../factory/picture_page_factory.dart';
 import '../../presenters/picture_page_presenter.dart';
 import '../../state_management/app_state.dart';
 import '../../../helper.dart';
@@ -14,8 +12,10 @@ import '../../views/picture_page_view.dart';
 class PicturePage extends StatefulWidget {
   final String userId;
   final String name;
+  final PicturePagePresenter
+  presenter; // The business logic object of the log in page
 
-  const PicturePage({Key? key, required this.userId, required this.name}) : super(key: key);
+  const PicturePage({Key? key, required this.userId, required this.name, required this.presenter}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => PicturePageState();
@@ -23,8 +23,6 @@ class PicturePage extends StatefulWidget {
 
 /// State object of the PicturePage. Holds the mutable data, related to the page.
 class PicturePageState extends State<PicturePage> implements PicturePageView {
-  late PicturePagePresenter
-      _presenter; // The business logic object of the log in page
   bool _isLoading =
           false, // Indicator showing if data is being fetched at the moment
       _isFetched = false;
@@ -33,15 +31,14 @@ class PicturePageState extends State<PicturePage> implements PicturePageView {
   /// initialize the page view by attaching it to the presenter
   @override
   void initState() {
-    _presenter = PicturePageFactory().getPicturePagePresenter(widget.userId);
-    _presenter.attach(this);
+    widget.presenter.attach(this);
     super.initState();
   }
 
   /// detach the view from the presenter
   @override
   void deactivate() {
-    _presenter.detach();
+    widget.presenter.detach();
     super.deactivate();
   }
 
@@ -69,13 +66,13 @@ class PicturePageState extends State<PicturePage> implements PicturePageView {
   @override
   Widget build(BuildContext context) {
     // initialize presenter and log in form, if not initialized yet
-    if (!_presenter.isInitialized()) {
-      _presenter.setAppState(Provider.of<AppState>(context));
+    if (!widget.presenter.isInitialized()) {
+      widget.presenter.setAppState(Provider.of<AppState>(context));
     }
 
     // fetch data if it is not fetched yet
     if (!_isFetched) {
-      _presenter.fetchData();
+      widget.presenter.fetchData();
     }
 
     return Scaffold(
@@ -125,12 +122,12 @@ class PicturePageState extends State<PicturePage> implements PicturePageView {
                         const SizedBox(
                           width: 10,
                         ),
-                        _presenter.isAuthorized()
+                        widget.presenter.isAuthorized()
                             ? CircleAvatar(
                                 backgroundColor: Helper.actionButtonColor,
                                 child: IconButton(
                                     onPressed: () {
-                                      _presenter.addPicture("front");
+                                      widget.presenter.addPicture("front");
                                     },
                                     icon: const Icon(Icons.add,
                                         color: Helper.actionButtonTextColor)),
@@ -164,12 +161,12 @@ class PicturePageState extends State<PicturePage> implements PicturePageView {
                         const SizedBox(
                           width: 10,
                         ),
-                        _presenter.isAuthorized()
+                        widget.presenter.isAuthorized()
                             ? CircleAvatar(
                                 backgroundColor: Helper.actionButtonColor,
                                 child: IconButton(
                                     onPressed: () {
-                                      _presenter.addPicture("back");
+                                      widget.presenter.addPicture("back");
                                     },
                                     icon: const Icon(Icons.add,
                                         color: Helper.actionButtonTextColor)),
@@ -203,12 +200,12 @@ class PicturePageState extends State<PicturePage> implements PicturePageView {
                         const SizedBox(
                           width: 10,
                         ),
-                        _presenter.isAuthorized()
+                        widget.presenter.isAuthorized()
                             ? CircleAvatar(
                                 backgroundColor: Helper.actionButtonColor,
                                 child: IconButton(
                                     onPressed: () {
-                                      _presenter.addPicture("side");
+                                      widget.presenter.addPicture("side");
                                     },
                                     icon: const Icon(Icons.add,
                                         color: Helper.actionButtonTextColor)),

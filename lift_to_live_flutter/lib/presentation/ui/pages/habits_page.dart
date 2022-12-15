@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:lift_to_live_flutter/presentation/ui/pages/edit_habits_page.dart';
+import 'package:lift_to_live_flutter/factory/page_factory.dart';
 import 'package:provider/provider.dart';
 import '../../presenters/habits_page_presenter.dart';
-import '../../../factory/habits_page_factory.dart';
 import '../../state_management/app_state.dart';
 import '../../../helper.dart';
 import '../../views/habits_page_view.dart';
@@ -13,8 +12,9 @@ import '../widgets/custom_calendar.dart';
 /// It is a stateful widget and its state object implements the HabitsPageView abstract class.
 class HabitsPage extends StatefulWidget {
   final String userId;
+  final HabitsPagePresenter presenter; // The business logic object
 
-  const HabitsPage({Key? key, required this.userId}) : super(key: key);
+  const HabitsPage({Key? key, required this.userId, required this.presenter}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => HabitsPageState();
@@ -22,7 +22,6 @@ class HabitsPage extends StatefulWidget {
 
 /// State object of the HabitsPage. Holds the mutable data, related to the page.
 class HabitsPageState extends State<HabitsPage> implements HabitsPageView {
-  late HabitsPagePresenter _presenter; // The business logic object
   bool _isLoading =
           false, // Indicator showing if data is being fetched at the moment
       _isFetched = false;
@@ -32,15 +31,14 @@ class HabitsPageState extends State<HabitsPage> implements HabitsPageView {
   /// initialize the page view by attaching it to the presenter
   @override
   void initState() {
-    _presenter = HabitsPageFactory().getHabitsPagePresenter(widget.userId);
-    _presenter.attach(this);
+    widget.presenter.attach(this);
     super.initState();
   }
 
   /// detach the view from the presenter
   @override
   void deactivate() {
-    _presenter.detach();
+    widget.presenter.detach();
     super.deactivate();
   }
 
@@ -68,13 +66,13 @@ class HabitsPageState extends State<HabitsPage> implements HabitsPageView {
     screenWidth = MediaQuery.of(context).size.width;
 
     // initialize presenter and log in form, if not initialized yet
-    if (!_presenter.isInitialized()) {
-      _presenter.setAppState(Provider.of<AppState>(context));
+    if (!widget.presenter.isInitialized()) {
+      widget.presenter.setAppState(Provider.of<AppState>(context));
     }
 
     // fetch data if it is not fetched yet
     if (!_isFetched) {
-      _presenter.fetchData();
+      widget.presenter.fetchData();
     }
 
     return Scaffold(
@@ -112,9 +110,9 @@ class HabitsPageState extends State<HabitsPage> implements HabitsPageView {
                     actions: [
                       IconButton(
                           onPressed: () async {
-                            if (_presenter.isAuthorized()) {
+                            if (widget.presenter.isAuthorized()) {
                               Helper.pushPageWithAnimation(
-                                  context, EditHabitsPage(userId: widget.userId,));
+                                  context, PageFactory().getEditHabitsPage(widget.userId,));
                             } else {
                               Helper.makeToast(context,
                                   "You don't have the permission to edit habits!");
@@ -129,7 +127,7 @@ class HabitsPageState extends State<HabitsPage> implements HabitsPageView {
                   SliverList(
                     delegate: SliverChildBuilderDelegate(
                       (BuildContext context, int index) {
-                        return _isFetched ? CustomCalendar(habits: _presenter.habits) : const SizedBox();
+                        return _isFetched ? CustomCalendar(habits: widget.presenter.habits) : const SizedBox();
                       },
                       childCount: 1,
                     ),

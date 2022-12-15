@@ -41,7 +41,7 @@ class TraineeSearchHolder extends StatelessWidget {
                   child: user.profilePicture != null ? Image.memory(
                   base64Decode(user.profilePicture!.data),
                   width: 200,
-                ) : Image.asset('assets/images/prof_pic.png', color: Helper.blackColor,),),
+                ) : Image.asset('assets/images/prof_pic.png', color: Helper.blackColor, width: 200,),),
               ),
             ),
             Expanded(

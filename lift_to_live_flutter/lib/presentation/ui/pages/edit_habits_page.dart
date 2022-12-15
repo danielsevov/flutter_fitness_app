@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:lift_to_live_flutter/presentation/ui/pages/habits_page.dart';
+import 'package:lift_to_live_flutter/factory/page_factory.dart';
 import 'package:provider/provider.dart';
 import '../../../domain/entities/habit.dart';
 import '../../presenters/edit_habits_page_presenter.dart';
-import '../../../factory/habits_page_factory.dart';
 import '../../state_management/app_state.dart';
 import '../../../helper.dart';
 import '../../views/edit_habits_page_view.dart';
@@ -14,8 +13,9 @@ import '../widgets/edit_habit_holder.dart';
 /// It is a stateful widget and its state object implements the EditHabitsPageView abstract class.
 class EditHabitsPage extends StatefulWidget {
   final String userId;
+  final EditHabitsPagePresenter presenter; // The business logic object
 
-  const EditHabitsPage({Key? key, required this.userId}) : super(key: key);
+  const EditHabitsPage({Key? key, required this.userId, required this.presenter}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => EditHabitsPageState();
@@ -24,7 +24,6 @@ class EditHabitsPage extends StatefulWidget {
 /// State object of the HabitsPage. Holds the mutable data, related to the profile page.
 class EditHabitsPageState extends State<EditHabitsPage>
     implements EditHabitsPageView {
-  late EditHabitsPagePresenter _presenter; // The business logic object
   bool _isLoading =
           false, // Indicator showing if data is being fetched at the moment
       _isFetched = false;
@@ -41,15 +40,14 @@ class EditHabitsPageState extends State<EditHabitsPage>
   @override
   void initState() {
     _isChanged = false;
-    _presenter = HabitsPageFactory().getEditHabitsPagePresenter(widget.userId);
-    _presenter.attach(this);
+    widget.presenter.attach(this);
     super.initState();
   }
 
   /// detach the view from the presenter
   @override
   void deactivate() {
-    _presenter.detach();
+    widget.presenter.detach();
     super.deactivate();
   }
 
@@ -77,13 +75,13 @@ class EditHabitsPageState extends State<EditHabitsPage>
     screenWidth = MediaQuery.of(context).size.width;
 
     // initialize presenter and log in form, if not initialized yet
-    if (!_presenter.isInitialized()) {
-      _presenter.setAppState(Provider.of<AppState>(context));
+    if (!widget.presenter.isInitialized()) {
+      widget.presenter.setAppState(Provider.of<AppState>(context));
     }
 
     // fetch data if it is not fetched yet
     if (!_isFetched) {
-      _presenter.fetchData();
+      widget.presenter.fetchData();
     }
 
     return Scaffold(
@@ -161,7 +159,7 @@ class EditHabitsPageState extends State<EditHabitsPage>
                 icon: const Icon(Icons.add),
                 label: const Text('Add'),
                 onPressed: () {
-                  _presenter.addNewElement();
+                  widget.presenter.addNewElement();
                 },
               )), // button third
 
@@ -179,7 +177,7 @@ class EditHabitsPageState extends State<EditHabitsPage>
                   style: TextStyle(color: Helper.blackColor),
                 ),
                 onPressed: () {
-                  _presenter.saveChanges();
+                  widget.presenter.saveChanges();
                 },
               )),
         ],
@@ -233,6 +231,6 @@ class EditHabitsPageState extends State<EditHabitsPage>
   /// Function for returning from this page to the previous one.
   void goBack() {
     Navigator.pop(context);
-    Helper.replacePage(context, HabitsPage(userId: widget.userId));
+    Helper.replacePage(context, PageFactory().getHabitsPage(widget.userId));
   }
 }

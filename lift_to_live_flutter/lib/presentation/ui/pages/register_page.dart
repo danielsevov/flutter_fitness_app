@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lift_to_live_flutter/presentation/ui/pages/trainees_page.dart';
 import 'package:provider/provider.dart';
-
-import '../../../factory/register_page_factory.dart';
+import '../../../factory/page_factory.dart';
 import '../../presenters/register_page_presenter.dart';
 import '../../state_management/app_state.dart';
 import '../../../helper.dart';
@@ -14,7 +12,9 @@ import '../widgets/register_form.dart';
 /// and submitting them for registration of the user.
 /// It is a stateful widget and its state object implements the RegisterPageView abstract class.
 class RegisterPage extends StatefulWidget {
-  const RegisterPage({Key? key}) : super(key: key);
+  final RegisterPagePresenter presenter; // The business logic object of the log in page
+
+  const RegisterPage({Key? key, required this.presenter}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => RegisterPageState();
@@ -23,8 +23,6 @@ class RegisterPage extends StatefulWidget {
 /// State object of the RegisterPage. Holds the mutable data, related to the register page.
 class RegisterPageState extends State<RegisterPage>
     implements RegisterPageView {
-  final RegisterPagePresenter _presenter = RegisterPageFactory()
-      .getRegisterPresenter(); // The business logic object of the log in page
   late final RegisterForm
       _registerForm; // The log in form widget, nested in the log in page
   bool _isLoading = false,
@@ -35,14 +33,14 @@ class RegisterPageState extends State<RegisterPage>
   /// initialize the page view by attaching it to the presenter
   @override
   void initState() {
-    _presenter.attach(this);
+    widget.presenter.attach(this);
     super.initState();
   }
 
   /// detach the view from the presenter
   @override
   void deactivate() {
-    _presenter.detach();
+    widget.presenter.detach();
     super.deactivate();
   }
 
@@ -54,13 +52,13 @@ class RegisterPageState extends State<RegisterPage>
     _screenHeight = MediaQuery.of(context).size.height;
 
     // initialize presenter and log in form, if not initialized yet
-    if (!_presenter.isInitialized()) {
-      _presenter.setAppState(Provider.of<AppState>(context));
+    if (!widget.presenter.isInitialized()) {
+      widget.presenter.setAppState(Provider.of<AppState>(context));
     }
 
     // fetch data if it is not fetched yet
     if (!_isFetched) {
-      _presenter.fetchData();
+      widget.presenter.fetchData();
     }
 
     return Scaffold(
@@ -72,7 +70,7 @@ class RegisterPageState extends State<RegisterPage>
         leading: IconButton(
             icon: const Icon(Icons.arrow_back, color: Helper.yellowColor),
             onPressed: () {
-              Helper.replacePage(context, const TraineesPage());
+              Helper.replacePage(context, PageFactory().getTraineesPage());
             }
         ),
         title: const Text(
@@ -149,7 +147,7 @@ class RegisterPageState extends State<RegisterPage>
   @override
   void notifyUserRegistered() {
     Helper.makeToast(context, "User has been successfully registered!");
-    Helper.replacePage(context, const TraineesPage());
+    Helper.replacePage(context, PageFactory().getTraineesPage());
   }
 
   /// Function to pass the required coach data to the page view.
@@ -159,7 +157,7 @@ class RegisterPageState extends State<RegisterPage>
       _registerForm = RegisterForm(
         screenHeight: _screenHeight,
         screenWidth: _screenWidth,
-        presenter: _presenter,
+        presenter: widget.presenter,
         coaches: coachesIds,
       );
     });

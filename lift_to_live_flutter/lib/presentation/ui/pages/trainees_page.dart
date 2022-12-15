@@ -1,9 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:lift_to_live_flutter/presentation/ui/pages/profile_page.dart';
-import 'package:lift_to_live_flutter/presentation/ui/pages/register_page.dart';
+import 'package:lift_to_live_flutter/factory/page_factory.dart';
 import 'package:provider/provider.dart';
-import '../../../factory/trainees_page_factory.dart';
 import '../../presenters/trainees_page_presenter.dart';
 import '../../state_management/app_state.dart';
 import '../../../helper.dart';
@@ -12,10 +10,12 @@ import '../widgets/trainee_search_holder.dart';
 
 
 /// Custom TraineesPage widget used by coaches to search and overview trainees.
-/// It provides navigation to the trainees's profile pages.
+/// It provides navigation to the trainee's profile pages.
 /// It is a stateful widget and its state object implements the TraineesPageView abstract class.
 class TraineesPage extends StatefulWidget {
-  const TraineesPage({Key? key}) : super(key: key);
+  final TraineesPagePresenter presenter; // The business logic object
+
+  const TraineesPage({Key? key, required this.presenter}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => TraineesPageState();
@@ -24,7 +24,6 @@ class TraineesPage extends StatefulWidget {
 /// State object of the TraineesPage. Holds the mutable data, related to the profile page.
 class TraineesPageState extends State<TraineesPage>
     implements TraineesPageView {
-  late TraineesPagePresenter _presenter; // The business logic object
   bool _isLoading =
           false, // Indicator showing if data is being fetched at the moment
       _isFetched = false;
@@ -35,15 +34,14 @@ class TraineesPageState extends State<TraineesPage>
   /// initialize the page view by attaching it to the presenter
   @override
   void initState() {
-    _presenter = TraineesPageFactory().getTraineesPagePresenter();
-    _presenter.attach(this);
+    widget.presenter.attach(this);
     super.initState();
   }
 
   /// detach the view from the presenter
   @override
   void deactivate() {
-    _presenter.detach();
+    widget.presenter.detach();
     super.deactivate();
   }
 
@@ -81,13 +79,13 @@ class TraineesPageState extends State<TraineesPage>
   /// Function to navigate to the selected user profile page
   @override
   void navigateToProfilePage(String id) {
-    Helper.pushPageWithAnimation(context, ProfilePage(userId: id, originPage: 'trainees',));
+    Helper.pushPageWithAnimation(context, PageFactory().getProfilePage(id, 'trainees'));
   }
 
-  /// Function called when user wants to navigate to the user regsitration page.
+  /// Function called when user wants to navigate to the user registration page.
   @override
   void registerPressed(BuildContext context) {
-    Helper.replacePage(context, const RegisterPage());
+    Helper.replacePage(context, PageFactory().getRegisterPage());
   }
 
   /// Function to apply the search term filter on the trainees
@@ -103,13 +101,13 @@ class TraineesPageState extends State<TraineesPage>
     screenWidth = MediaQuery.of(context).size.width;
 
     // initialize presenter and log in form, if not initialized yet
-    if (!_presenter.isInitialized()) {
-      _presenter.setAppState(Provider.of<AppState>(context));
+    if (!widget.presenter.isInitialized()) {
+      widget.presenter.setAppState(Provider.of<AppState>(context));
     }
 
     // fetch data if it is not fetched yet
     if (!_isFetched) {
-      _presenter.fetchData();
+      widget.presenter.fetchData();
     }
 
     return Scaffold(
