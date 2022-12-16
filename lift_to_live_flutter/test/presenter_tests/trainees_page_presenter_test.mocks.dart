@@ -110,7 +110,7 @@ class MockUserRepository extends _i1.Mock implements _i4.UserRepository {
   ) =>
       (super.noSuchMethod(
         Invocation.method(
-          #getUserImages,
+          #fetchUserImages,
           [
             userId,
             jwtToken,

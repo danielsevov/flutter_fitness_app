@@ -82,7 +82,7 @@ class MockBackendAPI extends _i1.Mock implements _i3.BackendAPI {
   ) =>
       (super.noSuchMethod(
         Invocation.method(
-          #getImages,
+          #fetchImages,
           [
             userId,
             jwtToken,
@@ -91,7 +91,7 @@ class MockBackendAPI extends _i1.Mock implements _i3.BackendAPI {
         returnValue: _i4.Future<_i2.Response>.value(_FakeResponse_0(
           this,
           Invocation.method(
-            #getImages,
+            #fetchImages,
             [
               userId,
               jwtToken,

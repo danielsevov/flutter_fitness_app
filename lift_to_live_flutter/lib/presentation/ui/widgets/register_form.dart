@@ -537,6 +537,7 @@ class RegisterFormState extends State<RegisterForm> {
                       fontSize: widget.screenHeight / 35,
                       height: 0.8),
                 ),
+                dropdownColor: Helper.blueColor,
                 style: TextStyle(
                     color: Helper.textFieldTextColor,
                     fontSize: widget.screenHeight / 35,
