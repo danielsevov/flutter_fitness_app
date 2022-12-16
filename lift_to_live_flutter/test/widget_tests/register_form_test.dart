@@ -161,7 +161,6 @@ void main() {
     });
   });
 
-
   testWidgets('RegisterForm test fill date fields', (tester) async {
     await tester.runAsync(() async {
       // tests
@@ -207,6 +206,86 @@ void main() {
       await tester.pump(const Duration(seconds: 2));
 
       expect(dateFinder, findsOneWidget);
+    });
+  });
+
+  testWidgets('RegisterForm test fill all fields', (tester) async {
+    await tester.runAsync(() async {
+      // tests
+      final presenter = MockRegisterPagePresenter();
+      final appState = AppState();
+      appState.setInitialState('User A', 'token', [Role('User A', 'coach')]);
+      when(presenter.appState).thenReturn(appState);
+
+      final form = RegisterForm(screenHeight: 600, screenWidth: 400, presenter: presenter, coaches: const ['User A', 'User B', 'User C'],);
+
+      final titleFinder = find.text('Register User');
+      final locationFinder = find.byIcon(Icons.location_pin);
+      final dateFinder = find.byIcon(Icons.date_range);
+
+      await tester.pumpWidget(MaterialApp(
+          title: 'Flutter Demo', home: Scaffold(backgroundColor: Helper.lightBlueColor, body: Center(child: form,))));
+
+      await tester.pump(const Duration(seconds: 2));
+      await tester.pumpAndSettle();
+
+      // enter country
+      final austriaFinder = find.text('Austria');
+      await tester.tap(locationFinder);
+      await tester.pumpAndSettle();
+      await tester.pump(const Duration(seconds: 2));
+      await tester.tap(austriaFinder);
+      await tester.pump(const Duration(seconds: 2));
+      await tester.pumpAndSettle();
+
+      //enter date
+      final buttonFinder = find.text('OK');
+      final dateTextFinder = find.text('10');
+      await tester.tap(dateFinder);
+      await tester.pumpAndSettle();
+      await tester.pump(const Duration(seconds: 2));
+      await tester.tap(dateTextFinder);
+      await tester.pumpAndSettle();
+      await tester.pump(const Duration(seconds: 2));
+      await tester.tap(buttonFinder);
+      await tester.pumpAndSettle();
+      await tester.pump(const Duration(seconds: 2));
+
+      form.enterData('User Name', 'user@email.com', 'MyPassword1234', '0888555555');
+
+      expect(form.getCoachEmail(), 'User A');
+
+      String month = DateTime.now().month.toString();
+      String year = DateTime.now().year.toString();
+      if(DateTime.now().month < 10) {
+        month = '0$month';
+      }
+      expect(form.getDateOfBirth(), '10/$month/$year');
+
+      expect(form.getPhoneNumber(), '0888555555');
+
+      expect(form.getNationality(), 'Austria');
+
+      expect(form.getName(), 'User Name');
+
+      expect(form.getPassword(), 'MyPassword1234');
+
+      expect(form.getEmail(), 'user@email.com');
+
+      await tester.tap(titleFinder);
+      await tester.pumpAndSettle();
+      await tester.pump(const Duration(seconds: 2));
+
+      verify(presenter.registerUser()).called(1);
+
+      form.clearEmail();
+      expect(form.getEmail(), '');
+
+      form.clearPassword();
+      expect(form.getPassword(), '');
+
+      form.clearForm();
+      expect(form.getPhoneNumber(), '');
     });
   });
 }

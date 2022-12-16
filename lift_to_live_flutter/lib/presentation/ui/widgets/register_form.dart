@@ -100,6 +100,13 @@ class RegisterForm extends StatefulWidget implements RegisterFormView {
   String getPhoneNumber() {
     return _phoneController.text.toString();
   }
+
+  void enterData(String name, String email, String pass, String phone) {
+    _nameController.text = name;
+    _emailController.text = email;
+    _passwordController.text = pass;
+    _phoneController.text = phone;
+  }
 }
 
 /// This class holds data and methods related to the log in form.

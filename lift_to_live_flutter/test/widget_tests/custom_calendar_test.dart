@@ -13,11 +13,13 @@ void main() {
       final HabitTask habitTaskTrue = HabitTask('This is the task', true);
       final HabitTask habitTaskFalse = HabitTask('This is the task', false);
 
-      final String today = DateTime.now().millisecondsSinceEpoch.toString();
+      final String day1 = DateTime.now().subtract(const Duration(days: 1)).millisecondsSinceEpoch.toString();
+      final String day2 = DateTime.now().subtract(const Duration(days: 2)).millisecondsSinceEpoch.toString();
+      final String day3 = DateTime.now().subtract(const Duration(days: 3)).millisecondsSinceEpoch.toString();
 
-      final Habit habit = Habit(1, today, 'This is a note', 'A', 'A', false, [habitTaskTrue, habitTaskTrue]);
-      final Habit habit2 = Habit(1, today, 'This is a note', 'A', 'A', false, [habitTaskTrue, habitTaskFalse]);
-      final Habit habit3 = Habit(1, today, 'This is a note', 'A', 'A', false, [habitTaskFalse, habitTaskFalse]);
+      final Habit habit = Habit(1, day1, 'This is a note', 'A', 'A', false, [habitTaskTrue, habitTaskTrue]);
+      final Habit habit2 = Habit(1, day2, 'This is a note', 'A', 'A', false, [habitTaskTrue, habitTaskFalse]);
+      final Habit habit3 = Habit(1, day3, 'This is a note', 'A', 'A', false, [habitTaskFalse, habitTaskFalse]);
 
       final widget = CustomCalendar(habits: [habit, habit2, habit3]);
 
