@@ -15,37 +15,37 @@ void main() {
   group('Helper tests', () {
     test('Helper.makeToast test', () {
       final context = MockBuildContext();
-      when(context.findAncestorWidgetOfExactType()).thenThrow(FetchFailedException('message'));
+      when(context.findAncestorWidgetOfExactType()).thenThrow(FailedFetchException('message'));
 
-      expect(() async => Helper.makeToast(context, 'message'), throwsA(isA<FetchFailedException>()));
+      expect(() async => Helper.makeToast(context, 'message'), throwsA(isA<FailedFetchException>()));
     });
 
     test('Helper.pushPageWithAnimation test', () {
       final context = MockBuildContext();
-      when(context.findAncestorStateOfType()).thenThrow(FetchFailedException('message'));
+      when(context.findAncestorStateOfType()).thenThrow(FailedFetchException('message'));
 
-      expect(() async => Helper.pushPageWithAnimation(context, const SizedBox()), throwsA(isA<FetchFailedException>()));
+      expect(() async => Helper.pushPageWithAnimation(context, const SizedBox()), throwsA(isA<FailedFetchException>()));
     });
 
     test('Helper.pushPage test', () {
       final context = MockBuildContext();
-      when(context.findAncestorStateOfType()).thenThrow(FetchFailedException('message'));
+      when(context.findAncestorStateOfType()).thenThrow(FailedFetchException('message'));
 
-      expect(() async => Helper.pushPage(context, const SizedBox()), throwsA(isA<FetchFailedException>()));
+      expect(() async => Helper.pushPage(context, const SizedBox()), throwsA(isA<FailedFetchException>()));
     });
 
     test('Helper.pushPageWithCallback test', () {
       final context = MockBuildContext();
-      when(context.findAncestorStateOfType()).thenThrow(FetchFailedException('message'));
+      when(context.findAncestorStateOfType()).thenThrow(FailedFetchException('message'));
 
-      expect(() async => Helper.pushPageWithCallback(context, const SizedBox(), (){}), throwsA(isA<FetchFailedException>()));
+      expect(() async => Helper.pushPageWithCallback(context, const SizedBox(), (){}), throwsA(isA<FailedFetchException>()));
     });
 
     test('Helper.replacePage test', () {
       final context = MockBuildContext();
-      when(context.findAncestorStateOfType()).thenThrow(FetchFailedException('message'));
+      when(context.findAncestorStateOfType()).thenThrow(FailedFetchException('message'));
 
-      expect(() async => Helper.replacePage(context, const SizedBox()), throwsA(isA<FetchFailedException>()));
+      expect(() async => Helper.replacePage(context, const SizedBox()), throwsA(isA<FailedFetchException>()));
     });
 
     test('Helper.isDateBeforeToday test', () {

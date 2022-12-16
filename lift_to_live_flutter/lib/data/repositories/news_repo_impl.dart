@@ -34,7 +34,7 @@ class NewsRepoImpl implements NewsRepository {
     //else throw an exception
     else {
       log("fetch news failed");
-      throw FetchFailedException(
+      throw FailedFetchException(
           "Failed to fetch news!\nresponse code ${response.statusCode}");
     }
   }

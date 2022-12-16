@@ -38,7 +38,7 @@ void main() {
 
       NewsRepository repository = NewsRepoImpl(backendAPI);
 
-      expect(() async => await repository.getNews("search", 1), throwsA(isA<FetchFailedException>()));
+      expect(() async => await repository.getNews("search", 1), throwsA(isA<FailedFetchException>()));
     });
   });
 }

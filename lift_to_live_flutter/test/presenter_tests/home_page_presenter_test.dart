@@ -175,7 +175,7 @@ void main() {
     when(view.setFetched(any)).thenAnswer((realInvocation) { });
     when(userRepo.fetchUser('email', 'token')).thenAnswer(
             (_) async => User('email', 'email', 'coachId', 'nationality', 'dateOfBirth', 'name', 'phoneNumber'));
-    when(userRepo.fetchProfileImage('email', 'token')).thenThrow(FetchFailedException(''));
+    when(userRepo.fetchProfileImage('email', 'token')).thenThrow(FailedFetchException(''));
     when(view.setUserData(any, any)).thenAnswer((realInvocation) { });
     when(newsRepo.getNews(any, any)).thenAnswer(
             (_) async => TestData.test_news_1);

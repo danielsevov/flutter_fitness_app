@@ -38,7 +38,7 @@ void main() {
 
       TokenRepository repository = TokenRepoImpl(backendAPI);
 
-      expect(() async => await repository.getToken('email', 'password'), throwsA(isA<FetchFailedException>()));
+      expect(() async => await repository.getToken('email', 'password'), throwsA(isA<FailedFetchException>()));
     });
   });
 }

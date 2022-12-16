@@ -89,7 +89,7 @@ void main() {
 
   test('test fetch template fail', () async {
     final habitsRepo = MockHabitsRepository();
-    when(habitsRepo.fetchTemplate(any, any)).thenThrow(FetchFailedException(''));
+    when(habitsRepo.fetchTemplate(any, any)).thenThrow(FailedFetchException(''));
 
     final presenter = HabitsPagePresenter(habitsRepo, 'A');
     final appState = AppState();
@@ -128,7 +128,7 @@ void main() {
   test('test fetch habits fail', () async {
     final habitsRepo = MockHabitsRepository();
     when(habitsRepo.fetchTemplate(any, any)).thenAnswer((realInvocation) async => Habit(1, '', '', '', '', true, [HabitTask('My Task 1', false)]));
-    when(habitsRepo.fetchHabits(any, any)).thenThrow(FetchFailedException(''));
+    when(habitsRepo.fetchHabits(any, any)).thenThrow(FailedFetchException(''));
 
     final presenter = HabitsPagePresenter(habitsRepo, 'A');
     final appState = AppState();

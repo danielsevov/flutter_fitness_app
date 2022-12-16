@@ -82,7 +82,7 @@ void main() {
     final presenter = PicturePagePresenter(userRepo, 'email@email.com');
     expect(presenter.isInitialized(), false);
 
-    when(userRepo.fetchUserImages(any, any)).thenThrow(FetchFailedException('fail'));
+    when(userRepo.fetchUserImages(any, any)).thenThrow(FailedFetchException('fail'));
 
     appState.setInitialState('email@email.com', '', []);
     presenter.setAppState(appState);

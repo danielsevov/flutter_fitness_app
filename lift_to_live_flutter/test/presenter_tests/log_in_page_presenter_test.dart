@@ -152,7 +152,7 @@ void main() {
       when(form.getPassword()).thenReturn('wrong_password');
       when(form.clearPassword()).thenAnswer((realInvocation) { });
       when(form.clearForm()).thenAnswer((realInvocation) { });
-      when(tokenRepo.getToken('email@email.com', 'wrong_password')).thenThrow(FetchFailedException('no token'));
+      when(tokenRepo.getToken('email@email.com', 'wrong_password')).thenThrow(FailedFetchException('no token'));
 
       await presenter.logIn();
 

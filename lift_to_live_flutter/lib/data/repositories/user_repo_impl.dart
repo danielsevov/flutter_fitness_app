@@ -32,7 +32,7 @@ class UserRepoImpl implements UserRepository {
     //else throw an exception
     else {
       log("patch image failed");
-      throw FetchFailedException(
+      throw FailedFetchException(
           "Failed to patch image!\nresponse code ${response.statusCode}");
     }
   }
@@ -50,7 +50,7 @@ class UserRepoImpl implements UserRepository {
     //else throw an exception
     else {
       log("post image failed");
-      throw FetchFailedException(
+      throw FailedFetchException(
           "Failed to post image!\nresponse code ${response.statusCode}");
     }
   }
@@ -72,7 +72,7 @@ class UserRepoImpl implements UserRepository {
     //else throw an exception
     else {
       log("fetch profile picture failed");
-      throw FetchFailedException(
+      throw FailedFetchException(
           "Failed to fetch profile picture!\nresponse code ${response.statusCode}");
     }
   }
@@ -94,7 +94,7 @@ class UserRepoImpl implements UserRepository {
     //else throw an exception
     else {
       log("fetch user details failed");
-      throw FetchFailedException(
+      throw FailedFetchException(
           "Failed to fetch user details!\nresponse code ${response.statusCode}");
     }
   }
@@ -121,7 +121,7 @@ class UserRepoImpl implements UserRepository {
     //else throw an exception
     else {
       log("fetch trainee details failed");
-      throw FetchFailedException(
+      throw FailedFetchException(
           "Failed to fetch user details!\nresponse code ${response.statusCode}");
     }
   }
@@ -150,7 +150,7 @@ class UserRepoImpl implements UserRepository {
     //else throw an exception
     else {
       log("fetch user images failed");
-      throw FetchFailedException(
+      throw FailedFetchException(
           "Failed to fetch user images!\nresponse code ${response.statusCode}");
     }
   }
@@ -179,7 +179,7 @@ class UserRepoImpl implements UserRepository {
     //else throw an exception
     else {
       log("fetch user roles failed");
-      throw FetchFailedException(
+      throw FailedFetchException(
           "Failed to fetch user roles!\nresponse code ${response.statusCode}");
     }
   }
@@ -210,7 +210,7 @@ class UserRepoImpl implements UserRepository {
     //else throw an exception
     else {
       log("fetch coach roles failed");
-      throw FetchFailedException(
+      throw FailedFetchException(
           "Failed to fetch coach roles!\nresponse code ${response.statusCode}");
     }
   }
@@ -223,13 +223,13 @@ class UserRepoImpl implements UserRepository {
 
       if(res.statusCode != 200 && res.statusCode != 204) {
         log("fetch user details failed");
-        throw FetchFailedException(
+        throw FailedFetchException(
             "Failed to delete image!");
       }
     }
     catch(e) {
       log("fetch user details failed");
-      throw FetchFailedException(
+      throw FailedFetchException(
           "Failed to delete image!\n$e");
     }
   }
@@ -253,7 +253,7 @@ class UserRepoImpl implements UserRepository {
     //else throw an exception
     else {
       log("post user failed");
-      throw FetchFailedException(
+      throw FailedFetchException(
           "Failed to register new user!\nresponse code ${response.statusCode}");
     }
   }

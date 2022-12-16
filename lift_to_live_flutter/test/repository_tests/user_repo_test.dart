@@ -39,7 +39,7 @@ void main() {
 
       UserRepository repository = UserRepoImpl(backendAPI);
 
-      expect(() async => await repository.fetchUser('A', 'A'), throwsA(isA<FetchFailedException>()));
+      expect(() async => await repository.fetchUser('A', 'A'), throwsA(isA<FailedFetchException>()));
     });
   });
 
@@ -67,7 +67,7 @@ void main() {
 
       UserRepository repository = UserRepoImpl(backendAPI);
 
-      expect(() async => await repository.fetchMyTrainees('A', 'A'), throwsA(isA<FetchFailedException>()));
+      expect(() async => await repository.fetchMyTrainees('A', 'A'), throwsA(isA<FailedFetchException>()));
     });
   });
 
@@ -95,7 +95,7 @@ void main() {
 
       UserRepository repository = UserRepoImpl(backendAPI);
 
-      expect(() async => await repository.fetchProfileImage('A', 'A'), throwsA(isA<FetchFailedException>()));
+      expect(() async => await repository.fetchProfileImage('A', 'A'), throwsA(isA<FailedFetchException>()));
     });
   });
 
@@ -150,11 +150,11 @@ void main() {
   test('test delete image exception', () async {
     final backendAPI = MockBackendAPI();
 
-    when(backendAPI.deleteImage( 1 ,'')).thenThrow(FetchFailedException(''));
+    when(backendAPI.deleteImage( 1 ,'')).thenThrow(FailedFetchException(''));
 
     UserRepository repository = UserRepoImpl(backendAPI);
 
-    expect(() => repository.deleteImage( 1 ,''), throwsA(isA<FetchFailedException>()));
+    expect(() => repository.deleteImage( 1 ,''), throwsA(isA<FailedFetchException>()));
   });
 
   test('test patch image', () async {
@@ -203,7 +203,7 @@ void main() {
 
     UserRepository repository = UserRepoImpl(backendAPI);
 
-    expect(() async => await repository.fetchUserImages('A', 'A'), throwsA(isA<FetchFailedException>()));
+    expect(() async => await repository.fetchUserImages('A', 'A'), throwsA(isA<FailedFetchException>()));
   });
 
   group('mock test user repository to fetch user roles', () {
@@ -230,7 +230,7 @@ void main() {
 
       UserRepository repository = UserRepoImpl(backendAPI);
 
-      expect(() async => await repository.fetchUserRoles('A'), throwsA(isA<FetchFailedException>()));
+      expect(() async => await repository.fetchUserRoles('A'), throwsA(isA<FailedFetchException>()));
     });
   });
 
@@ -258,7 +258,7 @@ void main() {
 
       UserRepository repository = UserRepoImpl(backendAPI);
 
-      expect(() async => await repository.fetchCoachRoles('A'), throwsA(isA<FetchFailedException>()));
+      expect(() async => await repository.fetchCoachRoles('A'), throwsA(isA<FailedFetchException>()));
     });
   });
 
@@ -299,7 +299,7 @@ void main() {
 
       UserRepository repository = UserRepoImpl(backendAPI);
 
-      expect(() async =>  await repository.registerUser('', '', '', '', '', '', '', ''), throwsA(isA<FetchFailedException>()));
+      expect(() async =>  await repository.registerUser('', '', '', '', '', '', '', ''), throwsA(isA<FailedFetchException>()));
     });
   });
 }

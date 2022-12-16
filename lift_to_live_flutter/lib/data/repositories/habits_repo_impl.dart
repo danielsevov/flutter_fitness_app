@@ -41,7 +41,7 @@ class HabitsRepoImpl implements HabitsRepository {
     //else throw an exception
     else {
       log("fetch habits failed\nresponse code ${response.statusCode}");
-      throw FetchFailedException(
+      throw FailedFetchException(
           "Failed to fetch Habits!\nresponse code ${response.statusCode}");
     }
   }
@@ -75,7 +75,7 @@ class HabitsRepoImpl implements HabitsRepository {
     //else throw an exception
     else {
       log("fetch template habit failed\nresponse code ${response.statusCode}");
-      throw FetchFailedException(
+      throw FailedFetchException(
           "Failed to fetch Habits!\nresponse code ${response.statusCode}");
     }
   }
@@ -95,7 +95,7 @@ class HabitsRepoImpl implements HabitsRepository {
           jwtToken);
     } catch (e) {
       log("patch habit failed");
-      throw FetchFailedException(
+      throw FailedFetchException(
           "Failed to patch Habit!\nresponse code ${e.toString()}");
     }
   }
@@ -120,7 +120,7 @@ class HabitsRepoImpl implements HabitsRepository {
           jwtToken);
     } catch (e) {
       log("post habit failed");
-      throw FetchFailedException(
+      throw FailedFetchException(
           "Failed to post Habit!\nresponse code ${e.toString()}");
     }
   }

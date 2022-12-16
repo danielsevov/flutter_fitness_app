@@ -38,7 +38,7 @@ class TokenRepoImpl implements TokenRepository {
     //else throw an exception
     else {
       log("log in failed");
-      throw FetchFailedException(
+      throw FailedFetchException(
           "Failed to fetch token!\nresponse code ${response.statusCode}");
     }
   }

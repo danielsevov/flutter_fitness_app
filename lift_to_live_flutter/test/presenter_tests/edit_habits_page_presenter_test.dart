@@ -70,7 +70,7 @@ void main() {
     presenter.detach();
     presenter.attach(view);
 
-    when(habitsRepo.fetchTemplate(any, any)).thenThrow(FetchFailedException(''));
+    when(habitsRepo.fetchTemplate(any, any)).thenThrow(FailedFetchException(''));
 
     expect(() => {presenter.fetchData()}, returnsNormally);
     verifyNever(view.setFetched(true));

@@ -48,7 +48,7 @@ void main() {
           HabitsRepository repository = HabitsRepoImpl(backendAPI);
 
           expect(() async => await repository.fetchHabits('A', 'A'),
-              throwsA(isA<FetchFailedException>()));
+              throwsA(isA<FailedFetchException>()));
         });
   });
 
@@ -105,7 +105,7 @@ void main() {
           HabitsRepository repository = HabitsRepoImpl(backendAPI);
 
           expect(() async => await repository.fetchTemplate('A', 'A'),
-              throwsA(isA<FetchFailedException>()));
+              throwsA(isA<FailedFetchException>()));
         });
   });
 
@@ -129,11 +129,11 @@ void main() {
             () async {
           final backendAPI = MockBackendAPI();
 
-          when(backendAPI.postHabit('A', 'A', 'A', 'A', false, [], 'A')).thenThrow(FetchFailedException(''));
+          when(backendAPI.postHabit('A', 'A', 'A', 'A', false, [], 'A')).thenThrow(FailedFetchException(''));
 
           HabitsRepository repository = HabitsRepoImpl(backendAPI);
 
-          expect(() async => await repository.postHabit('A', 'A', 'A', 'A', false, [], 'A'), throwsA(isA<FetchFailedException>()));
+          expect(() async => await repository.postHabit('A', 'A', 'A', 'A', false, [], 'A'), throwsA(isA<FailedFetchException>()));
         });
   });
 
@@ -157,11 +157,11 @@ void main() {
             () async {
           final backendAPI = MockBackendAPI();
 
-          when(backendAPI.patchHabit(1, 'A', 'A', 'A', 'A', [], 'A')).thenThrow(FetchFailedException(''));
+          when(backendAPI.patchHabit(1, 'A', 'A', 'A', 'A', [], 'A')).thenThrow(FailedFetchException(''));
 
           HabitsRepository repository = HabitsRepoImpl(backendAPI);
 
-          expect(() async => await repository.patchHabit(1, 'A', 'A', 'A', 'A', [], 'A'), throwsA(isA<FetchFailedException>()));
+          expect(() async => await repository.patchHabit(1, 'A', 'A', 'A', 'A', [], 'A'), throwsA(isA<FailedFetchException>()));
         });
   });
 }
