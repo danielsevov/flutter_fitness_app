@@ -6,7 +6,7 @@ import '../../presenters/edit_habits_page_presenter.dart';
 import '../../state_management/app_state.dart';
 import '../../../helper.dart';
 import '../../views/edit_habits_page_view.dart';
-import '../widgets/edit_habit_holder.dart';
+import '../widgets/habit_related/edit_habit_holder.dart';
 
 
 /// Custom EditHabitsPage widget used as a main editorial page of the habit template of a user.

@@ -1,7 +1,7 @@
 // coverage:ignore-start
 
 import 'package:flutter/material.dart';
-import '../ui/widgets/trainee_search_holder.dart';
+import '../ui/widgets/user_related/trainee_search_holder.dart';
 
 /// API to the TraineesPage view widget.
 /// Describes the methods of the trainees page view implementation.

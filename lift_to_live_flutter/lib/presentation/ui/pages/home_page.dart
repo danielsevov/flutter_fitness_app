@@ -4,10 +4,9 @@ import 'package:expandable_bottom_bar/expandable_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:lift_to_live_flutter/domain/entities/news.dart';
 import 'package:lift_to_live_flutter/presentation/presenters/home_page_presenter.dart';
-import 'package:lift_to_live_flutter/presentation/ui/widgets/custom_bottom_bar.dart';
-import 'package:lift_to_live_flutter/presentation/ui/widgets/custom_drawer.dart';
-import 'package:lift_to_live_flutter/presentation/ui/widgets/log_out_dialog.dart';
-import 'package:lift_to_live_flutter/presentation/ui/widgets/news_article_holder.dart';
+import 'package:lift_to_live_flutter/presentation/ui/widgets/custom_bottom_nav_bar/custom_bottom_bar.dart';
+import 'package:lift_to_live_flutter/presentation/ui/widgets/custom_drawer/custom_drawer.dart';
+import 'package:lift_to_live_flutter/presentation/ui/widgets/news_related/news_article_holder.dart';
 import 'package:lift_to_live_flutter/presentation/views/home_page_view.dart';
 import 'package:provider/provider.dart';
 
@@ -15,6 +14,7 @@ import '../../../domain/entities/user.dart';
 import '../../../factory/page_factory.dart';
 import '../../state_management/app_state.dart';
 import '../../../helper.dart';
+import '../widgets/forms_and_dialogs/custom_dialog.dart';
 
 
 /// Custom widget, which is the HomePage and is used as a main navigational hub for the application.
@@ -224,7 +224,11 @@ class HomePageState extends State<HomePage> implements HomePageView {
                       showDialog(
                           context: context,
                           builder: (context) {
-                            return LogOutDialog(view: this);
+                            return CustomDialog(title: 'Sign out', bodyText: 'Are you sure you want to sign out?', confirm: () {
+                              logOutPressed(context);
+                            }, cancel: () {
+                              Navigator.pop(context);
+                            });
                           });
                     },
                     icon: const Icon(

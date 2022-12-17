@@ -4,8 +4,8 @@ import 'package:lift_to_live_flutter/domain/entities/habit.dart';
 import 'package:lift_to_live_flutter/domain/entities/habit_task.dart';
 import 'package:lift_to_live_flutter/helper.dart';
 import 'package:lift_to_live_flutter/presentation/presenters/habits_page_presenter.dart';
-import 'package:lift_to_live_flutter/presentation/ui/widgets/habit_holder.dart';
-import 'package:lift_to_live_flutter/presentation/ui/widgets/habit_task_holder.dart';
+import 'package:lift_to_live_flutter/presentation/ui/widgets/habit_related/habit_holder.dart';
+import 'package:lift_to_live_flutter/presentation/ui/widgets/habit_related/habit_task_holder.dart';
 import 'habit_task_holder_test.mocks.dart';
 
 void main() {

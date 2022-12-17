@@ -6,7 +6,7 @@ import '../../presenters/trainees_page_presenter.dart';
 import '../../state_management/app_state.dart';
 import '../../../helper.dart';
 import '../../views/trainees_page_view.dart';
-import '../widgets/trainee_search_holder.dart';
+import '../widgets/user_related/trainee_search_holder.dart';
 
 
 /// Custom TraineesPage widget used by coaches to search and overview trainees.

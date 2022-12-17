@@ -6,7 +6,7 @@ import '../../state_management/app_state.dart';
 import '../../../helper.dart';
 import '../../views/register_form_view.dart';
 import '../../views/register_page_view.dart';
-import '../widgets/register_form.dart';
+import '../widgets/forms_and_dialogs/register_form.dart';
 
 /// Custom widget, which is the RegisterPage and is used for inputting user details
 /// and submitting them for registration of the user.

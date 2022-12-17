@@ -4,7 +4,7 @@ import 'package:lift_to_live_flutter/domain/entities/role.dart';
 import 'package:lift_to_live_flutter/helper.dart';
 import 'package:lift_to_live_flutter/presentation/presenters/register_page_presenter.dart';
 import 'package:lift_to_live_flutter/presentation/state_management/app_state.dart';
-import 'package:lift_to_live_flutter/presentation/ui/widgets/register_form.dart';
+import 'package:lift_to_live_flutter/presentation/ui/widgets/forms_and_dialogs/register_form.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'register_form_test.mocks.dart';

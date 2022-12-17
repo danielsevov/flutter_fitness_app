@@ -8,7 +8,6 @@ import 'package:lift_to_live_flutter/domain/repositories/news_repo.dart';
 import 'package:lift_to_live_flutter/domain/repositories/user_repo.dart';
 import 'package:lift_to_live_flutter/presentation/presenters/home_page_presenter.dart';
 import 'package:lift_to_live_flutter/presentation/state_management/app_state.dart';
-import 'package:lift_to_live_flutter/presentation/ui/widgets/log_out_dialog.dart';
 import 'package:lift_to_live_flutter/presentation/views/home_page_view.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -17,7 +16,7 @@ import '../test_data.dart';
 import 'home_page_presenter_test.mocks.dart';
 
 
-@GenerateMocks([NewsRepository, UserRepository, HomePageView, LogOutDialog])
+@GenerateMocks([NewsRepository, UserRepository, HomePageView])
 void main() {
   test('test presenter constructor', () {
     final newsRepo = MockNewsRepository();

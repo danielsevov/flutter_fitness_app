@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:lift_to_live_flutter/domain/entities/habit.dart';
 import 'package:lift_to_live_flutter/domain/entities/habit_task.dart';
 import 'package:lift_to_live_flutter/helper.dart';
-import 'package:lift_to_live_flutter/presentation/ui/widgets/custom_calendar.dart';
+import 'package:lift_to_live_flutter/presentation/ui/widgets/habit_related/custom_calendar.dart';
 
 void main() {
 

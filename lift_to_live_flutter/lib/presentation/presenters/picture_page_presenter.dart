@@ -6,7 +6,7 @@ import 'package:lift_to_live_flutter/domain/entities/image.dart';
 import 'package:lift_to_live_flutter/domain/repositories/user_repo.dart';
 import 'package:lift_to_live_flutter/presentation/presenters/base_presenter.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:lift_to_live_flutter/presentation/ui/widgets/my_image_holder.dart';
+import 'package:lift_to_live_flutter/presentation/ui/widgets/image_related/my_image_holder.dart';
 import '../../helper.dart';
 import '../views/picture_page_view.dart';
 

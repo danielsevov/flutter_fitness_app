@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:lift_to_live_flutter/helper.dart';
-import 'package:lift_to_live_flutter/presentation/ui/widgets/edit_habit_holder.dart';
+import 'package:lift_to_live_flutter/presentation/ui/widgets/habit_related/edit_habit_holder.dart';
 
 void main() {
 

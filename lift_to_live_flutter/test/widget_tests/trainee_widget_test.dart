@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:lift_to_live_flutter/domain/entities/user.dart';
-import 'package:lift_to_live_flutter/presentation/ui/widgets/trainee_search_holder.dart';
+import 'package:lift_to_live_flutter/presentation/ui/widgets/user_related/trainee_search_holder.dart';
 import 'package:lift_to_live_flutter/presentation/views/trainees_page_view.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';

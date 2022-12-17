@@ -5,7 +5,7 @@ import '../../presenters/habits_page_presenter.dart';
 import '../../state_management/app_state.dart';
 import '../../../helper.dart';
 import '../../views/habits_page_view.dart';
-import '../widgets/custom_calendar.dart';
+import '../widgets/habit_related/custom_calendar.dart';
 
 
 /// Custom HabitsPage widget used as a main overview of the habit entries of a user.

@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:lift_to_live_flutter/presentation/presenters/picture_page_presenter.dart';
-import 'package:lift_to_live_flutter/presentation/ui/widgets/detail_screen.dart';
-import 'package:lift_to_live_flutter/presentation/ui/widgets/my_image_holder.dart';
+import 'package:lift_to_live_flutter/presentation/ui/widgets/image_related/detail_screen.dart';
+import 'package:lift_to_live_flutter/presentation/ui/widgets/image_related/my_image_holder.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 

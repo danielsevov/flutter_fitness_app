@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lift_to_live_flutter/factory/page_factory.dart';
 import 'package:lift_to_live_flutter/presentation/presenters/log_in_page_presenter.dart';
-import 'package:lift_to_live_flutter/presentation/ui/widgets/log_in_form.dart';
+import 'package:lift_to_live_flutter/presentation/ui/widgets/forms_and_dialogs/log_in_form.dart';
 import 'package:provider/provider.dart';
 import '../../state_management/app_state.dart';
 import '../../../helper.dart';

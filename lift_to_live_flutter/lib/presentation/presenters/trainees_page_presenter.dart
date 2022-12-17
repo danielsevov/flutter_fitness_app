@@ -2,7 +2,7 @@ import 'dart:developer';
 import 'package:lift_to_live_flutter/domain/entities/image.dart';
 import 'package:lift_to_live_flutter/domain/repositories/user_repo.dart';
 import 'package:lift_to_live_flutter/presentation/presenters/base_presenter.dart';
-import 'package:lift_to_live_flutter/presentation/ui/widgets/trainee_search_holder.dart';
+import 'package:lift_to_live_flutter/presentation/ui/widgets/user_related/trainee_search_holder.dart';
 import '../../domain/entities/user.dart';
 import '../views/trainees_page_view.dart';
 

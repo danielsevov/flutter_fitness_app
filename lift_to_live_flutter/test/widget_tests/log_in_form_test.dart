@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:lift_to_live_flutter/presentation/presenters/log_in_page_presenter.dart';
-import 'package:lift_to_live_flutter/presentation/ui/widgets/log_in_form.dart';
+import 'package:lift_to_live_flutter/presentation/ui/widgets/forms_and_dialogs/log_in_form.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 

@@ -4,8 +4,8 @@ import 'package:lift_to_live_flutter/domain/repositories/habits_repo.dart';
 import 'package:lift_to_live_flutter/helper.dart';
 import 'package:lift_to_live_flutter/presentation/presenters/base_presenter.dart';
 import '../../domain/entities/habit.dart';
-import '../ui/widgets/habit_holder.dart';
-import '../ui/widgets/habit_task_holder.dart';
+import '../ui/widgets/habit_related/habit_holder.dart';
+import '../ui/widgets/habit_related/habit_task_holder.dart';
 import '../views/habits_page_view.dart';
 
 /// This is the object, which holds the business logic, related to the user Habits Page view.

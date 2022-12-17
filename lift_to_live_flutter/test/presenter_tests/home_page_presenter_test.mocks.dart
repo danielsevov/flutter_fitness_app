@@ -3,21 +3,17 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i9;
+import 'dart:async' as _i6;
 
-import 'package:flutter/foundation.dart' as _i7;
-import 'package:flutter/material.dart' as _i6;
+import 'package:flutter/material.dart' as _i10;
 import 'package:lift_to_live_flutter/domain/entities/image.dart' as _i4;
 import 'package:lift_to_live_flutter/domain/entities/news.dart' as _i2;
-import 'package:lift_to_live_flutter/domain/entities/role.dart' as _i11;
+import 'package:lift_to_live_flutter/domain/entities/role.dart' as _i8;
 import 'package:lift_to_live_flutter/domain/entities/user.dart' as _i3;
-import 'package:lift_to_live_flutter/domain/repositories/news_repo.dart' as _i8;
-import 'package:lift_to_live_flutter/domain/repositories/user_repo.dart'
-    as _i10;
-import 'package:lift_to_live_flutter/presentation/ui/widgets/log_out_dialog.dart'
-    as _i12;
+import 'package:lift_to_live_flutter/domain/repositories/news_repo.dart' as _i5;
+import 'package:lift_to_live_flutter/domain/repositories/user_repo.dart' as _i7;
 import 'package:lift_to_live_flutter/presentation/views/home_page_view.dart'
-    as _i5;
+    as _i9;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -61,74 +57,16 @@ class _FakeMyImage_2 extends _i1.SmartFake implements _i4.MyImage {
         );
 }
 
-class _FakeHomePageView_3 extends _i1.SmartFake implements _i5.HomePageView {
-  _FakeHomePageView_3(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
-class _FakeState_4<T extends _i6.StatefulWidget> extends _i1.SmartFake
-    implements _i6.State<T> {
-  _FakeState_4(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-
-  @override
-  String toString({_i6.DiagnosticLevel? minLevel = _i6.DiagnosticLevel.info}) =>
-      super.toString();
-}
-
-class _FakeStatefulElement_5 extends _i1.SmartFake
-    implements _i6.StatefulElement {
-  _FakeStatefulElement_5(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-
-  @override
-  String toString({_i6.DiagnosticLevel? minLevel = _i6.DiagnosticLevel.info}) =>
-      super.toString();
-}
-
-class _FakeDiagnosticsNode_6 extends _i1.SmartFake
-    implements _i6.DiagnosticsNode {
-  _FakeDiagnosticsNode_6(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-
-  @override
-  String toString({
-    _i7.TextTreeConfiguration? parentConfiguration,
-    _i6.DiagnosticLevel? minLevel = _i6.DiagnosticLevel.info,
-  }) =>
-      super.toString();
-}
-
 /// A class which mocks [NewsRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockNewsRepository extends _i1.Mock implements _i8.NewsRepository {
+class MockNewsRepository extends _i1.Mock implements _i5.NewsRepository {
   MockNewsRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i9.Future<_i2.News> getNews(
+  _i6.Future<_i2.News> getNews(
     String? search,
     int? count,
   ) =>
@@ -140,7 +78,7 @@ class MockNewsRepository extends _i1.Mock implements _i8.NewsRepository {
             count,
           ],
         ),
-        returnValue: _i9.Future<_i2.News>.value(_FakeNews_0(
+        returnValue: _i6.Future<_i2.News>.value(_FakeNews_0(
           this,
           Invocation.method(
             #getNews,
@@ -150,28 +88,28 @@ class MockNewsRepository extends _i1.Mock implements _i8.NewsRepository {
             ],
           ),
         )),
-      ) as _i9.Future<_i2.News>);
+      ) as _i6.Future<_i2.News>);
 }
 
 /// A class which mocks [UserRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockUserRepository extends _i1.Mock implements _i10.UserRepository {
+class MockUserRepository extends _i1.Mock implements _i7.UserRepository {
   MockUserRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i9.Future<List<_i11.Role>> fetchUserRoles(String? jwtToken) =>
+  _i6.Future<List<_i8.Role>> fetchUserRoles(String? jwtToken) =>
       (super.noSuchMethod(
         Invocation.method(
           #fetchUserRoles,
           [jwtToken],
         ),
-        returnValue: _i9.Future<List<_i11.Role>>.value(<_i11.Role>[]),
-      ) as _i9.Future<List<_i11.Role>>);
+        returnValue: _i6.Future<List<_i8.Role>>.value(<_i8.Role>[]),
+      ) as _i6.Future<List<_i8.Role>>);
   @override
-  _i9.Future<_i3.User> fetchUser(
+  _i6.Future<_i3.User> fetchUser(
     String? userId,
     String? jwtToken,
   ) =>
@@ -183,7 +121,7 @@ class MockUserRepository extends _i1.Mock implements _i10.UserRepository {
             jwtToken,
           ],
         ),
-        returnValue: _i9.Future<_i3.User>.value(_FakeUser_1(
+        returnValue: _i6.Future<_i3.User>.value(_FakeUser_1(
           this,
           Invocation.method(
             #fetchUser,
@@ -193,9 +131,9 @@ class MockUserRepository extends _i1.Mock implements _i10.UserRepository {
             ],
           ),
         )),
-      ) as _i9.Future<_i3.User>);
+      ) as _i6.Future<_i3.User>);
   @override
-  _i9.Future<List<_i3.User>> fetchMyTrainees(
+  _i6.Future<List<_i3.User>> fetchMyTrainees(
     String? userId,
     String? jwtToken,
   ) =>
@@ -207,10 +145,10 @@ class MockUserRepository extends _i1.Mock implements _i10.UserRepository {
             jwtToken,
           ],
         ),
-        returnValue: _i9.Future<List<_i3.User>>.value(<_i3.User>[]),
-      ) as _i9.Future<List<_i3.User>>);
+        returnValue: _i6.Future<List<_i3.User>>.value(<_i3.User>[]),
+      ) as _i6.Future<List<_i3.User>>);
   @override
-  _i9.Future<List<_i4.MyImage>> fetchUserImages(
+  _i6.Future<List<_i4.MyImage>> fetchUserImages(
     String? userId,
     String? jwtToken,
   ) =>
@@ -222,10 +160,10 @@ class MockUserRepository extends _i1.Mock implements _i10.UserRepository {
             jwtToken,
           ],
         ),
-        returnValue: _i9.Future<List<_i4.MyImage>>.value(<_i4.MyImage>[]),
-      ) as _i9.Future<List<_i4.MyImage>>);
+        returnValue: _i6.Future<List<_i4.MyImage>>.value(<_i4.MyImage>[]),
+      ) as _i6.Future<List<_i4.MyImage>>);
   @override
-  _i9.Future<_i4.MyImage> fetchProfileImage(
+  _i6.Future<_i4.MyImage> fetchProfileImage(
     String? userId,
     String? jwtToken,
   ) =>
@@ -237,7 +175,7 @@ class MockUserRepository extends _i1.Mock implements _i10.UserRepository {
             jwtToken,
           ],
         ),
-        returnValue: _i9.Future<_i4.MyImage>.value(_FakeMyImage_2(
+        returnValue: _i6.Future<_i4.MyImage>.value(_FakeMyImage_2(
           this,
           Invocation.method(
             #fetchProfileImage,
@@ -247,9 +185,9 @@ class MockUserRepository extends _i1.Mock implements _i10.UserRepository {
             ],
           ),
         )),
-      ) as _i9.Future<_i4.MyImage>);
+      ) as _i6.Future<_i4.MyImage>);
   @override
-  _i9.Future<void> patchImage(
+  _i6.Future<void> patchImage(
     int? id,
     String? userId,
     String? date,
@@ -269,11 +207,11 @@ class MockUserRepository extends _i1.Mock implements _i10.UserRepository {
             jwtToken,
           ],
         ),
-        returnValue: _i9.Future<void>.value(),
-        returnValueForMissingStub: _i9.Future<void>.value(),
-      ) as _i9.Future<void>);
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
   @override
-  _i9.Future<void> postImage(
+  _i6.Future<void> postImage(
     String? userId,
     String? date,
     String? encoded,
@@ -291,11 +229,11 @@ class MockUserRepository extends _i1.Mock implements _i10.UserRepository {
             jwtToken,
           ],
         ),
-        returnValue: _i9.Future<void>.value(),
-        returnValueForMissingStub: _i9.Future<void>.value(),
-      ) as _i9.Future<void>);
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
   @override
-  _i9.Future<void> deleteImage(
+  _i6.Future<void> deleteImage(
     int? id,
     String? jwtToken,
   ) =>
@@ -307,20 +245,20 @@ class MockUserRepository extends _i1.Mock implements _i10.UserRepository {
             jwtToken,
           ],
         ),
-        returnValue: _i9.Future<void>.value(),
-        returnValueForMissingStub: _i9.Future<void>.value(),
-      ) as _i9.Future<void>);
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
   @override
-  _i9.Future<List<_i11.Role>> fetchCoachRoles(String? jwtToken) =>
+  _i6.Future<List<_i8.Role>> fetchCoachRoles(String? jwtToken) =>
       (super.noSuchMethod(
         Invocation.method(
           #fetchCoachRoles,
           [jwtToken],
         ),
-        returnValue: _i9.Future<List<_i11.Role>>.value(<_i11.Role>[]),
-      ) as _i9.Future<List<_i11.Role>>);
+        returnValue: _i6.Future<List<_i8.Role>>.value(<_i8.Role>[]),
+      ) as _i6.Future<List<_i8.Role>>);
   @override
-  _i9.Future<void> registerUser(
+  _i6.Future<void> registerUser(
     String? userId,
     String? coachId,
     String? password,
@@ -344,15 +282,15 @@ class MockUserRepository extends _i1.Mock implements _i10.UserRepository {
             jwtToken,
           ],
         ),
-        returnValue: _i9.Future<void>.value(),
-        returnValueForMissingStub: _i9.Future<void>.value(),
-      ) as _i9.Future<void>);
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
 }
 
 /// A class which mocks [HomePageView].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockHomePageView extends _i1.Mock implements _i5.HomePageView {
+class MockHomePageView extends _i1.Mock implements _i9.HomePageView {
   MockHomePageView() {
     _i1.throwOnMissingStub(this);
   }
@@ -360,7 +298,7 @@ class MockHomePageView extends _i1.Mock implements _i5.HomePageView {
   @override
   void setUserData(
     _i3.User? user,
-    _i6.Image? profilePicture,
+    _i10.Image? profilePicture,
   ) =>
       super.noSuchMethod(
         Invocation.method(
@@ -406,7 +344,7 @@ class MockHomePageView extends _i1.Mock implements _i5.HomePageView {
       );
   @override
   void habitsPressed(
-    _i6.BuildContext? context,
+    _i10.BuildContext? context,
     bool? bottomBarButton,
   ) =>
       super.noSuchMethod(
@@ -421,7 +359,7 @@ class MockHomePageView extends _i1.Mock implements _i5.HomePageView {
       );
   @override
   void profilePressed(
-    _i6.BuildContext? context,
+    _i10.BuildContext? context,
     bool? bottomBarButton,
   ) =>
       super.noSuchMethod(
@@ -435,7 +373,7 @@ class MockHomePageView extends _i1.Mock implements _i5.HomePageView {
         returnValueForMissingStub: null,
       );
   @override
-  void logOutPressed(_i6.BuildContext? context) => super.noSuchMethod(
+  void logOutPressed(_i10.BuildContext? context) => super.noSuchMethod(
         Invocation.method(
           #logOutPressed,
           [context],
@@ -444,7 +382,7 @@ class MockHomePageView extends _i1.Mock implements _i5.HomePageView {
       );
   @override
   void traineesPressed(
-    _i6.BuildContext? context,
+    _i10.BuildContext? context,
     bool? bottomBarButton,
   ) =>
       super.noSuchMethod(
@@ -465,138 +403,4 @@ class MockHomePageView extends _i1.Mock implements _i5.HomePageView {
         ),
         returnValueForMissingStub: null,
       );
-}
-
-/// A class which mocks [LogOutDialog].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockLogOutDialog extends _i1.Mock implements _i12.LogOutDialog {
-  MockLogOutDialog() {
-    _i1.throwOnMissingStub(this);
-  }
-
-  @override
-  _i5.HomePageView get view => (super.noSuchMethod(
-        Invocation.getter(#view),
-        returnValue: _FakeHomePageView_3(
-          this,
-          Invocation.getter(#view),
-        ),
-      ) as _i5.HomePageView);
-  @override
-  _i6.State<_i6.StatefulWidget> createState() => (super.noSuchMethod(
-        Invocation.method(
-          #createState,
-          [],
-        ),
-        returnValue: _FakeState_4<_i6.StatefulWidget>(
-          this,
-          Invocation.method(
-            #createState,
-            [],
-          ),
-        ),
-      ) as _i6.State<_i6.StatefulWidget>);
-  @override
-  _i6.StatefulElement createElement() => (super.noSuchMethod(
-        Invocation.method(
-          #createElement,
-          [],
-        ),
-        returnValue: _FakeStatefulElement_5(
-          this,
-          Invocation.method(
-            #createElement,
-            [],
-          ),
-        ),
-      ) as _i6.StatefulElement);
-  @override
-  String toStringShort() => (super.noSuchMethod(
-        Invocation.method(
-          #toStringShort,
-          [],
-        ),
-        returnValue: '',
-      ) as String);
-  @override
-  void debugFillProperties(_i7.DiagnosticPropertiesBuilder? properties) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #debugFillProperties,
-          [properties],
-        ),
-        returnValueForMissingStub: null,
-      );
-  @override
-  String toStringShallow({
-    String? joiner = r', ',
-    _i6.DiagnosticLevel? minLevel = _i6.DiagnosticLevel.debug,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #toStringShallow,
-          [],
-          {
-            #joiner: joiner,
-            #minLevel: minLevel,
-          },
-        ),
-        returnValue: '',
-      ) as String);
-  @override
-  String toStringDeep({
-    String? prefixLineOne = r'',
-    String? prefixOtherLines,
-    _i6.DiagnosticLevel? minLevel = _i6.DiagnosticLevel.debug,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #toStringDeep,
-          [],
-          {
-            #prefixLineOne: prefixLineOne,
-            #prefixOtherLines: prefixOtherLines,
-            #minLevel: minLevel,
-          },
-        ),
-        returnValue: '',
-      ) as String);
-  @override
-  _i6.DiagnosticsNode toDiagnosticsNode({
-    String? name,
-    _i7.DiagnosticsTreeStyle? style,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #toDiagnosticsNode,
-          [],
-          {
-            #name: name,
-            #style: style,
-          },
-        ),
-        returnValue: _FakeDiagnosticsNode_6(
-          this,
-          Invocation.method(
-            #toDiagnosticsNode,
-            [],
-            {
-              #name: name,
-              #style: style,
-            },
-          ),
-        ),
-      ) as _i6.DiagnosticsNode);
-  @override
-  List<_i6.DiagnosticsNode> debugDescribeChildren() => (super.noSuchMethod(
-        Invocation.method(
-          #debugDescribeChildren,
-          [],
-        ),
-        returnValue: <_i6.DiagnosticsNode>[],
-      ) as List<_i6.DiagnosticsNode>);
-  @override
-  String toString({_i6.DiagnosticLevel? minLevel = _i6.DiagnosticLevel.info}) =>
-      super.toString();
 }

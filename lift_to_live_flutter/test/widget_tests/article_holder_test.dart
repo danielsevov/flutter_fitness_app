@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:lift_to_live_flutter/helper.dart';
-import 'package:lift_to_live_flutter/presentation/ui/widgets/news_article_holder.dart';
+import 'package:lift_to_live_flutter/presentation/ui/widgets/news_related/news_article_holder.dart';
 import 'package:lift_to_live_flutter/presentation/views/home_page_view.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
