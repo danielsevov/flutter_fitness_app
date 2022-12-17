@@ -12,7 +12,7 @@ import '../views/picture_page_view.dart';
 
 /// This is the object, which holds the business logic, related to the user Picture Page view.
 /// It is the mediator between the PicturePage view (UI) and the repositories (Data).
-class PicturePagePresenter extends BasePresenter{
+class PicturePagePresenter extends BasePresenter {
   PicturePageView? _view;
 
   final UserRepository _userRepository;
@@ -41,55 +41,65 @@ class PicturePagePresenter extends BasePresenter{
 
   /// Function used for fetching the required data, which is then displayed on the picture page.
   Future<void> fetchData() async {
-
     // set the loading indicator to be displayed on the picture page view
     _view?.setInProgress(true);
 
     _myImages = [];
     _pictures = [];
-    var sidePictures = <Widget>[], backPictures = <Widget>[], frontPictures = <Widget>[];
+    var sidePictures = <Widget>[],
+        backPictures = <Widget>[],
+        frontPictures = <Widget>[];
 
     // try fetching the user images
-      try {
-        _myImages = await _userRepository.fetchUserImages(
-            _userId, super.appState.getToken());
+    try {
+      _myImages = await _userRepository.fetchUserImages(
+          _userId, super.appState.getToken());
 
-        // extract images from the list of MyImage objects.
-        for (var element in _myImages) {
-          _pictures.add(Image.memory(
-            base64Decode(element.data),
-            height: 200,
-          ));
+      // extract images from the list of MyImage objects.
+      for (var element in _myImages) {
+        _pictures.add(Image.memory(
+          base64Decode(element.data),
+          height: 200,
+        ));
 
-          // sort the images by type and add to separate lists
-          if(element.type == 'side') {
-            sidePictures.add(MyImageHolder(img: Image.memory(
-              base64Decode(element.data),
-              height: 200,
-            ), date: element.date, id: element.id, presenter: this));
-          }
-          else if(element.type == 'back') {
-            backPictures.add(MyImageHolder(img: Image.memory(
-              base64Decode(element.data),
-              height: 200,
-            ), date: element.date, id: element.id, presenter: this));
-          }
-          else if(element.type == 'front') {
-            frontPictures.add(MyImageHolder(img: Image.memory(
-              base64Decode(element.data),
-              height: 200,
-            ), date: element.date, id: element.id, presenter: this));
-          }
+        // sort the images by type and add to separate lists
+        if (element.type == 'side') {
+          sidePictures.add(MyImageHolder(
+              img: Image.memory(
+                base64Decode(element.data),
+                height: 200,
+              ),
+              date: element.date,
+              id: element.id,
+              presenter: this));
+        } else if (element.type == 'back') {
+          backPictures.add(MyImageHolder(
+              img: Image.memory(
+                base64Decode(element.data),
+                height: 200,
+              ),
+              date: element.date,
+              id: element.id,
+              presenter: this));
+        } else if (element.type == 'front') {
+          frontPictures.add(MyImageHolder(
+              img: Image.memory(
+                base64Decode(element.data),
+                height: 200,
+              ),
+              date: element.date,
+              id: element.id,
+              presenter: this));
         }
       }
-      catch (e) {
-        _myImages = [];
-        _pictures = [];
-      }
+    } catch (e) {
+      _myImages = [];
+      _pictures = [];
+    }
 
-      // display the fetched picture data
-      _view?.setInProgress(false);
-      _view?.setPictures(sidePictures, frontPictures, backPictures);
+    // display the fetched picture data
+    _view?.setInProgress(false);
+    _view?.setPictures(sidePictures, frontPictures, backPictures);
   }
 
   /// Function for deleting an image entry.
@@ -113,7 +123,12 @@ class PicturePagePresenter extends BasePresenter{
       String encoded = Helper.imageToBlob(imageFile);
 
       // store the image
-      await _userRepository.postImage(_userId, (DateTime.now().millisecondsSinceEpoch).toString(), encoded, type, appState.getToken());
+      await _userRepository.postImage(
+          _userId,
+          (DateTime.now().millisecondsSinceEpoch).toString(),
+          encoded,
+          type,
+          appState.getToken());
 
       // re-fetch the picture data
       fetchData();

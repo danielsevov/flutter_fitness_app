@@ -13,7 +13,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 /// This is the object, which holds the business logic, related to the Home Page view.
 /// It is the mediator between the HomePage view (UI) and the repositories (Data).
-class HomePagePresenter extends BasePresenter{
+class HomePagePresenter extends BasePresenter {
   HomePageView? _view;
   final NewsRepository _newsRepository;
   final UserRepository _userRepository;
@@ -46,7 +46,6 @@ class HomePagePresenter extends BasePresenter{
 
   /// Function used for fetching the required data, which is then displayed on the home page.
   Future<void> fetchData() async {
-
     // set the loading indicator to be displayed on the home page view
     _view?.setInProgress(true);
 
@@ -61,9 +60,11 @@ class HomePagePresenter extends BasePresenter{
         base64Decode(myImage.data),
         height: 150,
       );
-    }
-    catch (e) {
-      _profilePicture = Image.asset('assets/images/prof_pic.png', height: 150,);
+    } catch (e) {
+      _profilePicture = Image.asset(
+        'assets/images/prof_pic.png',
+        height: 150,
+      );
     }
 
     // display the fetched user data
@@ -77,7 +78,6 @@ class HomePagePresenter extends BasePresenter{
 
   /// Sub-function to fetch news separately from the user details, as they use different data-sources.
   Future<void> fetchNews() async {
-
     // display loading indicator on home page
     _view?.setInProgress(true);
 
@@ -95,14 +95,14 @@ class HomePagePresenter extends BasePresenter{
   Future<void> redirectToURL(int index) async {
     var url = _currentNews.articles[index].url;
     try {
-      if (url.length >= 5 && !await launchUrl(
-        Uri.parse(url),
-        mode: LaunchMode.externalApplication,
-      )) {
+      if (url.length >= 5 &&
+          !await launchUrl(
+            Uri.parse(url),
+            mode: LaunchMode.externalApplication,
+          )) {
         _view?.notifyWrongURL('Could not launch $url');
       }
-    }
-    catch(e) {
+    } catch (e) {
       _view?.notifyWrongURL('Could not launch $url');
     }
   }

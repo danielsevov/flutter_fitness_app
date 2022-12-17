@@ -21,7 +21,15 @@ class CustomFormDropdownTextField extends StatelessWidget {
       {super.key,
       required this.screenHeight,
       required this.screenWidth,
-      required this.controller, this.validator, required this.textInputType, required this.hint, required this.icon, required this.obscureText, this.onTap, required this.onChanged, required this.items});
+      required this.controller,
+      this.validator,
+      required this.textInputType,
+      required this.hint,
+      required this.icon,
+      required this.obscureText,
+      this.onTap,
+      required this.onChanged,
+      required this.items});
 
   @override
   Widget build(BuildContext context) {
@@ -31,10 +39,7 @@ class CustomFormDropdownTextField extends StatelessWidget {
       width: screenWidth * 0.9,
       child: DropdownButtonFormField(
         items: items.map((String value) {
-          return DropdownMenuItem(
-              value: value,
-              child: Text(value)
-          );
+          return DropdownMenuItem(value: value, child: Text(value));
         }).toList(),
         onChanged: onChanged,
         value: controller.text,
@@ -46,21 +51,24 @@ class CustomFormDropdownTextField extends StatelessWidget {
             Icons.fitness_center,
             color: Helper.textFieldIconColor,
           ),
-          filled : true, fillColor : Helper.blueColor,
+          filled: true,
+          fillColor: Helper.blueColor,
           errorStyle: const TextStyle(color: Helper.textFieldErrorColor),
           focusedBorder: OutlineInputBorder(
-              borderSide:
-              const BorderSide(color: Helper.textFieldBorderColor, width: 1),
+              borderSide: const BorderSide(
+                  color: Helper.textFieldBorderColor, width: 1),
               borderRadius: BorderRadius.circular(10)),
           focusedErrorBorder: OutlineInputBorder(
-              borderSide: const BorderSide(color: Helper.textFieldErrorColor, width: 1),
+              borderSide:
+                  const BorderSide(color: Helper.textFieldErrorColor, width: 1),
               borderRadius: BorderRadius.circular(10)),
           errorBorder: OutlineInputBorder(
-              borderSide: const BorderSide(color: Helper.textFieldErrorColor, width: 1),
+              borderSide:
+                  const BorderSide(color: Helper.textFieldErrorColor, width: 1),
               borderRadius: BorderRadius.circular(10)),
           enabledBorder: OutlineInputBorder(
-              borderSide:
-              const BorderSide(color: Helper.textFieldBorderColor, width: 1),
+              borderSide: const BorderSide(
+                  color: Helper.textFieldBorderColor, width: 1),
               borderRadius: BorderRadius.circular(10)),
           hintText: "Enter coach ID",
           hintStyle: TextStyle(

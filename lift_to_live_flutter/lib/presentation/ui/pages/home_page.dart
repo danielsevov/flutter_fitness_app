@@ -16,12 +16,12 @@ import '../../state_management/app_state.dart';
 import '../../../helper.dart';
 import '../widgets/forms_and_dialogs/custom_dialog.dart';
 
-
 /// Custom widget, which is the HomePage and is used as a main navigational hub for the application.
 /// It provides navigation to the main app pages, as well as a news overview and the log out functionality.
 /// It is a stateful widget and its state object implements the HomePageView abstract class.
 class HomePage extends StatefulWidget {
-  final HomePagePresenter presenter; // The business logic object of the log in page
+  final HomePagePresenter
+      presenter; // The business logic object of the log in page
 
   const HomePage({Key? key, required this.presenter}) : super(key: key);
 
@@ -116,7 +116,8 @@ class HomePageState extends State<HomePage> implements HomePageView {
   @override
   void habitsPressed(BuildContext context, bool bottomBarButton) {
     if (!bottomBarButton) Navigator.of(context).pop();
-    Helper.pushPageWithAnimation(context, PageFactory().getHabitsPage(_user.id));
+    Helper.pushPageWithAnimation(
+        context, PageFactory().getHabitsPage(_user.id));
   }
 
   /// Function to redirect user to URL
@@ -130,8 +131,7 @@ class HomePageState extends State<HomePage> implements HomePageView {
   void profilePressed(BuildContext context, bool bottomBarButton) {
     if (!bottomBarButton) Navigator.of(context).pop();
     Helper.pushPageWithAnimation(
-        context,
-        PageFactory().getProfilePage(_user.id, 'home'));
+        context, PageFactory().getProfilePage(_user.id, 'home'));
   }
 
   /// Function called when user wants to navigate from home to trainees page
@@ -178,8 +178,7 @@ class HomePageState extends State<HomePage> implements HomePageView {
         onPressed: () {
           try {
             DefaultBottomBarController.of(context).swap();
-          }
-          catch (e) {
+          } catch (e) {
             log(e.toString());
           }
         },
@@ -224,11 +223,15 @@ class HomePageState extends State<HomePage> implements HomePageView {
                       showDialog(
                           context: context,
                           builder: (context) {
-                            return CustomDialog(title: 'Sign out', bodyText: 'Are you sure you want to sign out?', confirm: () {
-                              logOutPressed(context);
-                            }, cancel: () {
-                              Navigator.pop(context);
-                            });
+                            return CustomDialog(
+                                title: 'Sign out',
+                                bodyText: 'Are you sure you want to sign out?',
+                                confirm: () {
+                                  logOutPressed(context);
+                                },
+                                cancel: () {
+                                  Navigator.pop(context);
+                                });
                           });
                     },
                     icon: const Icon(

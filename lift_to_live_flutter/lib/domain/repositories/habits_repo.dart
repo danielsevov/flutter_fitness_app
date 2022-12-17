@@ -15,11 +15,6 @@ abstract class HabitsRepository {
   Future<List<Habit>> fetchHabits(String userId, String jwtToken);
 
   /// This function is used for posting habit entries.
-  Future<void> postHabit(String date,
-      String note,
-      String userId,
-      String coachId,
-      bool isTemplate,
-      List<HabitTask> habits,
-      String jwtToken);
+  Future<void> postHabit(String date, String note, String userId,
+      String coachId, bool isTemplate, List<HabitTask> habits, String jwtToken);
 }

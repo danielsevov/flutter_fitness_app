@@ -8,7 +8,7 @@ import '../views/register_page_view.dart';
 
 /// This is the object, which holds the business logic, related to the Register user Page view.
 /// It is the mediator between the Register view (UI) and the repositories (Data).
-class RegisterPagePresenter extends BasePresenter{
+class RegisterPagePresenter extends BasePresenter {
   RegisterPageView? _view; // the log in view UI component
   final UserRepository
       _userRepository; // the repository used for fetching the user roles
@@ -28,7 +28,6 @@ class RegisterPagePresenter extends BasePresenter{
 
   /// Function used for fetching the required data, which is then displayed on the register page.
   Future<void> fetchData() async {
-
     // set the loading indicator to be displayed on the register page view
     _view?.setInProgress(true);
 
@@ -37,11 +36,10 @@ class RegisterPagePresenter extends BasePresenter{
     try {
       var coaches = await _userRepository.fetchCoachRoles(appState.getToken());
       coachesIds = coaches.map((e) => e.userId).toList();
-      if(!appState.isCoach()) {
+      if (!appState.isCoach()) {
         coachesIds.add(appState.getUserId());
       }
-    }
-    catch (e) {
+    } catch (e) {
       _view?.notifyRegisterFailed();
     }
 
@@ -68,16 +66,15 @@ class RegisterPagePresenter extends BasePresenter{
     // try to register user
     try {
       log('email: $email, pass: $pass, name: $name, nationality: $nationality, phoneNumber: $phoneNumber, birthday: $birthday, coachId: $coachId');
-      await _userRepository.registerUser(email!, coachId!, pass!, name!, phoneNumber!, nationality!, birthday!, appState.getToken());
+      await _userRepository.registerUser(email!, coachId!, pass!, name!,
+          phoneNumber!, nationality!, birthday!, appState.getToken());
 
       _view?.setInProgress(false);
       _view?.notifyUserRegistered();
-    }
-    on DuplicatedIdException {
+    } on DuplicatedIdException {
       _view?.getRegisterForm().clearEmail();
       _view?.notifyEmailAlreadyExists();
-    }
-    catch (e) {
+    } catch (e) {
       _view?.getRegisterForm().clearPassword();
       _view?.notifyRegisterFailed();
     }

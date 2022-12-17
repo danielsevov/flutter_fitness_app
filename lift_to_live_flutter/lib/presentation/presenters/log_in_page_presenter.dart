@@ -6,7 +6,7 @@ import '../views/log_in_page_view.dart';
 
 /// This is the object, which holds the business logic, related to the Log In Page view.
 /// It is the mediator between the LogIn view (UI) and the repositories (Data).
-class LogInPagePresenter extends BasePresenter{
+class LogInPagePresenter extends BasePresenter {
   LogInPageView? _view; // the log in view UI component
   final TokenRepository
       _tokenRepository; // the repository used for fetching the JWT token

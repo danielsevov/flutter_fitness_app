@@ -5,7 +5,6 @@ import '../../state_management/app_state.dart';
 import '../../../helper.dart';
 import '../../views/picture_page_view.dart';
 
-
 /// Custom PicturePage widget used as a main overview of the pictures of a user.
 /// It provides overview of the user's pictures.
 /// It is a stateful widget and its state object implements the PicturePageView abstract class.
@@ -13,9 +12,14 @@ class PicturePage extends StatefulWidget {
   final String userId;
   final String name;
   final PicturePagePresenter
-  presenter; // The business logic object of the log in page
+      presenter; // The business logic object of the log in page
 
-  const PicturePage({Key? key, required this.userId, required this.name, required this.presenter}) : super(key: key);
+  const PicturePage(
+      {Key? key,
+      required this.userId,
+      required this.name,
+      required this.presenter})
+      : super(key: key);
 
   @override
   State<StatefulWidget> createState() => PicturePageState();
@@ -79,158 +83,161 @@ class PicturePageState extends State<PicturePage> implements PicturePageView {
       appBar: AppBar(
         backgroundColor: Helper.pageBackgroundColor.withOpacity(0.7),
         centerTitle: true,
-        title: Text("${widget.name}'s Photo Album", style: const TextStyle(color: Helper.lightHeadlineColor),),
+        title: Text(
+          "${widget.name}'s Photo Album",
+          style: const TextStyle(color: Helper.lightHeadlineColor),
+        ),
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
             bottom: Radius.circular(15),
           ),
         ),
         iconTheme: const IconThemeData(
-            color: Helper.darkHeadlineColor, //change your color here
+          color: Helper.darkHeadlineColor, //change your color here
         ),
       ),
       body: _isLoading
           ? const Center(
-        child: CircularProgressIndicator(
-          color: Helper.yellowColor,
-        ),
-      )
+              child: CircularProgressIndicator(
+                color: Helper.yellowColor,
+              ),
+            )
           : SingleChildScrollView(
-        child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
-                  image: const DecorationImage(
-                    image: AssetImage(Helper.pageBackgroundImage),
-                    fit: BoxFit.cover,
+              child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30),
+                    image: const DecorationImage(
+                      image: AssetImage(Helper.pageBackgroundImage),
+                      fit: BoxFit.cover,
+                    ),
                   ),
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text(
-                          "Front Photos",
-                          style:
-                              TextStyle(color: Helper.lightHeadlineColor, fontSize: 24),
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        widget.presenter.isAuthorized()
-                            ? CircleAvatar(
-                                backgroundColor: Helper.actionButtonColor,
-                                child: IconButton(
-                                    onPressed: () {
-                                      widget.presenter.addPicture("front");
-                                    },
-                                    icon: const Icon(Icons.add,
-                                        color: Helper.actionButtonTextColor)),
-                              )
-                            : const SizedBox()
-                      ],
-                    ),
-                    const Divider(
-                      color: Helper.whiteColor,
-                      thickness: 1,
-                    ),
-                    Container(
-                      padding: const EdgeInsets.fromLTRB(5, 20, 5, 20),
-                      height: 300,
-                      child: ListView(
-                        scrollDirection: Axis.horizontal,
-                        children: _picturesFront,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      const SizedBox(
+                        height: 20,
                       ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text(
-                          "Back Photos",
-                          style:
-                              TextStyle(color: Helper.lightHeadlineColor, fontSize: 24),
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        widget.presenter.isAuthorized()
-                            ? CircleAvatar(
-                                backgroundColor: Helper.actionButtonColor,
-                                child: IconButton(
-                                    onPressed: () {
-                                      widget.presenter.addPicture("back");
-                                    },
-                                    icon: const Icon(Icons.add,
-                                        color: Helper.actionButtonTextColor)),
-                              )
-                            : const SizedBox()
-                      ],
-                    ),
-                    const Divider(
-                      color: Helper.whiteColor,
-                      thickness: 1,
-                    ),
-                    Container(
-                      padding: const EdgeInsets.fromLTRB(5, 20, 5, 20),
-                      height: 300,
-                      child: ListView(
-                        scrollDirection: Axis.horizontal,
-                        children: _picturesBack,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text(
+                            "Front Photos",
+                            style: TextStyle(
+                                color: Helper.lightHeadlineColor, fontSize: 24),
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          widget.presenter.isAuthorized()
+                              ? CircleAvatar(
+                                  backgroundColor: Helper.actionButtonColor,
+                                  child: IconButton(
+                                      onPressed: () {
+                                        widget.presenter.addPicture("front");
+                                      },
+                                      icon: const Icon(Icons.add,
+                                          color: Helper.actionButtonTextColor)),
+                                )
+                              : const SizedBox()
+                        ],
                       ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text(
-                          "Side Photos",
-                          style:
-                              TextStyle(color: Helper.lightHeadlineColor, fontSize: 24),
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        widget.presenter.isAuthorized()
-                            ? CircleAvatar(
-                                backgroundColor: Helper.actionButtonColor,
-                                child: IconButton(
-                                    onPressed: () {
-                                      widget.presenter.addPicture("side");
-                                    },
-                                    icon: const Icon(Icons.add,
-                                        color: Helper.actionButtonTextColor)),
-                              )
-                            : const SizedBox()
-                      ],
-                    ),
-                    const Divider(
-                      color: Helper.whiteColor,
-                      thickness: 1,
-                    ),
-                    Container(
-                      padding: const EdgeInsets.fromLTRB(5, 20, 5, 20),
-                      height: 300,
-                      child: ListView(
-                        scrollDirection: Axis.horizontal,
-                        children: _picturesSide,
+                      const Divider(
+                        color: Helper.whiteColor,
+                        thickness: 1,
                       ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    )
-                  ],
-                )),
-      ),
+                      Container(
+                        padding: const EdgeInsets.fromLTRB(5, 20, 5, 20),
+                        height: 300,
+                        child: ListView(
+                          scrollDirection: Axis.horizontal,
+                          children: _picturesFront,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text(
+                            "Back Photos",
+                            style: TextStyle(
+                                color: Helper.lightHeadlineColor, fontSize: 24),
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          widget.presenter.isAuthorized()
+                              ? CircleAvatar(
+                                  backgroundColor: Helper.actionButtonColor,
+                                  child: IconButton(
+                                      onPressed: () {
+                                        widget.presenter.addPicture("back");
+                                      },
+                                      icon: const Icon(Icons.add,
+                                          color: Helper.actionButtonTextColor)),
+                                )
+                              : const SizedBox()
+                        ],
+                      ),
+                      const Divider(
+                        color: Helper.whiteColor,
+                        thickness: 1,
+                      ),
+                      Container(
+                        padding: const EdgeInsets.fromLTRB(5, 20, 5, 20),
+                        height: 300,
+                        child: ListView(
+                          scrollDirection: Axis.horizontal,
+                          children: _picturesBack,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text(
+                            "Side Photos",
+                            style: TextStyle(
+                                color: Helper.lightHeadlineColor, fontSize: 24),
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          widget.presenter.isAuthorized()
+                              ? CircleAvatar(
+                                  backgroundColor: Helper.actionButtonColor,
+                                  child: IconButton(
+                                      onPressed: () {
+                                        widget.presenter.addPicture("side");
+                                      },
+                                      icon: const Icon(Icons.add,
+                                          color: Helper.actionButtonTextColor)),
+                                )
+                              : const SizedBox()
+                        ],
+                      ),
+                      const Divider(
+                        color: Helper.whiteColor,
+                        thickness: 1,
+                      ),
+                      Container(
+                        padding: const EdgeInsets.fromLTRB(5, 20, 5, 20),
+                        height: 300,
+                        child: ListView(
+                          scrollDirection: Axis.horizontal,
+                          children: _picturesSide,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      )
+                    ],
+                  )),
+            ),
     );
   }
 

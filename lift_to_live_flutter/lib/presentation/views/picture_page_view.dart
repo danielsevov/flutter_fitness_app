@@ -6,7 +6,8 @@ import 'package:flutter/material.dart';
 /// Describes the methods of the pictures page view implementation.
 abstract class PicturePageView {
   /// Function to set and display the user details, user pictures.
-  void setPictures(List<Widget> pictureSide, List<Widget> pictureFront, List<Widget> pictureBack);
+  void setPictures(List<Widget> pictureSide, List<Widget> pictureFront,
+      List<Widget> pictureBack);
 
   /// Function to set if data is currently being fetched and an loading indicator should be displayed.
   void setInProgress(bool inProgress);

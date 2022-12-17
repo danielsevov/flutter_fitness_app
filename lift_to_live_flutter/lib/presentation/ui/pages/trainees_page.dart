@@ -8,7 +8,6 @@ import '../../../helper.dart';
 import '../../views/trainees_page_view.dart';
 import '../widgets/user_related/trainee_search_holder.dart';
 
-
 /// Custom TraineesPage widget used by coaches to search and overview trainees.
 /// It provides navigation to the trainee's profile pages.
 /// It is a stateful widget and its state object implements the TraineesPageView abstract class.
@@ -79,7 +78,8 @@ class TraineesPageState extends State<TraineesPage>
   /// Function to navigate to the selected user profile page
   @override
   void navigateToProfilePage(String id) {
-    Helper.pushPageWithAnimation(context, PageFactory().getProfilePage(id, 'trainees'));
+    Helper.pushPageWithAnimation(
+        context, PageFactory().getProfilePage(id, 'trainees'));
   }
 
   /// Function called when user wants to navigate to the user registration page.
@@ -90,7 +90,7 @@ class TraineesPageState extends State<TraineesPage>
 
   /// Function to apply the search term filter on the trainees
   void refreshList() {
-    setState(() { });
+    setState(() {});
   }
 
   /// Build method of the home page view
@@ -114,8 +114,14 @@ class TraineesPageState extends State<TraineesPage>
       floatingActionButton: FloatingActionButton.extended(
         backgroundColor: Helper.actionButtonColor,
         heroTag: "btn3",
-        icon: const Icon(CupertinoIcons.profile_circled, color: Helper.blackColor,),
-        label: const Text('Register User', style: TextStyle(color: Helper.blackColor),),
+        icon: const Icon(
+          CupertinoIcons.profile_circled,
+          color: Helper.blackColor,
+        ),
+        label: const Text(
+          'Register User',
+          style: TextStyle(color: Helper.blackColor),
+        ),
         onPressed: () {
           registerPressed(context);
         },
@@ -123,7 +129,10 @@ class TraineesPageState extends State<TraineesPage>
       appBar: AppBar(
         backgroundColor: Helper.pageBackgroundColor.withOpacity(0.7),
         centerTitle: true,
-        title: const Text("My Trainees", style: TextStyle(color: Helper.headerBarTextColor),),
+        title: const Text(
+          "My Trainees",
+          style: TextStyle(color: Helper.headerBarTextColor),
+        ),
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
             bottom: Radius.circular(15),
@@ -158,12 +167,12 @@ class TraineesPageState extends State<TraineesPage>
                   keyboardType: TextInputType.text,
                   decoration: InputDecoration(
                     focusedBorder: OutlineInputBorder(
-                        borderSide:
-                            const BorderSide(color: Helper.yellowColor, width: 1),
+                        borderSide: const BorderSide(
+                            color: Helper.yellowColor, width: 1),
                         borderRadius: BorderRadius.circular(10)),
                     enabledBorder: OutlineInputBorder(
-                        borderSide:
-                            const BorderSide(color: Helper.whiteColor, width: 1),
+                        borderSide: const BorderSide(
+                            color: Helper.whiteColor, width: 1),
                         borderRadius: BorderRadius.circular(10)),
                     prefixIcon: const Icon(
                       Icons.search,
@@ -171,21 +180,25 @@ class TraineesPageState extends State<TraineesPage>
                     ),
                     hintText: "Search user",
                     hintStyle: const TextStyle(
-                        color: Helper.textFieldHintColor, fontSize: 24, height: 0.8),
+                        color: Helper.textFieldHintColor,
+                        fontSize: 24,
+                        height: 0.8),
                   ),
                   style: const TextStyle(
-                      color: Helper.textFieldTextColor, fontSize: 20, height: 0.8),
+                      color: Helper.textFieldTextColor,
+                      fontSize: 20,
+                      height: 0.8),
                 ),
               ),
               _isLoading
                   ? const Center(
-                    child: Padding(
-                      padding: EdgeInsets.all(15.0),
-                      child: CircularProgressIndicator(
+                      child: Padding(
+                        padding: EdgeInsets.all(15.0),
+                        child: CircularProgressIndicator(
                           color: Helper.yellowColor,
                         ),
-                    ),
-                  )
+                      ),
+                    )
                   : Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -195,7 +208,13 @@ class TraineesPageState extends State<TraineesPage>
                           height: screenHeight / 1.5,
                           width: screenWidth > 500 ? 500 : screenWidth,
                           child: ListView(
-                            children: _userWidgets.where((element) => element.user.name.toLowerCase().contains(searchController.text.toLowerCase()) || element.user.email.toLowerCase().contains(searchController.text.toLowerCase())).toList(),
+                            children: _userWidgets
+                                .where((element) =>
+                                    element.user.name.toLowerCase().contains(
+                                        searchController.text.toLowerCase()) ||
+                                    element.user.email.toLowerCase().contains(
+                                        searchController.text.toLowerCase()))
+                                .toList(),
                           ),
                         ),
                       ],

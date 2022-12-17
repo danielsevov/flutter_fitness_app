@@ -8,7 +8,7 @@ import '../views/trainees_page_view.dart';
 
 /// This is the object, which holds the business logic, related to the user Trainees Page view.
 /// It is the mediator between the TraineesPage view (UI) and the repositories (Data).
-class TraineesPagePresenter extends BasePresenter{
+class TraineesPagePresenter extends BasePresenter {
   TraineesPageView? _view;
 
   final UserRepository _userRepository;
@@ -39,29 +39,31 @@ class TraineesPagePresenter extends BasePresenter{
 
     // fetch the user details and profile picture
     try {
-      _users = await _userRepository.fetchMyTrainees(appState.getUserId(), appState.getToken());
+      _users = await _userRepository.fetchMyTrainees(
+          appState.getUserId(), appState.getToken());
 
       List<TraineeSearchHolder> widgets = [];
       MyImage currentImage;
       for (var element in _users) {
-
-        try{
-          currentImage = await _userRepository.fetchProfileImage(element.id, appState.getToken());
+        try {
+          currentImage = await _userRepository.fetchProfileImage(
+              element.id, appState.getToken());
           element.profilePicture = currentImage;
-        }
-        catch(e) {
+        } catch (e) {
           log('missing profile picture');
         }
 
-        widgets.add(TraineeSearchHolder(user: element, view: _view!,));
+        widgets.add(TraineeSearchHolder(
+          user: element,
+          view: _view!,
+        ));
       }
 
       log('reached here');
       _view?.setInProgress(false);
       _view?.setUserData(widgets);
       _view?.setFetched(true);
-    }
-    catch (e) {
+    } catch (e) {
       _view?.notifyNoUserData();
       _view?.setInProgress(false);
     }

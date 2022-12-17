@@ -20,9 +20,11 @@ class UserRepoImpl implements UserRepository {
 
   /// This function is used for patching a Image object, which holds the picture of a user.
   @override
-  Future<void> patchImage(int id, String userId, String date, String data, String type, String token)async {
+  Future<void> patchImage(int id, String userId, String date, String data,
+      String type, String token) async {
     //fetch http response object
-    Response response = await backendAPI.patchImage(id, userId, date, data, type, token);
+    Response response =
+        await backendAPI.patchImage(id, userId, date, data, type, token);
 
     //proceed if fetch is successful and status code is 200
     if (response.statusCode == 200 || response.body.contains('SUCCESS')) {
@@ -39,7 +41,8 @@ class UserRepoImpl implements UserRepository {
 
   /// This function is used for posting a Image object, which holds the picture of a user.
   @override
-  Future<void> postImage(String userId, String date, String data, String type, String token)async {
+  Future<void> postImage(String userId, String date, String data, String type,
+      String token) async {
     var response = await backendAPI.postImage(userId, date, data, type, token);
 
     //proceed if fetch is successful and status code is 200
@@ -221,24 +224,30 @@ class UserRepoImpl implements UserRepository {
     try {
       var res = await backendAPI.deleteImage(id, jwtToken);
 
-      if(res.statusCode != 200 && res.statusCode != 204) {
+      if (res.statusCode != 200 && res.statusCode != 204) {
         log("fetch user details failed");
-        throw FailedFetchException(
-            "Failed to delete image!");
+        throw FailedFetchException("Failed to delete image!");
       }
-    }
-    catch(e) {
+    } catch (e) {
       log("fetch user details failed");
-      throw FailedFetchException(
-          "Failed to delete image!\n$e");
+      throw FailedFetchException("Failed to delete image!\n$e");
     }
   }
 
   /// This function is used for registering a user.
   @override
-  Future<void> registerUser(String userId, String coachId, String password, String name, String phoneNumber, String nationality, String dateOfBirth, String jwtToken) async {
+  Future<void> registerUser(
+      String userId,
+      String coachId,
+      String password,
+      String name,
+      String phoneNumber,
+      String nationality,
+      String dateOfBirth,
+      String jwtToken) async {
     //fetch http response object
-    Response response = await backendAPI.registerUser(userId, coachId, password, name, phoneNumber, nationality, dateOfBirth, jwtToken);
+    Response response = await backendAPI.registerUser(userId, coachId, password,
+        name, phoneNumber, nationality, dateOfBirth, jwtToken);
 
     //proceed if fetch is successful and status code is 200
     if (response.statusCode == 200) {

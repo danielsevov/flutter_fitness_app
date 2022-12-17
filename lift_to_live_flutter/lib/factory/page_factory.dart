@@ -23,29 +23,48 @@ class PageFactory {
   final PresenterFactory _presenterFactory = PresenterFactory();
 
   // function to get a LogInPage object
-  LogInPage getLogInPage() => LogInPage(presenter: _presenterFactory.getLogInPresenter());
+  LogInPage getLogInPage() =>
+      LogInPage(presenter: _presenterFactory.getLogInPresenter());
 
   // function to get a HomePage object
-  HomePage getHomePage() => HomePage(presenter: _presenterFactory.getHomePagePresenter());
+  HomePage getHomePage() =>
+      HomePage(presenter: _presenterFactory.getHomePagePresenter());
 
   // function to get a TraineesPage object
-  TraineesPage getTraineesPage() => TraineesPage(presenter: _presenterFactory.getTraineesPagePresenter());
+  TraineesPage getTraineesPage() =>
+      TraineesPage(presenter: _presenterFactory.getTraineesPagePresenter());
 
   // function to get a RegisterPage object
-  RegisterPage getRegisterPage() => RegisterPage(presenter: _presenterFactory.getRegisterPresenter());
+  RegisterPage getRegisterPage() =>
+      RegisterPage(presenter: _presenterFactory.getRegisterPresenter());
 
   // function to get a HabitsPage object
-  HabitsPage getHabitsPage(String userId) => HabitsPage(presenter: _presenterFactory.getHabitsPagePresenter(userId), userId: userId,);
+  HabitsPage getHabitsPage(String userId) => HabitsPage(
+        presenter: _presenterFactory.getHabitsPagePresenter(userId),
+        userId: userId,
+      );
 
   // function to get a EditHabitsPage object
-  EditHabitsPage getEditHabitsPage(String userId) => EditHabitsPage(presenter: _presenterFactory.getEditHabitsPagePresenter(userId), userId: userId,);
+  EditHabitsPage getEditHabitsPage(String userId) => EditHabitsPage(
+        presenter: _presenterFactory.getEditHabitsPagePresenter(userId),
+        userId: userId,
+      );
 
   // function to get a PicturePage object
-  PicturePage getPicturePage(String userId, String name) => PicturePage(presenter: _presenterFactory.getPicturePagePresenter(userId), userId: userId, name: name,);
+  PicturePage getPicturePage(String userId, String name) => PicturePage(
+        presenter: _presenterFactory.getPicturePagePresenter(userId),
+        userId: userId,
+        name: name,
+      );
 
   // function to get a ProfilePage object
-  ProfilePage getProfilePage(String userId, String originPage) => ProfilePage(presenter: _presenterFactory.getProfilePagePresenter(userId), userId: userId, originPage: originPage,);
+  ProfilePage getProfilePage(String userId, String originPage) => ProfilePage(
+        presenter: _presenterFactory.getProfilePagePresenter(userId),
+        userId: userId,
+        originPage: originPage,
+      );
 
   // function to get a HomePage object wrapped in a BottomBarController so that the expandable bottom nav bar can be used.
-  DefaultBottomBarController getWrappedHomePage() => DefaultBottomBarController(child: getHomePage());
+  DefaultBottomBarController getWrappedHomePage() =>
+      DefaultBottomBarController(child: getHomePage());
 }

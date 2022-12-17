@@ -19,5 +19,4 @@ abstract class BasePresenter {
 
   /// Getter for appState
   AppState get appState => _appState;
-
 }

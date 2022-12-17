@@ -22,7 +22,8 @@ class BackendAPI {
   static const apiURL = "http://192.168.13.108:3000/"; // sofia
 
   /// This function is used for patching an image entry.
-  Future<http.Response> patchImage(int id, String userId, String date, String data, String type, String token) async {
+  Future<http.Response> patchImage(int id, String userId, String date,
+      String data, String type, String token) async {
     var res = await http.patch(
       Uri.parse('${apiURL}images/$id'),
       headers: <String, String>{
@@ -67,7 +68,8 @@ class BackendAPI {
   }
 
   /// This function is used for posting a new image.
-  Future<http.Response> postImage(String userId, String date, String data, String type, String jwtToken) async {
+  Future<http.Response> postImage(String userId, String date, String data,
+      String type, String jwtToken) async {
     var res = await http.post(
       Uri.parse('${apiURL}images/'),
       headers: <String, String>{
@@ -86,8 +88,14 @@ class BackendAPI {
   }
 
   /// This function is used to patch a habit instance.
-  Future<http.Response> patchHabit(int id, String date, String note, String userId,
-      String coachId, List<HabitTask> habits, String jwtToken) async {
+  Future<http.Response> patchHabit(
+      int id,
+      String date,
+      String note,
+      String userId,
+      String coachId,
+      List<HabitTask> habits,
+      String jwtToken) async {
     String inner = jsonEncode(habits);
 
     var res = await http.patch(
@@ -97,11 +105,11 @@ class BackendAPI {
         'Authorization': 'Bearer $jwtToken',
       },
       body: "${jsonEncode(<String, String>{
-        'date': date,
-        'note': note,
-        'userId': userId,
-        'coachId': coachId,
-      }).replaceAll("}", "")}, \"habits\" : $inner}",
+            'date': date,
+            'note': note,
+            'userId': userId,
+            'coachId': coachId,
+          }).replaceAll("}", "")}, \"habits\" : $inner}",
     );
     return res;
   }
@@ -154,12 +162,12 @@ class BackendAPI {
         'Authorization': 'Bearer $jwtToken',
       },
       body: "${jsonEncode(<String, dynamic>{
-        'date': date,
-        'note': note,
-        'userId': userId,
-        'coachId': coachId,
-        'is_template': isTemplate,
-      }).replaceAll("}", "")}, \"habits\" : $inner}",
+            'date': date,
+            'note': note,
+            'userId': userId,
+            'coachId': coachId,
+            'is_template': isTemplate,
+          }).replaceAll("}", "")}, \"habits\" : $inner}",
     );
     return res;
   }
@@ -179,7 +187,15 @@ class BackendAPI {
   }
 
   /// This function is used to post the user data of a single user.
-  Future<http.Response> registerUser(String userId, String coachId, String password, String name, String phoneNumber, String nationality, String dateOfBirth, String jwtToken) async {
+  Future<http.Response> registerUser(
+      String userId,
+      String coachId,
+      String password,
+      String name,
+      String phoneNumber,
+      String nationality,
+      String dateOfBirth,
+      String jwtToken) async {
     http.Response res = await http.post(
       Uri.parse('${apiURL}signup'),
       headers: <String, String>{

@@ -9,8 +9,8 @@ class HabitHolder extends StatelessWidget {
   final Habit habit;
   final List<Widget> habitTaskWidgets;
 
-  const HabitHolder({super.key, required this.habit, required this.habitTaskWidgets});
-
+  const HabitHolder(
+      {super.key, required this.habit, required this.habitTaskWidgets});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,11 @@ class HabitHolder extends StatelessWidget {
       margin: const EdgeInsets.fromLTRB(10, 5, 10, 0),
       decoration: const BoxDecoration(
         color: Helper.lightBlueColor,
-        borderRadius: BorderRadius.only(topRight: Radius.circular(90), topLeft: Radius.circular(10), bottomLeft: Radius.circular(10), bottomRight: Radius.circular(10)),
+        borderRadius: BorderRadius.only(
+            topRight: Radius.circular(90),
+            topLeft: Radius.circular(10),
+            bottomLeft: Radius.circular(10),
+            bottomRight: Radius.circular(10)),
       ),
       child: Column(
         children: [
@@ -48,25 +52,24 @@ class HabitHolder extends StatelessWidget {
                       height: 30,
                     ),
                     Icon(
-                        !habit.habits.any(
-                                (element) => !element.isCompleted)
+                        !habit.habits.any((element) => !element.isCompleted)
                             ? Icons.thumb_up
-                            : habit.habits.any((element) =>
-                        !element.isCompleted) &&
-                            habit.habits.any((element) =>
-                            element.isCompleted)
-                            ? Icons.thumbs_up_down
-                            : Icons.thumb_down,
+                            : habit.habits.any(
+                                        (element) => !element.isCompleted) &&
+                                    habit.habits
+                                        .any((element) => element.isCompleted)
+                                ? Icons.thumbs_up_down
+                                : Icons.thumb_down,
                         size: 50,
-                        color: !habit.habits.any(
-                                (element) => !element.isCompleted)
+                        color: !habit.habits
+                                .any((element) => !element.isCompleted)
                             ? Colors.green.shade800
-                            : habit.habits.any((element) =>
-                        !element.isCompleted) &&
-                            habit.habits.any((element) =>
-                            element.isCompleted)
-                            ? Colors.yellow.shade800
-                            : Colors.red.shade800)
+                            : habit.habits.any(
+                                        (element) => !element.isCompleted) &&
+                                    habit.habits
+                                        .any((element) => element.isCompleted)
+                                ? Colors.yellow.shade800
+                                : Colors.red.shade800)
                   ],
                 ),
               ),
@@ -77,9 +80,7 @@ class HabitHolder extends StatelessWidget {
             children: [
               const SizedBox(height: 10),
               Text(
-                habit.note.isEmpty
-                    ? ''
-                    : 'Coach note: ${habit.note}',
+                habit.note.isEmpty ? '' : 'Coach note: ${habit.note}',
                 style: const TextStyle(color: Colors.white),
               )
             ],

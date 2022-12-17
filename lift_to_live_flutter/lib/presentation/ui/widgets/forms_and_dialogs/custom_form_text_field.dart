@@ -19,7 +19,13 @@ class CustomFormTextField extends StatelessWidget {
       {super.key,
       required this.screenHeight,
       required this.screenWidth,
-      required this.controller, this.validator, required this.textInputType, required this.hint, required this.icon, required this.obscureText, this.onTap});
+      required this.controller,
+      this.validator,
+      required this.textInputType,
+      required this.hint,
+      required this.icon,
+      required this.obscureText,
+      this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -39,21 +45,24 @@ class CustomFormTextField extends StatelessWidget {
             icon,
             color: Helper.textFieldIconColor,
           ),
-          filled : true, fillColor : Helper.blueColor,
+          filled: true,
+          fillColor: Helper.blueColor,
           errorStyle: const TextStyle(color: Helper.textFieldErrorColor),
           focusedBorder: OutlineInputBorder(
-              borderSide:
-              const BorderSide(color: Helper.textFieldBorderColor, width: 1),
+              borderSide: const BorderSide(
+                  color: Helper.textFieldBorderColor, width: 1),
               borderRadius: BorderRadius.circular(10)),
           focusedErrorBorder: OutlineInputBorder(
-              borderSide: const BorderSide(color: Helper.textFieldErrorColor, width: 1),
+              borderSide:
+                  const BorderSide(color: Helper.textFieldErrorColor, width: 1),
               borderRadius: BorderRadius.circular(10)),
           errorBorder: OutlineInputBorder(
-              borderSide: const BorderSide(color: Helper.textFieldErrorColor, width: 1),
+              borderSide:
+                  const BorderSide(color: Helper.textFieldErrorColor, width: 1),
               borderRadius: BorderRadius.circular(10)),
           enabledBorder: OutlineInputBorder(
-              borderSide:
-              const BorderSide(color: Helper.textFieldBorderColor, width: 1),
+              borderSide: const BorderSide(
+                  color: Helper.textFieldBorderColor, width: 1),
               borderRadius: BorderRadius.circular(10)),
           hintText: hint,
           hintStyle: TextStyle(

@@ -21,10 +21,12 @@ abstract class UserRepository {
   Future<MyImage> fetchProfileImage(String userId, String jwtToken);
 
   /// This function is used for patching a Image object, which holds the picture of a user.
-  Future<void> patchImage(int id, String userId, String date, String encoded, String type, String jwtToken);
+  Future<void> patchImage(int id, String userId, String date, String encoded,
+      String type, String jwtToken);
 
   /// This function is used for posting a Image object, which holds the picture of a user.
-  Future<void> postImage(String userId, String date, String encoded, String type, String jwtToken);
+  Future<void> postImage(
+      String userId, String date, String encoded, String type, String jwtToken);
 
   /// This function is used to delete a image.
   Future<void> deleteImage(int id, String jwtToken);
@@ -33,5 +35,13 @@ abstract class UserRepository {
   Future<List<Role>> fetchCoachRoles(String jwtToken);
 
   /// This function is used for registering a user.
-  Future<void> registerUser(String userId, String coachId, String password, String name, String phoneNumber, String nationality, String dateOfBirth, String jwtToken);
+  Future<void> registerUser(
+      String userId,
+      String coachId,
+      String password,
+      String name,
+      String phoneNumber,
+      String nationality,
+      String dateOfBirth,
+      String jwtToken);
 }

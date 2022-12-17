@@ -7,14 +7,14 @@ import '../../../helper.dart';
 import '../../views/habits_page_view.dart';
 import '../widgets/habit_related/custom_calendar.dart';
 
-
 /// Custom HabitsPage widget used as a main overview of the habit entries of a user.
 /// It is a stateful widget and its state object implements the HabitsPageView abstract class.
 class HabitsPage extends StatefulWidget {
   final String userId;
   final HabitsPagePresenter presenter; // The business logic object
 
-  const HabitsPage({Key? key, required this.userId, required this.presenter}) : super(key: key);
+  const HabitsPage({Key? key, required this.userId, required this.presenter})
+      : super(key: key);
 
   @override
   State<StatefulWidget> createState() => HabitsPageState();
@@ -112,7 +112,10 @@ class HabitsPageState extends State<HabitsPage> implements HabitsPageView {
                           onPressed: () async {
                             if (widget.presenter.isAuthorized()) {
                               Helper.pushPageWithAnimation(
-                                  context, PageFactory().getEditHabitsPage(widget.userId,));
+                                  context,
+                                  PageFactory().getEditHabitsPage(
+                                    widget.userId,
+                                  ));
                             } else {
                               Helper.makeToast(context,
                                   "You don't have the permission to edit habits!");
@@ -127,7 +130,9 @@ class HabitsPageState extends State<HabitsPage> implements HabitsPageView {
                   SliverList(
                     delegate: SliverChildBuilderDelegate(
                       (BuildContext context, int index) {
-                        return _isFetched ? CustomCalendar(habits: widget.presenter.habits) : const SizedBox();
+                        return _isFetched
+                            ? CustomCalendar(habits: widget.presenter.habits)
+                            : const SizedBox();
                       },
                       childCount: 1,
                     ),
@@ -135,11 +140,20 @@ class HabitsPageState extends State<HabitsPage> implements HabitsPageView {
                   SliverList(
                     delegate: SliverChildBuilderDelegate(
                       (BuildContext context, int index) {
-                        return Column(children: const [
-                          //Divider(color: Helper.whiteColor, thickness: 1,),
-                          Text('Habit Entries:', style: TextStyle(color: Helper.whiteColor, fontSize: 22),),
-                          Divider(color: Helper.whiteColor, thickness: 1,),
-                        ],);
+                        return Column(
+                          children: const [
+                            //Divider(color: Helper.whiteColor, thickness: 1,),
+                            Text(
+                              'Habit Entries:',
+                              style: TextStyle(
+                                  color: Helper.whiteColor, fontSize: 22),
+                            ),
+                            Divider(
+                              color: Helper.whiteColor,
+                              thickness: 1,
+                            ),
+                          ],
+                        );
                       },
                       childCount: 1,
                     ),

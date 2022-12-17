@@ -8,14 +8,15 @@ import '../../../helper.dart';
 import '../../views/edit_habits_page_view.dart';
 import '../widgets/habit_related/edit_habit_holder.dart';
 
-
 /// Custom EditHabitsPage widget used as a main editorial page of the habit template of a user.
 /// It is a stateful widget and its state object implements the EditHabitsPageView abstract class.
 class EditHabitsPage extends StatefulWidget {
   final String userId;
   final EditHabitsPagePresenter presenter; // The business logic object
 
-  const EditHabitsPage({Key? key, required this.userId, required this.presenter}) : super(key: key);
+  const EditHabitsPage(
+      {Key? key, required this.userId, required this.presenter})
+      : super(key: key);
 
   @override
   State<StatefulWidget> createState() => EditHabitsPageState();
@@ -89,9 +90,7 @@ class EditHabitsPageState extends State<EditHabitsPage>
       appBar: AppBar(
         leading: IconButton(
             icon: const Icon(Icons.arrow_back, color: Helper.yellowColor),
-            onPressed: () => {
-                  _isChanged ? goBack() : Navigator.pop(context)
-                }),
+            onPressed: () => {_isChanged ? goBack() : Navigator.pop(context)}),
         centerTitle: true,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(

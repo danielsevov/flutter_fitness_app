@@ -16,7 +16,6 @@ abstract class HabitsPageView {
 
   /// Function to notify if no habits were found
   void notifyNoHabitsFound();
-
 }
 
 // coverage:ignore-end

@@ -68,37 +68,61 @@ class LogInFormState extends State<LogInForm> {
       child: Column(
         children: [
           //email text field
-          CustomFormTextField(screenHeight: widget.screenHeight, screenWidth: widget.screenWidth, controller: widget._emailController, textInputType: TextInputType.emailAddress, hint: 'Enter email address', icon: Icons.email_outlined, validator: (value) {
-            if (value != null &&
-                !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                    .hasMatch(value)) {
-              widget.clearForm();
-              return 'Email must be in the right format (xxx@xxx.xxx)!';
-            }
-            return null;
-          }, obscureText: false,),
+          CustomFormTextField(
+            screenHeight: widget.screenHeight,
+            screenWidth: widget.screenWidth,
+            controller: widget._emailController,
+            textInputType: TextInputType.emailAddress,
+            hint: 'Enter email address',
+            icon: Icons.email_outlined,
+            validator: (value) {
+              if (value != null &&
+                  !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                      .hasMatch(value)) {
+                widget.clearForm();
+                return 'Email must be in the right format (xxx@xxx.xxx)!';
+              }
+              return null;
+            },
+            obscureText: false,
+          ),
           SizedBox(
             height: widget.screenHeight / 30,
           ),
 
           //password text field
-          CustomFormTextField(screenHeight: widget.screenHeight, screenWidth: widget.screenWidth, controller: widget._passwordController, textInputType: TextInputType.text, hint: 'Enter password', icon: Icons.key, validator: (value) {
-            if (value != null && value.length < 8) {
-              widget.clearPassword();
-              return 'Password must be at least 8 characters long!';
-            }
-            return null;
-          }, obscureText: true,),
+          CustomFormTextField(
+            screenHeight: widget.screenHeight,
+            screenWidth: widget.screenWidth,
+            controller: widget._passwordController,
+            textInputType: TextInputType.text,
+            hint: 'Enter password',
+            icon: Icons.key,
+            validator: (value) {
+              if (value != null && value.length < 8) {
+                widget.clearPassword();
+                return 'Password must be at least 8 characters long!';
+              }
+              return null;
+            },
+            obscureText: true,
+          ),
           SizedBox(
             height: widget.screenHeight / 20,
           ),
 
           //log in button
-          CustomFormButton(screenHeight: widget.screenHeight, screenWidth: widget.screenWidth, title: 'Sign In', icon: Icons.login, function: () {
-            if (_logInFormKey.currentState!.validate()) {
-              widget.presenter.logIn();
-            }
-          }, tag: 'btn0'),
+          CustomFormButton(
+              screenHeight: widget.screenHeight,
+              screenWidth: widget.screenWidth,
+              title: 'Sign In',
+              icon: Icons.login,
+              function: () {
+                if (_logInFormKey.currentState!.validate()) {
+                  widget.presenter.logIn();
+                }
+              },
+              tag: 'btn0'),
         ],
       ),
     );

@@ -12,7 +12,8 @@ import '../widgets/forms_and_dialogs/register_form.dart';
 /// and submitting them for registration of the user.
 /// It is a stateful widget and its state object implements the RegisterPageView abstract class.
 class RegisterPage extends StatefulWidget {
-  final RegisterPagePresenter presenter; // The business logic object of the log in page
+  final RegisterPagePresenter
+      presenter; // The business logic object of the log in page
 
   const RegisterPage({Key? key, required this.presenter}) : super(key: key);
 
@@ -71,8 +72,7 @@ class RegisterPageState extends State<RegisterPage>
             icon: const Icon(Icons.arrow_back, color: Helper.yellowColor),
             onPressed: () {
               Helper.replacePage(context, PageFactory().getTraineesPage());
-            }
-        ),
+            }),
         title: const Text(
           "Register User",
           style: TextStyle(color: Helper.headerBarTextColor),

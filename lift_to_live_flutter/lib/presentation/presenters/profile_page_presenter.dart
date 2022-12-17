@@ -12,7 +12,7 @@ import '../views/profile_page_view.dart';
 
 /// This is the object, which holds the business logic, related to the user Profile Page view.
 /// It is the mediator between the ProfilePage view (UI) and the repositories (Data).
-class ProfilePagePresenter extends BasePresenter{
+class ProfilePagePresenter extends BasePresenter {
   ProfilePageView? _view;
 
   final UserRepository _userRepository;
@@ -37,19 +37,19 @@ class ProfilePagePresenter extends BasePresenter{
 
   /// Function called to indicate if user is authorized to view private pages.
   isAuthorized(bool changePicture) {
-    return appState.getUserId() == _userId || ( super.appState.isCoachOrAdmin() && !changePicture);
+    return appState.getUserId() == _userId ||
+        (super.appState.isCoachOrAdmin() && !changePicture);
   }
 
   /// Function used for fetching the required data, which is then displayed on the profile page.
   Future<void> fetchData() async {
-
     // set the loading indicator to be displayed on the home page view
     _view?.setInProgress(true);
 
     // fetch the user details and profile picture
     try {
-      _user = await _userRepository.fetchUser(
-          _userId, super.appState.getToken());
+      _user =
+          await _userRepository.fetchUser(_userId, super.appState.getToken());
 
       try {
         _myImage = await _userRepository.fetchProfileImage(
@@ -58,17 +58,19 @@ class ProfilePagePresenter extends BasePresenter{
           base64Decode(_myImage.data),
           height: 300,
         );
-      }
-      catch (e) {
+      } catch (e) {
         _myImage = MyImage('', 'profile', 0, '', '');
-        _profilePicture = Image.asset('assets/images/prof_pic.png', height: 300, color: Helper.yellowColor,);
+        _profilePicture = Image.asset(
+          'assets/images/prof_pic.png',
+          height: 300,
+          color: Helper.yellowColor,
+        );
       }
 
       // display the fetched user data
       _view?.setInProgress(false);
       _view?.setUserData(_user, _profilePicture);
-    }
-    catch (e) {
+    } catch (e) {
       _view?.notifyNoUserData();
       _view?.setInProgress(false);
     }
@@ -87,11 +89,21 @@ class ProfilePagePresenter extends BasePresenter{
       File imageFile = File(pickedFile.path);
       String encoded = Helper.imageToBlob(imageFile);
 
-      if(_myImage.id != 0) {
-        _userRepository.patchImage(_myImage.id, _myImage.userId, (DateTime.now().millisecondsSinceEpoch).toString(), encoded, "profile", appState.getToken());
-      }
-      else {
-        _userRepository.postImage(_myImage.userId, (DateTime.now().millisecondsSinceEpoch).toString(), encoded, "profile", appState.getToken());
+      if (_myImage.id != 0) {
+        _userRepository.patchImage(
+            _myImage.id,
+            _myImage.userId,
+            (DateTime.now().millisecondsSinceEpoch).toString(),
+            encoded,
+            "profile",
+            appState.getToken());
+      } else {
+        _userRepository.postImage(
+            _myImage.userId,
+            (DateTime.now().millisecondsSinceEpoch).toString(),
+            encoded,
+            "profile",
+            appState.getToken());
       }
 
       var img = Image.file(

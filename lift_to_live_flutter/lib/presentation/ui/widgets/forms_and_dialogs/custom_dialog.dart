@@ -6,15 +6,26 @@ class CustomDialog extends StatelessWidget {
   final String title, bodyText;
   final Function() confirm, cancel;
 
-  const CustomDialog({Key? key, required this.title, required this.bodyText, required this.confirm, required this.cancel}) : super(key: key);
+  const CustomDialog(
+      {Key? key,
+      required this.title,
+      required this.bodyText,
+      required this.confirm,
+      required this.cancel})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
       backgroundColor: Helper.paragraphBackgroundColor,
-      title: Text(title, style: const TextStyle(color: Helper.defaultTextColor),),
+      title: Text(
+        title,
+        style: const TextStyle(color: Helper.defaultTextColor),
+      ),
       content: Text(
-        bodyText, style: const TextStyle(color: Helper.defaultTextColor),),
+        bodyText,
+        style: const TextStyle(color: Helper.defaultTextColor),
+      ),
       actions: [
         IconButton(
             onPressed: confirm,

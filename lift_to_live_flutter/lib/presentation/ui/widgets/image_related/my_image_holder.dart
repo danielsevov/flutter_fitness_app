@@ -12,8 +12,13 @@ class MyImageHolder extends StatelessWidget {
   final int id;
   final PicturePagePresenter presenter;
 
-  const MyImageHolder({Key? key, required this.img, required this.date, required this.id, required this.presenter}) : super(key: key);
-
+  const MyImageHolder(
+      {Key? key,
+      required this.img,
+      required this.date,
+      required this.id,
+      required this.presenter})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -60,11 +65,20 @@ class MyImageHolder extends StatelessWidget {
               ),
               IconButton(
                   onPressed: () {
-
                     showDialog(
                         context: context,
                         builder: (context) {
-                          return CustomDialog(title: 'Delete image', bodyText: 'Are you sure you want to delete this image?', confirm: (){presenter.deleteImage(id);Navigator.pop(context);}, cancel: (){Navigator.pop(context);});
+                          return CustomDialog(
+                              title: 'Delete image',
+                              bodyText:
+                                  'Are you sure you want to delete this image?',
+                              confirm: () {
+                                presenter.deleteImage(id);
+                                Navigator.pop(context);
+                              },
+                              cancel: () {
+                                Navigator.pop(context);
+                              });
                         });
                   },
                   icon: const Icon(

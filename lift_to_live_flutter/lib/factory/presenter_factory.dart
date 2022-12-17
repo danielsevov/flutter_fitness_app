@@ -38,8 +38,7 @@ class PresenterFactory {
       UserRepoImpl(backendAPI); // user repository
   HabitsRepository getHabitsRepository() =>
       HabitsRepoImpl(backendAPI); // habits repository
-  NewsRepository getNewsRepository() =>
-      NewsRepoImpl(newsAPI); //news repository
+  NewsRepository getNewsRepository() => NewsRepoImpl(newsAPI); //news repository
 
   // function to get a LogInPagePresenter object.
   LogInPagePresenter getLogInPresenter() =>

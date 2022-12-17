@@ -10,7 +10,7 @@ import '../views/habits_page_view.dart';
 
 /// This is the object, which holds the business logic, related to the user Habits Page view.
 /// It is the mediator between the HabitsPage view (UI) and the repositories (Data).
-class HabitsPagePresenter extends BasePresenter{
+class HabitsPagePresenter extends BasePresenter {
   HabitsPageView? _view;
 
   final HabitsRepository _habitsRepository;
@@ -52,11 +52,11 @@ class HabitsPagePresenter extends BasePresenter{
 
     // fetch the user habit template
     try {
-      template = await _habitsRepository.fetchTemplate(
-          _userId, appState.getToken());
+      template =
+          await _habitsRepository.fetchTemplate(_userId, appState.getToken());
 
       //create template if not present\
-      if(template.id == 0) {
+      if (template.id == 0) {
         await _habitsRepository.postHabit(
             (DateTime.now().millisecondsSinceEpoch).toString(),
             template.note,
@@ -67,20 +67,19 @@ class HabitsPagePresenter extends BasePresenter{
             appState.getToken());
 
         // re-fetch the habit template
-        template = await _habitsRepository.fetchTemplate(
-            _userId, appState.getToken());
+        template =
+            await _habitsRepository.fetchTemplate(_userId, appState.getToken());
       }
 
       // fetch all user habit entries
-      _habits = await _habitsRepository.fetchHabits(
-          _userId, appState.getToken());
+      _habits =
+          await _habitsRepository.fetchHabits(_userId, appState.getToken());
 
       //sort by date
       _habits.sort((a, b) => b.date.compareTo(a.date));
 
       //create today's habit if not present
-      if ((_habits.isEmpty ||
-          Helper.isDateBeforeToday(_habits.first.date))) {
+      if ((_habits.isEmpty || Helper.isDateBeforeToday(_habits.first.date))) {
         await _habitsRepository.postHabit(
             (DateTime.now().millisecondsSinceEpoch).toString(),
             template.note,
@@ -90,8 +89,8 @@ class HabitsPagePresenter extends BasePresenter{
             template.habits,
             appState.getToken());
 
-        _habits = await _habitsRepository.fetchHabits(
-            _userId, appState.getToken());
+        _habits =
+            await _habitsRepository.fetchHabits(_userId, appState.getToken());
 
         //sort by date
         _habits.sort((a, b) => b.date.compareTo(a.date));
@@ -103,7 +102,10 @@ class HabitsPagePresenter extends BasePresenter{
         Habit habit = element;
         for (var element in habit.habits) {
           habitTaskWidgets.add(HabitTaskHolder(
-            habitTask: element, habit: habit, presenter: this,));
+            habitTask: element,
+            habit: habit,
+            presenter: this,
+          ));
         }
 
         //add habit tasks to the habit instance widget
@@ -120,8 +122,7 @@ class HabitsPagePresenter extends BasePresenter{
       _view?.setInProgress(false);
       _view?.setHabitData(_habitWidgets);
       _view?.setFetched(true);
-    }
-    catch (e) {
+    } catch (e) {
       _view?.notifyNoHabitsFound();
       _habitWidgets.add(const Text('No Habits were found!'));
       _view?.setHabitData(_habitWidgets);
@@ -131,7 +132,9 @@ class HabitsPagePresenter extends BasePresenter{
   }
 
   /// Function for updating a habit entry.
-  void updateHabitEntry(int id, String date, String note, String userId, String coachId, List<HabitTask> habits) {
-    _habitsRepository.patchHabit(id, date, note, userId, coachId, habits, appState.getToken());
+  void updateHabitEntry(int id, String date, String note, String userId,
+      String coachId, List<HabitTask> habits) {
+    _habitsRepository.patchHabit(
+        id, date, note, userId, coachId, habits, appState.getToken());
   }
 }

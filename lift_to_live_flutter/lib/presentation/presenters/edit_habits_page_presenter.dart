@@ -1,4 +1,3 @@
-
 import '../../domain/entities/habit.dart';
 import '../../domain/entities/habit_task.dart';
 import '../../domain/repositories/habits_repo.dart';
@@ -7,7 +6,7 @@ import 'base_presenter.dart';
 
 /// This is the object, which holds the business logic, related to the user Edit Habits Page view.
 /// It is the mediator between the EditHabitsPage view (UI) and the repositories (Data).
-class EditHabitsPagePresenter extends BasePresenter{
+class EditHabitsPagePresenter extends BasePresenter {
   EditHabitsPageView? _view;
 
   final HabitsRepository _habitsRepository;
@@ -41,8 +40,8 @@ class EditHabitsPagePresenter extends BasePresenter{
 
     // fetch the template habit
     try {
-      template = await _habitsRepository.fetchTemplate(
-          _userId, appState.getToken());
+      template =
+          await _habitsRepository.fetchTemplate(_userId, appState.getToken());
 
       // create edit habit widgets for each task
       for (var element in template.habits) {
@@ -52,9 +51,7 @@ class EditHabitsPagePresenter extends BasePresenter{
       // notify the page view that fetch is complete
       _view?.setInProgress(false);
       _view?.setFetched(true);
-    }
-
-    catch (e) {
+    } catch (e) {
       _view?.setInProgress(false);
     }
   }
@@ -67,7 +64,7 @@ class EditHabitsPagePresenter extends BasePresenter{
 
     // create the Habit tasks
     controllers?.map((e) => e.text.toString()).forEach((element) {
-      if(element.isNotEmpty) newTasks.add(HabitTask(element, false));
+      if (element.isNotEmpty) newTasks.add(HabitTask(element, false));
     });
 
     // update the habit template

@@ -8,7 +8,6 @@ import '../../../helper.dart';
 import '../../views/log_in_form_view.dart';
 import '../../views/log_in_page_view.dart';
 
-
 /// Custom widget, which is the LogInPage and is used for inputting user credentials
 /// and submitting them for authentication and communicating with the user.
 /// It is a stateful widget and its state object implements the LogInPageView abstract class.
@@ -27,8 +26,7 @@ class LogInPageState extends State<LogInPage> implements LogInPageView {
       _logInForm; // The log in form widget, nested in the log in page
   bool _isLoading =
       false; // Indicator showing if data is being fetched at the moment
-  bool _formInitialized =
-  false; // Indicator showing if form is initialized
+  bool _formInitialized = false; // Indicator showing if form is initialized
   late double _screenWidth, _screenHeight; // Dimensions of the screen
 
   /// initialize the page view by attaching it to the presenter
@@ -57,7 +55,7 @@ class LogInPageState extends State<LogInPage> implements LogInPageView {
       widget.presenter.setAppState(Provider.of<AppState>(context));
     }
 
-    if(!_formInitialized) {
+    if (!_formInitialized) {
       _logInForm = LogInForm(
           screenHeight: _screenHeight,
           screenWidth: _screenWidth,
@@ -132,8 +130,7 @@ class LogInPageState extends State<LogInPage> implements LogInPageView {
   /// Function to trigger page change from log in page to home page, upon successful log in.
   @override
   void navigateToHome() {
-    Helper.pushPageWithAnimation(
-        context, PageFactory().getWrappedHomePage());
+    Helper.pushPageWithAnimation(context, PageFactory().getWrappedHomePage());
   }
 
   /// Function to display a toast message, when user cannot be authenticated.

@@ -63,11 +63,10 @@ class HabitsRepoImpl implements HabitsRepository {
         myHabits.add(Habit.fromJson(element));
       }
 
-      if(myHabits.isNotEmpty) {
+      if (myHabits.isNotEmpty) {
         //return the Habits
         return myHabits[0];
-      }
-      else {
+      } else {
         return Habit(0, '', '', '', '', true, [HabitTask('My Task 1', false)]);
       }
     }
@@ -86,13 +85,7 @@ class HabitsRepoImpl implements HabitsRepository {
       String coachId, List<HabitTask> habits, String jwtToken) async {
     try {
       await backendAPI.patchHabit(
-          id,
-          date,
-          note,
-          userId,
-          coachId,
-          habits,
-          jwtToken);
+          id, date, note, userId, coachId, habits, jwtToken);
     } catch (e) {
       log("patch habit failed");
       throw FailedFetchException(
@@ -102,7 +95,8 @@ class HabitsRepoImpl implements HabitsRepository {
 
   /// This function is used for posting habit entries.
   @override
-  Future<void> postHabit(String date,
+  Future<void> postHabit(
+      String date,
       String note,
       String userId,
       String coachId,
@@ -111,13 +105,7 @@ class HabitsRepoImpl implements HabitsRepository {
       String jwtToken) async {
     try {
       await backendAPI.postHabit(
-          date,
-          note,
-          userId,
-          coachId,
-          isTemplate,
-          habits,
-          jwtToken);
+          date, note, userId, coachId, isTemplate, habits, jwtToken);
     } catch (e) {
       log("post habit failed");
       throw FailedFetchException(

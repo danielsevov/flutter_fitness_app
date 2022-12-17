@@ -16,8 +16,7 @@ class NewsArticleHolder extends StatelessWidget {
     return Container(
       color: index.isOdd
           ? Helper.lightBlueColor
-          : Helper.paragraphBackgroundColor
-          .withOpacity(0.12),
+          : Helper.paragraphBackgroundColor.withOpacity(0.12),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
@@ -32,47 +31,41 @@ class NewsArticleHolder extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: const BorderRadius.only(
                         bottomRight: Radius.circular(20)),
-                    child: view.currentNews.articles[index]
-                        .urlToImage.isEmpty
+                    child: view.currentNews.articles[index].urlToImage.isEmpty
                         ? null
                         : Image.network(
-                      view.currentNews
-                          .articles[index].urlToImage,
-                      loadingBuilder: (context, child,
-                          loadingProgress) =>
-                      (loadingProgress == null)
-                          ? child
-                          : const Center(
-                        child:
-                        CircularProgressIndicator(
-                          color: Helper
-                              .pageBackgroundColor,
-                        ),
-                      ),
-                      errorBuilder: (context, error,
-                          stackTrace) =>
-                          Container(
+                            view.currentNews.articles[index].urlToImage,
+                            loadingBuilder: (context, child, loadingProgress) =>
+                                (loadingProgress == null)
+                                    ? child
+                                    : const Center(
+                                        child: CircularProgressIndicator(
+                                          color: Helper.pageBackgroundColor,
+                                        ),
+                                      ),
+                            errorBuilder: (context, error, stackTrace) =>
+                                Container(
+                              height: 80,
+                              width: 160,
+                              color: Helper.backgroundColor,
+                            ),
+                            scale: 0.1,
                             height: 80,
                             width: 160,
-                            color: Helper.backgroundColor,
                           ),
-                      scale: 0.1,
-                      height: 80,
-                      width: 160,
-                    ),
                   ),
                 ),
               ),
               Expanded(
                   child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      view.currentNews.articles[index].title,
-                      style: const TextStyle(
-                          color: Helper.defaultTextColor,
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ))
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  view.currentNews.articles[index].title,
+                  style: const TextStyle(
+                      color: Helper.defaultTextColor,
+                      fontWeight: FontWeight.bold),
+                ),
+              ))
             ],
           ),
           Padding(
@@ -96,7 +89,10 @@ class NewsArticleHolder extends StatelessWidget {
                   CupertinoIcons.arrow_turn_down_right,
                   color: Helper.actionButtonTextColor,
                 ),
-                label: const Text('Read More', style: TextStyle(color: Helper.blackColor),),
+                label: const Text(
+                  'Read More',
+                  style: TextStyle(color: Helper.blackColor),
+                ),
                 backgroundColor: Helper.actionButtonColor,
               ),
               const SizedBox(
