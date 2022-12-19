@@ -133,13 +133,12 @@ void main() {
     when(view.setNewsData(any)).thenAnswer((realInvocation) { });
 
     await presenter.fetchNews();
-    await presenter.fetchNews();
 
     expect(appState.getToken(), 'token');
     expect(appState.getUserRoles().length, 1);
-    verify(view.setInProgress(any)).called(4);
+    verify(view.setInProgress(any)).called(2);
     verify(newsRepo.getNews(any, any)).called(1);
-    verify(view.setNewsData(any)).called(2);
+    verify(view.setNewsData(any)).called(1);
   });
 
   test('test fetch data', () async {
@@ -165,13 +164,14 @@ void main() {
     when(view.setNewsData(any)).thenAnswer((realInvocation) { });
 
     await presenter.fetchData();
+    await presenter.fetchData();
 
     expect(appState.getToken(), 'token');
     expect(appState.getUserRoles().length, 1);
     verify(view.setInProgress(any)).called(4);
     verify(newsRepo.getNews(any, any)).called(1);
-    verify(view.setNewsData(any)).called(1);
-    verify(view.setUserData(any, any)).called(1);
+    verify(view.setNewsData(any)).called(2);
+    verify(view.setUserData(any, any)).called(2);
   });
 
   test('test fetch data with exception', () async {
