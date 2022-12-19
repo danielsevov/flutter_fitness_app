@@ -21,17 +21,22 @@ void main() {
   test('test presenter constructor', () {
     final newsRepo = MockNewsRepository();
     final userRepo = MockUserRepository();
-    final presenter = HomePagePresenter(newsRepo, userRepo);
+    final presenter = HomePagePresenter();
+
+    expect(presenter.repositoriesAttached, false);
+    presenter.attachRepositories(userRepo, newsRepo);
 
     expect(presenter, isA<HomePagePresenter>());
     expect(presenter.isInitialized(), false);
+    expect(presenter.repositoriesAttached, true);
   });
 
   test('test set app state', () {
     final newsRepo = MockNewsRepository();
     final userRepo = MockUserRepository();
     final appState = AppState();
-    final presenter = HomePagePresenter(newsRepo, userRepo);
+    final presenter = HomePagePresenter();
+    presenter.attachRepositories(userRepo, newsRepo);
     expect(presenter.isInitialized(), false);
 
     expect(() async => presenter.setAppState(appState), returnsNormally);
@@ -43,7 +48,8 @@ void main() {
     final newsRepo = MockNewsRepository();
     final userRepo = MockUserRepository();
     final appState = AppState();
-    final presenter = HomePagePresenter(newsRepo, userRepo);
+    final presenter = HomePagePresenter();
+    presenter.attachRepositories(userRepo, newsRepo);
     presenter.setAppState(appState);
 
     expect(appState.hasState(), false);
@@ -58,7 +64,8 @@ void main() {
     final newsRepo = MockNewsRepository();
     final userRepo = MockUserRepository();
     final appState = AppState();
-    final presenter = HomePagePresenter(newsRepo, userRepo);
+    final presenter = HomePagePresenter();
+    presenter.attachRepositories(userRepo, newsRepo);
     presenter.setAppState(appState);
     appState.setInitialState('email', 'token', []);
 
@@ -69,7 +76,8 @@ void main() {
     final newsRepo = MockNewsRepository();
     final userRepo = MockUserRepository();
     final appState = AppState();
-    final presenter = HomePagePresenter(newsRepo, userRepo);
+    final presenter = HomePagePresenter();
+    presenter.attachRepositories(userRepo, newsRepo);
     presenter.setAppState(appState);
     appState.setInitialState('email', 'token', [Role('A', 'admin')]);
 
@@ -81,7 +89,8 @@ void main() {
       final newsRepo = MockNewsRepository();
       final userRepo = MockUserRepository();
       final view = MockHomePageView();
-      final presenter = HomePagePresenter(newsRepo, userRepo);
+      final presenter = HomePagePresenter();
+    presenter.attachRepositories(userRepo, newsRepo);
 
       expect(() async => presenter.attach(view), returnsNormally);
     });
@@ -89,7 +98,8 @@ void main() {
     test('test detach view', () {
       final newsRepo = MockNewsRepository();
       final userRepo = MockUserRepository();
-      final presenter = HomePagePresenter(newsRepo, userRepo);
+      final presenter = HomePagePresenter();
+    presenter.attachRepositories(userRepo, newsRepo);
 
       expect(() async => presenter.detach(), returnsNormally);
     });
@@ -98,7 +108,8 @@ void main() {
       final newsRepo = MockNewsRepository();
       final userRepo = MockUserRepository();
       final view = MockHomePageView();
-      final presenter = HomePagePresenter(newsRepo, userRepo);
+      final presenter = HomePagePresenter();
+    presenter.attachRepositories(userRepo, newsRepo);
 
       expect(() async => presenter..attach(view)..detach(), returnsNormally);
     });
@@ -109,7 +120,8 @@ void main() {
     final userRepo = MockUserRepository();
     final appState = AppState();
     final view = MockHomePageView();
-    final presenter = HomePagePresenter(newsRepo, userRepo);
+    final presenter = HomePagePresenter();
+    presenter.attachRepositories(userRepo, newsRepo);
     presenter.setAppState(appState);
     appState.setInitialState('email', 'token', [Role('A', 'admin')]);
     presenter.attach(view);
@@ -134,7 +146,8 @@ void main() {
     final userRepo = MockUserRepository();
     final appState = AppState();
     final view = MockHomePageView();
-    final presenter = HomePagePresenter(newsRepo, userRepo);
+    final presenter = HomePagePresenter();
+    presenter.attachRepositories(userRepo, newsRepo);
     presenter.setAppState(appState);
     appState.setInitialState('email', 'token', [Role('A', 'admin')]);
     presenter.attach(view);
@@ -165,7 +178,8 @@ void main() {
     final userRepo = MockUserRepository();
     final appState = AppState();
     final view = MockHomePageView();
-    final presenter = HomePagePresenter(newsRepo, userRepo);
+    final presenter = HomePagePresenter();
+    presenter.attachRepositories(userRepo, newsRepo);
     presenter.setAppState(appState);
     appState.setInitialState('email', 'token', [Role('A', 'admin')]);
     presenter.attach(view);
@@ -188,7 +202,8 @@ void main() {
     final userRepo = MockUserRepository();
     final appState = AppState();
     final view = MockHomePageView();
-    final presenter = HomePagePresenter(newsRepo, userRepo);
+    final presenter = HomePagePresenter();
+    presenter.attachRepositories(userRepo, newsRepo);
     presenter.setAppState(appState);
     appState.setInitialState('email', 'token', [Role('A', 'admin')]);
     presenter.attach(view);
@@ -217,7 +232,8 @@ void main() {
     final userRepo = MockUserRepository();
     final appState = AppState();
     final view = MockHomePageView();
-    final presenter = HomePagePresenter(newsRepo, userRepo);
+    final presenter = HomePagePresenter();
+    presenter.attachRepositories(userRepo, newsRepo);
     presenter.setAppState(appState);
     appState.setInitialState('email', 'token', [Role('A', 'admin')]);
     presenter.attach(view);

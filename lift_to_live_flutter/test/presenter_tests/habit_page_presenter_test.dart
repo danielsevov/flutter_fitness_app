@@ -18,7 +18,9 @@ import 'habit_page_presenter_test.mocks.dart';
 void main() {
   test('test presenter constructor', () {
     final habitsRepo = MockHabitsRepository();
-    final presenter = HabitsPagePresenter(habitsRepo, 'A');
+    final presenter = HabitsPagePresenter();
+    presenter.attachRepositories(habitsRepo);
+    presenter.userId = 'A';
 
     expect(presenter, isA<HabitsPagePresenter>());
     expect(presenter.isInitialized(), false);
@@ -26,7 +28,9 @@ void main() {
 
   test('test set app state', () {
     final habitsRepo = MockHabitsRepository();
-    final presenter = HabitsPagePresenter(habitsRepo, 'A');
+    final presenter = HabitsPagePresenter();
+    presenter.attachRepositories(habitsRepo);
+    presenter.userId = 'A';
     final appState = AppState();
     expect(presenter.isInitialized(), false);
 
@@ -37,7 +41,9 @@ void main() {
 
   test('test isAuthorized()', () {
     final habitsRepo = MockHabitsRepository();
-    final presenter = HabitsPagePresenter(habitsRepo, 'A');
+    final presenter = HabitsPagePresenter();
+    presenter.attachRepositories(habitsRepo);
+    presenter.userId = 'A';
     final appState = AppState();
     appState.setInitialState('A', 'token', [Role('A', 'admin')]);
 
@@ -48,7 +54,9 @@ void main() {
 
   test('test isOwner()', () {
     final habitsRepo = MockHabitsRepository();
-    final presenter = HabitsPagePresenter(habitsRepo, 'A');
+    final presenter = HabitsPagePresenter();
+    presenter.attachRepositories(habitsRepo);
+    presenter.userId = 'A';
     final appState = AppState();
     appState.setInitialState('A', 'token', [Role('A', 'admin')]);
 
@@ -59,7 +67,9 @@ void main() {
 
   test('test fail isOwner()', () {
     final habitsRepo = MockHabitsRepository();
-    final presenter = HabitsPagePresenter(habitsRepo, 'A');
+    final presenter = HabitsPagePresenter();
+    presenter.attachRepositories(habitsRepo);
+    presenter.userId = 'A';
     final appState = AppState();
     appState.setInitialState('B', 'token', [Role('A', 'admin')]);
 
@@ -70,14 +80,18 @@ void main() {
 
   test('test habits getter', () {
     final habitsRepo = MockHabitsRepository();
-    final presenter = HabitsPagePresenter(habitsRepo, 'A');
+    final presenter = HabitsPagePresenter();
+    presenter.attachRepositories(habitsRepo);
+    presenter.userId = 'A';
 
     expect(presenter.habits, []);
   });
 
   test('test updateHabitEntry()', () {
     final habitsRepo = MockHabitsRepository();
-    final presenter = HabitsPagePresenter(habitsRepo, 'A');
+    final presenter = HabitsPagePresenter();
+    presenter.attachRepositories(habitsRepo);
+    presenter.userId = 'A';
     final appState = AppState();
     appState.setInitialState('A', 'token', [Role('A', 'admin')]);
 
@@ -91,7 +105,9 @@ void main() {
     final habitsRepo = MockHabitsRepository();
     when(habitsRepo.fetchTemplate(any, any)).thenThrow(FailedFetchException(''));
 
-    final presenter = HabitsPagePresenter(habitsRepo, 'A');
+    final presenter = HabitsPagePresenter();
+    presenter.attachRepositories(habitsRepo);
+    presenter.userId = 'A';
     final appState = AppState();
     appState.setInitialState('A', 'token', [Role('A', 'admin')]);
 
@@ -110,7 +126,9 @@ void main() {
     final habitsRepo = MockHabitsRepository();
     when(habitsRepo.fetchTemplate(any, any)).thenAnswer((realInvocation) async => Habit(0, '', '', '', '', true, [HabitTask('My Task 1', false)]));
 
-    final presenter = HabitsPagePresenter(habitsRepo, 'A');
+    final presenter = HabitsPagePresenter();
+    presenter.attachRepositories(habitsRepo);
+    presenter.userId = 'A';
     final appState = AppState();
     appState.setInitialState('A', 'token', [Role('A', 'admin')]);
 
@@ -130,7 +148,9 @@ void main() {
     when(habitsRepo.fetchTemplate(any, any)).thenAnswer((realInvocation) async => Habit(1, '', '', '', '', true, [HabitTask('My Task 1', false)]));
     when(habitsRepo.fetchHabits(any, any)).thenThrow(FailedFetchException(''));
 
-    final presenter = HabitsPagePresenter(habitsRepo, 'A');
+    final presenter = HabitsPagePresenter();
+    presenter.attachRepositories(habitsRepo);
+    presenter.userId = 'A';
     final appState = AppState();
     appState.setInitialState('A', 'token', [Role('A', 'admin')]);
 
@@ -148,7 +168,9 @@ void main() {
     when(habitsRepo.fetchTemplate(any, any)).thenAnswer((realInvocation) async => Habit(1, '', '', '', '', true, [HabitTask('My Task 1', false)]));
     when(habitsRepo.fetchHabits(any, any)).thenAnswer((realInvocation) async => []);
 
-    final presenter = HabitsPagePresenter(habitsRepo, 'A');
+    final presenter = HabitsPagePresenter();
+    presenter.attachRepositories(habitsRepo);
+    presenter.userId = 'A';
     final appState = AppState();
     appState.setInitialState('A', 'token', [Role('A', 'admin')]);
 
@@ -166,7 +188,9 @@ void main() {
     when(habitsRepo.fetchTemplate(any, any)).thenAnswer((realInvocation) async => Habit(1, '', '', '', '', true, [HabitTask('My Task 1', false)]));
     when(habitsRepo.fetchHabits(any, any)).thenAnswer((realInvocation) async => [Habit(1, '946681200000', '', '', '', false, [HabitTask('My Task 1', false)])]);
 
-    final presenter = HabitsPagePresenter(habitsRepo, 'A');
+    final presenter = HabitsPagePresenter();
+    presenter.attachRepositories(habitsRepo);
+    presenter.userId = 'A';
     final appState = AppState();
     appState.setInitialState('A', 'token', [Role('A', 'admin')]);
 
@@ -184,7 +208,9 @@ void main() {
     when(habitsRepo.fetchTemplate(any, any)).thenAnswer((realInvocation) async => Habit(1, '', '', '', '', true, [HabitTask('My Task 1', false)]));
     when(habitsRepo.fetchHabits(any, any)).thenAnswer((realInvocation) async => [Habit(1, '', '', '', '', false, [HabitTask('My Task 1', false)]), Habit(2, '', '', '', '', false, [HabitTask('My Task 1', false)])]);
 
-    final presenter = HabitsPagePresenter(habitsRepo, 'A');
+    final presenter = HabitsPagePresenter();
+    presenter.attachRepositories(habitsRepo);
+    presenter.userId = 'A';
     final appState = AppState();
     appState.setInitialState('A', 'token', [Role('A', 'admin')]);
 

@@ -5,6 +5,14 @@ abstract class BasePresenter {
   late AppState _appState; // the app state object
   bool _isInitialized =
       false; // indicator if the presenter has been initialized with the app state object yet
+  bool _repositoriesAttached = false; // indicates if the required repositories are attached and the presenter is ready for use
+
+  /// Getter and setter functions for repositoriesAttached
+  bool get repositoriesAttached => _repositoriesAttached;
+
+  set repositoriesAttached(value) {
+    _repositoriesAttached = value;
+  }
 
   /// Function to pass the app state object to the presenter
   void setAppState(AppState appState) {

@@ -80,7 +80,7 @@ void main() {
     });
   });
 
-  testWidgets('CustomDrawer test constructor', (tester) async {
+  testWidgets('CustomDrawer test tap', (tester) async {
     await tester.runAsync(() async {
       // tests
       final HomePageView view = MockHomePageView();
@@ -156,4 +156,48 @@ void main() {
       await tester.tap(traineesFinder);
     });
   });
+
+  // TODO fix expandable test
+  // testWidgets('CustomBottomBar test expand', (tester) async {
+  //   await tester.runAsync(() async {
+  //     // tests
+  //     final HomePageView view = MockHomePageView();
+  //     when(view.screenWidth).thenReturn(400);
+  //     when(view.screenHeight).thenReturn(400);
+  //     when(view.isFetched).thenReturn(true);
+  //     when(view.userData).thenReturn(TestData.test_user_1);
+  //     when(view.profilePicture).thenReturn(Image.asset(
+  //         'assets/images/prof_pic.png',
+  //         height: 100));
+  //
+  //     final widget = CustomBottomBar(view: view);
+  //
+  //     final buttonFinder1 = find.text('Start Workout').hitTestable();
+  //     final buttonFinder2 = find.text('Edit Templates').hitTestable();
+  //     final buttonFinder3 = find.text('View History').hitTestable();
+  //     final iconFinder = find.byKey(Key('expandButton'));
+  //
+  //     await tester.pumpWidget(MaterialApp(
+  //         title: 'Flutter Demo', home: DefaultBottomBarController(child: Scaffold(body: Center(child: Container(height: 400, width: 400, color: Helper.blueColor,child: widget),)))));
+  //
+  //     await tester.pumpAndSettle();
+  //     await tester.pump(const Duration(seconds: 2));
+  //
+  //     expect(buttonFinder1, findsNothing);
+  //     expect(buttonFinder2, findsNothing);
+  //     expect(buttonFinder3, findsNothing);
+  //
+  //     await tester.pumpAndSettle();
+  //     await tester.pump(const Duration(seconds: 2));
+  //
+  //     await tester.tap(iconFinder);
+  //
+  //     await tester.pumpAndSettle();
+  //     await tester.pump(const Duration(seconds: 2));
+  //
+  //     expect(buttonFinder1, findsOneWidget);
+  //     expect(buttonFinder2, findsOneWidget);
+  //     expect(buttonFinder3, findsOneWidget);
+  //   });
+  // });
 }

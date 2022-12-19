@@ -17,7 +17,8 @@ import 'register_page_presenter_test.mocks.dart';
 void main() {
   test('test presenter constructor', () {
     final userRepo = MockUserRepository();
-    final presenter = RegisterPagePresenter(userRepo);
+    final presenter = RegisterPagePresenter();
+      presenter.attachRepositories(userRepo);
 
     expect(presenter, isA<RegisterPagePresenter>());
     expect(presenter.isInitialized(), false);
@@ -27,14 +28,16 @@ void main() {
     test('test attach view', () {
       final view = MockRegisterPageView();
       final userRepo = MockUserRepository();
-      final presenter = RegisterPagePresenter(userRepo);
+      final presenter = RegisterPagePresenter();
+      presenter.attachRepositories(userRepo);
 
       expect(() async => presenter.attach(view), returnsNormally);
     });
 
     test('test detach view', () {
       final userRepo = MockUserRepository();
-      final presenter = RegisterPagePresenter(userRepo);
+      final presenter = RegisterPagePresenter();
+      presenter.attachRepositories(userRepo);
 
       expect(() async => presenter.detach(), returnsNormally);
     });
@@ -42,7 +45,8 @@ void main() {
     test('test attach and detach view', () {
       final view = MockRegisterPageView();
       final userRepo = MockUserRepository();
-      final presenter = RegisterPagePresenter(userRepo);
+      final presenter = RegisterPagePresenter();
+      presenter.attachRepositories(userRepo);
 
       expect(() async => presenter..attach(view)..detach(), returnsNormally);
     });
@@ -51,7 +55,8 @@ void main() {
   test('test set app state', () {
     final appState = AppState();
     final userRepo = MockUserRepository();
-    final presenter = RegisterPagePresenter(userRepo);
+    final presenter = RegisterPagePresenter();
+      presenter.attachRepositories(userRepo);
     expect(presenter.isInitialized(), false);
 
     expect(() async => presenter.setAppState(appState), returnsNormally);
@@ -62,7 +67,8 @@ void main() {
   test('test fetch data fail', () {
     final view = MockRegisterPageView();
     final userRepo = MockUserRepository();
-    final presenter = RegisterPagePresenter(userRepo);
+    final presenter = RegisterPagePresenter();
+      presenter.attachRepositories(userRepo);
     final appState = AppState();
     appState.setInitialState('email', 'token', [Role('email', 'admin')]);
     when(userRepo.fetchCoachRoles(any)).thenThrow(FailedFetchException(''));
@@ -77,7 +83,8 @@ void main() {
   test('test fetch data success', () async {
     final view = MockRegisterPageView();
     final userRepo = MockUserRepository();
-    final presenter = RegisterPagePresenter(userRepo);
+    final presenter = RegisterPagePresenter();
+      presenter.attachRepositories(userRepo);
     final appState = AppState();
     appState.setInitialState('email', 'token', [Role('email', 'admin')]);
     when(userRepo.fetchCoachRoles(any)).thenAnswer((realInvocation) async => [Role('email1', 'coach')]);
@@ -94,7 +101,8 @@ void main() {
   test('test register user fail', () async {
     final view = MockRegisterPageView();
     final userRepo = MockUserRepository();
-    final presenter = RegisterPagePresenter(userRepo);
+    final presenter = RegisterPagePresenter();
+      presenter.attachRepositories(userRepo);
     final appState = AppState();
     appState.setInitialState('email', 'token', [Role('email', 'admin')]);
     when(userRepo.fetchCoachRoles(any)).thenAnswer((realInvocation) async => [Role('email1', 'coach')]);
@@ -114,7 +122,8 @@ void main() {
   test('test register user fail duplicate', () async {
     final view = MockRegisterPageView();
     final userRepo = MockUserRepository();
-    final presenter = RegisterPagePresenter(userRepo);
+    final presenter = RegisterPagePresenter();
+      presenter.attachRepositories(userRepo);
     final appState = AppState();
     appState.setInitialState('email', 'token', [Role('email', 'admin')]);
     when(userRepo.fetchCoachRoles(any)).thenAnswer((realInvocation) async => [Role('email1', 'coach')]);
@@ -133,7 +142,8 @@ void main() {
   test('test register user success', () async {
     final view = MockRegisterPageView();
     final userRepo = MockUserRepository();
-    final presenter = RegisterPagePresenter(userRepo);
+    final presenter = RegisterPagePresenter();
+      presenter.attachRepositories(userRepo);
     final appState = AppState();
     appState.setInitialState('email', 'token', [Role('email', 'admin')]);
     when(userRepo.fetchCoachRoles(any)).thenAnswer((realInvocation) async => [Role('email1', 'coach')]);

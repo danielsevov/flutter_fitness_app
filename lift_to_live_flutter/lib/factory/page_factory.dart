@@ -24,7 +24,7 @@ class PageFactory {
 
   // function to get a LogInPage object
   LogInPage getLogInPage() =>
-      LogInPage(presenter: _presenterFactory.getLogInPresenter());
+      LogInPage(presenter: _presenterFactory.getLogInPagePresenter());
 
   // function to get a HomePage object
   HomePage getHomePage() =>
@@ -36,7 +36,7 @@ class PageFactory {
 
   // function to get a RegisterPage object
   RegisterPage getRegisterPage() =>
-      RegisterPage(presenter: _presenterFactory.getRegisterPresenter());
+      RegisterPage(presenter: _presenterFactory.getRegisterPagePresenter());
 
   // function to get a HabitsPage object
   HabitsPage getHabitsPage(String userId) => HabitsPage(

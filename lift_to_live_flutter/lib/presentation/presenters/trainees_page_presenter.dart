@@ -1,3 +1,4 @@
+import 'dart:collection';
 import 'dart:developer';
 import 'package:lift_to_live_flutter/domain/entities/image.dart';
 import 'package:lift_to_live_flutter/domain/repositories/user_repo.dart';
@@ -11,11 +12,18 @@ import '../views/trainees_page_view.dart';
 class TraineesPagePresenter extends BasePresenter {
   TraineesPageView? _view;
 
-  final UserRepository _userRepository;
-  late final List<User> _users;
+  late final UserRepository _userRepository;
+  late List<User> _users;
+  final HashMap<String, MyImage> _photosCache = HashMap();
 
-  /// Simple constructor for passing the required repositories
-  TraineesPagePresenter(this._userRepository);
+  /// Simple constructor
+  TraineesPagePresenter();
+
+  /// Function to attach repositories
+  void attachRepositories(UserRepository userRepository) {
+    _userRepository = userRepository;
+    super.repositoriesAttached = true;
+  }
 
   /// Function to attach a view to the presenter
   void attach(TraineesPageView view) {
@@ -45,12 +53,18 @@ class TraineesPagePresenter extends BasePresenter {
       List<TraineeSearchHolder> widgets = [];
       MyImage currentImage;
       for (var element in _users) {
-        try {
-          currentImage = await _userRepository.fetchProfileImage(
-              element.id, appState.getToken());
-          element.profilePicture = currentImage;
-        } catch (e) {
-          log('missing profile picture');
+        if(_photosCache.containsKey(element.id)) {
+          element.profilePicture = _photosCache[element.id];
+        }
+        else {
+          try {
+            currentImage = await _userRepository.fetchProfileImage(
+                element.id, appState.getToken());
+            element.profilePicture = currentImage;
+            _photosCache.putIfAbsent(element.id, () => currentImage);
+          } catch (e) {
+            log('missing profile picture');
+          }
         }
 
         widgets.add(TraineeSearchHolder(

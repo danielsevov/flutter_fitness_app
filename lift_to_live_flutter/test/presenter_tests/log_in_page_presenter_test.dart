@@ -18,7 +18,8 @@ void main() {
   test('test presenter constructor', () {
     final tokenRepo = MockTokenRepository();
     final userRepo = MockUserRepository();
-    final presenter = LogInPagePresenter(tokenRepo, userRepo);
+    final presenter = LogInPagePresenter();
+    presenter.attachRepositories(tokenRepo, userRepo);
 
     expect(presenter, isA<LogInPagePresenter>());
     expect(presenter.isInitialized(), false);
@@ -29,7 +30,8 @@ void main() {
       final tokenRepo = MockTokenRepository();
       final userRepo = MockUserRepository();
       final view = MockLogInPageView();
-      final presenter = LogInPagePresenter(tokenRepo, userRepo);
+      final presenter = LogInPagePresenter();
+    presenter.attachRepositories(tokenRepo, userRepo);
 
       expect(() async => presenter.attach(view), returnsNormally);
     });
@@ -37,7 +39,8 @@ void main() {
     test('test detach view', () {
       final tokenRepo = MockTokenRepository();
       final userRepo = MockUserRepository();
-      final presenter = LogInPagePresenter(tokenRepo, userRepo);
+      final presenter = LogInPagePresenter();
+    presenter.attachRepositories(tokenRepo, userRepo);
 
       expect(() async => presenter.detach(), returnsNormally);
     });
@@ -46,7 +49,8 @@ void main() {
       final tokenRepo = MockTokenRepository();
       final userRepo = MockUserRepository();
       final view = MockLogInPageView();
-      final presenter = LogInPagePresenter(tokenRepo, userRepo);
+      final presenter = LogInPagePresenter();
+    presenter.attachRepositories(tokenRepo, userRepo);
 
       expect(() async => presenter..attach(view)..detach(), returnsNormally);
     });
@@ -56,7 +60,8 @@ void main() {
     final tokenRepo = MockTokenRepository();
     final userRepo = MockUserRepository();
     final appState = AppState();
-    final presenter = LogInPagePresenter(tokenRepo, userRepo);
+    final presenter = LogInPagePresenter();
+    presenter.attachRepositories(tokenRepo, userRepo);
     expect(presenter.isInitialized(), false);
 
     expect(() async => presenter.setAppState(appState), returnsNormally);
@@ -70,7 +75,8 @@ void main() {
       final userRepo = MockUserRepository();
       final view = MockLogInPageView();
       final appState = AppState();
-      final presenter = LogInPagePresenter(tokenRepo, userRepo);
+      final presenter = LogInPagePresenter();
+    presenter.attachRepositories(tokenRepo, userRepo);
       final form = MockLogInFormView();
 
       presenter.setAppState(appState);
@@ -105,7 +111,8 @@ void main() {
       final userRepo = MockUserRepository();
       final view = MockLogInPageView();
       final appState = AppState();
-      final presenter = LogInPagePresenter(tokenRepo, userRepo);
+      final presenter = LogInPagePresenter();
+    presenter.attachRepositories(tokenRepo, userRepo);
       final form = MockLogInFormView();
 
       presenter.setAppState(appState);
@@ -138,7 +145,8 @@ void main() {
       final userRepo = MockUserRepository();
       final view = MockLogInPageView();
       final appState = AppState();
-      final presenter = LogInPagePresenter(tokenRepo, userRepo);
+      final presenter = LogInPagePresenter();
+    presenter.attachRepositories(tokenRepo, userRepo);
       final form = MockLogInFormView();
 
       presenter.setAppState(appState);

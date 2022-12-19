@@ -9,12 +9,22 @@ import 'base_presenter.dart';
 class EditHabitsPagePresenter extends BasePresenter {
   EditHabitsPageView? _view;
 
-  final HabitsRepository _habitsRepository;
+  late final HabitsRepository _habitsRepository;
   late Habit template;
-  final String _userId;
+  late String _userId;
 
-  /// Simple constructor for passing the required repositories
-  EditHabitsPagePresenter(this._habitsRepository, this._userId);
+  /// Simple constructor
+  EditHabitsPagePresenter();
+
+  /// Function to attach repositories
+  void attachRepositories(HabitsRepository habitsRepository) {
+    _habitsRepository = habitsRepository;
+    super.repositoriesAttached = true;
+  }
+
+  void changeUser(String userID) {
+    _userId = userID;
+  }
 
   /// Function to attach a view to the presenter
   void attach(EditHabitsPageView view) {

@@ -10,11 +10,17 @@ import '../views/register_page_view.dart';
 /// It is the mediator between the Register view (UI) and the repositories (Data).
 class RegisterPagePresenter extends BasePresenter {
   RegisterPageView? _view; // the log in view UI component
-  final UserRepository
+  late final UserRepository
       _userRepository; // the repository used for fetching the user roles
 
-  /// Simple constructor for passing the required repositories
-  RegisterPagePresenter(this._userRepository);
+  /// Simple constructor
+  RegisterPagePresenter();
+
+  /// Function to attach repositories
+  void attachRepositories(UserRepository userRepository) {
+    _userRepository = userRepository;
+    super.repositoriesAttached = true;
+  }
 
   /// Function to attach a view to the presenter
   void attach(RegisterPageView view) {

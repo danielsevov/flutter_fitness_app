@@ -26,7 +26,7 @@ void main() {
   });
 
   test('PresenterFactory.getLogInPresenter() test', () {
-    var presenter = PresenterFactory().getLogInPresenter();
+    var presenter = PresenterFactory().getLogInPagePresenter();
 
     expect(presenter, isA<LogInPagePresenter>());
   });
@@ -77,5 +77,9 @@ void main() {
     var presenter = PresenterFactory().getTraineesPagePresenter();
 
     expect(presenter, isA<TraineesPagePresenter>());
+  });
+
+  test('PresenterFactory.reset() test', () {
+    expect(() => PresenterFactory().reset(), returnsNormally);
   });
 }

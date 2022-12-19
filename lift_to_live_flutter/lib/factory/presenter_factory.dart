@@ -38,37 +38,103 @@ class PresenterFactory {
       UserRepoImpl(backendAPI); // user repository
   HabitsRepository getHabitsRepository() =>
       HabitsRepoImpl(backendAPI); // habits repository
-  NewsRepository getNewsRepository() => NewsRepoImpl(newsAPI); //news repository
+  NewsRepository getNewsRepository() =>
+      NewsRepoImpl(newsAPI); //news repository
+
+  // reusable presenters
+  LogInPagePresenter logInPagePresenter = LogInPagePresenter();
+  RegisterPagePresenter registerPagePresenter = RegisterPagePresenter();
+  TraineesPagePresenter traineesPagePresenter = TraineesPagePresenter();
+  PicturePagePresenter picturePagePresenter = PicturePagePresenter();
+  HomePagePresenter homePagePresenter = HomePagePresenter();
+  HabitsPagePresenter habitsPagePresenter = HabitsPagePresenter();
+  EditHabitsPagePresenter editHabitsPagePresenter = EditHabitsPagePresenter();
+  ProfilePagePresenter profilePagePresenter = ProfilePagePresenter();
 
   // function to get a LogInPagePresenter object.
-  LogInPagePresenter getLogInPresenter() =>
-      LogInPagePresenter(getTokenRepository(), getUserRepository());
+  LogInPagePresenter getLogInPagePresenter() {
+    if(!logInPagePresenter.repositoriesAttached) {
+      logInPagePresenter.attachRepositories(getTokenRepository(), getUserRepository());
+    }
 
-  // function to get a HomePagePresenter object.
-  HabitsPagePresenter getHabitsPagePresenter(String userId) =>
-      HabitsPagePresenter(getHabitsRepository(), userId);
-
-  // function to get a EditHomePagePresenter object.
-  EditHabitsPagePresenter getEditHabitsPagePresenter(String userId) =>
-      EditHabitsPagePresenter(getHabitsRepository(), userId);
-
-  // function to get a HomePagePresenter object.
-  HomePagePresenter getHomePagePresenter() =>
-      HomePagePresenter(getNewsRepository(), getUserRepository());
-
-  // function to get a PicturePagePresenter object.
-  PicturePagePresenter getPicturePagePresenter(String userId) =>
-      PicturePagePresenter(getUserRepository(), userId);
-
-  // function to get a HomePagePresenter object.
-  ProfilePagePresenter getProfilePagePresenter(String userId) =>
-      ProfilePagePresenter(getUserRepository(), userId);
+    return logInPagePresenter;
+  }
 
   // function to get a RegisterPagePresenter object.
-  RegisterPagePresenter getRegisterPresenter() =>
-      RegisterPagePresenter(getUserRepository());
+  RegisterPagePresenter getRegisterPagePresenter() {
+    if(!registerPagePresenter.repositoriesAttached) {
+      registerPagePresenter.attachRepositories(getUserRepository());
+    }
+
+    return registerPagePresenter;
+  }
+
+  // function to get a TraineesPagePresenter object.
+  TraineesPagePresenter getTraineesPagePresenter() {
+    if(!traineesPagePresenter.repositoriesAttached) {
+      traineesPagePresenter.attachRepositories(getUserRepository());
+    }
+
+    return traineesPagePresenter;
+  }
 
   // function to get a HomePagePresenter object.
-  TraineesPagePresenter getTraineesPagePresenter() =>
-      TraineesPagePresenter(getUserRepository());
+  ProfilePagePresenter getProfilePagePresenter(String userId){
+    if(!profilePagePresenter.repositoriesAttached) {
+      profilePagePresenter.attachRepositories(getUserRepository());
+    }
+
+    if(profilePagePresenter.userId != userId) {
+      profilePagePresenter.reset();
+      profilePagePresenter.userId = userId;
+    }
+    return profilePagePresenter;
+  }
+
+  // function to get a PicturePagePresenter object.
+  PicturePagePresenter getPicturePagePresenter(String userId) {
+    if(!picturePagePresenter.repositoriesAttached) {
+      picturePagePresenter.attachRepositories(getUserRepository());
+    }
+
+    picturePagePresenter.changeUser(userId);
+
+    return picturePagePresenter;
+  }
+
+  // function to get a HomePagePresenter object.
+  HomePagePresenter getHomePagePresenter() {
+    if(!homePagePresenter.repositoriesAttached) {
+      homePagePresenter.attachRepositories(getUserRepository(), getNewsRepository());
+    }
+
+    return homePagePresenter;
+  }
+
+  // function to get a HabitsPagePresenter object.
+  HabitsPagePresenter getHabitsPagePresenter(String userId) {
+    if(!habitsPagePresenter.repositoriesAttached) {
+      habitsPagePresenter.attachRepositories(getHabitsRepository());
+    }
+
+    habitsPagePresenter.changeUser(userId);
+
+    return habitsPagePresenter;
+  }
+
+  // function to get a EditHabitsPagePresenter object.
+  EditHabitsPagePresenter getEditHabitsPagePresenter(String userId) {
+    if(!editHabitsPagePresenter.repositoriesAttached) {
+      editHabitsPagePresenter.attachRepositories(getHabitsRepository());
+    }
+
+    editHabitsPagePresenter.changeUser(userId);
+
+    return editHabitsPagePresenter;
+  }
+
+  void reset() {
+    homePagePresenter.reset();
+    profilePagePresenter.reset();
+  }
 }

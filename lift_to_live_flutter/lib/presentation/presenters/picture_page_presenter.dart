@@ -15,14 +15,24 @@ import '../views/picture_page_view.dart';
 class PicturePagePresenter extends BasePresenter {
   PicturePageView? _view;
 
-  final UserRepository _userRepository;
-  final String _userId;
+  late final UserRepository _userRepository;
+  late String _userId;
 
   List<MyImage> _myImages = [];
   List<Image> _pictures = [];
 
-  /// Simple constructor for passing the required repositories
-  PicturePagePresenter(this._userRepository, this._userId);
+  /// Simple constructor
+  PicturePagePresenter();
+
+  /// Function to attach repositories
+  void attachRepositories(UserRepository userRepository) {
+    _userRepository = userRepository;
+    super.repositoriesAttached = true;
+  }
+
+  void changeUser(String userID) {
+    _userId = userID;
+  }
 
   /// Function to attach a view to the presenter
   void attach(PicturePageView view) {

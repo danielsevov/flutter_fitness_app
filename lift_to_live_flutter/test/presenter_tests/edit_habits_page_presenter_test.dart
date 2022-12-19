@@ -17,7 +17,9 @@ import 'edit_habits_page_presenter_test.mocks.dart';
 void main() {
   test('test presenter constructor', () {
     final habitsRepo = MockHabitsRepository();
-    final presenter = EditHabitsPagePresenter(habitsRepo, 'A');
+    final presenter = EditHabitsPagePresenter();
+    presenter.attachRepositories(habitsRepo);
+    presenter.changeUser('A');
 
     expect(presenter, isA<EditHabitsPagePresenter>());
     expect(presenter.isInitialized(), false);
@@ -25,7 +27,9 @@ void main() {
 
   test('test set app state', () {
     final habitsRepo = MockHabitsRepository();
-    final presenter = EditHabitsPagePresenter(habitsRepo, 'A');
+    final presenter = EditHabitsPagePresenter();
+    presenter.attachRepositories(habitsRepo);
+    presenter.changeUser('A');
     final appState = AppState();
     expect(presenter.isInitialized(), false);
 
@@ -36,7 +40,9 @@ void main() {
 
   test('test isAuthorized()', () {
     final habitsRepo = MockHabitsRepository();
-    final presenter = EditHabitsPagePresenter(habitsRepo, 'A');
+    final presenter = EditHabitsPagePresenter();
+    presenter.attachRepositories(habitsRepo);
+    presenter.changeUser('A');
     final appState = AppState();
     appState.setInitialState('A', 'token', [Role('A', 'admin')]);
 
@@ -47,7 +53,9 @@ void main() {
 
   test('test addNewElement()', () {
     final habitsRepo = MockHabitsRepository();
-    final presenter = EditHabitsPagePresenter(habitsRepo, 'A');
+    final presenter = EditHabitsPagePresenter();
+    presenter.attachRepositories(habitsRepo);
+    presenter.changeUser('A');
     final view = MockEditHabitsPageView();
     final appState = AppState();
     appState.setInitialState('A', 'token', [Role('A', 'admin')]);
@@ -62,7 +70,9 @@ void main() {
 
   test('test fetchData fail()', () {
     final habitsRepo = MockHabitsRepository();
-    final presenter = EditHabitsPagePresenter(habitsRepo, 'A');
+    final presenter = EditHabitsPagePresenter();
+    presenter.attachRepositories(habitsRepo);
+    presenter.changeUser('A');
     final view = MockEditHabitsPageView();
     final appState = AppState();
     appState.setInitialState('A', 'token', [Role('A', 'admin')]);
@@ -78,7 +88,9 @@ void main() {
 
   test('test fetchData success()', () async {
     final habitsRepo = MockHabitsRepository();
-    final presenter = EditHabitsPagePresenter(habitsRepo, 'A');
+    final presenter = EditHabitsPagePresenter();
+    presenter.attachRepositories(habitsRepo);
+    presenter.changeUser('A');
     final view = MockEditHabitsPageView();
     final appState = AppState();
     appState.setInitialState('A', 'token', [Role('A', 'admin')]);
@@ -96,7 +108,9 @@ void main() {
 
   test('test saveChanges()', () async {
     final habitsRepo = MockHabitsRepository();
-    final presenter = EditHabitsPagePresenter(habitsRepo, 'A');
+    final presenter = EditHabitsPagePresenter();
+    presenter.attachRepositories(habitsRepo);
+    presenter.changeUser('A');
     final view = MockEditHabitsPageView();
     final appState = AppState();
     appState.setInitialState('A', 'token', [Role('A', 'admin')]);

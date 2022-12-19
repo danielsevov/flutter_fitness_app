@@ -13,14 +13,25 @@ import '../views/habits_page_view.dart';
 class HabitsPagePresenter extends BasePresenter {
   HabitsPageView? _view;
 
-  final HabitsRepository _habitsRepository;
+  late final HabitsRepository _habitsRepository;
   List<Habit> _habits = [];
   final List<Widget> _habitWidgets = [];
   late Habit template;
-  final String _userId;
+  late String userId;
 
-  /// Simple constructor for passing the required repositories
-  HabitsPagePresenter(this._habitsRepository, this._userId);
+  /// Simple constructor
+  HabitsPagePresenter();
+
+  /// Function to attach repositories
+  void attachRepositories(HabitsRepository habitsRepository) {
+    _habitsRepository = habitsRepository;
+    super.repositoriesAttached = true;
+  }
+
+  void changeUser(String userID) {
+    _habitWidgets.clear();
+    userId = userID;
+  }
 
   /// Function to attach a view to the presenter
   void attach(HabitsPageView view) {
@@ -39,7 +50,7 @@ class HabitsPagePresenter extends BasePresenter {
 
   /// Function called to indicate if user is the owner of the page.
   isOwner() {
-    return super.appState.getUserId() == _userId;
+    return super.appState.getUserId() == userId;
   }
 
   /// Function to get all habit entries.
@@ -53,14 +64,14 @@ class HabitsPagePresenter extends BasePresenter {
     // fetch the user habit template
     try {
       template =
-          await _habitsRepository.fetchTemplate(_userId, appState.getToken());
+          await _habitsRepository.fetchTemplate(userId, appState.getToken());
 
       //create template if not present\
       if (template.id == 0) {
         await _habitsRepository.postHabit(
             (DateTime.now().millisecondsSinceEpoch).toString(),
             template.note,
-            _userId,
+            userId,
             appState.getUserId(),
             true,
             template.habits,
@@ -68,12 +79,12 @@ class HabitsPagePresenter extends BasePresenter {
 
         // re-fetch the habit template
         template =
-            await _habitsRepository.fetchTemplate(_userId, appState.getToken());
+            await _habitsRepository.fetchTemplate(userId, appState.getToken());
       }
 
       // fetch all user habit entries
       _habits =
-          await _habitsRepository.fetchHabits(_userId, appState.getToken());
+          await _habitsRepository.fetchHabits(userId, appState.getToken());
 
       //sort by date
       _habits.sort((a, b) => b.date.compareTo(a.date));
@@ -90,7 +101,7 @@ class HabitsPagePresenter extends BasePresenter {
             appState.getToken());
 
         _habits =
-            await _habitsRepository.fetchHabits(_userId, appState.getToken());
+            await _habitsRepository.fetchHabits(userId, appState.getToken());
 
         //sort by date
         _habits.sort((a, b) => b.date.compareTo(a.date));

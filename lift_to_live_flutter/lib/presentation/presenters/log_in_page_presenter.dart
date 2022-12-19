@@ -8,13 +8,20 @@ import '../views/log_in_page_view.dart';
 /// It is the mediator between the LogIn view (UI) and the repositories (Data).
 class LogInPagePresenter extends BasePresenter {
   LogInPageView? _view; // the log in view UI component
-  final TokenRepository
+  late final TokenRepository
       _tokenRepository; // the repository used for fetching the JWT token
-  final UserRepository
+  late final UserRepository
       _userRepository; // the repository used for fetching the user roles
 
-  /// Simple constructor for passing the required repositories
-  LogInPagePresenter(this._tokenRepository, this._userRepository);
+  /// Simple constructor
+  LogInPagePresenter();
+
+  /// Function to attach repositories
+  void attachRepositories(TokenRepository tokenRepository, UserRepository userRepository) {
+    _tokenRepository = tokenRepository;
+    _userRepository = userRepository;
+    super.repositoriesAttached = true;
+  }
 
   /// Function to attach a view to the presenter
   void attach(LogInPageView view) {

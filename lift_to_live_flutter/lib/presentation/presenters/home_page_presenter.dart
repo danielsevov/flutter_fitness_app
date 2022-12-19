@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:lift_to_live_flutter/domain/repositories/user_repo.dart';
+import 'package:lift_to_live_flutter/factory/presenter_factory.dart';
 import 'package:lift_to_live_flutter/presentation/presenters/base_presenter.dart';
 import 'package:lift_to_live_flutter/presentation/views/home_page_view.dart';
 
@@ -15,14 +16,26 @@ import 'package:url_launcher/url_launcher.dart';
 /// It is the mediator between the HomePage view (UI) and the repositories (Data).
 class HomePagePresenter extends BasePresenter {
   HomePageView? _view;
-  final NewsRepository _newsRepository;
-  final UserRepository _userRepository;
+  late final NewsRepository _newsRepository;
+  late final UserRepository _userRepository;
   late User _user;
   late News _currentNews;
   late Image _profilePicture;
+  bool _dataFetched = false;
 
   /// Simple constructor for passing the required repositories
-  HomePagePresenter(this._newsRepository, this._userRepository);
+  HomePagePresenter();
+
+  /// Function to attach repositories
+  void attachRepositories(UserRepository userRepository, NewsRepository newsRepository) {
+    _userRepository = userRepository;
+    _newsRepository = newsRepository;
+    super.repositoriesAttached = true;
+  }
+
+  void reset() {
+    _dataFetched = false;
+  }
 
   /// Function to attach a view to the presenter
   void attach(HomePageView view) {
@@ -42,10 +55,18 @@ class HomePagePresenter extends BasePresenter {
   /// Function to clear the app state upon log out and navigate to log in page
   void logOut() {
     super.appState.clearState();
+    PresenterFactory().reset();
   }
 
   /// Function used for fetching the required data, which is then displayed on the home page.
   Future<void> fetchData() async {
+    if(_dataFetched) {
+      _view?.setUserData(_user, _profilePicture);
+      _view?.setNewsData(_currentNews);
+      _view?.setFetched(true);
+      return ;
+    }
+
     // set the loading indicator to be displayed on the home page view
     _view?.setInProgress(true);
 
@@ -74,6 +95,7 @@ class HomePagePresenter extends BasePresenter {
 
     // fetch the news
     await fetchNews();
+    _dataFetched = true;
   }
 
   /// Sub-function to fetch news separately from the user details, as they use different data-sources.

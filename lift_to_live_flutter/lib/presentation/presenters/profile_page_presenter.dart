@@ -15,15 +15,26 @@ import '../views/profile_page_view.dart';
 class ProfilePagePresenter extends BasePresenter {
   ProfilePageView? _view;
 
-  final UserRepository _userRepository;
-  final String _userId;
+  late final UserRepository _userRepository;
+  String userId = '';
   late User _user;
 
   late MyImage _myImage;
   late Image _profilePicture;
+  bool _dataFetched = false;
 
-  /// Simple constructor for passing the required repositories
-  ProfilePagePresenter(this._userRepository, this._userId);
+  /// Simple constructor
+  ProfilePagePresenter();
+
+  /// Function to attach repositories
+  void attachRepositories(UserRepository userRepository) {
+    _userRepository = userRepository;
+    super.repositoriesAttached = true;
+  }
+
+  void reset() {
+    _dataFetched = false;
+  }
 
   /// Function to attach a view to the presenter
   void attach(ProfilePageView view) {
@@ -37,23 +48,28 @@ class ProfilePagePresenter extends BasePresenter {
 
   /// Function called to indicate if user is authorized to view private pages.
   isAuthorized(bool changePicture) {
-    return appState.getUserId() == _userId ||
+    return appState.getUserId() == userId ||
         (super.appState.isCoachOrAdmin() && !changePicture);
   }
 
   /// Function used for fetching the required data, which is then displayed on the profile page.
   Future<void> fetchData() async {
+    if(_dataFetched) {
+      _view?.setUserData(_user, _profilePicture);
+      return ;
+    }
+
     // set the loading indicator to be displayed on the home page view
     _view?.setInProgress(true);
 
     // fetch the user details and profile picture
     try {
       _user =
-          await _userRepository.fetchUser(_userId, super.appState.getToken());
+          await _userRepository.fetchUser(userId, super.appState.getToken());
 
       try {
         _myImage = await _userRepository.fetchProfileImage(
-            _userId, super.appState.getToken());
+            userId, super.appState.getToken());
         _profilePicture = Image.memory(
           base64Decode(_myImage.data),
           height: 300,
@@ -74,6 +90,8 @@ class ProfilePagePresenter extends BasePresenter {
       _view?.notifyNoUserData();
       _view?.setInProgress(false);
     }
+
+    _dataFetched = true;
   }
 
   // coverage:ignore-start

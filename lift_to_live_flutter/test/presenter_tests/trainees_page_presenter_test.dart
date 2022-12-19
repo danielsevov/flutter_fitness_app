@@ -17,7 +17,8 @@ import 'profile_page_presenter_test.mocks.dart';
 void main() {
   test('test presenter constructor', () {
     final userRepo = MockUserRepository();
-    final presenter = TraineesPagePresenter(userRepo);
+    final presenter = TraineesPagePresenter();
+    presenter.attachRepositories(userRepo);
     final view = MockTraineesPageView();
     presenter.attach(view);
     presenter.detach();
@@ -29,7 +30,8 @@ void main() {
   test('test set app state', () {
     final userRepo = MockUserRepository();
     final appState = AppState();
-    final presenter = TraineesPagePresenter(userRepo);
+    final presenter = TraineesPagePresenter();
+    presenter.attachRepositories(userRepo);
     expect(presenter.isInitialized(), false);
 
     expect(() async => presenter.setAppState(appState), returnsNormally);
@@ -40,7 +42,8 @@ void main() {
   test('test set app state', () {
     final userRepo = MockUserRepository();
     final appState = AppState();
-    final presenter = TraineesPagePresenter(userRepo);
+    final presenter = TraineesPagePresenter();
+    presenter.attachRepositories(userRepo);
     expect(presenter.isInitialized(), false);
 
     appState.setInitialState('email@email.com', '', []);
@@ -53,7 +56,8 @@ void main() {
   test('test set app state 2', () {
     final userRepo = MockUserRepository();
     final appState = AppState();
-    final presenter = TraineesPagePresenter(userRepo);
+    final presenter = TraineesPagePresenter();
+    presenter.attachRepositories(userRepo);
     expect(presenter.isInitialized(), false);
 
     appState.setInitialState('email@email.com', '', [Role('email@email.com', 'admin')]);
@@ -66,7 +70,8 @@ void main() {
   test('test fetch data', () async {
     final userRepo = MockUserRepository();
     final appState = AppState();
-    final presenter = TraineesPagePresenter(userRepo);
+    final presenter = TraineesPagePresenter();
+    presenter.attachRepositories(userRepo);
     final view = MockTraineesPageView();
     presenter.attach(view);
 
@@ -86,7 +91,8 @@ void main() {
   test('test fetch data 2', () {
     final userRepo = MockUserRepository();
     final appState = AppState();
-    final presenter = TraineesPagePresenter(userRepo);
+    final presenter = TraineesPagePresenter();
+    presenter.attachRepositories(userRepo);
     final view = MockTraineesPageView();
     presenter.attach(view);
 
@@ -104,7 +110,8 @@ void main() {
   test('test fetch data 3', () {
     final userRepo = MockUserRepository();
     final appState = AppState();
-    final presenter = TraineesPagePresenter(userRepo);
+    final presenter = TraineesPagePresenter();
+    presenter.attachRepositories(userRepo);
     final view = MockTraineesPageView();
     presenter.attach(view);
 

@@ -173,9 +173,14 @@ class HabitsPageState extends State<HabitsPage> implements HabitsPageView {
                     ),
                   )
                 ])
-              : const CircularProgressIndicator(
-                  color: Helper.yellowColor,
-                )),
+              : const Center(
+                child: Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: CircularProgressIndicator(
+                      color: Helper.yellowColor,
+                    ),
+                ),
+              )),
     );
   }
 
