@@ -124,4 +124,25 @@ void main() {
 
     expect(() => presenter.fetchData(), returnsNormally);
   });
+
+  test('test fetch data twice', () async {
+    final userRepo = MockUserRepository();
+    final appState = AppState();
+    final presenter = ProfilePagePresenter();
+    presenter.attachRepositories(userRepo);
+    presenter.userId = 'email@email.com';
+    expect(presenter.isInitialized(), false);
+
+    when(userRepo.fetchUser(any, any)).thenAnswer((realInvocation) async => TestData.test_user_1);
+    when(userRepo.fetchProfileImage(any, any)).thenAnswer((realInvocation) async => TestData.test_image_1);
+
+    appState.setInitialState('email@email.com', 'token', []);
+    presenter.setAppState(appState);
+
+    await presenter.fetchData();
+    await presenter.fetchData();
+
+    verify(userRepo.fetchUser('email@email.com', 'token')).called(1);
+    verify(userRepo.fetchProfileImage('email@email.com', 'token')).called(1);
+  });
 }
