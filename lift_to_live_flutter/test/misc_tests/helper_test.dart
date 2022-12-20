@@ -59,6 +59,14 @@ void main() {
       expect(Helper.formatter, isA<DateFormat>());
     });
 
+    test('Helper.intFromDynamic test', () {
+      List<dynamic> list = ["1", "2", "3"];
+      expect(Helper.toIntList(list).length, 3);
+      expect(Helper.toIntList(list)[0], 1);
+      expect(Helper.toIntList(list)[1], 2);
+      expect(Helper.toIntList(list)[2], 3);
+    });
+
     test('Helper.imageToBlob() test', () {
 
       File file = File('assets/images/lifttolive.png');

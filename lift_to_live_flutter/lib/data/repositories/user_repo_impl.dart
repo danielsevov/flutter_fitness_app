@@ -22,7 +22,7 @@ class UserRepoImpl implements UserRepository {
   @override
   Future<void> patchImage(int id, String userId, String date, String data,
       String type, String token) async {
-    //fetch http response object
+    //fetch json response object
     Response response =
         await backendAPI.patchImage(id, userId, date, data, type, token);
 
@@ -61,7 +61,7 @@ class UserRepoImpl implements UserRepository {
   /// This function is used for fetching a Image object, which holds the profile picture of a user.
   @override
   Future<MyImage> fetchProfileImage(String userId, String jwtToken) async {
-    //fetch http response object
+    //fetch json response object
     Response response = await backendAPI.fetchProfileImage(userId, jwtToken);
 
     //proceed if fetch is successful and status code is 200
@@ -83,7 +83,7 @@ class UserRepoImpl implements UserRepository {
   /// This function is used for fetching a User object, containing user details.
   @override
   Future<User> fetchUser(String userId, String jwtToken) async {
-    //fetch http response object
+    //fetch json response object
     Response response = await backendAPI.fetchUser(userId, jwtToken);
 
     //proceed if fetch is successful and status code is 200
@@ -105,7 +105,7 @@ class UserRepoImpl implements UserRepository {
   /// This function is used for fetching all trainees profiles of the current user.
   @override
   Future<List<User>> fetchMyTrainees(String userId, String jwtToken) async {
-    //fetch http response object
+    //fetch json response object
     Response response = await backendAPI.fetchMyTrainees(jwtToken);
 
     //proceed if fetch is successful and status code is 200
@@ -132,7 +132,7 @@ class UserRepoImpl implements UserRepository {
   /// This function is used for fetching all Image objects of a user.
   @override
   Future<List<MyImage>> fetchUserImages(String userId, String jwtToken) async {
-    //fetch http response object
+    //fetch json response object
     Response response = await backendAPI.fetchImages(userId, jwtToken);
 
     //proceed if fetch is successful and status code is 200
@@ -161,7 +161,7 @@ class UserRepoImpl implements UserRepository {
   /// This function is used for fetching a list of Role objects, describing the user role of a user.
   @override
   Future<List<Role>> fetchUserRoles(String jwtToken) async {
-    //fetch http response object
+    //fetch json response object
     Response response = await backendAPI.fetchUserRoles(jwtToken);
 
     //proceed if fetch is successful and status code is 200
@@ -190,7 +190,7 @@ class UserRepoImpl implements UserRepository {
   /// This function is used for fetching a list of all coach Role objects.
   @override
   Future<List<Role>> fetchCoachRoles(String jwtToken) async {
-    //fetch http response object
+    //fetch json response object
     Response response = await backendAPI.fetchCoachRoles(jwtToken);
 
     //proceed if fetch is successful and status code is 200
@@ -245,7 +245,7 @@ class UserRepoImpl implements UserRepository {
       String nationality,
       String dateOfBirth,
       String jwtToken) async {
-    //fetch http response object
+    //fetch json response object
     Response response = await backendAPI.registerUser(userId, coachId, password,
         name, phoneNumber, nationality, dateOfBirth, jwtToken);
 

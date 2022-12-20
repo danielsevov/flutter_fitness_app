@@ -5,6 +5,7 @@ import 'dart:developer';
 import 'package:http/http.dart' as http;
 
 import '../../domain/entities/habit_task.dart';
+import '../../domain/entities/workout_set.dart';
 
 /// This is a datasource object, which handles the communication with the Backend REST API.
 /// The communication is done via http requests, using the http.dart package.
@@ -67,6 +68,96 @@ class BackendAPI {
     return res;
   }
 
+  /// This function is used for fetching all workout entries for a user.
+  Future<http.Response> fetchWorkouts(String userId, String jwtToken) async {
+    return http.post(
+      Uri.parse('${apiURL}workouts_for_user/'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer $jwtToken',
+      },
+      body: jsonEncode(<String, String>{
+        'id': userId,
+      }),
+    );
+  }
+
+  /// This function is used for fetching all workout templates entries for a user.
+  Future<http.Response> fetchWorkoutTemplates(String userId, String jwtToken) async {
+    return http.post(
+      Uri.parse('${apiURL}workout_templates_for_user/'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer $jwtToken',
+      },
+      body: jsonEncode(<String, String>{
+        'id': userId,
+      }),
+    );
+  }
+
+  /// This function is used for deleting an workout entry.
+  Future<http.Response> deleteWorkout(int id, String jwtToken) async {
+    var res = await http.delete(
+      Uri.parse('${apiURL}workouts/$id'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer $jwtToken',
+      },
+    );
+    return res;
+  }
+
+  /// This function is used for posting a new workout.
+  Future<http.Response> postWorkout(String coachNote, String note, String userId,
+      String coachId, List<WorkoutSet> sets, String completedOn, String createdOn, String name, String duration, bool isTemplate, String jwtToken) async {
+    String inner = jsonEncode(sets);
+    var res = await http.post(
+      Uri.parse('${apiURL}workouts/'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer $jwtToken',
+      },
+      body: "${jsonEncode(<String, String>{
+        'coach_note': coachNote,
+        'workout_name': name,
+        'completed_on': completedOn,
+        'created_on': createdOn,
+        'duration': duration,
+        'userId': userId,
+        'coachId': coachId,
+        'is_template': isTemplate.toString(),
+      }).replaceAll("}", "")}, \"sets\" : $inner}",
+    );
+    log(res.body);
+    return res;
+  }
+
+  /// This function is used for updating a new workout.
+  Future<http.Response> patchWorkout(int id, String coachNote, String note, String userId,
+      String coachId, List<WorkoutSet> sets, String completedOn, String createdOn, String name, String duration, bool isTemplate, String jwtToken) async {
+    String inner = jsonEncode(sets);
+    var res = await http.patch(
+      Uri.parse('${apiURL}workouts/$id'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer $jwtToken',
+      },
+      body: "${jsonEncode(<String, String>{
+        'coach_note': coachNote,
+        'workout_name': name,
+        'completed_on': completedOn,
+        'created_on': createdOn,
+        'duration': duration,
+        'userId': userId,
+        'coachId': coachId,
+        'is_template': isTemplate.toString(),
+      }).replaceAll("}", "")}, \"sets\" : $inner}",
+    );
+    log(res.body);
+    return res;
+  }
+
   /// This function is used for posting a new image.
   Future<http.Response> postImage(String userId, String date, String data,
       String type, String jwtToken) async {
@@ -115,7 +206,7 @@ class BackendAPI {
   }
 
   /// This function is used for fetching the habits template of a user.
-  Future<http.Response> fetchTemplate(String userId, String jwtToken) async {
+  Future<http.Response> fetchHabitTemplate(String userId, String jwtToken) async {
     http.Response res = await http.post(
       Uri.parse('${apiURL}user_template_habit'),
       headers: <String, String>{
@@ -131,7 +222,7 @@ class BackendAPI {
 
   /// This function is used for fetching all habit entries for a user.
   Future<http.Response> fetchHabits(String userId, String jwtToken) async {
-    fetchTemplate(userId, jwtToken);
+    fetchHabitTemplate(userId, jwtToken);
     return http.post(
       Uri.parse('${apiURL}user_habits'),
       headers: <String, String>{

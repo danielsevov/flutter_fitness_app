@@ -20,7 +20,7 @@ class TokenRepoImpl implements TokenRepository {
   /// If no token can be fetched, a custom exception is thrown.
   @override
   Future<String> getToken(String email, String password) async {
-    //fetch http response object
+    //fetch json response object
     Response response = await backendAPI.logIn(email, password);
 
     //proceed if fetch is successful and status code is 200

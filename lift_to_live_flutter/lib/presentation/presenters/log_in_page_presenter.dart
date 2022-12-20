@@ -1,7 +1,6 @@
 import 'package:lift_to_live_flutter/domain/repositories/token_repo.dart';
 import 'package:lift_to_live_flutter/domain/repositories/user_repo.dart';
 import 'package:lift_to_live_flutter/presentation/presenters/base_presenter.dart';
-
 import '../views/log_in_page_view.dart';
 
 /// This is the object, which holds the business logic, related to the Log In Page view.

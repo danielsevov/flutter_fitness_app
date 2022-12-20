@@ -20,7 +20,7 @@ class HabitsRepoImpl implements HabitsRepository {
   /// This function is used for fetching all habit entries for a user.
   @override
   Future<List<Habit>> fetchHabits(String userId, String jwtToken) async {
-    //fetch http response object
+    //fetch json response object
     Response response = await backendAPI.fetchHabits(userId, jwtToken);
 
     //proceed if fetch is successful and status code is 200
@@ -49,8 +49,8 @@ class HabitsRepoImpl implements HabitsRepository {
   /// This function is used for fetching the habits template for a user.
   @override
   Future<Habit> fetchTemplate(String userId, String jwtToken) async {
-    //fetch http response object
-    Response response = await backendAPI.fetchTemplate(userId, jwtToken);
+    //fetch json response object
+    Response response = await backendAPI.fetchHabitTemplate(userId, jwtToken);
 
     //proceed if fetch is successful and status code is 200
     if (response.statusCode == 200) {

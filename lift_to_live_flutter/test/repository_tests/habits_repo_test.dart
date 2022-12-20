@@ -56,7 +56,7 @@ void main() {
     test('returns response if the http call completes successfully', () async {
       final backendAPI = MockBackendAPI();
 
-      when(backendAPI.fetchTemplate('A', 'A')).thenAnswer((_) async => Response(
+      when(backendAPI.fetchHabitTemplate('A', 'A')).thenAnswer((_) async => Response(
           '[{"id":9,"date":"1670407637607","habits":[{"task":"Eat one apple","is_completed":false},{"task":"Drink glass of milk","is_completed":false},{"task":"Do the laundry ","is_completed":false},{"task":"Deadlift 200 kilograms","is_completed":false}],"note":"This is my note","userId":"A","coachId":"B","is_template":true}]',
           200,
           headers: {
@@ -75,7 +75,7 @@ void main() {
     test('returns response if the http call completes successfully but no habits were found', () async {
       final backendAPI = MockBackendAPI();
 
-      when(backendAPI.fetchTemplate('A', 'A')).thenAnswer((_) async => Response(
+      when(backendAPI.fetchHabitTemplate('A', 'A')).thenAnswer((_) async => Response(
           '[]',
           200,
           headers: {
@@ -95,7 +95,7 @@ void main() {
             () async {
           final backendAPI = MockBackendAPI();
 
-          when(backendAPI.fetchTemplate('A', 'A')).thenAnswer((_) async => Response(
+          when(backendAPI.fetchHabitTemplate('A', 'A')).thenAnswer((_) async => Response(
               '',
               404,
               headers: {

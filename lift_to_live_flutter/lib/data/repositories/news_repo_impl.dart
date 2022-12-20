@@ -20,7 +20,7 @@ class NewsRepoImpl implements NewsRepository {
   /// If no news can be fetched, a custom exception is thrown.
   @override
   Future<News> getNews(String search, int count) async {
-    //fetch http response object
+    //fetch json response object
     Response response = await newsAPI.fetchNews(search, count);
 
     //proceed if fetch is successful and status code is 200

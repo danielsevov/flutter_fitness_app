@@ -151,4 +151,9 @@ class Helper {
         DateTime(
             DateTime.now().year, DateTime.now().month, DateTime.now().day));
   }
+
+  /// Function for transforming dynamic list of strings to list of integers
+  static List<int> toIntList(List<dynamic> list) {
+    return list.map((e) => int.parse(e)).toList();
+  }
 }
