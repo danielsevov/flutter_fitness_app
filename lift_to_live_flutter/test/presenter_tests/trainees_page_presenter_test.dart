@@ -77,8 +77,8 @@ void main() {
 
     expect(presenter.isInitialized(), false);
 
-    when(userRepo.fetchMyTrainees(any, any)).thenAnswer((realInvocation) async => [TestData.test_user_1]);
-    when(userRepo.fetchProfileImage(any, any)).thenAnswer((realInvocation) async => TestData.test_image_complete);
+    when(userRepo.fetchMyTrainees(any, any)).thenAnswer((realInvocation) async => [TestData.testUser1]);
+    when(userRepo.fetchProfileImage(any, any)).thenAnswer((realInvocation) async => TestData.testImage3);
 
     appState.setInitialState('email@email.com', '', []);
     presenter.setAppState(appState);
@@ -99,7 +99,7 @@ void main() {
     expect(presenter.isInitialized(), false);
 
     when(userRepo.fetchMyTrainees(any, any)).thenThrow(FailedFetchException('fail'));
-    when(userRepo.fetchProfileImage(any, any)).thenAnswer((realInvocation) async => TestData.test_image_complete);
+    when(userRepo.fetchProfileImage(any, any)).thenAnswer((realInvocation) async => TestData.testImage3);
 
     appState.setInitialState('email@email.com', '', []);
     presenter.setAppState(appState);
@@ -117,7 +117,7 @@ void main() {
 
     expect(presenter.isInitialized(), false);
 
-    when(userRepo.fetchMyTrainees(any, any)).thenAnswer((realInvocation) async => [TestData.test_user_1]);
+    when(userRepo.fetchMyTrainees(any, any)).thenAnswer((realInvocation) async => [TestData.testUser1]);
     when(userRepo.fetchProfileImage(any, any)).thenThrow(FailedFetchException('fail'));
 
     appState.setInitialState('email@email.com', '', []);

@@ -26,7 +26,7 @@ void main() {
 
       UserRepository repository = UserRepoImpl(backendAPI);
 
-      expect(await repository.fetchUser('A', 'A'), TestData.test_user_1);
+      expect(await repository.fetchUser('A', 'A'), TestData.testUser1);
     });
 
     test('throws an exception if the http call completes with an error', () async {
@@ -54,7 +54,7 @@ void main() {
 
       UserRepository repository = UserRepoImpl(backendAPI);
 
-      expect(await repository.fetchMyTrainees('A', 'A'), [TestData.test_user_1]);
+      expect(await repository.fetchMyTrainees('A', 'A'), [TestData.testUser1]);
     });
 
     test('throws an exception if the http call completes with an error', () async {
@@ -217,7 +217,7 @@ void main() {
 
       UserRepository repository = UserRepoImpl(backendAPI);
 
-      expect(await repository.fetchUserRoles('A'), [TestData.test_role_1]);
+      expect(await repository.fetchUserRoles('A'), [TestData.testRole1]);
     });
 
     test('throws an exception if the http call completes with an error', () async {
@@ -245,7 +245,7 @@ void main() {
 
       UserRepository repository = UserRepoImpl(backendAPI);
 
-      expect(await repository.fetchCoachRoles('A'), [TestData.test_role_1]);
+      expect(await repository.fetchCoachRoles('A'), [TestData.testRole1]);
     });
 
     test('throws an exception if the http call completes with an error', () async {

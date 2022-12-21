@@ -17,7 +17,7 @@ void main() {
     await tester.runAsync(() async {
       // tests
       final HomePageView view = MockHomePageView();
-      when(view.currentNews).thenReturn(TestData.test_news_3);
+      when(view.currentNews).thenReturn(TestData.testNews3);
 
       final widget = NewsArticleHolder(view: view, index: 0);
 
@@ -37,7 +37,7 @@ void main() {
     await tester.runAsync(() async {
       // tests
       final HomePageView view = MockHomePageView();
-      when(view.currentNews).thenReturn(TestData.test_news_3);
+      when(view.currentNews).thenReturn(TestData.testNews3);
 
       final widget = NewsArticleHolder(view: view, index: 0);
 

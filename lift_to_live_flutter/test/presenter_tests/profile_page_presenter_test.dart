@@ -82,8 +82,8 @@ void main() {
     presenter.userId = 'email@email.com';
     expect(presenter.isInitialized(), false);
 
-    when(userRepo.fetchUser(any, any)).thenAnswer((realInvocation) async => TestData.test_user_1);
-    when(userRepo.fetchProfileImage(any, any)).thenAnswer((realInvocation) async => TestData.test_image_1);
+    when(userRepo.fetchUser(any, any)).thenAnswer((realInvocation) async => TestData.testUser1);
+    when(userRepo.fetchProfileImage(any, any)).thenAnswer((realInvocation) async => TestData.testImage1);
 
     appState.setInitialState('email@email.com', '', []);
     presenter.setAppState(appState);
@@ -100,7 +100,7 @@ void main() {
     expect(presenter.isInitialized(), false);
 
     when(userRepo.fetchUser(any, any)).thenThrow(FailedFetchException('fail'));
-    when(userRepo.fetchProfileImage(any, any)).thenAnswer((realInvocation) async => TestData.test_image_1);
+    when(userRepo.fetchProfileImage(any, any)).thenAnswer((realInvocation) async => TestData.testImage1);
 
     appState.setInitialState('email@email.com', '', []);
     presenter.setAppState(appState);
@@ -116,7 +116,7 @@ void main() {
     presenter.userId = 'email@email.com';
     expect(presenter.isInitialized(), false);
 
-    when(userRepo.fetchUser(any, any)).thenAnswer((realInvocation) async => TestData.test_user_1);
+    when(userRepo.fetchUser(any, any)).thenAnswer((realInvocation) async => TestData.testUser1);
     when(userRepo.fetchProfileImage(any, any)).thenThrow(FailedFetchException('fail'));
 
     appState.setInitialState('email@email.com', '', []);
@@ -133,8 +133,8 @@ void main() {
     presenter.userId = 'email@email.com';
     expect(presenter.isInitialized(), false);
 
-    when(userRepo.fetchUser(any, any)).thenAnswer((realInvocation) async => TestData.test_user_1);
-    when(userRepo.fetchProfileImage(any, any)).thenAnswer((realInvocation) async => TestData.test_image_1);
+    when(userRepo.fetchUser(any, any)).thenAnswer((realInvocation) async => TestData.testUser1);
+    when(userRepo.fetchProfileImage(any, any)).thenAnswer((realInvocation) async => TestData.testImage1);
 
     appState.setInitialState('email@email.com', 'token', []);
     presenter.setAppState(appState);

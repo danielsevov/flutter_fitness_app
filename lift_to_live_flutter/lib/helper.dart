@@ -156,4 +156,9 @@ class Helper {
   static List<int> toIntList(List<dynamic> list) {
     return list.map((e) => int.parse(e)).toList();
   }
+
+  /// Function for transforming list of integers to list of strings
+  static List<String> toStringList(List<int> list) {
+    return list.map((e) => e.toString()).toList();
+  }
 }

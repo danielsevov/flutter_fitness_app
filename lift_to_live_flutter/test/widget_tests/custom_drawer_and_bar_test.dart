@@ -19,7 +19,7 @@ void main() {
       when(view.screenWidth).thenReturn(400);
       when(view.screenHeight).thenReturn(400);
       when(view.isFetched).thenReturn(true);
-      when(view.userData).thenReturn(TestData.test_user_1);
+      when(view.userData).thenReturn(TestData.testUser1);
       when(view.profilePicture).thenReturn(Image.asset(
           'assets/images/prof_pic.png',
           height: 100));
@@ -55,7 +55,7 @@ void main() {
       when(view.screenWidth).thenReturn(400);
       when(view.screenHeight).thenReturn(400);
       when(view.isFetched).thenReturn(false);
-      when(view.userData).thenReturn(TestData.test_user_1);
+      when(view.userData).thenReturn(TestData.testUser1);
       when(view.profilePicture).thenReturn(Image.asset(
           'assets/images/prof_pic.png',
           height: 100));
@@ -87,7 +87,7 @@ void main() {
       when(view.screenWidth).thenReturn(400);
       when(view.screenHeight).thenReturn(600);
       when(view.isFetched).thenReturn(true);
-      when(view.userData).thenReturn(TestData.test_user_1);
+      when(view.userData).thenReturn(TestData.testUser1);
       when(view.profilePicture).thenReturn(Image.asset(
           'assets/images/prof_pic.png',
           height: 100));
@@ -127,7 +127,7 @@ void main() {
       when(view.screenWidth).thenReturn(400);
       when(view.screenHeight).thenReturn(400);
       when(view.isFetched).thenReturn(true);
-      when(view.userData).thenReturn(TestData.test_user_1);
+      when(view.userData).thenReturn(TestData.testUser1);
       when(view.profilePicture).thenReturn(Image.asset(
           'assets/images/prof_pic.png',
           height: 100));

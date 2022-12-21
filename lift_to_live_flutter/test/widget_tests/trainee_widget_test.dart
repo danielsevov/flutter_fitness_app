@@ -16,8 +16,8 @@ void main() {
   testWidgets('TraineeSearchWidget test constructor', (tester) async {
     await tester.runAsync(() async {
       // tests
-      final User user = TestData.test_user_1;
-      user.profilePicture = TestData.test_image_complete;
+      final User user = TestData.testUser1;
+      user.profilePicture = TestData.testImage3;
 
       final TraineesPageView view = MockTraineesPageView();
 
@@ -44,7 +44,7 @@ void main() {
   testWidgets('TraineeSearchWidget test constructor without image', (tester) async {
     await tester.runAsync(() async {
       // tests
-      final User user = TestData.test_user_1;
+      final User user = TestData.testUser1;
       user.profilePicture = null;
 
       final TraineesPageView view = MockTraineesPageView();
@@ -72,7 +72,7 @@ void main() {
   testWidgets('TraineeSearchWidget test navigate to profile page', (tester) async {
     await tester.runAsync(() async {
       // tests
-      final User user = TestData.test_user_1;
+      final User user = TestData.testUser1;
 
       final TraineesPageView view = MockTraineesPageView();
 

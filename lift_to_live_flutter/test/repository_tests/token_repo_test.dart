@@ -25,7 +25,7 @@ void main() {
 
       TokenRepository repository = TokenRepoImpl(backendAPI);
 
-      expect(await repository.getToken('email', 'password'), TestData.test_token_1.token);
+      expect(await repository.getToken('email', 'password'), TestData.testToken1.token);
     });
 
     test('throws an exception if the http call completes with an error', () async {

@@ -22,11 +22,12 @@ class WorkoutSet {
   // Function used for transforming a workout set object to JSON map.
   Map<String, dynamic> toJson() => {
         'set_note': setNote,
-        'reps': reps,
-        'kilos': kilos,
+        'reps': Helper.toStringList(reps),
+        'kilos': Helper.toStringList(kilos),
         'exercise': exercise,
         'is_completed': isCompleted,
       };
+
 
   @override
   bool operator ==(Object other) =>
@@ -34,18 +35,12 @@ class WorkoutSet {
       other is WorkoutSet &&
           runtimeType == other.runtimeType &&
           setNote == other.setNote &&
-          reps == other.reps &&
-          kilos == other.kilos &&
           exercise == other.exercise &&
           isCompleted == other.isCompleted;
 
   @override
   int get hashCode =>
-      setNote.hashCode ^
-      reps.hashCode ^
-      kilos.hashCode ^
-      exercise.hashCode ^
-      isCompleted.hashCode;
+      setNote.hashCode ^ exercise.hashCode ^ isCompleted.hashCode;
 
   @override
   String toString() {

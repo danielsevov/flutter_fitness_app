@@ -5,7 +5,7 @@ import '../test_data.dart';
 
 void main() {
   test('Role constructor test', () {
-    final role = TestData.test_role_1;
+    final role = TestData.testRole1;
     
     expect(role.userId, 'A');
     expect(role.name, 'A');
@@ -13,20 +13,20 @@ void main() {
 
   group('Role toJson tests', (){
     test('Role toJson compared to self', () {
-      final role = TestData.test_role_1;
+      final role = TestData.testRole1;
 
       expect(role.toJson().toString() == role.toJson().toString(), true);
     });
 
     test('Role toJson compared to self 2', () {
-      final role = TestData.test_role_1;
+      final role = TestData.testRole1;
 
       expect(role.toJson().toString(), '{userId: A, name: A}');
     });
 
     test('Role toJson compared to other', () {
-      final role = TestData.test_role_1;
-      final role2 = TestData.test_role_2;
+      final role = TestData.testRole1;
+      final role2 = TestData.testRole2;
 
       expect(role.toJson().toString() == role2.toJson().toString(), false);
     });
@@ -34,15 +34,15 @@ void main() {
 
   group('Role fromJson tests', (){
     test('Role fromJson compared to self', () {
-      final role = TestData.test_role_1;
+      final role = TestData.testRole1;
       final roleJson = role.toJson();
 
       expect(role == Role.fromJson(roleJson), true);
     });
 
     test('Role fromJson compared to other Role', () {
-      final role = TestData.test_role_1;
-      final role2 = TestData.test_role_2;
+      final role = TestData.testRole1;
+      final role2 = TestData.testRole2;
       final roleJson = role2.toJson();
 
       expect(role == Role.fromJson(roleJson), false);
@@ -51,21 +51,21 @@ void main() {
 
   group('Role equals tests', (){
     test('Role equals compared to self', () {
-      final role = TestData.test_role_1;
+      final role = TestData.testRole1;
 
       expect(role == role, true);
     });
 
     test('Role equals compared to self 2', () {
-      final Role role = TestData.test_role_1;
+      final Role role = TestData.testRole1;
       final role2 = Role('A', 'A');
 
       expect(role == role2, true);
     });
 
     test('Role equals compared to other Role', () {
-      final role = TestData.test_role_1;
-      final role2 = TestData.test_role_2;
+      final role = TestData.testRole1;
+      final role2 = TestData.testRole2;
 
       expect(role == role2, false);
     });
@@ -73,21 +73,21 @@ void main() {
 
   group('Role hashCode tests', (){
     test('Role hashCode compared to self', () {
-      final role = TestData.test_role_1;
+      final role = TestData.testRole1;
 
       expect(role.hashCode == role.hashCode, true);
     });
 
     test('Role hashCode compared to self 2', () {
-      final role = TestData.test_role_1;
+      final role = TestData.testRole1;
       final role2 = Role('A', 'A');
 
       expect(role.hashCode == role2.hashCode, true);
     });
 
     test('Role hashCode compared to other Role', () {
-      final role = TestData.test_role_1;
-      final role2 = TestData.test_user_1;
+      final role = TestData.testRole1;
+      final role2 = TestData.testUser1;
 
       expect(role.hashCode == role2.hashCode, false);
     });

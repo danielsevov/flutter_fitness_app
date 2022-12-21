@@ -62,7 +62,7 @@ void main() {
     presenter.changeUser('email@email.com');
     expect(presenter.isInitialized(), false);
 
-    when(userRepo.fetchUserImages(any, any)).thenAnswer((realInvocation) async => [TestData.test_image_1, TestData.test_image_2]);
+    when(userRepo.fetchUserImages(any, any)).thenAnswer((realInvocation) async => [TestData.testImage1, TestData.testImage2]);
 
     appState.setInitialState('email@email.com', '', []);
     presenter.setAppState(appState);
@@ -110,7 +110,7 @@ void main() {
     presenter.changeUser('email@email.com');
     expect(presenter.isInitialized(), false);
 
-    when(userRepo.fetchUserImages(any, any)).thenAnswer((realInvocation) async => [TestData.test_image_1, TestData.test_image_2]);
+    when(userRepo.fetchUserImages(any, any)).thenAnswer((realInvocation) async => [TestData.testImage1, TestData.testImage2]);
     when(userRepo.deleteImage(any, any)).thenAnswer((realInvocation) async => {});
 
     appState.setInitialState('email@email.com', 'token', []);

@@ -14,10 +14,10 @@ void main() {
     final appState = AppState();
 
     expect(appState.hasState(), false);
-    appState.setInitialState('email', 'token', [TestData.test_role_1]);
+    appState.setInitialState('email', 'token', [TestData.testRole1]);
     expect(appState.hasState(), true);
     expect(appState.getToken(), 'token');
-    expect(appState.getUserRoles(), [TestData.test_role_1]);
+    expect(appState.getUserRoles(), [TestData.testRole1]);
     expect(appState.getUserId(), 'email');
   });
 
@@ -25,7 +25,7 @@ void main() {
     final appState = AppState();
 
     expect(appState.hasState(), false);
-    appState.setInitialState('email', 'token', [TestData.test_role_1]);
+    appState.setInitialState('email', 'token', [TestData.testRole1]);
     expect(appState.hasState(), true);
     appState.clearState();
     expect(appState.hasState(), false);

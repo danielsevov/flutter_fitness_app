@@ -67,6 +67,15 @@ void main() {
       expect(Helper.toIntList(list)[2], 3);
     });
 
+    test('Helper.toStringList test', () {
+      List<int> list = [1, 2, 3];
+      var list2 = Helper.toStringList(list);
+      expect(list2.length, 3);
+      expect(list2[0], '1');
+      expect(list2[1], '2');
+      expect(list2[2], '3');
+    });
+
     test('Helper.imageToBlob() test', () {
 
       File file = File('assets/images/lifttolive.png');

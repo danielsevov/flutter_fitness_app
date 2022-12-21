@@ -71,21 +71,10 @@ class Workout {
           createdOn == other.createdOn &&
           name == other.name &&
           duration == other.duration &&
-          isTemplate == other.isTemplate &&
-          sets == other.sets;
+          isTemplate == other.isTemplate;
 
   @override
-  int get hashCode =>
-      id.hashCode ^
-      coachId.hashCode ^
-      userId.hashCode ^
-      coachNote.hashCode ^
-      completedOn.hashCode ^
-      createdOn.hashCode ^
-      name.hashCode ^
-      duration.hashCode ^
-      isTemplate.hashCode ^
-      sets.hashCode;
+  int get hashCode => int.parse(id) ^ id.hashCode ^ coachId.hashCode ^ isTemplate.hashCode;
 
   @override
   String toString() {

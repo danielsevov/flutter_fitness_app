@@ -162,9 +162,43 @@ export class WorkoutController {
           }
         },
       }) user:User): Promise<Workout[]> {
-    return this.workoutRepository.find({where: {userId:user.id}});
+    return this.workoutRepository.find({where: {userId:user.id, is_template:false}});
   }
   
+  
+  @post('/workout_templates_for_user')
+  @response(200, {
+    description: 'Array of Workout model instances',
+    content: {
+      'application/json': {
+        schema: {
+          type: 'array',
+          items: getModelSchemaRef(Workout, {includeRelations: true}),
+        },
+      },
+    },
+  })
+  async findWorkoutTemplatesForUser(@inject(SecurityBindings.USER) currentUserProfile: UserProfile,
+  @requestBody(
+      {
+        description: 'Required input for image upload',
+        required: true,
+        content: {
+          'application/json': {
+            schema: {
+              type: 'object',
+			  required: ['id'],
+              properties: {
+				id:{
+                  type: 'string',
+                }
+              },
+            },
+          }
+        },
+      }) user:User): Promise<Workout[]> {
+    return this.workoutRepository.find({where: {userId:user.id, is_template:true}});
+  }
   
   @post('/my_created_workouts_for_user')
   @response(200, {

@@ -17,6 +17,15 @@ class Exercise {
         name = json['name'],
         muscleGroup = json['target'];
 
+  // Function used for transforming an exercise object to JSON map.
+  Map<String, dynamic> toJson() => {
+        'bodyPart': bodyPart,
+        'equipment': equipment,
+        'gifUrl': gifUrl,
+        'name': name,
+        'target': muscleGroup,
+      };
+
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
