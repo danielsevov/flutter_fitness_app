@@ -45,19 +45,6 @@ class Workout {
         'sets': List<dynamic>.from(sets.map((x) => x.toJson())),
       };
 
-  // Function used for transforming a Workout entry object to JSON map, excluding the id of the entry.
-  Map<String, dynamic> toJsonNoID() => {
-        'coach_note': coachNote,
-        'workout_name': name,
-        'completed_on': completedOn,
-        'created_on': createdOn,
-        'duration': duration,
-        'userId': userId,
-        'coachId': coachId,
-        'is_template': isTemplate,
-        'sets': List<dynamic>.from(sets.map((x) => x.toJson())),
-      };
-
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
