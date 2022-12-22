@@ -177,6 +177,21 @@ void main() {
       expect(() async => await repository.deleteWorkout(1, 'A',), returnsNormally);
     });
 
+    test('if the http call completes successfully', () async {
+      final backendAPI = MockBackendAPI();
+
+      when(backendAPI.deleteWorkout(1, any)).thenAnswer((_) async => Response(
+          '',
+          404,
+          headers: {
+            HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8',
+          }));
+
+      WorkoutRepository repository = WorkoutRepoImpl(backendAPI);
+
+      expect(() async => await repository.deleteWorkout(1, 'A'), throwsA(isA<FailedFetchException>()));
+    });
+
     test('throws an exception if the http call completes with an error',
             () async {
           final backendAPI = MockBackendAPI();

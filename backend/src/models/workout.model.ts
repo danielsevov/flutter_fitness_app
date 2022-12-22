@@ -10,7 +10,7 @@ export class Workout extends Entity {
   sets: object[];
 
   @property({
-    type: 'string',
+    type: 'number',
     id: true,
     generated: true,
   })
