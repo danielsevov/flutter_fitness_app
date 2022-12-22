@@ -48,11 +48,11 @@ class TestData {
   static final WorkoutSet testWorkoutSet1 = WorkoutSet('A', [1, 2, 3], [1, 2, 3], 'A', true);
   static final WorkoutSet testWorkoutSet2 = WorkoutSet('B', [4, 5, 6], [4, 5, 6], 'B', false);
 
-  static final Workout testWorkoutTemplate1 = Workout('A', 'A', 'A', 'A', 'A', true, 'A', 'A', 'A', [testWorkoutSet1]);
-  static final Workout testWorkoutTemplate2 = Workout('B', 'B', 'B', 'B', 'B', true, 'B', 'B', 'B', [testWorkoutSet1, testWorkoutSet2]);
+  static final Workout testWorkoutTemplate1 = Workout(1, 'A', 'A', 'A', 'A', true, 'A', 'A', 'A', [testWorkoutSet1]);
+  static final Workout testWorkoutTemplate2 = Workout(2, 'B', 'B', 'B', 'B', true, 'B', 'B', 'B', [testWorkoutSet1, testWorkoutSet2]);
 
-  static final Workout testWorkout1 = Workout('1', 'A', 'A', 'A', 'A', false, 'A', 'A', 'A', [testWorkoutSet1]);
-  static final Workout testWorkout2 = Workout('2', 'B', 'B', 'B', 'B', false, 'B', 'B', 'B', [testWorkoutSet1, testWorkoutSet2]);
+  static final Workout testWorkout1 = Workout(1, 'A', 'A', 'A', 'A', false, 'A', 'A', 'A', [testWorkoutSet1]);
+  static final Workout testWorkout2 = Workout(2, 'B', 'B', 'B', 'B', false, 'B', 'B', 'B', [testWorkoutSet1, testWorkoutSet2]);
 
   static final Role testRole1 = Role('A', 'A');
   static final Role testRole2 = Role('B', 'B');

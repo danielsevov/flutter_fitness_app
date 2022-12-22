@@ -7,7 +7,8 @@ import 'dart:async' as _i4;
 
 import 'package:http/http.dart' as _i2;
 import 'package:lift_to_live_flutter/data/datasources/backend_api.dart' as _i3;
-import 'package:lift_to_live_flutter/domain/entities/habit_task.dart' as _i5;
+import 'package:lift_to_live_flutter/domain/entities/habit_task.dart' as _i6;
+import 'package:lift_to_live_flutter/domain/entities/workout_set.dart' as _i5;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -124,6 +125,183 @@ class MockBackendAPI extends _i1.Mock implements _i3.BackendAPI {
         )),
       ) as _i4.Future<_i2.Response>);
   @override
+  _i4.Future<_i2.Response> fetchWorkouts(
+    String? userId,
+    String? jwtToken,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #fetchWorkouts,
+          [
+            userId,
+            jwtToken,
+          ],
+        ),
+        returnValue: _i4.Future<_i2.Response>.value(_FakeResponse_0(
+          this,
+          Invocation.method(
+            #fetchWorkouts,
+            [
+              userId,
+              jwtToken,
+            ],
+          ),
+        )),
+      ) as _i4.Future<_i2.Response>);
+  @override
+  _i4.Future<_i2.Response> fetchWorkoutTemplates(
+    String? userId,
+    String? jwtToken,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #fetchWorkoutTemplates,
+          [
+            userId,
+            jwtToken,
+          ],
+        ),
+        returnValue: _i4.Future<_i2.Response>.value(_FakeResponse_0(
+          this,
+          Invocation.method(
+            #fetchWorkoutTemplates,
+            [
+              userId,
+              jwtToken,
+            ],
+          ),
+        )),
+      ) as _i4.Future<_i2.Response>);
+  @override
+  _i4.Future<_i2.Response> deleteWorkout(
+    int? id,
+    String? jwtToken,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #deleteWorkout,
+          [
+            id,
+            jwtToken,
+          ],
+        ),
+        returnValue: _i4.Future<_i2.Response>.value(_FakeResponse_0(
+          this,
+          Invocation.method(
+            #deleteWorkout,
+            [
+              id,
+              jwtToken,
+            ],
+          ),
+        )),
+      ) as _i4.Future<_i2.Response>);
+  @override
+  _i4.Future<_i2.Response> postWorkout(
+    String? coachNote,
+    String? note,
+    String? userId,
+    String? coachId,
+    List<_i5.WorkoutSet>? sets,
+    String? completedOn,
+    String? createdOn,
+    String? name,
+    String? duration,
+    bool? isTemplate,
+    String? jwtToken,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #postWorkout,
+          [
+            coachNote,
+            note,
+            userId,
+            coachId,
+            sets,
+            completedOn,
+            createdOn,
+            name,
+            duration,
+            isTemplate,
+            jwtToken,
+          ],
+        ),
+        returnValue: _i4.Future<_i2.Response>.value(_FakeResponse_0(
+          this,
+          Invocation.method(
+            #postWorkout,
+            [
+              coachNote,
+              note,
+              userId,
+              coachId,
+              sets,
+              completedOn,
+              createdOn,
+              name,
+              duration,
+              isTemplate,
+              jwtToken,
+            ],
+          ),
+        )),
+      ) as _i4.Future<_i2.Response>);
+  @override
+  _i4.Future<_i2.Response> patchWorkout(
+    int? id,
+    String? coachNote,
+    String? note,
+    String? userId,
+    String? coachId,
+    List<_i5.WorkoutSet>? sets,
+    String? completedOn,
+    String? createdOn,
+    String? name,
+    String? duration,
+    bool? isTemplate,
+    String? jwtToken,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #patchWorkout,
+          [
+            id,
+            coachNote,
+            note,
+            userId,
+            coachId,
+            sets,
+            completedOn,
+            createdOn,
+            name,
+            duration,
+            isTemplate,
+            jwtToken,
+          ],
+        ),
+        returnValue: _i4.Future<_i2.Response>.value(_FakeResponse_0(
+          this,
+          Invocation.method(
+            #patchWorkout,
+            [
+              id,
+              coachNote,
+              note,
+              userId,
+              coachId,
+              sets,
+              completedOn,
+              createdOn,
+              name,
+              duration,
+              isTemplate,
+              jwtToken,
+            ],
+          ),
+        )),
+      ) as _i4.Future<_i2.Response>);
+  @override
   _i4.Future<_i2.Response> postImage(
     String? userId,
     String? date,
@@ -163,7 +341,7 @@ class MockBackendAPI extends _i1.Mock implements _i3.BackendAPI {
     String? note,
     String? userId,
     String? coachId,
-    List<_i5.HabitTask>? habits,
+    List<_i6.HabitTask>? habits,
     String? jwtToken,
   ) =>
       (super.noSuchMethod(
@@ -202,7 +380,7 @@ class MockBackendAPI extends _i1.Mock implements _i3.BackendAPI {
   ) =>
       (super.noSuchMethod(
         Invocation.method(
-          #fetchTemplate,
+          #fetchHabitTemplate,
           [
             userId,
             jwtToken,
@@ -211,7 +389,7 @@ class MockBackendAPI extends _i1.Mock implements _i3.BackendAPI {
         returnValue: _i4.Future<_i2.Response>.value(_FakeResponse_0(
           this,
           Invocation.method(
-            #fetchTemplate,
+            #fetchHabitTemplate,
             [
               userId,
               jwtToken,
@@ -250,7 +428,7 @@ class MockBackendAPI extends _i1.Mock implements _i3.BackendAPI {
     String? userId,
     String? coachId,
     bool? isTemplate,
-    List<_i5.HabitTask>? habits,
+    List<_i6.HabitTask>? habits,
     String? jwtToken,
   ) =>
       (super.noSuchMethod(

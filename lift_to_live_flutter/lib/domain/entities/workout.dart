@@ -2,7 +2,7 @@ import 'workout_set.dart';
 
 /// Entity class for holding details of a single Workout entry instance.
 class Workout {
-  String id; // id of the entry
+  int id; // id of the entry
   String coachId, // the id of the coach who created the workout
   userId, // the id of the user owner of the template
   coachNote, // the note from the coach
@@ -61,7 +61,7 @@ class Workout {
           isTemplate == other.isTemplate;
 
   @override
-  int get hashCode => int.parse(id) ^ id.hashCode ^ coachId.hashCode ^ isTemplate.hashCode;
+  int get hashCode => id ^ id.hashCode ^ coachId.hashCode ^ isTemplate.hashCode;
 
   @override
   String toString() {

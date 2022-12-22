@@ -3,14 +3,15 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i5;
+import 'dart:async' as _i6;
 
+import 'package:lift_to_live_flutter/domain/repositories/user_repo.dart' as _i4;
 import 'package:lift_to_live_flutter/presentation/presenters/register_page_presenter.dart'
     as _i3;
 import 'package:lift_to_live_flutter/presentation/state_management/app_state.dart'
     as _i2;
 import 'package:lift_to_live_flutter/presentation/views/register_page_view.dart'
-    as _i4;
+    as _i5;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -44,6 +45,19 @@ class MockRegisterPagePresenter extends _i1.Mock
   }
 
   @override
+  bool get repositoriesAttached => (super.noSuchMethod(
+        Invocation.getter(#repositoriesAttached),
+        returnValue: false,
+      ) as bool);
+  @override
+  set repositoriesAttached(dynamic value) => super.noSuchMethod(
+        Invocation.setter(
+          #repositoriesAttached,
+          value,
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
   _i2.AppState get appState => (super.noSuchMethod(
         Invocation.getter(#appState),
         returnValue: _FakeAppState_0(
@@ -52,7 +66,16 @@ class MockRegisterPagePresenter extends _i1.Mock
         ),
       ) as _i2.AppState);
   @override
-  void attach(_i4.RegisterPageView? view) => super.noSuchMethod(
+  void attachRepositories(_i4.UserRepository? userRepository) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #attachRepositories,
+          [userRepository],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  void attach(_i5.RegisterPageView? view) => super.noSuchMethod(
         Invocation.method(
           #attach,
           [view],
@@ -68,23 +91,23 @@ class MockRegisterPagePresenter extends _i1.Mock
         returnValueForMissingStub: null,
       );
   @override
-  _i5.Future<void> fetchData() => (super.noSuchMethod(
+  _i6.Future<void> fetchData() => (super.noSuchMethod(
         Invocation.method(
           #fetchData,
           [],
         ),
-        returnValue: _i5.Future<void>.value(),
-        returnValueForMissingStub: _i5.Future<void>.value(),
-      ) as _i5.Future<void>);
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
   @override
-  _i5.Future<void> registerUser() => (super.noSuchMethod(
+  _i6.Future<void> registerUser() => (super.noSuchMethod(
         Invocation.method(
           #registerUser,
           [],
         ),
-        returnValue: _i5.Future<void>.value(),
-        returnValueForMissingStub: _i5.Future<void>.value(),
-      ) as _i5.Future<void>);
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
   @override
   void setAppState(_i2.AppState? appState) => super.noSuchMethod(
         Invocation.method(

@@ -36,7 +36,7 @@ void main() {
 
     test('Workout equals compared to self 2', () {
       final Workout workoutSet = TestData.testWorkout1;
-      final workoutSet2 = Workout('1', 'A', 'A', 'A', 'A', false, 'A', 'A', 'A', [TestData.testWorkoutSet1]);
+      final workoutSet2 = Workout(1, 'A', 'A', 'A', 'A', false, 'A', 'A', 'A', [TestData.testWorkoutSet1]);
 
       expect(workoutSet == workoutSet2, true);
     });
@@ -58,7 +58,7 @@ void main() {
 
     test('Workout hashCode compared to self 2', () {
       final workoutSet = TestData.testWorkout1;
-      final workoutSet2 = Workout('1', 'A', 'A', 'A', 'A', false, 'A', 'A', 'A', [TestData.testWorkoutSet1]);
+      final workoutSet2 = Workout(1, 'A', 'A', 'A', 'A', false, 'A', 'A', 'A', [TestData.testWorkoutSet1]);
       print('${workoutSet.hashCode} | ${workoutSet2.hashCode}');
 
       expect(workoutSet.hashCode == workoutSet2.hashCode, true);

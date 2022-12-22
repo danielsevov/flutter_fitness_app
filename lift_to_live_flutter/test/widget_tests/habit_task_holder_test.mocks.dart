@@ -3,16 +3,18 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i6;
+import 'dart:async' as _i7;
 
 import 'package:lift_to_live_flutter/domain/entities/habit.dart' as _i2;
-import 'package:lift_to_live_flutter/domain/entities/habit_task.dart' as _i7;
+import 'package:lift_to_live_flutter/domain/entities/habit_task.dart' as _i8;
+import 'package:lift_to_live_flutter/domain/repositories/habits_repo.dart'
+    as _i5;
 import 'package:lift_to_live_flutter/presentation/presenters/habits_page_presenter.dart'
     as _i4;
 import 'package:lift_to_live_flutter/presentation/state_management/app_state.dart'
     as _i3;
 import 'package:lift_to_live_flutter/presentation/views/habits_page_view.dart'
-    as _i5;
+    as _i6;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -72,10 +74,36 @@ class MockHabitsPagePresenter extends _i1.Mock
         returnValueForMissingStub: null,
       );
   @override
+  String get userId => (super.noSuchMethod(
+        Invocation.getter(#userId),
+        returnValue: '',
+      ) as String);
+  @override
+  set userId(String? _userId) => super.noSuchMethod(
+        Invocation.setter(
+          #userId,
+          _userId,
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
   List<_i2.Habit> get habits => (super.noSuchMethod(
         Invocation.getter(#habits),
         returnValue: <_i2.Habit>[],
       ) as List<_i2.Habit>);
+  @override
+  bool get repositoriesAttached => (super.noSuchMethod(
+        Invocation.getter(#repositoriesAttached),
+        returnValue: false,
+      ) as bool);
+  @override
+  set repositoriesAttached(dynamic value) => super.noSuchMethod(
+        Invocation.setter(
+          #repositoriesAttached,
+          value,
+        ),
+        returnValueForMissingStub: null,
+      );
   @override
   _i3.AppState get appState => (super.noSuchMethod(
         Invocation.getter(#appState),
@@ -85,7 +113,24 @@ class MockHabitsPagePresenter extends _i1.Mock
         ),
       ) as _i3.AppState);
   @override
-  void attach(_i5.HabitsPageView? view) => super.noSuchMethod(
+  void attachRepositories(_i5.HabitsRepository? habitsRepository) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #attachRepositories,
+          [habitsRepository],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  void changeUser(String? userID) => super.noSuchMethod(
+        Invocation.method(
+          #changeUser,
+          [userID],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  void attach(_i6.HabitsPageView? view) => super.noSuchMethod(
         Invocation.method(
           #attach,
           [view],
@@ -101,14 +146,14 @@ class MockHabitsPagePresenter extends _i1.Mock
         returnValueForMissingStub: null,
       );
   @override
-  _i6.Future<void> fetchData() => (super.noSuchMethod(
+  _i7.Future<void> fetchData() => (super.noSuchMethod(
         Invocation.method(
           #fetchData,
           [],
         ),
-        returnValue: _i6.Future<void>.value(),
-        returnValueForMissingStub: _i6.Future<void>.value(),
-      ) as _i6.Future<void>);
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
   @override
   void updateHabitEntry(
     int? id,
@@ -116,7 +161,7 @@ class MockHabitsPagePresenter extends _i1.Mock
     String? note,
     String? userId,
     String? coachId,
-    List<_i7.HabitTask>? habits,
+    List<_i8.HabitTask>? habits,
   ) =>
       super.noSuchMethod(
         Invocation.method(

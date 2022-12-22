@@ -3,14 +3,17 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i5;
+import 'dart:async' as _i7;
 
+import 'package:lift_to_live_flutter/domain/repositories/token_repo.dart'
+    as _i4;
+import 'package:lift_to_live_flutter/domain/repositories/user_repo.dart' as _i5;
 import 'package:lift_to_live_flutter/presentation/presenters/log_in_page_presenter.dart'
     as _i3;
 import 'package:lift_to_live_flutter/presentation/state_management/app_state.dart'
     as _i2;
 import 'package:lift_to_live_flutter/presentation/views/log_in_page_view.dart'
-    as _i4;
+    as _i6;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -44,6 +47,19 @@ class MockLogInPagePresenter extends _i1.Mock
   }
 
   @override
+  bool get repositoriesAttached => (super.noSuchMethod(
+        Invocation.getter(#repositoriesAttached),
+        returnValue: false,
+      ) as bool);
+  @override
+  set repositoriesAttached(dynamic value) => super.noSuchMethod(
+        Invocation.setter(
+          #repositoriesAttached,
+          value,
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
   _i2.AppState get appState => (super.noSuchMethod(
         Invocation.getter(#appState),
         returnValue: _FakeAppState_0(
@@ -52,7 +68,22 @@ class MockLogInPagePresenter extends _i1.Mock
         ),
       ) as _i2.AppState);
   @override
-  void attach(_i4.LogInPageView? view) => super.noSuchMethod(
+  void attachRepositories(
+    _i4.TokenRepository? tokenRepository,
+    _i5.UserRepository? userRepository,
+  ) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #attachRepositories,
+          [
+            tokenRepository,
+            userRepository,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  void attach(_i6.LogInPageView? view) => super.noSuchMethod(
         Invocation.method(
           #attach,
           [view],
@@ -68,14 +99,14 @@ class MockLogInPagePresenter extends _i1.Mock
         returnValueForMissingStub: null,
       );
   @override
-  _i5.Future<void> logIn() => (super.noSuchMethod(
+  _i7.Future<void> logIn() => (super.noSuchMethod(
         Invocation.method(
           #logIn,
           [],
         ),
-        returnValue: _i5.Future<void>.value(),
-        returnValueForMissingStub: _i5.Future<void>.value(),
-      ) as _i5.Future<void>);
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
   @override
   void setAppState(_i2.AppState? appState) => super.noSuchMethod(
         Invocation.method(
