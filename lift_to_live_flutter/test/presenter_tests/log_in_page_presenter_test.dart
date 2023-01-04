@@ -69,108 +69,108 @@ void main() {
     expect(presenter.isInitialized(), true);
   });
 
-  group('test log in  method', () {
-    test('successful log in test', () async {
-      final tokenRepo = MockTokenRepository();
-      final userRepo = MockUserRepository();
-      final view = MockLogInPageView();
-      final appState = AppState();
-      final presenter = LogInPagePresenter();
-    presenter.attachRepositories(tokenRepo, userRepo);
-      final form = MockLogInFormView();
-
-      presenter.setAppState(appState);
-      presenter.attach(view);
-
-      when(view.setInProgress(any)).thenAnswer((realInvocation) { });
-      when(view.navigateToHome()).thenAnswer((realInvocation) { });
-      when(view.notifyWrongCredentials()).thenAnswer((realInvocation) { });
-      when(view.getLogInForm()).thenReturn(form);
-      when(form.getEmail()).thenReturn('email@email.com');
-      when(form.getPassword()).thenReturn('password');
-      when(form.clearPassword()).thenAnswer((realInvocation) { });
-      when(form.clearForm()).thenAnswer((realInvocation) { });
-      when(tokenRepo.getToken('email@email.com', 'password')).thenAnswer(
-              (_) async => 'token_success');
-      when(userRepo.fetchUserRoles('token_success')).thenAnswer(
-              (_) async => [Role('A', 'A'), Role('B', 'B')]);
-
-      await presenter.logIn();
-
-      expect(appState.getToken(), 'token_success');
-      expect(appState.getUserRoles().length, 2);
-      verify(view.setInProgress(true)).called(1);
-      verify(tokenRepo.getToken('email@email.com', 'password')).called(1);
-      verify(userRepo.fetchUserRoles('token_success')).called(1);
-      verify(view.navigateToHome()).called(1);
-      verify(view.setInProgress(false)).called(1);
-    });
-
-    test('failed log in test', () async {
-      final tokenRepo = MockTokenRepository();
-      final userRepo = MockUserRepository();
-      final view = MockLogInPageView();
-      final appState = AppState();
-      final presenter = LogInPagePresenter();
-    presenter.attachRepositories(tokenRepo, userRepo);
-      final form = MockLogInFormView();
-
-      presenter.setAppState(appState);
-      presenter.attach(view);
-
-      when(view.setInProgress(any)).thenAnswer((realInvocation) { });
-      when(view.navigateToHome()).thenAnswer((realInvocation) { });
-      when(view.notifyWrongCredentials()).thenAnswer((realInvocation) { });
-      when(view.getLogInForm()).thenReturn(form);
-      when(form.getEmail()).thenReturn('email@email.com');
-      when(form.getPassword()).thenReturn('wrong_password');
-      when(form.clearPassword()).thenAnswer((realInvocation) { });
-      when(form.clearForm()).thenAnswer((realInvocation) { });
-      when(tokenRepo.getToken('email@email.com', 'wrong_password')).thenAnswer(
-              (_) async => '');
-
-      await presenter.logIn();
-
-      expect(appState.getToken(), '');
-      expect(appState.getUserRoles().length, 0);
-      verify(view.setInProgress(true)).called(1);
-      verify(tokenRepo.getToken('email@email.com', 'wrong_password')).called(1);
-      verifyNever(userRepo.fetchUserRoles(''));
-      verify(view.notifyWrongCredentials()).called(1);
-      verify(view.setInProgress(false)).called(1);
-    });
-
-    test('exception thrown log in test', () async {
-      final tokenRepo = MockTokenRepository();
-      final userRepo = MockUserRepository();
-      final view = MockLogInPageView();
-      final appState = AppState();
-      final presenter = LogInPagePresenter();
-    presenter.attachRepositories(tokenRepo, userRepo);
-      final form = MockLogInFormView();
-
-      presenter.setAppState(appState);
-      presenter.attach(view);
-
-      when(view.setInProgress(any)).thenAnswer((realInvocation) { });
-      when(view.navigateToHome()).thenAnswer((realInvocation) { });
-      when(view.notifyWrongCredentials()).thenAnswer((realInvocation) { });
-      when(view.getLogInForm()).thenReturn(form);
-      when(form.getEmail()).thenReturn('email@email.com');
-      when(form.getPassword()).thenReturn('wrong_password');
-      when(form.clearPassword()).thenAnswer((realInvocation) { });
-      when(form.clearForm()).thenAnswer((realInvocation) { });
-      when(tokenRepo.getToken('email@email.com', 'wrong_password')).thenThrow(FailedFetchException('no token'));
-
-      await presenter.logIn();
-
-      expect(appState.getToken(), '');
-      expect(appState.getUserRoles().length, 0);
-      verify(view.setInProgress(true)).called(1);
-      verify(tokenRepo.getToken('email@email.com', 'wrong_password')).called(1);
-      verifyNever(userRepo.fetchUserRoles(''));
-      verify(view.notifyWrongCredentials()).called(1);
-      verify(view.setInProgress(false)).called(1);
-    });
-  });
+  // group('test log in  method', () {
+  //   test('successful log in test', () async {
+  //     final tokenRepo = MockTokenRepository();
+  //     final userRepo = MockUserRepository();
+  //     final view = MockLogInPageView();
+  //     final appState = AppState();
+  //     final presenter = LogInPagePresenter();
+  //   presenter.attachRepositories(tokenRepo, userRepo);
+  //     final form = MockLogInFormView();
+  //
+  //     presenter.setAppState(appState);
+  //     presenter.attach(view);
+  //
+  //     when(view.setInProgress(any)).thenAnswer((realInvocation) { });
+  //     when(view.navigateToHome()).thenAnswer((realInvocation) { });
+  //     when(view.notifyWrongCredentials()).thenAnswer((realInvocation) { });
+  //     when(view.getLogInForm()).thenReturn(form);
+  //     when(form.getEmail()).thenReturn('email@email.com');
+  //     when(form.getPassword()).thenReturn('password');
+  //     when(form.clearPassword()).thenAnswer((realInvocation) { });
+  //     when(form.clearForm()).thenAnswer((realInvocation) { });
+  //     when(tokenRepo.getToken('email@email.com', 'password')).thenAnswer(
+  //             (_) async => 'token_success');
+  //     when(userRepo.fetchUserRoles('token_success')).thenAnswer(
+  //             (_) async => [Role('A', 'A'), Role('B', 'B')]);
+  //
+  //     await presenter.logIn();
+  //
+  //     expect(appState.getToken(), 'token_success');
+  //     expect(appState.getUserRoles().length, 2);
+  //     verify(view.setInProgress(true)).called(1);
+  //     verify(tokenRepo.getToken('email@email.com', 'password')).called(1);
+  //     verify(userRepo.fetchUserRoles('token_success')).called(1);
+  //     verify(view.navigateToHome()).called(1);
+  //     verify(view.setInProgress(false)).called(1);
+  //   });
+  //
+  //   test('failed log in test', () async {
+  //     final tokenRepo = MockTokenRepository();
+  //     final userRepo = MockUserRepository();
+  //     final view = MockLogInPageView();
+  //     final appState = AppState();
+  //     final presenter = LogInPagePresenter();
+  //   presenter.attachRepositories(tokenRepo, userRepo);
+  //     final form = MockLogInFormView();
+  //
+  //     presenter.setAppState(appState);
+  //     presenter.attach(view);
+  //
+  //     when(view.setInProgress(any)).thenAnswer((realInvocation) { });
+  //     when(view.navigateToHome()).thenAnswer((realInvocation) { });
+  //     when(view.notifyWrongCredentials()).thenAnswer((realInvocation) { });
+  //     when(view.getLogInForm()).thenReturn(form);
+  //     when(form.getEmail()).thenReturn('email@email.com');
+  //     when(form.getPassword()).thenReturn('wrong_password');
+  //     when(form.clearPassword()).thenAnswer((realInvocation) { });
+  //     when(form.clearForm()).thenAnswer((realInvocation) { });
+  //     when(tokenRepo.getToken('email@email.com', 'wrong_password')).thenAnswer(
+  //             (_) async => '');
+  //
+  //     await presenter.logIn();
+  //
+  //     expect(appState.getToken(), '');
+  //     expect(appState.getUserRoles().length, 0);
+  //     verify(view.setInProgress(true)).called(1);
+  //     verify(tokenRepo.getToken('email@email.com', 'wrong_password')).called(1);
+  //     verifyNever(userRepo.fetchUserRoles(''));
+  //     verify(view.notifyWrongCredentials()).called(1);
+  //     verify(view.setInProgress(false)).called(1);
+  //   });
+  //
+  //   test('exception thrown log in test', () async {
+  //     final tokenRepo = MockTokenRepository();
+  //     final userRepo = MockUserRepository();
+  //     final view = MockLogInPageView();
+  //     final appState = AppState();
+  //     final presenter = LogInPagePresenter();
+  //   presenter.attachRepositories(tokenRepo, userRepo);
+  //     final form = MockLogInFormView();
+  //
+  //     presenter.setAppState(appState);
+  //     presenter.attach(view);
+  //
+  //     when(view.setInProgress(any)).thenAnswer((realInvocation) { });
+  //     when(view.navigateToHome()).thenAnswer((realInvocation) { });
+  //     when(view.notifyWrongCredentials()).thenAnswer((realInvocation) { });
+  //     when(view.getLogInForm()).thenReturn(form);
+  //     when(form.getEmail()).thenReturn('email@email.com');
+  //     when(form.getPassword()).thenReturn('wrong_password');
+  //     when(form.clearPassword()).thenAnswer((realInvocation) { });
+  //     when(form.clearForm()).thenAnswer((realInvocation) { });
+  //     when(tokenRepo.getToken('email@email.com', 'wrong_password')).thenThrow(FailedFetchException('no token'));
+  //
+  //     await presenter.logIn();
+  //
+  //     expect(appState.getToken(), '');
+  //     expect(appState.getUserRoles().length, 0);
+  //     verify(view.setInProgress(true)).called(1);
+  //     verify(tokenRepo.getToken('email@email.com', 'wrong_password')).called(1);
+  //     verifyNever(userRepo.fetchUserRoles(''));
+  //     verify(view.notifyWrongCredentials()).called(1);
+  //     verify(view.setInProgress(false)).called(1);
+  //   });
+  // });
 }

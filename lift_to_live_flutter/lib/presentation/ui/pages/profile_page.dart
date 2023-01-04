@@ -92,6 +92,13 @@ class ProfilePageState extends State<ProfilePage> implements ProfilePageView {
         context, PageFactory().getHabitsPage(_user.id));
   }
 
+  /// Function called when user wants to navigate from the users profile to the users workout history page.
+  @override
+  void workoutsPressed(BuildContext context) {
+    Helper.pushPageWithAnimation(
+        context, PageFactory().getWorkoutHistoryPage(_user.id));
+  }
+
   /// Function called when user wants to navigate from profile page to pictures page.
   @override
   void picturesPressed(BuildContext context) {
@@ -244,7 +251,27 @@ class ProfilePageState extends State<ProfilePage> implements ProfilePageView {
                                         habitsPressed(context);
                                       },
                                     )), // button third
-
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Container(
+                                    margin: const EdgeInsets.all(10),
+                                    child: FloatingActionButton.extended(
+                                      heroTag: 'btn7',
+                                      backgroundColor: Helper.blackColor,
+                                      icon: const Icon(
+                                        Icons.fitness_center_outlined,
+                                        color: Helper.whiteColor,
+                                      ),
+                                      label: const Text(
+                                        'View Workouts',
+                                        style:
+                                        TextStyle(color: Helper.whiteColor),
+                                      ),
+                                      onPressed: () {
+                                        workoutsPressed(context);
+                                      },
+                                    )),
                                 // Add more buttons here
                               ],
                             ),

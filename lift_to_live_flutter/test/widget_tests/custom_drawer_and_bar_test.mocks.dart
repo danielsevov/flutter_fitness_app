@@ -137,4 +137,19 @@ class MockHomePageView extends _i1.Mock implements _i2.HomePageView {
         ),
         returnValueForMissingStub: null,
       );
+  @override
+  void historyPressed(
+    _i4.BuildContext? context,
+    bool? fromBottomBar,
+  ) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #historyPressed,
+          [
+            context,
+            fromBottomBar,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
 }

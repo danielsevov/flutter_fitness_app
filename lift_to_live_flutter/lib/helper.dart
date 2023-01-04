@@ -16,7 +16,7 @@ class Helper {
       blackColor = Colors.black, // black shade used for the logo
       whiteColor = Colors.white, // black shade used for the logo
       hintGreyColor =
-          Color.fromRGBO(229, 229, 229, 1), // blue grey used for the text hint
+          Color.fromRGBO(229, 229, 229, 0.5), // blue grey used for the text hint
 
       // default color scheme
       defaultTextColor = whiteColor, // default color of the text

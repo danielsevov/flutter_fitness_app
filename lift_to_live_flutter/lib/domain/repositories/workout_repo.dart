@@ -17,6 +17,12 @@ abstract class WorkoutRepository {
   /// This function is used for fetching all workout entries for a user.
   Future<List<Workout>> fetchWorkouts(String userId, String jwtToken);
 
+  /// This function is used for fetching a single template entry.
+  Future<Workout> fetchTemplate(int id, String jwtToken);
+
+  /// This function is used for fetching a single workout entry.
+  Future<Workout> fetchWorkout(int id, String jwtToken);
+
   /// This function is used for posting workout entries.
   Future<void> postWorkout(String coachNote, String note, String userId,
       String coachId, List<WorkoutSet> workoutSets, String completedOn, String createdOn, String name, String duration, bool isTemplate, String jwtToken);

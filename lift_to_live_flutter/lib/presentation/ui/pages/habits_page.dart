@@ -5,7 +5,7 @@ import '../../presenters/habits_page_presenter.dart';
 import '../../state_management/app_state.dart';
 import '../../../helper.dart';
 import '../../views/habits_page_view.dart';
-import '../widgets/habit_related/custom_calendar.dart';
+import '../widgets/habit_related/custom_habits_calendar.dart';
 
 /// Custom HabitsPage widget used as a main overview of the habit entries of a user.
 /// It is a stateful widget and its state object implements the HabitsPageView abstract class.
@@ -131,7 +131,7 @@ class HabitsPageState extends State<HabitsPage> implements HabitsPageView {
                     delegate: SliverChildBuilderDelegate(
                       (BuildContext context, int index) {
                         return _isFetched
-                            ? CustomCalendar(habits: widget.presenter.habits)
+                            ? CustomHabitsCalendar(habits: widget.presenter.habits)
                             : const SizedBox();
                       },
                       childCount: 1,

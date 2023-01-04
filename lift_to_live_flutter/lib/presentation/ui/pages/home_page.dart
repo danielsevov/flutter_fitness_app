@@ -14,7 +14,7 @@ import '../../../domain/entities/user.dart';
 import '../../../factory/page_factory.dart';
 import '../../state_management/app_state.dart';
 import '../../../helper.dart';
-import '../widgets/forms_and_dialogs/custom_dialog.dart';
+import '../widgets/reusable_elements/custom_dialog.dart';
 
 /// Custom widget, which is the HomePage and is used as a main navigational hub for the application.
 /// It provides navigation to the main app pages, as well as a news overview and the log out functionality.
@@ -134,6 +134,26 @@ class HomePageState extends State<HomePage> implements HomePageView {
         context, PageFactory().getProfilePage(_user.id, 'home'));
   }
 
+  @override
+  void historyPressed(BuildContext context, bool fromBottomBar) {
+    if (!fromBottomBar) Navigator.of(context).pop();
+    Helper.pushPageWithAnimation(
+        context, PageFactory().getWorkoutHistoryPage(_user.id));
+  }
+
+  @override
+  void templatesPressed(BuildContext context, bool fromBottomBar) {
+    if (!fromBottomBar) Navigator.of(context).pop();
+    Helper.pushPageWithAnimation(
+        context, PageFactory().getWorkoutTemplatesPage(_user.id));
+  }
+
+  @override
+  void workoutPressed(BuildContext context, bool bool) {
+    Helper.pushPageWithAnimation(
+        context, PageFactory().getWorkoutPage(0, _user.id, false, false));
+  }
+
   /// Function called when user wants to navigate from home to trainees page
   /// This is only allowed if user is admin or coach.
   @override
@@ -170,136 +190,144 @@ class HomePageState extends State<HomePage> implements HomePageView {
       widget.presenter.fetchData();
     }
 
-    return Scaffold(
-      extendBody: true,
-      floatingActionButton: FloatingActionButton.large(
-        heroTag: 'btn4',
-        //Floating action button on Scaffold
-        onPressed: () {
-          try {
-            DefaultBottomBarController.of(context).swap();
-          } catch (e) {
-            log(e.toString());
-          }
-        },
-        backgroundColor: Helper.actionButtonColor,
-        child: const Icon(
-          Icons.fitness_center_outlined,
-          color: Helper.actionButtonTextColor,
-        ), //icon inside button
-      ),
+    return WillPopScope(
+      onWillPop: () async {
+        // Return false to prevent the user from navigating away
+        return false;
+      },
+      child: Scaffold(
+        extendBody: true,
+        floatingActionButton: FloatingActionButton.large(
+          heroTag: 'btn4',
+          //Floating action button on Scaffold
+          onPressed: () {
+            if(isFetched) {
+              try {
+                DefaultBottomBarController.of(context).swap();
+              } catch (e) {
+                log(e.toString());
+              }
+            }
+          },
+          backgroundColor: Helper.actionButtonColor,
+          child: const Icon(
+            Icons.fitness_center_outlined,
+            color: Helper.actionButtonTextColor,
+          ), //icon inside button
+        ),
 
-      //floating action button position to center
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        //floating action button position to center
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
 
-      // bottom navigation bar on scaffold
-      bottomNavigationBar: CustomBottomBar(view: this),
-      body: Container(
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(Helper.pageBackgroundImage),
-            fit: BoxFit.fill,
+        // bottom navigation bar on scaffold
+        bottomNavigationBar: CustomBottomBar(view: this),
+        body: Container(
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage(Helper.pageBackgroundImage),
+              fit: BoxFit.fill,
+            ),
+          ),
+          child: CustomScrollView(
+            slivers: <Widget>[
+              SliverAppBar(
+                backgroundColor: Helper.pageBackgroundColor.withOpacity(0.7),
+                iconTheme: const IconThemeData(
+                  color: Helper.darkHeadlineColor, //change your color here
+                ),
+                pinned: true,
+                snap: true,
+                floating: true,
+                expandedHeight: 100.0,
+                shape: const ContinuousRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(15),
+                        bottomRight: Radius.circular(15))),
+                actions: [
+                  IconButton(
+                      //on pressed clear token and navigate to log in page
+                      onPressed: () async {
+                        showDialog(
+                            context: context,
+                            builder: (context) {
+                              return CustomDialog(
+                                  title: 'Sign out',
+                                  bodyText: 'Are you sure you want to sign out?',
+                                  confirm: () {
+                                    logOutPressed(context);
+                                  },
+                                  cancel: () {
+                                    Navigator.pop(context);
+                                  });
+                            });
+                      },
+                      icon: const Icon(
+                        Icons.logout,
+                        color: Helper.darkHeadlineColor,
+                      )),
+                ],
+                flexibleSpace: const FlexibleSpaceBar(
+                  title: Text(
+                    "L I F T    T O    L I V E",
+                    style: TextStyle(color: Helper.headerBarTextColor),
+                  ),
+                  centerTitle: true,
+                ),
+              ),
+              SliverList(
+                delegate: SliverChildBuilderDelegate(
+                  (BuildContext context, int index) {
+                    return Hero(
+                      tag: 'logo',
+                      child: Container(
+                        padding: const EdgeInsets.fromLTRB(20, 20, 20, 100),
+                        child: Image.asset(
+                          Helper.logoImage,
+                          width: _screenWidth * 0.8,
+                          height: _screenHeight * 0.5,
+                        ),
+                      ),
+                    );
+                  },
+                  childCount: 1,
+                ),
+              ),
+              SliverToBoxAdapter(
+                child: SizedBox(
+                  height: 20,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Text(
+                        'Scroll down and check what\'s new in the gym world!',
+                        style: TextStyle(color: Helper.lightHeadlineColor),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              SliverList(
+                delegate: SliverChildBuilderDelegate(
+                  (BuildContext context, int index) {
+                    return _isLoading
+                        ? (index == 0
+                            ? const Center(
+                                child: CircularProgressIndicator(
+                                color: Helper.yellowColor,
+                              ))
+                            : const SizedBox(
+                                height: 3,
+                              ))
+                        : NewsArticleHolder(view: this, index: index);
+                  },
+                  childCount: 20,
+                ),
+              ),
+            ],
           ),
         ),
-        child: CustomScrollView(
-          slivers: <Widget>[
-            SliverAppBar(
-              backgroundColor: Helper.pageBackgroundColor.withOpacity(0.7),
-              iconTheme: const IconThemeData(
-                color: Helper.darkHeadlineColor, //change your color here
-              ),
-              pinned: true,
-              snap: true,
-              floating: true,
-              expandedHeight: 100.0,
-              shape: const ContinuousRectangleBorder(
-                  borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(15),
-                      bottomRight: Radius.circular(15))),
-              actions: [
-                IconButton(
-                    //on pressed clear token and navigate to log in page
-                    onPressed: () async {
-                      showDialog(
-                          context: context,
-                          builder: (context) {
-                            return CustomDialog(
-                                title: 'Sign out',
-                                bodyText: 'Are you sure you want to sign out?',
-                                confirm: () {
-                                  logOutPressed(context);
-                                },
-                                cancel: () {
-                                  Navigator.pop(context);
-                                });
-                          });
-                    },
-                    icon: const Icon(
-                      Icons.logout,
-                      color: Helper.darkHeadlineColor,
-                    )),
-              ],
-              flexibleSpace: const FlexibleSpaceBar(
-                title: Text(
-                  "L I F T    T O    L I V E",
-                  style: TextStyle(color: Helper.headerBarTextColor),
-                ),
-                centerTitle: true,
-              ),
-            ),
-            SliverList(
-              delegate: SliverChildBuilderDelegate(
-                (BuildContext context, int index) {
-                  return Hero(
-                    tag: 'logo',
-                    child: Container(
-                      padding: const EdgeInsets.fromLTRB(20, 20, 20, 100),
-                      child: Image.asset(
-                        Helper.logoImage,
-                        width: _screenWidth * 0.8,
-                        height: _screenHeight * 0.5,
-                      ),
-                    ),
-                  );
-                },
-                childCount: 1,
-              ),
-            ),
-            SliverToBoxAdapter(
-              child: SizedBox(
-                height: 20,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    Text(
-                      'Scroll down and check what\'s new in the gym world!',
-                      style: TextStyle(color: Helper.lightHeadlineColor),
-                    )
-                  ],
-                ),
-              ),
-            ),
-            SliverList(
-              delegate: SliverChildBuilderDelegate(
-                (BuildContext context, int index) {
-                  return _isLoading
-                      ? (index == 0
-                          ? const Center(
-                              child: CircularProgressIndicator(
-                              color: Helper.yellowColor,
-                            ))
-                          : const SizedBox(
-                              height: 3,
-                            ))
-                      : NewsArticleHolder(view: this, index: index);
-                },
-                childCount: 20,
-              ),
-            ),
-          ],
-        ),
+        drawer: isFetched ? CustomDrawer(view: this) : const Drawer(),
       ),
-      drawer: CustomDrawer(view: this),
     );
   }
 }

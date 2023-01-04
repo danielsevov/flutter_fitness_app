@@ -27,7 +27,7 @@ class EditHabitHolder extends StatelessWidget {
         decoration: BoxDecoration(
           color: Helper.lightBlueColor,
           borderRadius: const BorderRadius.all(Radius.circular(15)),
-          border: Border.all(color: Helper.whiteColor, width: 2),
+          border: Border.all(color: Helper.whiteColor, width: 1),
         ),
         child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
           IconButton(

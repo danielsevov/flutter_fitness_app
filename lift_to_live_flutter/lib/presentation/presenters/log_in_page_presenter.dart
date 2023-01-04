@@ -1,3 +1,4 @@
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:lift_to_live_flutter/domain/repositories/token_repo.dart';
 import 'package:lift_to_live_flutter/domain/repositories/user_repo.dart';
 import 'package:lift_to_live_flutter/presentation/presenters/base_presenter.dart';
@@ -11,6 +12,7 @@ class LogInPagePresenter extends BasePresenter {
       _tokenRepository; // the repository used for fetching the JWT token
   late final UserRepository
       _userRepository; // the repository used for fetching the user roles
+  final storage = const FlutterSecureStorage();
 
   /// Simple constructor
   LogInPagePresenter();
@@ -37,9 +39,16 @@ class LogInPagePresenter extends BasePresenter {
     // set the loading indicator to be shown on the page view
     _view?.setInProgress(true);
 
-    // extract the email and password entries from the log in form
-    String? email = _view?.getLogInForm().getEmail(),
-        pass = _view?.getLogInForm().getPassword();
+    String? email, pass;
+
+    email = await storage.read(key: 'username');
+    pass = await storage.read(key: 'password');
+
+    if(email == null || pass == null) {
+      // extract the email and password entries from the log in form
+      email = _view?.getLogInForm().getEmail();
+      pass = _view?.getLogInForm().getPassword();
+    }
 
     // try to fetch a token based on the provided credentials
     String token = '';
@@ -52,6 +61,10 @@ class LogInPagePresenter extends BasePresenter {
 
         // set the user roles in the app state object
         super.appState.setInitialState(email, token, roles);
+
+        // store credentials
+        await storage.write(key: 'username', value: email);
+        await storage.write(key: 'password', value: pass);
 
         // navigate from log in to home page view
         _view?.navigateToHome();

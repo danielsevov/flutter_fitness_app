@@ -29,7 +29,7 @@ void main() {
       final nameFinder = find.text('Test User');
       final accountFinder = find.text('My Profile');
       final habitFinder = find.text('My Habits');
-      final workoutFinder = find.text('Manage Workouts');
+      final workoutFinder = find.text('View Workouts');
 
       await tester.pumpWidget(MaterialApp(
           title: 'Flutter Demo', home: Scaffold(body: Center(child: Container(height: 400, width: 400, color: Helper.blueColor,child: widget),))));
@@ -65,7 +65,7 @@ void main() {
       final nameFinder = find.text('Test User');
       final accountFinder = find.text('My Profile');
       final habitFinder = find.text('My Habits');
-      final workoutFinder = find.text('Manage Workouts');
+      final workoutFinder = find.text('View Workouts');
 
       await tester.pumpWidget(MaterialApp(
           title: 'Flutter Demo', home: Scaffold(body: Center(child: Container(height: 400, width: 400, color: Helper.blueColor,child: widget),))));
@@ -97,7 +97,7 @@ void main() {
       final nameFinder = find.text('Test User');
       final accountFinder = find.text('My Profile');
       final habitFinder = find.text('My Habits');
-      final workoutFinder = find.text('Manage Workouts');
+      final workoutFinder = find.text('View Workouts');
       final traineesFinder = find.text('Manage Trainees');
 
       await tester.pumpWidget(MaterialApp(
@@ -136,7 +136,7 @@ void main() {
 
       final accountFinder = find.text('Profile');
       final habitFinder = find.text('Habits');
-      final calendarFinder = find.text('Calendar');
+      final calendarFinder = find.text('History').first;
       final traineesFinder = find.text('Trainees');
 
       await tester.pumpWidget(MaterialApp(

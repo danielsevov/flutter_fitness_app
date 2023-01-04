@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:lift_to_live_flutter/factory/page_factory.dart';
 import 'package:lift_to_live_flutter/presentation/presenters/log_in_page_presenter.dart';
-import 'package:lift_to_live_flutter/presentation/ui/widgets/forms_and_dialogs/log_in_form.dart';
+import 'package:lift_to_live_flutter/presentation/ui/widgets/user_related/log_in_form.dart';
 import 'package:provider/provider.dart';
 import '../../state_management/app_state.dart';
 import '../../../helper.dart';
@@ -33,6 +34,7 @@ class LogInPageState extends State<LogInPage> implements LogInPageView {
   @override
   void initState() {
     widget.presenter.attach(this);
+    autoLogIn();
     super.initState();
   }
 
@@ -137,5 +139,18 @@ class LogInPageState extends State<LogInPage> implements LogInPageView {
   @override
   void notifyWrongCredentials() {
     Helper.makeToast(context, "Email or password is wrong!");
+  }
+
+  Future<void> autoLogIn() async {
+    String? email, pass;
+
+    const storage = FlutterSecureStorage();
+
+    email = await storage.read(key: 'username');
+    pass = await storage.read(key: 'password');
+
+    if(email != null && pass != null) {
+      widget.presenter.logIn();
+    }
   }
 }

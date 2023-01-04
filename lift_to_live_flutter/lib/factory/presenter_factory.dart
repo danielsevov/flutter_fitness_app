@@ -1,6 +1,12 @@
 import 'package:lift_to_live_flutter/data/datasources/backend_api.dart';
+import 'package:lift_to_live_flutter/data/repositories/exercise_repo_impl.dart';
+import 'package:lift_to_live_flutter/data/repositories/workout_repo_impl.dart';
+import 'package:lift_to_live_flutter/domain/repositories/exercise_repo.dart';
 import 'package:lift_to_live_flutter/domain/repositories/habits_repo.dart';
 import 'package:lift_to_live_flutter/domain/repositories/user_repo.dart';
+import 'package:lift_to_live_flutter/domain/repositories/workout_repo.dart';
+import 'package:lift_to_live_flutter/presentation/presenters/workout_history_page_presenter.dart';
+import 'package:lift_to_live_flutter/presentation/presenters/workout_templates_page_presenter.dart';
 
 import '../data/datasources/news_api.dart';
 import '../data/repositories/habits_repo_impl.dart';
@@ -10,6 +16,7 @@ import '../data/repositories/user_repo_impl.dart';
 import '../domain/repositories/news_repo.dart';
 import '../domain/repositories/token_repo.dart';
 import '../presentation/presenters/edit_habits_page_presenter.dart';
+import '../presentation/presenters/workout_page_presenter.dart';
 import '../presentation/presenters/habits_page_presenter.dart';
 import '../presentation/presenters/home_page_presenter.dart';
 import '../presentation/presenters/log_in_page_presenter.dart';
@@ -40,6 +47,10 @@ class PresenterFactory {
       HabitsRepoImpl(backendAPI); // habits repository
   NewsRepository getNewsRepository() =>
       NewsRepoImpl(newsAPI); //news repository
+  ExerciseRepository getExerciseRepository() =>
+      ExerciseRepoImpl(); //exercise repository
+  WorkoutRepository getWorkoutRepository() =>
+      WorkoutRepoImpl(backendAPI); //workouts repository
 
   // reusable presenters
   LogInPagePresenter logInPagePresenter = LogInPagePresenter();
@@ -50,6 +61,9 @@ class PresenterFactory {
   HabitsPagePresenter habitsPagePresenter = HabitsPagePresenter();
   EditHabitsPagePresenter editHabitsPagePresenter = EditHabitsPagePresenter();
   ProfilePagePresenter profilePagePresenter = ProfilePagePresenter();
+  WorkoutHistoryPagePresenter workoutHistoryPagePresenter = WorkoutHistoryPagePresenter();
+  WorkoutTemplatesPagePresenter workoutTemplatesPagePresenter = WorkoutTemplatesPagePresenter();
+  WorkoutPagePresenter workoutPagePresenter = WorkoutPagePresenter();
 
   // function to get a LogInPagePresenter object.
   LogInPagePresenter getLogInPagePresenter() {
@@ -131,6 +145,39 @@ class PresenterFactory {
     editHabitsPagePresenter.changeUser(userId);
 
     return editHabitsPagePresenter;
+  }
+
+  // function to get a WorkoutHistoryPagePresenter object.
+  WorkoutHistoryPagePresenter getWorkoutHistoryPresenter(String userId) {
+    if(!workoutHistoryPagePresenter.repositoriesAttached) {
+      workoutHistoryPagePresenter.attachRepositories(getWorkoutRepository(), getExerciseRepository());
+    }
+
+    workoutHistoryPagePresenter.changeUser(userId);
+
+    return workoutHistoryPagePresenter;
+  }
+
+  // function to get a WorkoutTemplatesPagePresenter object.
+  WorkoutTemplatesPagePresenter getWorkoutTemplatesPagePresenter(String userId) {
+    if(!workoutTemplatesPagePresenter.repositoriesAttached) {
+      workoutTemplatesPagePresenter.attachRepositories(getWorkoutRepository(), getExerciseRepository());
+    }
+
+    workoutTemplatesPagePresenter.changeUser(userId);
+
+    return workoutTemplatesPagePresenter;
+  }
+
+  // function to get a WorkoutPagePresenter object.
+  WorkoutPagePresenter getWorkoutPagePresenter(int templateId, String userId, bool forTemplate, bool fromTemplate) {
+    if(!workoutPagePresenter.repositoriesAttached) {
+      workoutPagePresenter.attachRepositories(getWorkoutRepository(), getExerciseRepository());
+    }
+
+    workoutPagePresenter.changeTemplate(templateId, userId, forTemplate, fromTemplate);
+
+    return workoutPagePresenter;
   }
 
   void reset() {

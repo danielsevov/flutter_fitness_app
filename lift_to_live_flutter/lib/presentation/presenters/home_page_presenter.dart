@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:lift_to_live_flutter/domain/repositories/user_repo.dart';
 import 'package:lift_to_live_flutter/factory/presenter_factory.dart';
 import 'package:lift_to_live_flutter/presentation/presenters/base_presenter.dart';
@@ -53,8 +54,9 @@ class HomePagePresenter extends BasePresenter {
   }
 
   /// Function to clear the app state upon log out and navigate to log in page
-  void logOut() {
+  Future<void> logOut() async {
     super.appState.clearState();
+    await const FlutterSecureStorage().deleteAll();
     PresenterFactory().reset();
   }
 
