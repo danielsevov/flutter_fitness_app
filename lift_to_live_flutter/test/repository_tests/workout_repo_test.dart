@@ -122,6 +122,94 @@ void main() {
         });
   });
 
+  group('fetch single workout tests', () {
+    test('returns response if the http call completes successfully', () async {
+      final backendAPI = MockBackendAPI();
+
+      when(backendAPI.fetchWorkout(1, 'A')).thenAnswer((_) async => Response(
+          '{"sets":[{"set_note":"A","reps":["10","10"],"kilos":["10","10"],"exercise":"A","is_completed":false},{"set_note":"A","reps":["10","10"],"kilos":["10","10"],"exercise":"A","is_completed":false},{"set_note":"A ","reps":["10","10"],"kilos":["10","10"],"exercise":"A","is_completed":false}],"id":1,"coachId":"A","userId":"A","coach_note":"A","completed_on":"A","workout_name":"A","created_on":"A","is_template":true,"duration":"0"}',
+          200,
+          headers: {
+            HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8',
+          }));
+
+      WorkoutRepository repository = WorkoutRepoImpl(backendAPI);
+
+      var obj = await repository.fetchWorkout(1, 'A');
+
+      expect(obj.id, 1);
+      expect(obj.userId, 'A');
+      expect(obj.sets.length, 3);
+    });
+
+    test('throws an exception if the http call completes with an error',
+            () async {
+          final backendAPI = MockBackendAPI();
+
+          when(backendAPI.fetchWorkout(1, 'A')).thenAnswer((_) async => Response(
+              '',
+              404,
+              headers: {
+                HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8',
+              }));
+
+          WorkoutRepository repository = WorkoutRepoImpl(backendAPI);
+
+          expect(() async => await repository.fetchWorkout(1, 'A'),
+              throwsA(isA<FailedFetchException>()));
+        });
+  });
+
+  group('fetch single template tests', () {
+    test('returns response if the http call completes successfully', () async {
+      final backendAPI = MockBackendAPI();
+
+      when(backendAPI.fetchWorkout(1, 'A')).thenAnswer((_) async => Response(
+          '{"sets":[{"set_note":"A","reps":["10","10"],"kilos":["10","10"],"exercise":"A","is_completed":false},{"set_note":"A","reps":["10","10"],"kilos":["10","10"],"exercise":"A","is_completed":false},{"set_note":"A ","reps":["10","10"],"kilos":["10","10"],"exercise":"A","is_completed":false}],"id":1,"coachId":"A","userId":"A","coach_note":"A","completed_on":"A","workout_name":"A","created_on":"A","is_template":true,"duration":"0"}',
+          200,
+          headers: {
+            HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8',
+          }));
+
+      WorkoutRepository repository = WorkoutRepoImpl(backendAPI);
+
+      var obj = await repository.fetchTemplate(1, 'A');
+
+      expect(obj.id, 1);
+      expect(obj.userId, 'A');
+      expect(obj.sets.length, 3);
+    });
+
+    test('returns response if the template id is 0', () async {
+      final backendAPI = MockBackendAPI();
+
+      WorkoutRepository repository = WorkoutRepoImpl(backendAPI);
+
+      var obj = await repository.fetchTemplate(0, 'A');
+
+      expect(obj.id, 0);
+      expect(obj.userId, '');
+      expect(obj.sets.length, 0);
+    });
+
+    test('throws an exception if the http call completes with an error',
+            () async {
+          final backendAPI = MockBackendAPI();
+
+          when(backendAPI.fetchWorkout(1, 'A')).thenAnswer((_) async => Response(
+              '',
+              404,
+              headers: {
+                HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8',
+              }));
+
+          WorkoutRepository repository = WorkoutRepoImpl(backendAPI);
+
+          expect(() async => await repository.fetchTemplate(1, 'A'),
+              throwsA(isA<FailedFetchException>()));
+        });
+  });
+
   group('post workout tests', () {
     test('if the http call completes successfully', () async {
       final backendAPI = MockBackendAPI();
