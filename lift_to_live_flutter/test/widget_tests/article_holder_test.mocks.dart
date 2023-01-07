@@ -152,4 +152,34 @@ class MockHomePageView extends _i1.Mock implements _i2.HomePageView {
         ),
         returnValueForMissingStub: null,
       );
+  @override
+  void templatesPressed(
+    _i4.BuildContext? context,
+    bool? bool,
+  ) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #templatesPressed,
+          [
+            context,
+            bool,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  void workoutPressed(
+    _i4.BuildContext? context,
+    bool? bool,
+  ) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #workoutPressed,
+          [
+            context,
+            bool,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
 }

@@ -149,6 +149,30 @@ class MockBackendAPI extends _i1.Mock implements _i3.BackendAPI {
         )),
       ) as _i4.Future<_i2.Response>);
   @override
+  _i4.Future<_i2.Response> fetchWorkout(
+    int? id,
+    String? jwtToken,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #fetchWorkout,
+          [
+            id,
+            jwtToken,
+          ],
+        ),
+        returnValue: _i4.Future<_i2.Response>.value(_FakeResponse_0(
+          this,
+          Invocation.method(
+            #fetchWorkout,
+            [
+              id,
+              jwtToken,
+            ],
+          ),
+        )),
+      ) as _i4.Future<_i2.Response>);
+  @override
   _i4.Future<_i2.Response> fetchWorkoutTemplates(
     String? userId,
     String? jwtToken,
