@@ -115,7 +115,7 @@ class HomePageState extends State<HomePage> implements HomePageView {
 
   /// Function called when user wants to navigate from home to habit page
   @override
-  void habitsPressed(BuildContext context, bool bottomBarButton) {
+  void habitsPressed(bool bottomBarButton) {
     if (!bottomBarButton) Navigator.of(context).pop();
     Helper.pushPageWithAnimation(
         context, PageFactory().getHabitsPage(_user.id));
@@ -129,28 +129,28 @@ class HomePageState extends State<HomePage> implements HomePageView {
 
   /// Function called when user wants to navigate from home to profile page
   @override
-  void profilePressed(BuildContext context, bool bottomBarButton) {
+  void profilePressed(bool bottomBarButton) {
     if (!bottomBarButton) Navigator.of(context).pop();
     Helper.pushPageWithAnimation(
         context, PageFactory().getProfilePage(_user.id, 'home'));
   }
 
   @override
-  void historyPressed(BuildContext context, bool fromBottomBar) {
+  void historyPressed(bool fromBottomBar) {
     if (!fromBottomBar) Navigator.of(context).pop();
     Helper.pushPageWithAnimation(
         context, PageFactory().getWorkoutHistoryPage(_user.id));
   }
 
   @override
-  void templatesPressed(BuildContext context, bool fromBottomBar) {
+  void templatesPressed(bool fromBottomBar) {
     if (!fromBottomBar) Navigator.of(context).pop();
     Helper.pushPageWithAnimation(
         context, PageFactory().getWorkoutTemplatesPage(_user.id));
   }
 
   @override
-  void workoutPressed(BuildContext context, bool bool) {
+  void workoutPressed(bool bool) {
     Helper.pushPageWithAnimation(
         context, PageFactory().getWorkoutPage(0, _user.id, false, false));
   }
@@ -158,7 +158,7 @@ class HomePageState extends State<HomePage> implements HomePageView {
   /// Function called when user wants to navigate from home to trainees page
   /// This is only allowed if user is admin or coach.
   @override
-  void traineesPressed(BuildContext context, bool bottomBarButton) {
+  void traineesPressed(bool bottomBarButton) {
     if (!bottomBarButton) Navigator.of(context).pop();
     if (widget.presenter.isCoachOrAdmin()) {
       Helper.pushPageWithAnimation(context, PageFactory().getTraineesPage());

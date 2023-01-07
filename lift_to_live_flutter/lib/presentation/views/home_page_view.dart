@@ -36,30 +36,30 @@ abstract class HomePageView {
   void notifyWrongURL(String s) {}
 
   /// Function called when user wants to navigate from home to habit page
-  void habitsPressed(BuildContext context, bool bottomBarButton);
+  void habitsPressed(bool bottomBarButton);
 
   /// Function called when user wants to navigate from home to profile page
-  void profilePressed(BuildContext context, bool bottomBarButton);
+  void profilePressed(bool bottomBarButton);
 
   /// Function called when user wants to log out
   void logOutPressed(BuildContext context);
 
   /// Function called when user wants to navigate from home to trainees page
   /// This is only allowed if user is admin or coach.
-  void traineesPressed(BuildContext context, bool bottomBarButton);
+  void traineesPressed(bool bottomBarButton);
 
   /// Function to call when button pressed to redirect user to URL
   void redirectToUrl(int index);
 
   /// Function called when user wants to navigate from home to workout history page
-  void historyPressed(BuildContext context, bool fromBottomBar) {
+  void historyPressed(bool fromBottomBar) {
   }
 
   /// Function for navigating to edit workout templates page.
-  void templatesPressed(BuildContext context, bool bool) {}
+  void templatesPressed(bool bool) {}
 
   /// Function for navigating to edit workout page.
-  void workoutPressed(BuildContext context, bool bool) {}
+  void workoutPressed(bool bool) {}
 }
 
 // coverage:ignore-end

@@ -4,7 +4,7 @@ import '../../../../helper.dart';
 
 /// Custom drawer body item widget used for navigation, placed on the home page drawer.
 class CustomDrawerBodyItem extends StatelessWidget {
-  final Function(BuildContext context, bool fromBottomBar) function;
+  final Function(bool fromBottomBar) function;
   final String title;
   final IconData icon;
   final Color tileColor;
@@ -43,7 +43,7 @@ class CustomDrawerBodyItem extends StatelessWidget {
         ],
       ),
       onTap: () {
-        function(context, false);
+        function(false);
       },
     );
   }

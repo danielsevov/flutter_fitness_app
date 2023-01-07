@@ -77,32 +77,18 @@ class MockHomePageView extends _i1.Mock implements _i2.HomePageView {
         returnValueForMissingStub: null,
       );
   @override
-  void habitsPressed(
-    _i4.BuildContext? context,
-    bool? bottomBarButton,
-  ) =>
-      super.noSuchMethod(
+  void habitsPressed(bool? bottomBarButton) => super.noSuchMethod(
         Invocation.method(
           #habitsPressed,
-          [
-            context,
-            bottomBarButton,
-          ],
+          [bottomBarButton],
         ),
         returnValueForMissingStub: null,
       );
   @override
-  void profilePressed(
-    _i4.BuildContext? context,
-    bool? bottomBarButton,
-  ) =>
-      super.noSuchMethod(
+  void profilePressed(bool? bottomBarButton) => super.noSuchMethod(
         Invocation.method(
           #profilePressed,
-          [
-            context,
-            bottomBarButton,
-          ],
+          [bottomBarButton],
         ),
         returnValueForMissingStub: null,
       );
@@ -115,17 +101,10 @@ class MockHomePageView extends _i1.Mock implements _i2.HomePageView {
         returnValueForMissingStub: null,
       );
   @override
-  void traineesPressed(
-    _i4.BuildContext? context,
-    bool? bottomBarButton,
-  ) =>
-      super.noSuchMethod(
+  void traineesPressed(bool? bottomBarButton) => super.noSuchMethod(
         Invocation.method(
           #traineesPressed,
-          [
-            context,
-            bottomBarButton,
-          ],
+          [bottomBarButton],
         ),
         returnValueForMissingStub: null,
       );
@@ -138,47 +117,26 @@ class MockHomePageView extends _i1.Mock implements _i2.HomePageView {
         returnValueForMissingStub: null,
       );
   @override
-  void historyPressed(
-    _i4.BuildContext? context,
-    bool? fromBottomBar,
-  ) =>
-      super.noSuchMethod(
+  void historyPressed(bool? fromBottomBar) => super.noSuchMethod(
         Invocation.method(
           #historyPressed,
-          [
-            context,
-            fromBottomBar,
-          ],
+          [fromBottomBar],
         ),
         returnValueForMissingStub: null,
       );
   @override
-  void templatesPressed(
-    _i4.BuildContext? context,
-    bool? bool,
-  ) =>
-      super.noSuchMethod(
+  void templatesPressed(bool? bool) => super.noSuchMethod(
         Invocation.method(
           #templatesPressed,
-          [
-            context,
-            bool,
-          ],
+          [bool],
         ),
         returnValueForMissingStub: null,
       );
   @override
-  void workoutPressed(
-    _i4.BuildContext? context,
-    bool? bool,
-  ) =>
-      super.noSuchMethod(
+  void workoutPressed(bool? bool) => super.noSuchMethod(
         Invocation.method(
           #workoutPressed,
-          [
-            context,
-            bool,
-          ],
+          [bool],
         ),
         returnValueForMissingStub: null,
       );
