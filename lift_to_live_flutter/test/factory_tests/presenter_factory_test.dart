@@ -11,6 +11,9 @@ import 'package:lift_to_live_flutter/presentation/presenters/log_in_page_present
 import 'package:lift_to_live_flutter/presentation/presenters/picture_page_presenter.dart';
 import 'package:lift_to_live_flutter/presentation/presenters/profile_page_presenter.dart';
 import 'package:lift_to_live_flutter/presentation/presenters/trainees_page_presenter.dart';
+import 'package:lift_to_live_flutter/presentation/presenters/workout_history_page_presenter.dart';
+import 'package:lift_to_live_flutter/presentation/presenters/workout_page_presenter.dart';
+import 'package:lift_to_live_flutter/presentation/presenters/workout_templates_page_presenter.dart';
 
 void main() {
   test('PresenterFactory.getUserRepository() test', () {
@@ -73,10 +76,28 @@ void main() {
     expect(presenter, isA<ProfilePagePresenter>());
   });
 
-  test('PresenterFactory.getHomePresenter() test', () {
+  test('PresenterFactory.getTraineesPagePresenter() test', () {
     var presenter = PresenterFactory().getTraineesPagePresenter();
 
     expect(presenter, isA<TraineesPagePresenter>());
+  });
+
+  test('PresenterFactory.getWorkoutHistoryPresenter() test', () {
+    var presenter = PresenterFactory().getWorkoutHistoryPresenter('email@email.com');
+
+    expect(presenter, isA<WorkoutHistoryPagePresenter>());
+  });
+
+  test('PresenterFactory.getWorkoutTemplatesPagePresenter() test', () {
+    var presenter = PresenterFactory().getWorkoutTemplatesPagePresenter('email@email.com');
+
+    expect(presenter, isA<WorkoutTemplatesPagePresenter>());
+  });
+
+  test('PresenterFactory.getWorkoutPagePresenter() test', () {
+    var presenter = PresenterFactory().getWorkoutPagePresenter(1, 'email@email.com', false, false);
+
+    expect(presenter, isA<WorkoutPagePresenter>());
   });
 
   test('PresenterFactory.reset() test', () {
