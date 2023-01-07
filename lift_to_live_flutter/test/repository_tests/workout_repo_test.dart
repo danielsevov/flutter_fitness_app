@@ -34,6 +34,22 @@ void main() {
       expect(obj[0].sets.length, 3);
     });
 
+    test('returns response if the http call completes successfully but list is empty', () async {
+      final backendAPI = MockBackendAPI();
+
+      when(backendAPI.fetchWorkouts('A', 'A')).thenAnswer((_) async => Response(
+          '[]',
+          200,
+          headers: {
+            HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8',
+          }));
+
+      WorkoutRepository repository = WorkoutRepoImpl(backendAPI);
+
+      expect(() async => await repository.fetchWorkouts('A', 'A'),
+          throwsA(isA<FailedFetchException>()));
+    });
+
     test('throws an exception if the http call completes with an error',
             () async {
           final backendAPI = MockBackendAPI();
@@ -70,6 +86,22 @@ void main() {
       expect(obj[0].id, 1);
       expect(obj[0].userId, 'A');
       expect(obj[0].sets.length, 3);
+    });
+
+    test('returns response if the http call completes successfully but list is empty', () async {
+      final backendAPI = MockBackendAPI();
+
+      when(backendAPI.fetchWorkoutTemplates('A', 'A')).thenAnswer((_) async => Response(
+          '[]',
+          200,
+          headers: {
+            HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8',
+          }));
+
+      WorkoutRepository repository = WorkoutRepoImpl(backendAPI);
+
+      expect(() async => await repository.fetchTemplates('A', 'A'),
+          throwsA(isA<FailedFetchException>()));
     });
 
     test('throws an exception if the http call completes with an error',
