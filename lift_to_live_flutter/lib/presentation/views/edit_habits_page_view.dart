@@ -27,7 +27,7 @@ abstract class EditHabitsPageView {
   void notifySavedChanges();
 
   /// Get and Set the current note
-  String getNote();
+  String? getNote();
   void setNote(String note);
 }
 

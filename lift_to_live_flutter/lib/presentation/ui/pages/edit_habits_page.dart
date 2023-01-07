@@ -255,7 +255,7 @@ class EditHabitsPageState extends State<EditHabitsPage>
   }
 
   @override
-  String getNote() {
+  String? getNote() {
     return noteController.text.toString();
   }
 

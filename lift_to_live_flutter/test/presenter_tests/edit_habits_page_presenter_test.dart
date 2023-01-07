@@ -134,4 +134,32 @@ void main() {
     verify(view.notifySavedChanges()).called(1);
     verify(habitsRepo.patchHabit(any, any, any, any, any, any, any)).called(1);
   });
+
+  test('test saveChanges()', () async {
+    final habitsRepo = MockHabitsRepository();
+    final presenter = EditHabitsPagePresenter();
+    presenter.attachRepositories(habitsRepo);
+    presenter.changeUser('A');
+    final view = MockEditHabitsPageView();
+    final appState = AppState();
+    appState.setInitialState('A', 'token', [Role('A', 'admin')]);
+    presenter.setAppState(appState);
+    presenter.detach();
+    presenter.attach(view);
+
+    when(habitsRepo.fetchTemplate(any, any)).thenAnswer((realInvocation) async => Habit(0, '', '', '', '', true, [HabitTask('My Task 1', false)]));
+    when(view.getNote()).thenReturn(null);
+
+    await presenter.fetchData();
+
+    final cn1 = TextEditingController();
+    cn1.text = 'Not empty';
+
+    when(view.getControllers()).thenReturn([cn1]);
+
+    presenter.saveChanges();
+
+    verify(view.notifySavedChanges()).called(1);
+    verify(habitsRepo.patchHabit(any, any, any, any, any, any, any)).called(1);
+  });
 }
