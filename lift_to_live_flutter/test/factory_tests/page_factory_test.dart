@@ -9,6 +9,9 @@ import 'package:lift_to_live_flutter/presentation/ui/pages/picture_page.dart';
 import 'package:lift_to_live_flutter/presentation/ui/pages/profile_page.dart';
 import 'package:lift_to_live_flutter/presentation/ui/pages/register_page.dart';
 import 'package:lift_to_live_flutter/presentation/ui/pages/trainees_page.dart';
+import 'package:lift_to_live_flutter/presentation/ui/pages/workout_history_page.dart';
+import 'package:lift_to_live_flutter/presentation/ui/pages/workout_page.dart';
+import 'package:lift_to_live_flutter/presentation/ui/pages/workout_templates_page.dart';
 
 void main() {
   test('PageFactory.getHomePage() test', () {
@@ -49,6 +52,21 @@ void main() {
   test('PageFactory.getProfilePage() test', () {
     var page = PageFactory().getProfilePage('', '');
     expect(page, isA<ProfilePage>());
+  });
+
+  test('PageFactory.getWorkoutPage() test', () {
+    var page = PageFactory().getWorkoutPage(1, '', false, false);
+    expect(page, isA<WorkoutPage>());
+  });
+
+  test('PageFactory.getWorkoutHistoryPage() test', () {
+    var page = PageFactory().getWorkoutHistoryPage('');
+    expect(page, isA<WorkoutHistoryPage>());
+  });
+
+  test('PageFactory.getWorkoutTemplatesPage() test', () {
+    var page = PageFactory().getWorkoutTemplatesPage('');
+    expect(page, isA<WorkoutTemplatesPage>());
   });
   
   test('PageFactory.getWrappedHomePage() test', () {
