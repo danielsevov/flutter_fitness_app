@@ -130,7 +130,8 @@ class ProfilePageState extends State<ProfilePage> implements ProfilePageView {
       body: CustomScrollView(slivers: <Widget>[
         SliverAppBar(
           centerTitle: true,
-          backgroundColor: Helper.pageBackgroundColor,
+          backgroundColor: Helper.lightBlueColor.withOpacity(0.9),
+          elevation: 20,
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(
               bottom: Radius.circular(15),
@@ -288,6 +289,7 @@ class ProfilePageState extends State<ProfilePage> implements ProfilePageView {
                                     : const SizedBox(),
                                 Container(
                                   height: _screenWidth / 2,
+                                  width: 150,
                                   alignment: Alignment.center,
                                   decoration: BoxDecoration(
                                     color: Helper.blackColor,
@@ -316,16 +318,6 @@ class ProfilePageState extends State<ProfilePage> implements ProfilePageView {
                             const SizedBox(
                               height: 20,
                             ),
-                            const Text(
-                              'User details:',
-                              style: TextStyle(
-                                  color: Helper.lightHeadlineColor,
-                                  fontSize: 22,
-                                  fontWeight: FontWeight.w600),
-                            ),
-                            const SizedBox(
-                              height: 5,
-                            ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -338,7 +330,7 @@ class ProfilePageState extends State<ProfilePage> implements ProfilePageView {
                                       color: Helper.paragraphBackgroundColor,
                                       borderRadius: BorderRadius.circular(15),
                                       border:
-                                          Border.all(color: Helper.whiteColor),
+                                          Border.all(color: Helper.whiteColor.withOpacity(0.3)),
                                     ),
                                     child: Row(
                                       mainAxisAlignment:

@@ -127,7 +127,8 @@ class TraineesPageState extends State<TraineesPage>
         },
       ),
       appBar: AppBar(
-        backgroundColor: Helper.pageBackgroundColor.withOpacity(0.7),
+        backgroundColor: Helper.lightBlueColor.withOpacity(0.9),
+        elevation: 20,
         centerTitle: true,
         title: const Text(
           "My Trainees",

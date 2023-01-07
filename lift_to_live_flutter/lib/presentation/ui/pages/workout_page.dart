@@ -9,7 +9,7 @@ import '../../../helper.dart';
 import '../../views/workout_page_view.dart';
 import '../widgets/reusable_elements/custom_dialog.dart';
 
-/// Custom WorkoutPage widget used for editing a template workout of a user.
+/// Custom WorkoutPage widget used for editing a template/workout of a user.
 /// It is a stateful widget and its state object implements the WorkoutPageView abstract class.
 class WorkoutPage extends StatefulWidget {
   final int templateId;
@@ -261,7 +261,7 @@ class WorkoutPageState extends State<WorkoutPage>
                         const SizedBox(height: 10,),
                         CustomHeadingTextField(screenHeight: screenHeight, screenWidth: screenWidth, controller: nameController, textInputType: TextInputType.text, hint: 'Enter workout name', icon: Icons.drive_file_rename_outline, color: Helper.yellowColor, isHeadline: true,),
                         const SizedBox(height: 10,),
-                        CustomHeadingTextField(screenHeight: screenHeight, screenWidth: screenWidth, controller: noteController, textInputType: TextInputType.multiline, hint: 'Enter workout note', icon: Icons.note, color: Helper.whiteColor, isHeadline: false,),
+                        CustomHeadingTextField(screenHeight: screenHeight, screenWidth: screenWidth, controller: noteController, textInputType: TextInputType.multiline, hint: 'Enter workout note', icon: Icons.notes, color: Helper.whiteColor, isHeadline: false,),
                         const SizedBox(height: 20,),
                       ],
                     ) : const SizedBox();

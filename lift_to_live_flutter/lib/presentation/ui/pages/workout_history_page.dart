@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lift_to_live_flutter/factory/page_factory.dart';
-import 'package:lift_to_live_flutter/presentation/ui/widgets/habit_related/custom_workouts_calendar.dart';
+import 'package:lift_to_live_flutter/presentation/ui/widgets/workout_related/custom_workouts_calendar.dart';
 import 'package:provider/provider.dart';
 import '../../presenters/workout_history_page_presenter.dart';
 import '../../state_management/app_state.dart';
@@ -117,7 +117,8 @@ class WorkoutHistoryPageState extends State<WorkoutHistoryPage>
                     iconTheme: const IconThemeData(
                       color: Helper.yellowColor, //change your color here
                     ),
-                    backgroundColor: Helper.lightBlueColor,
+                    backgroundColor: Helper.lightBlueColor.withOpacity(0.9),
+                    elevation: 20,
                     pinned: true,
                     snap: true,
                     floating: true,

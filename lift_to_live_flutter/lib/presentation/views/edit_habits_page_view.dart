@@ -25,6 +25,10 @@ abstract class EditHabitsPageView {
 
   ///Notify user when changes are saved
   void notifySavedChanges();
+
+  /// Get and Set the current note
+  String getNote();
+  void setNote(String note);
 }
 
 // coverage:ignore-end

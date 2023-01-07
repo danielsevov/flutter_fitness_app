@@ -90,12 +90,14 @@ class HabitsPageState extends State<HabitsPage> implements HabitsPageView {
                     iconTheme: const IconThemeData(
                       color: Helper.yellowColor, //change your color here
                     ),
-                    backgroundColor: Helper.lightBlueColor,
+                    backgroundColor: Helper.lightBlueColor.withOpacity(0.9),
+                    elevation: 20,
                     pinned: true,
                     snap: true,
                     floating: true,
                     expandedHeight: 100.0,
                     shape: const ContinuousRectangleBorder(
+                        side: BorderSide(color: Helper.blackColor, width: 1),
                         borderRadius: BorderRadius.only(
                             bottomLeft: Radius.circular(15),
                             bottomRight: Radius.circular(15))),

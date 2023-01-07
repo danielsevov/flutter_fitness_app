@@ -81,12 +81,13 @@ class PicturePageState extends State<PicturePage> implements PicturePageView {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Helper.pageBackgroundColor.withOpacity(0.7),
         centerTitle: true,
         title: Text(
           "${widget.name}'s Photo Album",
           style: const TextStyle(color: Helper.lightHeadlineColor),
         ),
+        backgroundColor: Helper.lightBlueColor.withOpacity(0.9),
+        elevation: 20,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
             bottom: Radius.circular(15),

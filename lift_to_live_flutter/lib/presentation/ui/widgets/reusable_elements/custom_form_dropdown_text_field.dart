@@ -37,7 +37,7 @@ class CustomFormDropdownTextField extends StatelessWidget {
     // Build a Form widget using the _formKey created above.
     return SizedBox(
       height: screenHeight * 0.1,
-      width: screenWidth * 0.9,
+      width: screenWidth * 0.85,
       child: DropdownButtonFormField(
         items: items.map((String value) {
           return DropdownMenuItem(value: value, child: Text(value));
@@ -61,26 +61,26 @@ class CustomFormDropdownTextField extends StatelessWidget {
               borderRadius: BorderRadius.circular(10)),
           focusedErrorBorder: OutlineInputBorder(
               borderSide:
-                  const BorderSide(color: Helper.textFieldErrorColor, width: 1),
+                  BorderSide(color: Helper.textFieldErrorColor.withOpacity(0.3), width: 1),
               borderRadius: BorderRadius.circular(10)),
           errorBorder: OutlineInputBorder(
               borderSide:
                   const BorderSide(color: Helper.textFieldErrorColor, width: 1),
               borderRadius: BorderRadius.circular(10)),
           enabledBorder: OutlineInputBorder(
-              borderSide: const BorderSide(
-                  color: Helper.textFieldBorderColor, width: 1),
+              borderSide: BorderSide(
+                  color: Helper.textFieldBorderColor.withOpacity(0.3), width: 1),
               borderRadius: BorderRadius.circular(10)),
           hintText: hint,
-          hintStyle: TextStyle(
+          hintStyle: const TextStyle(
               color: Helper.textFieldHintColor,
-              fontSize: screenHeight / 35,
+              fontSize: 22,
               height: 0.8),
         ),
         dropdownColor: Helper.blueColor,
-        style: TextStyle(
+        style: const TextStyle(
             color: Helper.whiteColor,
-            fontSize: screenHeight / 35,
+            fontSize: 22,
             height: 0.8),
       ),
     );

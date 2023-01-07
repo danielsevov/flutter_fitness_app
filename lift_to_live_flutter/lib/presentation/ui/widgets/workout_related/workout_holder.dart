@@ -43,25 +43,21 @@ class _WorkoutHolderState extends State<WorkoutHolder> {
         decoration: BoxDecoration(
           color: Helper.lightBlueColor,
           borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: Helper.whiteColor, width: 0.75),
+          border: Border.all(color: Helper.whiteColor.withOpacity(0.3), width: 0.75),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // name holder
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(widget.name, style: const TextStyle(color: Helper.yellowColor, fontSize: 22),),],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                FloatingActionButton(heroTag: 'editWorkoutButton${widget.name}', onPressed: (){
-                  Helper.replacePage(context, PageFactory().getWorkoutPage(widget.id, widget.userId, false, false));
-                }, isExtended: false, shape: const CircleBorder(),backgroundColor: Helper.whiteColor.withOpacity(0.33), mini: true, child: const Icon(Icons.edit_note_outlined),),
-              ],
-            ),
+          Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const SizedBox(width: 50,),
+            Text(widget.name, style: const TextStyle(color: Helper.yellowColor, fontSize: 22),),
+            FloatingActionButton(heroTag: 'editWorkoutButton${widget.name}', onPressed: (){
+              Helper.replacePage(context, PageFactory().getWorkoutPage(widget.id, widget.userId, false, false));
+            }, isExtended: false, shape: const CircleBorder(),backgroundColor: Helper.whiteColor.withOpacity(0.33), mini: true, child: const Icon(Icons.edit_note_outlined),),],
+        ),
             const SizedBox(
               height: 10,
             ),

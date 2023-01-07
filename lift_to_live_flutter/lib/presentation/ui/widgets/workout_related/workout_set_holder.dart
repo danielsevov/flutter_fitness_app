@@ -41,7 +41,7 @@ class _WorkoutSetHolderState extends State<WorkoutSetHolder> {
         decoration: BoxDecoration(
           color: Helper.blueColor,
           borderRadius: BorderRadius.circular(10),
-          //border: Border.all(color: Helper.whiteColor, width: 0.75),
+          border: Border.all(color: Helper.whiteColor.withOpacity(0.3), width: 0.75),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,

@@ -66,7 +66,8 @@ class RegisterPageState extends State<RegisterPage>
       backgroundColor: Helper.pageBackgroundColor,
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
-        backgroundColor: Helper.pageBackgroundColor.withOpacity(0.7),
+        backgroundColor: Helper.lightBlueColor.withOpacity(0.9),
+        elevation: 20,
         centerTitle: true,
         leading: IconButton(
             icon: const Icon(Icons.arrow_back, color: Helper.yellowColor),

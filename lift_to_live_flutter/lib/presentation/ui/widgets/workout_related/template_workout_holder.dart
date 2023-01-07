@@ -34,15 +34,15 @@ class _TemplateWorkoutHolderState extends State<TemplateWorkoutHolder> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.fromLTRB(5, 10, 5, 20),
+      padding: const EdgeInsets.fromLTRB(15, 10, 15, 20),
         margin: const EdgeInsets.fromLTRB(2, 0, 2, 0),
         decoration: BoxDecoration(
           color: Helper.lightBlueColor,
           borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: Helper.whiteColor, width: 0.75),
+          border: Border.all(color: Helper.whiteColor.withOpacity(0.3), width: 0.75),
         ),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -231,7 +231,8 @@ class HomePageState extends State<HomePage> implements HomePageView {
           child: CustomScrollView(
             slivers: <Widget>[
               SliverAppBar(
-                backgroundColor: Helper.pageBackgroundColor.withOpacity(0.7),
+                backgroundColor: Helper.lightBlueColor.withOpacity(0.9),
+                elevation: 20,
                 iconTheme: const IconThemeData(
                   color: Helper.darkHeadlineColor, //change your color here
                 ),
@@ -240,6 +241,7 @@ class HomePageState extends State<HomePage> implements HomePageView {
                 floating: true,
                 expandedHeight: 100.0,
                 shape: const ContinuousRectangleBorder(
+                  side: BorderSide(color: Helper.blackColor, width: 1),
                     borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(15),
                         bottomRight: Radius.circular(15))),

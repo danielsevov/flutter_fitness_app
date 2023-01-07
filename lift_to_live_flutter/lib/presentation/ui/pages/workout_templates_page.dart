@@ -112,20 +112,21 @@ class WorkoutTemplatesPageState extends State<WorkoutTemplatesPage> implements W
           ),
           child: (!_isLoading && _isFetched)
               ? CustomScrollView(slivers: <Widget>[
-                  const SliverAppBar(
-                    iconTheme: IconThemeData(
+                  SliverAppBar(
+                    iconTheme: const IconThemeData(
                       color: Helper.yellowColor, //change your color here
                     ),
-                    backgroundColor: Helper.lightBlueColor,
+                    backgroundColor: Helper.lightBlueColor.withOpacity(0.9),
+                    elevation: 20,
                     pinned: true,
                     snap: true,
                     floating: true,
                     expandedHeight: 100.0,
-                    shape: ContinuousRectangleBorder(
+                    shape: const ContinuousRectangleBorder(
                         borderRadius: BorderRadius.only(
                             bottomLeft: Radius.circular(15),
                             bottomRight: Radius.circular(15))),
-                    flexibleSpace: FlexibleSpaceBar(
+                    flexibleSpace: const FlexibleSpaceBar(
                       title: Text(
                         'Templates',
                         style: TextStyle(

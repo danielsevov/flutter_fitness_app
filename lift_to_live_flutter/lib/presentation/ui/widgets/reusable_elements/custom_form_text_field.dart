@@ -61,8 +61,8 @@ class CustomFormTextField extends StatelessWidget {
                   const BorderSide(color: Helper.textFieldErrorColor, width: 1),
               borderRadius: BorderRadius.circular(10)),
           enabledBorder: OutlineInputBorder(
-              borderSide: const BorderSide(
-                  color: Helper.textFieldBorderColor, width: 1),
+              borderSide: BorderSide(
+                  color: Helper.textFieldBorderColor.withOpacity(0.3), width: 1),
               borderRadius: BorderRadius.circular(10)),
           hintText: hint,
           hintStyle: const TextStyle(

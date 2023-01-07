@@ -27,7 +27,7 @@ class HabitTaskHolder extends StatelessWidget {
         decoration: BoxDecoration(
           color: Helper.blueColor,
           borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: Helper.whiteColor, width: 0.75),
+          border: Border.all(color: Helper.whiteColor.withOpacity(0.3), width: 0.75),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.end,
@@ -46,7 +46,7 @@ class HabitTaskHolder extends StatelessWidget {
             StatefulBuilder(
                 builder: (ctx, setState) => Checkbox(
                       side:
-                          const BorderSide(color: Helper.yellowColor, width: 2),
+                          BorderSide(color: Helper.yellowColor.withOpacity(0.3), width: 2),
                       checkColor: Helper.blackColor,
                       fillColor: MaterialStateProperty.all(
                           Helper.isDateBeforeToday(habit.date) ||
