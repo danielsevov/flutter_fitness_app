@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:lift_to_live_flutter/presentation/views/log_in_form_view.dart';
 import '../../../presenters/log_in_page_presenter.dart';
 import '../reusable_elements/custom_form_button.dart';
@@ -118,7 +119,7 @@ class LogInFormState extends State<LogInForm> {
               icon: Icons.login,
               function: () async {
                 if (_logInFormKey.currentState!.validate()) {
-                  widget.presenter.logIn();
+                  widget.presenter.logIn(const FlutterSecureStorage());
                 }
               },
               tag: 'btn0'),

@@ -54,9 +54,9 @@ class HomePagePresenter extends BasePresenter {
   }
 
   /// Function to clear the app state upon log out and navigate to log in page
-  Future<void> logOut() async {
+  Future<void> logOut(FlutterSecureStorage storage) async {
     super.appState.clearState();
-    await const FlutterSecureStorage().deleteAll();
+    await storage.deleteAll();
     PresenterFactory().reset();
   }
 

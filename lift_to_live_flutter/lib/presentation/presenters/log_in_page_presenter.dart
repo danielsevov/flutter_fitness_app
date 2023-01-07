@@ -12,7 +12,6 @@ class LogInPagePresenter extends BasePresenter {
       _tokenRepository; // the repository used for fetching the JWT token
   late final UserRepository
       _userRepository; // the repository used for fetching the user roles
-  final storage = const FlutterSecureStorage();
 
   /// Simple constructor
   LogInPagePresenter();
@@ -34,15 +33,16 @@ class LogInPagePresenter extends BasePresenter {
     _view = null;
   }
 
+  // coverage:ignore-start
   /// Function, which is called upon user credentials submission and handles the authentication of the user.
-  Future<void> logIn() async {
+  Future<void> logIn(FlutterSecureStorage secureStorage) async {
     // set the loading indicator to be shown on the page view
     _view?.setInProgress(true);
 
     String? email, pass;
 
-    email = await storage.read(key: 'username');
-    pass = await storage.read(key: 'password');
+    email = await secureStorage.read(key: 'username');
+    pass = await secureStorage.read(key: 'password');
 
     if(email == null || pass == null) {
       // extract the email and password entries from the log in form
@@ -63,8 +63,8 @@ class LogInPagePresenter extends BasePresenter {
         super.appState.setInitialState(email, token, roles);
 
         // store credentials
-        await storage.write(key: 'username', value: email);
-        await storage.write(key: 'password', value: pass);
+        await secureStorage.write(key: 'username', value: email);
+        await secureStorage.write(key: 'password', value: pass);
 
         // navigate from log in to home page view
         _view?.navigateToHome();
@@ -83,4 +83,5 @@ class LogInPagePresenter extends BasePresenter {
     // stop the loading indicator as data processing is finished
     _view?.setInProgress(false);
   }
+// coverage:ignore-end
 }

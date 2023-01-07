@@ -3,18 +3,19 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i6;
+import 'dart:async' as _i7;
 
+import 'package:flutter_secure_storage/flutter_secure_storage.dart' as _i5;
 import 'package:lift_to_live_flutter/domain/entities/image.dart' as _i3;
-import 'package:lift_to_live_flutter/domain/entities/role.dart' as _i8;
+import 'package:lift_to_live_flutter/domain/entities/role.dart' as _i9;
 import 'package:lift_to_live_flutter/domain/entities/user.dart' as _i2;
 import 'package:lift_to_live_flutter/domain/repositories/token_repo.dart'
-    as _i5;
-import 'package:lift_to_live_flutter/domain/repositories/user_repo.dart' as _i7;
+    as _i6;
+import 'package:lift_to_live_flutter/domain/repositories/user_repo.dart' as _i8;
 import 'package:lift_to_live_flutter/presentation/views/log_in_form_view.dart'
     as _i4;
 import 'package:lift_to_live_flutter/presentation/views/log_in_page_view.dart'
-    as _i9;
+    as _i10;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -58,16 +59,78 @@ class _FakeLogInFormView_2 extends _i1.SmartFake implements _i4.LogInFormView {
         );
 }
 
+class _FakeIOSOptions_3 extends _i1.SmartFake implements _i5.IOSOptions {
+  _FakeIOSOptions_3(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeAndroidOptions_4 extends _i1.SmartFake
+    implements _i5.AndroidOptions {
+  _FakeAndroidOptions_4(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeLinuxOptions_5 extends _i1.SmartFake implements _i5.LinuxOptions {
+  _FakeLinuxOptions_5(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeWindowsOptions_6 extends _i1.SmartFake
+    implements _i5.WindowsOptions {
+  _FakeWindowsOptions_6(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeWebOptions_7 extends _i1.SmartFake implements _i5.WebOptions {
+  _FakeWebOptions_7(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeMacOsOptions_8 extends _i1.SmartFake implements _i5.MacOsOptions {
+  _FakeMacOsOptions_8(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
 /// A class which mocks [TokenRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockTokenRepository extends _i1.Mock implements _i5.TokenRepository {
+class MockTokenRepository extends _i1.Mock implements _i6.TokenRepository {
   MockTokenRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i6.Future<String> getToken(
+  _i7.Future<String> getToken(
     String? email,
     String? password,
   ) =>
@@ -79,29 +142,29 @@ class MockTokenRepository extends _i1.Mock implements _i5.TokenRepository {
             password,
           ],
         ),
-        returnValue: _i6.Future<String>.value(''),
-      ) as _i6.Future<String>);
+        returnValue: _i7.Future<String>.value(''),
+      ) as _i7.Future<String>);
 }
 
 /// A class which mocks [UserRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockUserRepository extends _i1.Mock implements _i7.UserRepository {
+class MockUserRepository extends _i1.Mock implements _i8.UserRepository {
   MockUserRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i6.Future<List<_i8.Role>> fetchUserRoles(String? jwtToken) =>
+  _i7.Future<List<_i9.Role>> fetchUserRoles(String? jwtToken) =>
       (super.noSuchMethod(
         Invocation.method(
           #fetchUserRoles,
           [jwtToken],
         ),
-        returnValue: _i6.Future<List<_i8.Role>>.value(<_i8.Role>[]),
-      ) as _i6.Future<List<_i8.Role>>);
+        returnValue: _i7.Future<List<_i9.Role>>.value(<_i9.Role>[]),
+      ) as _i7.Future<List<_i9.Role>>);
   @override
-  _i6.Future<_i2.User> fetchUser(
+  _i7.Future<_i2.User> fetchUser(
     String? userId,
     String? jwtToken,
   ) =>
@@ -113,7 +176,7 @@ class MockUserRepository extends _i1.Mock implements _i7.UserRepository {
             jwtToken,
           ],
         ),
-        returnValue: _i6.Future<_i2.User>.value(_FakeUser_0(
+        returnValue: _i7.Future<_i2.User>.value(_FakeUser_0(
           this,
           Invocation.method(
             #fetchUser,
@@ -123,9 +186,9 @@ class MockUserRepository extends _i1.Mock implements _i7.UserRepository {
             ],
           ),
         )),
-      ) as _i6.Future<_i2.User>);
+      ) as _i7.Future<_i2.User>);
   @override
-  _i6.Future<List<_i2.User>> fetchMyTrainees(
+  _i7.Future<List<_i2.User>> fetchMyTrainees(
     String? userId,
     String? jwtToken,
   ) =>
@@ -137,10 +200,10 @@ class MockUserRepository extends _i1.Mock implements _i7.UserRepository {
             jwtToken,
           ],
         ),
-        returnValue: _i6.Future<List<_i2.User>>.value(<_i2.User>[]),
-      ) as _i6.Future<List<_i2.User>>);
+        returnValue: _i7.Future<List<_i2.User>>.value(<_i2.User>[]),
+      ) as _i7.Future<List<_i2.User>>);
   @override
-  _i6.Future<List<_i3.MyImage>> fetchUserImages(
+  _i7.Future<List<_i3.MyImage>> fetchUserImages(
     String? userId,
     String? jwtToken,
   ) =>
@@ -152,10 +215,10 @@ class MockUserRepository extends _i1.Mock implements _i7.UserRepository {
             jwtToken,
           ],
         ),
-        returnValue: _i6.Future<List<_i3.MyImage>>.value(<_i3.MyImage>[]),
-      ) as _i6.Future<List<_i3.MyImage>>);
+        returnValue: _i7.Future<List<_i3.MyImage>>.value(<_i3.MyImage>[]),
+      ) as _i7.Future<List<_i3.MyImage>>);
   @override
-  _i6.Future<_i3.MyImage> fetchProfileImage(
+  _i7.Future<_i3.MyImage> fetchProfileImage(
     String? userId,
     String? jwtToken,
   ) =>
@@ -167,7 +230,7 @@ class MockUserRepository extends _i1.Mock implements _i7.UserRepository {
             jwtToken,
           ],
         ),
-        returnValue: _i6.Future<_i3.MyImage>.value(_FakeMyImage_1(
+        returnValue: _i7.Future<_i3.MyImage>.value(_FakeMyImage_1(
           this,
           Invocation.method(
             #fetchProfileImage,
@@ -177,9 +240,9 @@ class MockUserRepository extends _i1.Mock implements _i7.UserRepository {
             ],
           ),
         )),
-      ) as _i6.Future<_i3.MyImage>);
+      ) as _i7.Future<_i3.MyImage>);
   @override
-  _i6.Future<void> patchImage(
+  _i7.Future<void> patchImage(
     int? id,
     String? userId,
     String? date,
@@ -199,11 +262,11 @@ class MockUserRepository extends _i1.Mock implements _i7.UserRepository {
             jwtToken,
           ],
         ),
-        returnValue: _i6.Future<void>.value(),
-        returnValueForMissingStub: _i6.Future<void>.value(),
-      ) as _i6.Future<void>);
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
   @override
-  _i6.Future<void> postImage(
+  _i7.Future<void> postImage(
     String? userId,
     String? date,
     String? encoded,
@@ -221,11 +284,11 @@ class MockUserRepository extends _i1.Mock implements _i7.UserRepository {
             jwtToken,
           ],
         ),
-        returnValue: _i6.Future<void>.value(),
-        returnValueForMissingStub: _i6.Future<void>.value(),
-      ) as _i6.Future<void>);
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
   @override
-  _i6.Future<void> deleteImage(
+  _i7.Future<void> deleteImage(
     int? id,
     String? jwtToken,
   ) =>
@@ -237,20 +300,20 @@ class MockUserRepository extends _i1.Mock implements _i7.UserRepository {
             jwtToken,
           ],
         ),
-        returnValue: _i6.Future<void>.value(),
-        returnValueForMissingStub: _i6.Future<void>.value(),
-      ) as _i6.Future<void>);
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
   @override
-  _i6.Future<List<_i8.Role>> fetchCoachRoles(String? jwtToken) =>
+  _i7.Future<List<_i9.Role>> fetchCoachRoles(String? jwtToken) =>
       (super.noSuchMethod(
         Invocation.method(
           #fetchCoachRoles,
           [jwtToken],
         ),
-        returnValue: _i6.Future<List<_i8.Role>>.value(<_i8.Role>[]),
-      ) as _i6.Future<List<_i8.Role>>);
+        returnValue: _i7.Future<List<_i9.Role>>.value(<_i9.Role>[]),
+      ) as _i7.Future<List<_i9.Role>>);
   @override
-  _i6.Future<void> registerUser(
+  _i7.Future<void> registerUser(
     String? userId,
     String? coachId,
     String? password,
@@ -274,15 +337,15 @@ class MockUserRepository extends _i1.Mock implements _i7.UserRepository {
             jwtToken,
           ],
         ),
-        returnValue: _i6.Future<void>.value(),
-        returnValueForMissingStub: _i6.Future<void>.value(),
-      ) as _i6.Future<void>);
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
 }
 
 /// A class which mocks [LogInPageView].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockLogInPageView extends _i1.Mock implements _i9.LogInPageView {
+class MockLogInPageView extends _i1.Mock implements _i10.LogInPageView {
   MockLogInPageView() {
     _i1.throwOnMissingStub(this);
   }
@@ -367,4 +430,220 @@ class MockLogInFormView extends _i1.Mock implements _i4.LogInFormView {
         ),
         returnValueForMissingStub: null,
       );
+}
+
+/// A class which mocks [FlutterSecureStorage].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockFlutterSecureStorage extends _i1.Mock
+    implements _i5.FlutterSecureStorage {
+  MockFlutterSecureStorage() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i5.IOSOptions get iOptions => (super.noSuchMethod(
+        Invocation.getter(#iOptions),
+        returnValue: _FakeIOSOptions_3(
+          this,
+          Invocation.getter(#iOptions),
+        ),
+      ) as _i5.IOSOptions);
+  @override
+  _i5.AndroidOptions get aOptions => (super.noSuchMethod(
+        Invocation.getter(#aOptions),
+        returnValue: _FakeAndroidOptions_4(
+          this,
+          Invocation.getter(#aOptions),
+        ),
+      ) as _i5.AndroidOptions);
+  @override
+  _i5.LinuxOptions get lOptions => (super.noSuchMethod(
+        Invocation.getter(#lOptions),
+        returnValue: _FakeLinuxOptions_5(
+          this,
+          Invocation.getter(#lOptions),
+        ),
+      ) as _i5.LinuxOptions);
+  @override
+  _i5.WindowsOptions get wOptions => (super.noSuchMethod(
+        Invocation.getter(#wOptions),
+        returnValue: _FakeWindowsOptions_6(
+          this,
+          Invocation.getter(#wOptions),
+        ),
+      ) as _i5.WindowsOptions);
+  @override
+  _i5.WebOptions get webOptions => (super.noSuchMethod(
+        Invocation.getter(#webOptions),
+        returnValue: _FakeWebOptions_7(
+          this,
+          Invocation.getter(#webOptions),
+        ),
+      ) as _i5.WebOptions);
+  @override
+  _i5.MacOsOptions get mOptions => (super.noSuchMethod(
+        Invocation.getter(#mOptions),
+        returnValue: _FakeMacOsOptions_8(
+          this,
+          Invocation.getter(#mOptions),
+        ),
+      ) as _i5.MacOsOptions);
+  @override
+  _i7.Future<void> write({
+    required String? key,
+    required String? value,
+    _i5.IOSOptions? iOptions,
+    _i5.AndroidOptions? aOptions,
+    _i5.LinuxOptions? lOptions,
+    _i5.WebOptions? webOptions,
+    _i5.MacOsOptions? mOptions,
+    _i5.WindowsOptions? wOptions,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #write,
+          [],
+          {
+            #key: key,
+            #value: value,
+            #iOptions: iOptions,
+            #aOptions: aOptions,
+            #lOptions: lOptions,
+            #webOptions: webOptions,
+            #mOptions: mOptions,
+            #wOptions: wOptions,
+          },
+        ),
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
+  @override
+  _i7.Future<String?> read({
+    required String? key,
+    _i5.IOSOptions? iOptions,
+    _i5.AndroidOptions? aOptions,
+    _i5.LinuxOptions? lOptions,
+    _i5.WebOptions? webOptions,
+    _i5.MacOsOptions? mOptions,
+    _i5.WindowsOptions? wOptions,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #read,
+          [],
+          {
+            #key: key,
+            #iOptions: iOptions,
+            #aOptions: aOptions,
+            #lOptions: lOptions,
+            #webOptions: webOptions,
+            #mOptions: mOptions,
+            #wOptions: wOptions,
+          },
+        ),
+        returnValue: _i7.Future<String?>.value(),
+      ) as _i7.Future<String?>);
+  @override
+  _i7.Future<bool> containsKey({
+    required String? key,
+    _i5.IOSOptions? iOptions,
+    _i5.AndroidOptions? aOptions,
+    _i5.LinuxOptions? lOptions,
+    _i5.WebOptions? webOptions,
+    _i5.MacOsOptions? mOptions,
+    _i5.WindowsOptions? wOptions,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #containsKey,
+          [],
+          {
+            #key: key,
+            #iOptions: iOptions,
+            #aOptions: aOptions,
+            #lOptions: lOptions,
+            #webOptions: webOptions,
+            #mOptions: mOptions,
+            #wOptions: wOptions,
+          },
+        ),
+        returnValue: _i7.Future<bool>.value(false),
+      ) as _i7.Future<bool>);
+  @override
+  _i7.Future<void> delete({
+    required String? key,
+    _i5.IOSOptions? iOptions,
+    _i5.AndroidOptions? aOptions,
+    _i5.LinuxOptions? lOptions,
+    _i5.WebOptions? webOptions,
+    _i5.MacOsOptions? mOptions,
+    _i5.WindowsOptions? wOptions,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #delete,
+          [],
+          {
+            #key: key,
+            #iOptions: iOptions,
+            #aOptions: aOptions,
+            #lOptions: lOptions,
+            #webOptions: webOptions,
+            #mOptions: mOptions,
+            #wOptions: wOptions,
+          },
+        ),
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
+  @override
+  _i7.Future<Map<String, String>> readAll({
+    _i5.IOSOptions? iOptions,
+    _i5.AndroidOptions? aOptions,
+    _i5.LinuxOptions? lOptions,
+    _i5.WebOptions? webOptions,
+    _i5.MacOsOptions? mOptions,
+    _i5.WindowsOptions? wOptions,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #readAll,
+          [],
+          {
+            #iOptions: iOptions,
+            #aOptions: aOptions,
+            #lOptions: lOptions,
+            #webOptions: webOptions,
+            #mOptions: mOptions,
+            #wOptions: wOptions,
+          },
+        ),
+        returnValue: _i7.Future<Map<String, String>>.value(<String, String>{}),
+      ) as _i7.Future<Map<String, String>>);
+  @override
+  _i7.Future<void> deleteAll({
+    _i5.IOSOptions? iOptions,
+    _i5.AndroidOptions? aOptions,
+    _i5.LinuxOptions? lOptions,
+    _i5.WebOptions? webOptions,
+    _i5.MacOsOptions? mOptions,
+    _i5.WindowsOptions? wOptions,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #deleteAll,
+          [],
+          {
+            #iOptions: iOptions,
+            #aOptions: aOptions,
+            #lOptions: lOptions,
+            #webOptions: webOptions,
+            #mOptions: mOptions,
+            #wOptions: wOptions,
+          },
+        ),
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
 }

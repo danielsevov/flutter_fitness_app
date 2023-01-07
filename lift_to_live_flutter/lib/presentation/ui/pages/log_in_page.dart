@@ -150,7 +150,7 @@ class LogInPageState extends State<LogInPage> implements LogInPageView {
     pass = await storage.read(key: 'password');
 
     if(email != null && pass != null) {
-      widget.presenter.logIn();
+      widget.presenter.logIn(storage);
     }
   }
 }

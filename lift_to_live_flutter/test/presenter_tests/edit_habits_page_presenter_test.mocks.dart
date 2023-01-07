@@ -201,14 +201,6 @@ class MockEditHabitsPageView extends _i1.Mock
         returnValueForMissingStub: null,
       );
   @override
-  String? getNote() => (super.noSuchMethod(
-        Invocation.method(
-          #getNote,
-          [],
-        ),
-        returnValue: '',
-      ) as String?);
-  @override
   void setNote(String? note) => super.noSuchMethod(
         Invocation.method(
           #setNote,

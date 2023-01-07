@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:lift_to_live_flutter/presentation/presenters/log_in_page_presenter.dart';
 import 'package:lift_to_live_flutter/presentation/ui/widgets/user_related/log_in_form.dart';
@@ -7,7 +8,7 @@ import 'package:mockito/mockito.dart';
 
 import '../widget_tests/log_in_form_test.mocks.dart';
 
-@GenerateMocks([LogInPagePresenter])
+@GenerateMocks([LogInPagePresenter, FlutterSecureStorage])
 void main() {
 
   testWidgets('LogInForm test constructor', (tester) async {
@@ -167,8 +168,9 @@ void main() {
     await tester.runAsync(() async {
       // tests
       final presenter = MockLogInPagePresenter();
+      final storage = MockFlutterSecureStorage();
 
-      when(presenter.logIn()).thenAnswer((realInvocation) async => {await Future.delayed(const Duration(seconds: 1))});
+      when(presenter.logIn(storage)).thenAnswer((realInvocation) async => {await Future.delayed(const Duration(seconds: 1))});
 
       final form = LogInForm(screenHeight: 800, screenWidth: 400, presenter: presenter);
 
@@ -191,7 +193,7 @@ void main() {
 
       expect(valFinder, findsNothing);
       expect(val2Finder, findsNothing);
-      verify(presenter.logIn()).called(1);
+      verify(presenter.logIn(any)).called(1);
     });
   });
 
@@ -199,8 +201,9 @@ void main() {
     await tester.runAsync(() async {
       // tests
       final presenter = MockLogInPagePresenter();
+      final storage = MockFlutterSecureStorage();
 
-      when(presenter.logIn()).thenAnswer((realInvocation) async => {await Future.delayed(const Duration(seconds: 1))});
+      when(presenter.logIn(storage)).thenAnswer((realInvocation) async => {await Future.delayed(const Duration(seconds: 1))});
 
       final form = LogInForm(screenHeight: 800, screenWidth: 400, presenter: presenter);
 
@@ -225,8 +228,9 @@ void main() {
     await tester.runAsync(() async {
       // tests
       final presenter = MockLogInPagePresenter();
+      final storage = MockFlutterSecureStorage();
 
-      when(presenter.logIn()).thenAnswer((realInvocation) async => {await Future.delayed(const Duration(seconds: 1))});
+      when(presenter.logIn(storage)).thenAnswer((realInvocation) async => {await Future.delayed(const Duration(seconds: 1))});
 
       final form = LogInForm(screenHeight: 800, screenWidth: 400, presenter: presenter);
 
@@ -255,8 +259,9 @@ void main() {
     await tester.runAsync(() async {
       // tests
       final presenter = MockLogInPagePresenter();
+      final storage = MockFlutterSecureStorage();
 
-      when(presenter.logIn()).thenAnswer((realInvocation) async => {await Future.delayed(const Duration(seconds: 1))});
+      when(presenter.logIn(storage)).thenAnswer((realInvocation) async => {await Future.delayed(const Duration(seconds: 1))});
 
       final form = LogInForm(screenHeight: 800, screenWidth: 400, presenter: presenter);
 

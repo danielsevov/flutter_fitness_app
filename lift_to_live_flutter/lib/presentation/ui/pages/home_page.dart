@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:expandable_bottom_bar/expandable_bottom_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:lift_to_live_flutter/domain/entities/news.dart';
 import 'package:lift_to_live_flutter/presentation/presenters/home_page_presenter.dart';
 import 'package:lift_to_live_flutter/presentation/ui/widgets/custom_bottom_nav_bar/custom_bottom_bar.dart';
@@ -169,7 +170,7 @@ class HomePageState extends State<HomePage> implements HomePageView {
   /// Function to clear the app state upon log out and navigate to log in page
   @override
   void logOutPressed(BuildContext context) {
-    widget.presenter.logOut();
+    widget.presenter.logOut(const FlutterSecureStorage());
     Helper.pushPageWithAnimation(context, PageFactory().getLogInPage());
   }
 
