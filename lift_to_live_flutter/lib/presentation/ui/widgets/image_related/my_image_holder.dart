@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lift_to_live_flutter/presentation/presenters/picture_page_presenter.dart';
-import 'package:lift_to_live_flutter/presentation/ui/widgets/forms_and_dialogs/custom_dialog.dart';
 
 import '../../../../helper.dart';
+import '../reusable_elements/custom_dialog.dart';
 import 'detail_screen.dart';
 
 /// Holder widget for a single image, placed on the user pictures page view.

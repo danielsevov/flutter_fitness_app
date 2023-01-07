@@ -30,7 +30,10 @@ class CustomBottomBar extends StatelessWidget {
               ),
               FloatingActionButton.extended(
                   heroTag: 'startWorkoutButton',
-                  onPressed: () {},
+                  onPressed: () {
+                    view.workoutPressed(context, true);
+                    DefaultBottomBarController.of(context).close();
+                  },
                   icon: const Icon(
                     Icons.fitness_center,
                     color: Helper.blackColor,
@@ -38,18 +41,21 @@ class CustomBottomBar extends StatelessWidget {
                   backgroundColor: Helper.yellowColor,
                   label: const Text(
                     'Start Workout',
-                    style: TextStyle(fontSize: 24, color: Helper.blackColor),
+                    style: TextStyle(fontSize: 24, color: Helper.blackColor, fontWeight: FontWeight.w700),
                   )),
               const SizedBox(
                 height: 10,
               ),
               FloatingActionButton.extended(
                   heroTag: 'editTemplatesButton',
-                  onPressed: () {},
-                  icon: const Icon(Icons.edit_note),
+                  onPressed: () {
+                    view.templatesPressed(context, true);
+                    DefaultBottomBarController.of(context).close();
+                  },
+                  icon: const Icon(Icons.view_carousel),
                   backgroundColor: Helper.redColor,
                   label: const Text(
-                    'Edit Templates',
+                    'Templates',
                     style: TextStyle(
                         fontSize: 24, color: Helper.paragraphTextColor),
                   )),
@@ -58,11 +64,14 @@ class CustomBottomBar extends StatelessWidget {
               ),
               FloatingActionButton.extended(
                   heroTag: 'viewHistoryButton',
-                  onPressed: () {},
+                  onPressed: () {
+                    view.historyPressed(context, true);
+                    DefaultBottomBarController.of(context).close();
+                  },
                   icon: const Icon(Icons.history),
                   backgroundColor: Helper.blackColor,
                   label: const Text(
-                    'View History',
+                    'History',
                     style: TextStyle(
                         fontSize: 24, color: Helper.paragraphTextColor),
                   )),
@@ -83,9 +92,9 @@ class CustomBottomBar extends StatelessWidget {
           CustomBottomBarItem(
               function: view.habitsPressed, title: 'Habits', icon: Icons.task),
           CustomBottomBarItem(
-              function: (context, fromBottomBar) {},
-              title: 'Calendar',
-              icon: Icons.edit_calendar), // TODO fix navigation
+              function: view.historyPressed,
+              title: 'History',
+              icon: Icons.edit_calendar),
           const SizedBox(),
           const SizedBox(),
           CustomBottomBarItem(

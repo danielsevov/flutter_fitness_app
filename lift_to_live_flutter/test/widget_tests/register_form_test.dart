@@ -4,7 +4,7 @@ import 'package:lift_to_live_flutter/domain/entities/role.dart';
 import 'package:lift_to_live_flutter/helper.dart';
 import 'package:lift_to_live_flutter/presentation/presenters/register_page_presenter.dart';
 import 'package:lift_to_live_flutter/presentation/state_management/app_state.dart';
-import 'package:lift_to_live_flutter/presentation/ui/widgets/forms_and_dialogs/register_form.dart';
+import 'package:lift_to_live_flutter/presentation/ui/widgets/user_related/register_form.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'register_form_test.mocks.dart';
@@ -172,14 +172,14 @@ void main() {
       final form = RegisterForm(screenHeight: 600, screenWidth: 400, presenter: presenter, coaches: const ['User A', 'User B', 'User C'],);
 
       final locationFinder = find.byIcon(Icons.date_range);
-      final nameFinder = find.text('10');
+      final nameFinder = find.text('1');
 
       String month = DateTime.now().month.toString();
       String year = DateTime.now().year.toString();
       if(DateTime.now().month < 10) {
         month = '0$month';
       }
-      final dateFinder = find.textContaining('10/$month/$year');
+      final dateFinder = find.textContaining('01/$month/$year');
       final buttonFinder = find.text('OK');
 
       await tester.pumpWidget(MaterialApp(
@@ -240,7 +240,7 @@ void main() {
 
       //enter date
       final buttonFinder = find.text('OK');
-      final dateTextFinder = find.text('10');
+      final dateTextFinder = find.text('1');
       await tester.tap(dateFinder);
       await tester.pumpAndSettle();
       await tester.pump(const Duration(seconds: 2));
@@ -260,7 +260,7 @@ void main() {
       if(DateTime.now().month < 10) {
         month = '0$month';
       }
-      expect(form.getDateOfBirth(), '10/$month/$year');
+      expect(form.getDateOfBirth(), '01/$month/$year');
 
       expect(form.getPhoneNumber(), '0888555555');
 

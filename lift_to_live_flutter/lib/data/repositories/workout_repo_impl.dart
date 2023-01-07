@@ -30,12 +30,73 @@ class WorkoutRepoImpl implements WorkoutRepository {
       //decode Workout objects
       List<Workout> myWorkouts = [];
       List<dynamic> list = json.decode(response.body);
+      if(list.isEmpty) {
+        throw FailedFetchException(
+            "No workouts found!\nresponse code ${response.statusCode}");
+      }
+
       for (var element in list) {
         myWorkouts.add(Workout.fromJson(element));
       }
 
       //return the Workout
       return myWorkouts;
+    }
+
+    //else throw an exception
+    else {
+      log("fetch workouts failed\nresponse code ${response.statusCode}");
+      throw FailedFetchException(
+          "Failed to fetch Workouts!\nresponse code ${response.statusCode}");
+    }
+  }
+
+  /// This function is used for fetching a single template entry.
+  @override
+  Future<Workout> fetchTemplate(int id, String jwtToken) async {
+
+    // return empty workout if a new one is requested
+    if(id == 0) {
+      return Workout(0, '', '', '', '', true, '', '', '', []);
+    }
+
+    //fetch json response object
+    Response response = await backendAPI.fetchWorkout(id, jwtToken);
+
+    //proceed if fetch is successful and status code is 200
+    if (response.statusCode == 200) {
+      log("fetch workouts success!");
+
+      //decode Workout objects
+      Workout myWorkout = Workout.fromJson(json.decode(response.body));
+
+      //return the Workout
+      return myWorkout;
+    }
+
+    //else throw an exception
+    else {
+      log("fetch workouts failed\nresponse code ${response.statusCode}");
+      throw FailedFetchException(
+          "Failed to fetch Workouts!\nresponse code ${response.statusCode}");
+    }
+  }
+
+  /// This function is used for fetching a single workout entry.
+  @override
+  Future<Workout> fetchWorkout(int id, String jwtToken) async {
+    //fetch json response object
+    Response response = await backendAPI.fetchWorkout(id, jwtToken);
+
+    //proceed if fetch is successful and status code is 200
+    if (response.statusCode == 200) {
+      log("fetch workouts success!");
+
+      //decode Workout objects
+      Workout myWorkout = Workout.fromJson(json.decode(response.body));
+
+      //return the Workout
+      return myWorkout;
     }
 
     //else throw an exception
@@ -59,6 +120,12 @@ class WorkoutRepoImpl implements WorkoutRepository {
       //decode template Workout objects
       List<Workout> myTemplates = [];
       List<dynamic> list = json.decode(response.body);
+
+      if(list.isEmpty) {
+        throw FailedFetchException(
+            "No workout templates found!\nresponse code ${response.statusCode}");
+      }
+
       for (var element in list) {
         myTemplates.add(Workout.fromJson(element));
       }

@@ -17,10 +17,11 @@ class HabitHolder extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
       margin: const EdgeInsets.fromLTRB(10, 5, 10, 0),
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         color: Helper.lightBlueColor,
-        borderRadius: BorderRadius.only(
-            topRight: Radius.circular(90),
+        border: Border.all(color: Helper.whiteColor.withOpacity(0.3)),
+        borderRadius: const BorderRadius.only(
+            topRight: Radius.circular(10),
             topLeft: Radius.circular(10),
             bottomLeft: Radius.circular(10),
             bottomRight: Radius.circular(10)),
@@ -35,21 +36,23 @@ class HabitHolder extends StatelessWidget {
                     left: 20, right: 20, top: 5, bottom: 5),
                 decoration: BoxDecoration(
                     color: Helper.blueColor,
+                    //border: Border.all(color: Helper.whiteColor.withOpacity(0.3)),
                     borderRadius: BorderRadius.circular(20)),
                 child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
                       Helper.formatter.format(
                           DateTime.fromMicrosecondsSinceEpoch(
                               int.parse(habit.date) * 1000)),
                       style: const TextStyle(
-                          color: Helper.whiteColor,
+                          color: Helper.yellowColor,
                           fontWeight: FontWeight.w400,
                           fontSize: 24),
                     ),
                     const SizedBox(
                       width: 20,
-                      height: 30,
+                      height: 2,
                     ),
                     Icon(
                         !habit.habits.any((element) => !element.isCompleted)
@@ -79,9 +82,15 @@ class HabitHolder extends StatelessWidget {
           Row(
             children: [
               const SizedBox(height: 10),
-              Text(
-                habit.note.isEmpty ? '' : 'Coach note: ${habit.note}',
-                style: const TextStyle(color: Colors.white),
+              habit.note.isEmpty ? const SizedBox() : Row(
+                children: [
+                  const Icon(Icons.notes, color: Helper.yellowColor,),
+                  const SizedBox(width: 10,),
+                  Text(
+                    habit.note,
+                    style: const TextStyle(color: Colors.white),
+                  ),
+                ],
               )
             ],
           ),

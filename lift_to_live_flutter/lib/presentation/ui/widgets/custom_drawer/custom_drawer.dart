@@ -41,10 +41,8 @@ class CustomDrawer extends StatelessWidget {
               icon: Icons.task_alt_outlined,
               tileColor: Helper.lightBlueColor),
           CustomDrawerBodyItem(
-              function: (context, fromBottomBar) {
-                Navigator.pop(context);
-              },
-              title: 'Manage Workouts',
+              function: view.historyPressed,
+              title: 'View Workouts',
               icon: Icons.fitness_center_outlined,
               tileColor: Helper.blueColor),
           CustomDrawerBodyItem(

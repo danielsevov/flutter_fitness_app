@@ -50,6 +50,16 @@ abstract class HomePageView {
 
   /// Function to call when button pressed to redirect user to URL
   void redirectToUrl(int index);
+
+  /// Function called when user wants to navigate from home to workout history page
+  void historyPressed(BuildContext context, bool fromBottomBar) {
+  }
+
+  /// Function for navigating to edit workout templates page.
+  void templatesPressed(BuildContext context, bool bool) {}
+
+  /// Function for navigating to edit workout page.
+  void workoutPressed(BuildContext context, bool bool) {}
 }
 
 // coverage:ignore-end

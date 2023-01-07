@@ -289,6 +289,14 @@ class MockProfilePageView extends _i1.Mock implements _i7.ProfilePageView {
         returnValueForMissingStub: null,
       );
   @override
+  void workoutsPressed(_i8.BuildContext? context) => super.noSuchMethod(
+        Invocation.method(
+          #workoutsPressed,
+          [context],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
   void picturesPressed(_i8.BuildContext? context) => super.noSuchMethod(
         Invocation.method(
           #picturesPressed,

@@ -18,9 +18,10 @@ class BackendAPI {
 
   BackendAPI._internal();
 
-  //static const apiURL = "http://192.168.178.30:3000/"; //molensingel
+  static const apiURL = "http://192.168.178.27:3000/"; //molensingel
   //static const apiURL = "http://145.93.150.0:3000/"; //fontys
-  static const apiURL = "http://192.168.13.108:3000/"; // sofia
+  //static const apiURL = "http://lift2live.synology.me:3000/"; // sofia
+  //static const apiURL = "http://192.168.13.9:3000/"; // sofia new
 
   /// This function is used for patching an image entry.
   Future<http.Response> patchImage(int id, String userId, String date,
@@ -82,6 +83,17 @@ class BackendAPI {
     );
   }
 
+  /// This function is used for fetching single workout entry.
+  Future<http.Response> fetchWorkout(int id, String jwtToken) async {
+    return http.get(
+      Uri.parse('${apiURL}workouts/$id/'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer $jwtToken',
+      },
+    );
+  }
+
   /// This function is used for fetching all workout templates entries for a user.
   Future<http.Response> fetchWorkoutTemplates(String userId, String jwtToken) async {
     return http.post(
@@ -118,7 +130,7 @@ class BackendAPI {
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization': 'Bearer $jwtToken',
       },
-      body: "${jsonEncode(<String, String>{
+      body: "${jsonEncode(<String, dynamic>{
         'coach_note': coachNote,
         'workout_name': name,
         'completed_on': completedOn,
@@ -126,7 +138,7 @@ class BackendAPI {
         'duration': duration,
         'userId': userId,
         'coachId': coachId,
-        'is_template': isTemplate.toString(),
+        'is_template': isTemplate,
       }).replaceAll("}", "")}, \"sets\" : $inner}",
     );
     log(res.body);
@@ -143,7 +155,7 @@ class BackendAPI {
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization': 'Bearer $jwtToken',
       },
-      body: "${jsonEncode(<String, String>{
+      body: "${jsonEncode(<String, dynamic>{
         'coach_note': coachNote,
         'workout_name': name,
         'completed_on': completedOn,
@@ -151,7 +163,7 @@ class BackendAPI {
         'duration': duration,
         'userId': userId,
         'coachId': coachId,
-        'is_template': isTemplate.toString(),
+        'is_template': isTemplate,
       }).replaceAll("}", "")}, \"sets\" : $inner}",
     );
     log(res.body);

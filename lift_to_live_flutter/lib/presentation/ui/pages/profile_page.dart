@@ -92,6 +92,13 @@ class ProfilePageState extends State<ProfilePage> implements ProfilePageView {
         context, PageFactory().getHabitsPage(_user.id));
   }
 
+  /// Function called when user wants to navigate from the users profile to the users workout history page.
+  @override
+  void workoutsPressed(BuildContext context) {
+    Helper.pushPageWithAnimation(
+        context, PageFactory().getWorkoutHistoryPage(_user.id));
+  }
+
   /// Function called when user wants to navigate from profile page to pictures page.
   @override
   void picturesPressed(BuildContext context) {
@@ -123,7 +130,8 @@ class ProfilePageState extends State<ProfilePage> implements ProfilePageView {
       body: CustomScrollView(slivers: <Widget>[
         SliverAppBar(
           centerTitle: true,
-          backgroundColor: Helper.pageBackgroundColor,
+          backgroundColor: Helper.lightBlueColor.withOpacity(0.9),
+          elevation: 20,
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(
               bottom: Radius.circular(15),
@@ -244,7 +252,27 @@ class ProfilePageState extends State<ProfilePage> implements ProfilePageView {
                                         habitsPressed(context);
                                       },
                                     )), // button third
-
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Container(
+                                    margin: const EdgeInsets.all(10),
+                                    child: FloatingActionButton.extended(
+                                      heroTag: 'btn7',
+                                      backgroundColor: Helper.blackColor,
+                                      icon: const Icon(
+                                        Icons.fitness_center_outlined,
+                                        color: Helper.whiteColor,
+                                      ),
+                                      label: const Text(
+                                        'View Workouts',
+                                        style:
+                                        TextStyle(color: Helper.whiteColor),
+                                      ),
+                                      onPressed: () {
+                                        workoutsPressed(context);
+                                      },
+                                    )),
                                 // Add more buttons here
                               ],
                             ),
@@ -261,6 +289,7 @@ class ProfilePageState extends State<ProfilePage> implements ProfilePageView {
                                     : const SizedBox(),
                                 Container(
                                   height: _screenWidth / 2,
+                                  width: 150,
                                   alignment: Alignment.center,
                                   decoration: BoxDecoration(
                                     color: Helper.blackColor,
@@ -289,16 +318,6 @@ class ProfilePageState extends State<ProfilePage> implements ProfilePageView {
                             const SizedBox(
                               height: 20,
                             ),
-                            const Text(
-                              'User details:',
-                              style: TextStyle(
-                                  color: Helper.lightHeadlineColor,
-                                  fontSize: 22,
-                                  fontWeight: FontWeight.w600),
-                            ),
-                            const SizedBox(
-                              height: 5,
-                            ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -311,7 +330,7 @@ class ProfilePageState extends State<ProfilePage> implements ProfilePageView {
                                       color: Helper.paragraphBackgroundColor,
                                       borderRadius: BorderRadius.circular(15),
                                       border:
-                                          Border.all(color: Helper.whiteColor),
+                                          Border.all(color: Helper.whiteColor.withOpacity(0.3)),
                                     ),
                                     child: Row(
                                       mainAxisAlignment:

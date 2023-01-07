@@ -43,6 +43,9 @@ dependencies:
   cupertino_icons: any
   expandable_bottom_bar: ^2.0.2
   country_picker: ^2.0.19
+  dropdown_textfield: ^1.0.7
+  flutter_secure_storage: ^7.0.1
+  image_cropper: ^3.0.1
 
 dev_dependencies:
   mockito: any

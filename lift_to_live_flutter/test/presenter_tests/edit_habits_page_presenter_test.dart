@@ -99,6 +99,7 @@ void main() {
     presenter.attach(view);
 
     when(habitsRepo.fetchTemplate(any, any)).thenAnswer((realInvocation) async => Habit(0, '', '', '', '', true, [HabitTask('My Task 1', false)]));
+    when(view.getNote()).thenReturn('');
 
     await presenter.fetchData();
 
@@ -119,6 +120,7 @@ void main() {
     presenter.attach(view);
 
     when(habitsRepo.fetchTemplate(any, any)).thenAnswer((realInvocation) async => Habit(0, '', '', '', '', true, [HabitTask('My Task 1', false)]));
+    when(view.getNote()).thenReturn('');
 
     await presenter.fetchData();
 

@@ -7,6 +7,8 @@ import '../../state_management/app_state.dart';
 import '../../../helper.dart';
 import '../../views/edit_habits_page_view.dart';
 import '../widgets/habit_related/edit_habit_holder.dart';
+import '../widgets/reusable_elements/custom_dialog.dart';
+import '../widgets/reusable_elements/custom_heading_text_field.dart';
 
 /// Custom EditHabitsPage widget used as a main editorial page of the habit template of a user.
 /// It is a stateful widget and its state object implements the EditHabitsPageView abstract class.
@@ -36,6 +38,8 @@ class EditHabitsPageState extends State<EditHabitsPage>
   List<TextEditingController> controllers = [];
 
   late Habit template;
+
+  TextEditingController noteController = TextEditingController();
 
   /// initialize the page view by attaching it to the presenter
   @override
@@ -88,11 +92,14 @@ class EditHabitsPageState extends State<EditHabitsPage>
     return Scaffold(
       backgroundColor: Helper.blueColor,
       appBar: AppBar(
+        backgroundColor: Helper.lightBlueColor.withOpacity(0.9),
+        elevation: 20,
         leading: IconButton(
             icon: const Icon(Icons.arrow_back, color: Helper.yellowColor),
             onPressed: () => {_isChanged ? goBack() : Navigator.pop(context)}),
         centerTitle: true,
         shape: const RoundedRectangleBorder(
+          side: BorderSide(color: Helper.blackColor, width: 1),
           borderRadius: BorderRadius.vertical(
             bottom: Radius.circular(15),
           ),
@@ -104,14 +111,24 @@ class EditHabitsPageState extends State<EditHabitsPage>
           IconButton(
             icon: const Icon(Icons.delete_forever),
             onPressed: () {
-              setState(() {
-                bodyElements.clear();
-                controllers.clear();
+              showDialog(context: context, builder: (context) {
+                return CustomDialog(
+                    title: 'Remove All',
+                    bodyText: 'Are you sure you want to remove all current tasks?',
+                    confirm: () async {
+                      setState(() {
+                        bodyElements.clear();
+                        controllers.clear();
+                      });
+                      Navigator.pop(context);
+                    },
+                    cancel: () {
+                      Navigator.pop(context);
+                    });
               });
             },
           )
         ],
-        backgroundColor: Helper.lightBlueColor,
         title: const Text(
           "Edit habits",
           style: TextStyle(color: Colors.white),
@@ -130,11 +147,15 @@ class EditHabitsPageState extends State<EditHabitsPage>
         child: _isFetched && !_isLoading
             ? ListView(
                 children: <Widget>[
+                  const SizedBox(height: 10,),
+                  CustomHeadingTextField(screenHeight: screenHeight, screenWidth: screenWidth, controller: noteController, textInputType: TextInputType.multiline, hint: 'Enter habit note', icon: Icons.notes, color: Helper.whiteColor, isHeadline: false,),
+                  const SizedBox(height: 20,),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: bodyElements,
                   ),
+                  const SizedBox(height: 80,)
                 ],
               )
             : const Center(
@@ -231,5 +252,17 @@ class EditHabitsPageState extends State<EditHabitsPage>
   void goBack() {
     Navigator.pop(context);
     Helper.replacePage(context, PageFactory().getHabitsPage(widget.userId));
+  }
+
+  @override
+  String getNote() {
+    return noteController.text.toString();
+  }
+
+  @override
+  void setNote(String note) {
+    setState(() {
+      noteController.text = note;
+    });
   }
 }

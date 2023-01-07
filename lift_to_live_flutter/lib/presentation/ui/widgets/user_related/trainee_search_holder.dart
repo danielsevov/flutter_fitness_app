@@ -32,7 +32,7 @@ class TraineeSearchHolder extends StatelessWidget {
               height: 150,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15.0),
-                  border: Border.all(color: Helper.whiteColor),
+                  border: Border.all(color: Helper.whiteColor.withOpacity(0.3)),
                   color: Helper.yellowColor),
               child: FittedBox(
                 fit: BoxFit.fill,

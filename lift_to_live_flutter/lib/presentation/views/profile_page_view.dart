@@ -18,6 +18,9 @@ abstract class ProfilePageView {
   /// Function called when user wants to navigate from the users profile to the users habit page
   void habitsPressed(BuildContext context);
 
+  /// Function called when user wants to navigate from the users profile to the users workout history page
+  void workoutsPressed(BuildContext context);
+
   /// Function called when user wants to navigate from profile page to pictures page
   void picturesPressed(BuildContext context);
 

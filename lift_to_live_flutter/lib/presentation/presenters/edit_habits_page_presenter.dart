@@ -53,6 +53,8 @@ class EditHabitsPagePresenter extends BasePresenter {
       template =
           await _habitsRepository.fetchTemplate(_userId, appState.getToken());
 
+      _view?.setNote(template.note);
+
       // create edit habit widgets for each task
       for (var element in template.habits) {
         _view?.addTaskElement(element.task, () => _view?.refresh());
@@ -77,11 +79,13 @@ class EditHabitsPagePresenter extends BasePresenter {
       if (element.isNotEmpty) newTasks.add(HabitTask(element, false));
     });
 
+    String? note = _view?.getNote();
+
     // update the habit template
     _habitsRepository.patchHabit(
         template.id,
         (DateTime.now().millisecondsSinceEpoch).toString(),
-        template.note,
+        note ?? template.note,
         _userId,
         appState.getUserId(),
         newTasks,

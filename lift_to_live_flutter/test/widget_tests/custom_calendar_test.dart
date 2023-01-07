@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:lift_to_live_flutter/domain/entities/habit.dart';
 import 'package:lift_to_live_flutter/domain/entities/habit_task.dart';
 import 'package:lift_to_live_flutter/helper.dart';
-import 'package:lift_to_live_flutter/presentation/ui/widgets/habit_related/custom_calendar.dart';
+import 'package:lift_to_live_flutter/presentation/ui/widgets/habit_related/custom_habits_calendar.dart';
 
 void main() {
 
@@ -21,7 +21,7 @@ void main() {
       final Habit habit2 = Habit(1, day2, 'This is a note', 'A', 'A', false, [habitTaskTrue, habitTaskFalse]);
       final Habit habit3 = Habit(1, day3, 'This is a note', 'A', 'A', false, [habitTaskFalse, habitTaskFalse]);
 
-      final widget = CustomCalendar(habits: [habit, habit2, habit3]);
+      final widget = CustomHabitsCalendar(habits: [habit, habit2, habit3]);
 
       await tester.pumpWidget(MaterialApp(
           title: 'Flutter Demo', home: Scaffold(body: Center(child: Container(color: Helper.blueColor,child: widget),))));

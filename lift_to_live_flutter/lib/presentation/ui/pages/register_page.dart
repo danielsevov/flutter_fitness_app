@@ -6,7 +6,7 @@ import '../../state_management/app_state.dart';
 import '../../../helper.dart';
 import '../../views/register_form_view.dart';
 import '../../views/register_page_view.dart';
-import '../widgets/forms_and_dialogs/register_form.dart';
+import '../widgets/user_related/register_form.dart';
 
 /// Custom widget, which is the RegisterPage and is used for inputting user details
 /// and submitting them for registration of the user.
@@ -66,7 +66,8 @@ class RegisterPageState extends State<RegisterPage>
       backgroundColor: Helper.pageBackgroundColor,
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
-        backgroundColor: Helper.pageBackgroundColor.withOpacity(0.7),
+        backgroundColor: Helper.lightBlueColor.withOpacity(0.9),
+        elevation: 20,
         centerTitle: true,
         leading: IconButton(
             icon: const Icon(Icons.arrow_back, color: Helper.yellowColor),

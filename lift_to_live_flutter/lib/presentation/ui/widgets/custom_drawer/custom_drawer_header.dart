@@ -27,6 +27,7 @@ class CustomDrawerHeader extends StatelessWidget {
                       width: 20,
                     ),
                     Container(
+                      width: 150,
                       alignment: Alignment.center,
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(30.0),

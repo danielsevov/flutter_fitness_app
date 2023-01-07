@@ -1,6 +1,7 @@
 import 'package:expandable_bottom_bar/expandable_bottom_bar.dart';
 import 'package:lift_to_live_flutter/factory/presenter_factory.dart';
 import 'package:lift_to_live_flutter/presentation/ui/pages/edit_habits_page.dart';
+import 'package:lift_to_live_flutter/presentation/ui/pages/workout_page.dart';
 import 'package:lift_to_live_flutter/presentation/ui/pages/habits_page.dart';
 import 'package:lift_to_live_flutter/presentation/ui/pages/picture_page.dart';
 import 'package:lift_to_live_flutter/presentation/ui/pages/profile_page.dart';
@@ -8,6 +9,8 @@ import 'package:lift_to_live_flutter/presentation/ui/pages/register_page.dart';
 import 'package:lift_to_live_flutter/presentation/ui/pages/trainees_page.dart';
 import '../presentation/ui/pages/home_page.dart';
 import '../presentation/ui/pages/log_in_page.dart';
+import '../presentation/ui/pages/workout_history_page.dart';
+import '../presentation/ui/pages/workout_templates_page.dart';
 
 /// Factory object for creating a page objects.
 /// This factory is a singleton object.
@@ -50,6 +53,18 @@ class PageFactory {
         userId: userId,
       );
 
+  // function to get a WorkoutHistoryPage object
+  WorkoutHistoryPage getWorkoutHistoryPage (String userId) => WorkoutHistoryPage(
+    presenter: _presenterFactory.getWorkoutHistoryPresenter(userId),
+    userId: userId,
+  );
+
+  // function to get a WorkoutHistoryPage object
+  WorkoutTemplatesPage getWorkoutTemplatesPage (String userId) => WorkoutTemplatesPage(
+    presenter: _presenterFactory.getWorkoutTemplatesPagePresenter(userId),
+    userId: userId,
+  );
+
   // function to get a PicturePage object
   PicturePage getPicturePage(String userId, String name) => PicturePage(
         presenter: _presenterFactory.getPicturePagePresenter(userId),
@@ -63,6 +78,12 @@ class PageFactory {
         userId: userId,
         originPage: originPage,
       );
+
+  // function to get a WorkoutPage object
+  WorkoutPage getWorkoutPage(int id, String userId, bool forTemplate, bool fromTemplate) => WorkoutPage(
+    presenter: _presenterFactory.getWorkoutPagePresenter(id, userId, forTemplate, fromTemplate),
+    templateId: id, userId: userId, forTemplate: forTemplate, fromTemplate: fromTemplate,
+  );
 
   // function to get a HomePage object wrapped in a BottomBarController so that the expandable bottom nav bar can be used.
   DefaultBottomBarController getWrappedHomePage() =>

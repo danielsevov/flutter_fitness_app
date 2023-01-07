@@ -20,7 +20,7 @@ void main() {
       final widget = HabitHolder(habit: habit, habitTaskWidgets: [habitTaskWidget]);
 
       final checkBoxFinder = find.byType(HabitTaskHolder);
-      final noteFinder = find.text('Coach note: This is a note');
+      final noteFinder = find.text('This is a note');
       final iconFinder = find.byIcon(Icons.thumb_up);
 
       await tester.pumpWidget(MaterialApp(
