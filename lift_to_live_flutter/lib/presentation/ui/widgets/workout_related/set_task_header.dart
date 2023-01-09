@@ -5,9 +5,7 @@ import '../../../../helper.dart';
 class SetTaskHeader extends StatefulWidget {
   final bool isTemplate;
 
-  const SetTaskHeader(
-      {Key? key, required this.isTemplate})
-      : super(key: key);
+  const SetTaskHeader({super.key, required this.isTemplate});
 
   @override
   State<SetTaskHeader> createState() => _SetTaskHeaderState();

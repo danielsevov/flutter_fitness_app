@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:lift_to_live_flutter/helper.dart';
 import 'package:lift_to_live_flutter/presentation/ui/widgets/workout_related/set_task_header.dart';
@@ -10,7 +9,7 @@ void main() {
     testWidgets('Set task header constructor test', (tester) async {
       await tester.runAsync(() async {
         // tests
-        const widget = SetTaskHeader(isTemplate: true);
+        const widget = SetTaskHeader(isTemplate: true, key: Key(''),);
 
         await tester.pumpWidget(MaterialApp(
             title: 'Flutter Demo', home: Scaffold(body: Center(child: Container(color: Helper.blueColor,child: widget),))));
