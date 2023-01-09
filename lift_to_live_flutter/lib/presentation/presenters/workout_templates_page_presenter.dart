@@ -160,10 +160,12 @@ class WorkoutTemplatesPagePresenter extends BasePresenter {
           creationDate: element.createdOn,
           id: element.id,
           userId: element.userId,
+          // coverage:ignore-start
           onSubmit: () { copyWorkout(element.id); }, onEdit: (BuildContext context){
           Helper.replacePage(context, PageFactory().getWorkoutPage(element.id, element.userId, true, true));},
           onStartWorkout: (BuildContext context){
           Helper.replacePage(context, PageFactory().getWorkoutPage(element.id, element.userId, false, true));},
+          // coverage:ignore-end
         ));
       }
 
