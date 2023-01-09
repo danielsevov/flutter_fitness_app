@@ -34,7 +34,7 @@ class _SetTaskHolderState extends State<SetTaskHolder> {
               Row(
                 children: [
                   SizedBox(
-                    width: 60,
+                    width: 70,
                     height: widget.isEnabled ? 50 : 20,
                     child: TextField(
                       enableInteractiveSelection: false,
@@ -44,7 +44,7 @@ class _SetTaskHolderState extends State<SetTaskHolder> {
                         border: const OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(15)))
                       ),
                       enabled: widget.isEnabled,
-                      onChanged: (newString){
+                      onSubmitted: (newString){
                         try {
                           int.parse(newString);
                         }
@@ -70,7 +70,7 @@ class _SetTaskHolderState extends State<SetTaskHolder> {
               Row(
                 children: [
                   SizedBox(
-                    width: 60,
+                    width: 70,
                   height: widget.isEnabled ? 50 : 20,
                     child: TextField(
                       enableInteractiveSelection: false,
@@ -80,7 +80,7 @@ class _SetTaskHolderState extends State<SetTaskHolder> {
                           border: const OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(15)))
                       ),
                       enabled: widget.isEnabled,
-                      onChanged: (newString){
+                      onSubmitted: (newString){
                         try {
                           int.parse(newString);
                         }

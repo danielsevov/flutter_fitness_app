@@ -29,10 +29,9 @@ class _SetTaskHeaderState extends State<SetTaskHeader> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              //const SizedBox(),
-              const Text('Kilograms', style: TextStyle(color: Helper.yellowColor, fontSize: 12),),
-              const Text('Repetitions', style: TextStyle(color: Helper.yellowColor, fontSize: 12),),
-              !widget.isTemplate ? const Text('Completed?', style: TextStyle(color: Helper.yellowColor, fontSize: 12),) : const SizedBox()
+              const SizedBox(width: 70,child: Text('Kilograms', style: TextStyle(color: Helper.yellowColor, fontSize: 12),)),
+              const SizedBox(width: 70,child: Text('Repetitions', style: TextStyle(color: Helper.yellowColor, fontSize: 12),)),
+              !widget.isTemplate ? const SizedBox(width: 70,child: Text('Completed?', style: TextStyle(color: Helper.yellowColor, fontSize: 12),)) : const SizedBox()
             ],
           ),
         ));

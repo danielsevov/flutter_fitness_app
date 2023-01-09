@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:lift_to_live_flutter/helper.dart';
 import 'package:lift_to_live_flutter/presentation/ui/widgets/workout_related/set_task_header.dart';
@@ -49,6 +50,31 @@ void main() {
         var kiloC = TextEditingController();
         var compC = TextEditingController();
 
+        final widget = SetTaskHolder(repsController: repC, kilosController: kiloC, isCompletedController: compC, isEnabled: true, isTemplate: false);
+
+        await tester.pumpWidget(MaterialApp(
+            title: 'Flutter Demo', home: Scaffold(body: Center(child: Container(color: Helper.blueColor,child: widget),))));
+
+        await tester.pump(const Duration(seconds: 2));
+        await tester.pumpAndSettle();
+
+        var kiloFinder = find.byType(TextField).first;
+        var repsFinder = find.byType(TextField).last;
+        var completeFinder = find.byType(Checkbox);
+
+        expect(kiloFinder, findsOneWidget);
+        expect(repsFinder, findsOneWidget);
+        expect(completeFinder, findsOneWidget);
+      });
+    });
+
+    testWidgets('Set task holder constructor test 2', (tester) async {
+      await tester.runAsync(() async {
+        // tests
+        var repC = TextEditingController();
+        var kiloC = TextEditingController();
+        var compC = TextEditingController();
+
         final widget = SetTaskHolder(repsController: repC, kilosController: kiloC, isCompletedController: compC, isEnabled: true, isTemplate: true);
 
         await tester.pumpWidget(MaterialApp(
@@ -57,9 +83,13 @@ void main() {
         await tester.pump(const Duration(seconds: 2));
         await tester.pumpAndSettle();
 
-        expect(find.text('Kilograms'), findsOneWidget);
-        expect(find.text('Repetitions'), findsOneWidget);
-        expect(find.text('Completed?'), findsNothing);
+        var kiloFinder = find.byType(TextField).first;
+        var repsFinder = find.byType(TextField).last;
+        var completeFinder = find.byType(Checkbox);
+
+        expect(kiloFinder, findsOneWidget);
+        expect(repsFinder, findsOneWidget);
+        expect(completeFinder, findsNothing);
       });
     });
 
@@ -112,7 +142,9 @@ void main() {
         var completeFinder = find.byType(Checkbox);
 
         await tester.enterText(kiloFinder, 'kilos');
+        await tester.testTextInput.receiveAction(TextInputAction.done);
         await tester.enterText(repsFinder, 'reps');
+        await tester.testTextInput.receiveAction(TextInputAction.done);
         await tester.tap(completeFinder);
 
         expect(kiloC.text, '');
@@ -120,6 +152,9 @@ void main() {
         expect(compC.text, 'true');
       });
     });
+  });
+
+  group('workout set holder tests', () {
 
   });
 
