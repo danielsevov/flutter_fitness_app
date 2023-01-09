@@ -1,7 +1,6 @@
 import 'package:dropdown_textfield/dropdown_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:lift_to_live_flutter/domain/entities/workout_set.dart';
-import 'package:lift_to_live_flutter/presentation/presenters/workout_page_presenter.dart';
 import 'package:lift_to_live_flutter/presentation/ui/widgets/reusable_elements/custom_dropdown_text_field.dart';
 import 'package:lift_to_live_flutter/presentation/ui/widgets/workout_related/set_task_header.dart';
 import 'package:lift_to_live_flutter/presentation/ui/widgets/workout_related/set_task_holder.dart';
@@ -11,7 +10,6 @@ import '../../../../helper.dart';
 /// A holder for a single editable set, part of a workout/template entry.
 class EditableSetHolder extends StatefulWidget {
   final List<SetTaskHolder> setTasks;
-  final WorkoutPagePresenter presenter;
 
   final TextEditingController noteController;
   final SingleValueDropDownController exerciseController;
@@ -19,7 +17,7 @@ class EditableSetHolder extends StatefulWidget {
       kilosControllers,
       isCompletedControllers;
 
-  final bool isEnabled, isTemplate;
+  final bool isTemplate;
   final List<String> exercises;
 
   final String tag;
@@ -29,9 +27,7 @@ class EditableSetHolder extends StatefulWidget {
       required this.setTasks,
       required this.exerciseController,
       required this.noteController,
-      required this.isEnabled,
       required this.exercises,
-      required this.presenter,
       required this.repsControllers,
       required this.kilosControllers,
       required this.isCompletedControllers, required this.tag, required this.isTemplate})
@@ -99,7 +95,7 @@ class EditableSetHolderState extends State<EditableSetHolder>  with AutomaticKee
                   }
                 },
                 items: widget.exercises,
-                isEnabled: widget.isEnabled),
+                isEnabled: true),
             const SizedBox(
               height: 10,
             ),
@@ -122,7 +118,7 @@ class EditableSetHolderState extends State<EditableSetHolder>  with AutomaticKee
               controller: widget.noteController,
               keyboardType: TextInputType.multiline,
               obscureText: false,
-              enabled: widget.isEnabled,
+              enabled: true,
             ),
             const SizedBox(
               height: 10,

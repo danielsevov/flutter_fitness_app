@@ -63,13 +63,6 @@ class _FixedSetHolderState extends State<FixedSetHolder> {
                 hint: 'Enter exercise',
                 icon: Icons.fitness_center_outlined,
                 obscureText: false,
-                onChanged: (newString) {
-                  if (newString != null && newString.isNotEmpty) {
-                    setState(() {
-                      widget.exerciseController.dropDownValue = newString;
-                    });
-                  }
-                },
                 items: widget.exercises,
                 isEnabled: false),
             const SizedBox(

@@ -11,7 +11,7 @@ class CustomDropdownTextField extends StatelessWidget {
   final IconData icon;
   final bool obscureText;
   final Function()? onTap;
-  final Function(dynamic newValue) onChanged;
+  final Function(dynamic newValue)? onChanged;
   final List<String> items;
   final bool isEnabled;
 
@@ -24,7 +24,7 @@ class CustomDropdownTextField extends StatelessWidget {
       required this.icon,
       required this.obscureText,
       this.onTap,
-      required this.onChanged,
+      this.onChanged,
       required this.items,
       required this.isEnabled});
 
