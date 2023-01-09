@@ -174,6 +174,7 @@ class WorkoutPagePresenter extends BasePresenter {
         repsControllers: repControllers,
         kilosControllers: kiloControllers,
         isCompletedControllers: isCompletedControllers, tag: '${tag++}', isTemplate: _forTemplate,));
+
     _view?.setTemplateData(_view?.nameController.text, _view?.noteController.text, _templateSetWidgets);
   }
 

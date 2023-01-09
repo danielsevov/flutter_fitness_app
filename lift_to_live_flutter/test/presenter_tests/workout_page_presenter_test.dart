@@ -3,6 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:lift_to_live_flutter/data/exceptions/fetch_failed_exception.dart';
 import 'package:lift_to_live_flutter/domain/entities/exercise.dart';
 import 'package:lift_to_live_flutter/domain/entities/role.dart';
+import 'package:lift_to_live_flutter/domain/entities/workout.dart';
 import 'package:lift_to_live_flutter/domain/repositories/exercise_repo.dart';
 import 'package:lift_to_live_flutter/domain/repositories/workout_repo.dart';
 import 'package:lift_to_live_flutter/presentation/presenters/workout_page_presenter.dart';
@@ -167,7 +168,7 @@ void main() {
     when(view.noteController).thenReturn(noteController);
     when(view.nameController).thenReturn(nameController);
 
-    String name, note;
+    String name = 'testname', note = 'testnote';
     List<Widget> list = [];
 
     when(view.setTemplateData(any, any, any)).thenAnswer((realInvocation) {
@@ -180,6 +181,8 @@ void main() {
 
     verifyNever(view.notifyNoTemplatesFound());
     expect(list.length, 1);
+    expect(name, 'A');
+    expect(note, 'A');
   });
 
   test('test fetchData() success', () async {
@@ -205,12 +208,9 @@ void main() {
     when(view.noteController).thenReturn(noteController);
     when(view.nameController).thenReturn(nameController);
 
-    String name, note;
     List<Widget> list = [];
 
     when(view.setTemplateData(any, any, any)).thenAnswer((realInvocation) {
-      name = realInvocation.positionalArguments[0];
-      note = realInvocation.positionalArguments[1];
       list = realInvocation.positionalArguments[2];
     });
 
@@ -223,5 +223,244 @@ void main() {
 
     expect(element1.repsControllers.length, 3);
     expect(element1.exerciseController.dropDownValue?.value, 'A');
+  });
+
+  test('test delete template', () async {
+    final workoutRepo = MockWorkoutRepository();
+    final exerciseRepo = MockExerciseRepository();
+    final presenter = WorkoutPagePresenter();
+    final view = MockWorkoutPageView();
+    final nameController = TextEditingController(), noteController = TextEditingController();
+
+    presenter.attachRepositories(workoutRepo, exerciseRepo);
+    presenter.changeTemplate(1, 'A', false, false);
+
+    presenter.attach(view);
+
+    final appState = AppState();
+    appState.setInitialState('A', 'token', [Role('A', 'admin')]);
+
+    presenter.setAppState(appState);
+
+    when(exerciseRepo.getExercises()).thenAnswer((realInvocation) async => [Exercise('bodypart1', 'equipment1', 'gifUrl1', 'name1', 'muscleGroup1'), Exercise('bodypart2', 'equipment2', 'gifUrl2', 'name2', 'muscleGroup2'), Exercise('bodypart3', 'equipment3', 'gifUrl3', 'name3', 'muscleGroup3'), ]);
+    when(workoutRepo.fetchWorkout(any, any)).thenAnswer((realInvocation) async => TestData.testWorkout1);
+    when(workoutRepo.fetchTemplate(any, any)).thenAnswer((realInvocation) async => TestData.testWorkoutTemplate1);
+    when(view.noteController).thenReturn(noteController);
+    when(view.nameController).thenReturn(nameController);
+    
+    await presenter.fetchData();
+
+    await presenter.deleteTemplate(1);
+    
+    verify(workoutRepo.deleteWorkout(1, 'token')).called(1);
+  });
+
+  test('test add set', () async {
+    final workoutRepo = MockWorkoutRepository();
+    final exerciseRepo = MockExerciseRepository();
+    final presenter = WorkoutPagePresenter();
+    final view = MockWorkoutPageView();
+    final nameController = TextEditingController(), noteController = TextEditingController();
+
+    presenter.attachRepositories(workoutRepo, exerciseRepo);
+    presenter.changeTemplate(1, 'A', false, false);
+
+    presenter.attach(view);
+
+    final appState = AppState();
+    appState.setInitialState('A', 'token', [Role('A', 'admin')]);
+
+    presenter.setAppState(appState);
+
+    when(exerciseRepo.getExercises()).thenAnswer((realInvocation) async => [Exercise('bodypart1', 'equipment1', 'gifUrl1', 'name1', 'muscleGroup1'), Exercise('bodypart2', 'equipment2', 'gifUrl2', 'name2', 'muscleGroup2'), Exercise('bodypart3', 'equipment3', 'gifUrl3', 'name3', 'muscleGroup3'), ]);
+    when(workoutRepo.fetchWorkout(any, any)).thenAnswer((realInvocation) async => TestData.testWorkout1);
+    when(workoutRepo.fetchTemplate(any, any)).thenAnswer((realInvocation) async => TestData.testWorkoutTemplate1);
+    when(view.noteController).thenReturn(noteController);
+    when(view.nameController).thenReturn(nameController);
+
+    await presenter.fetchData();
+
+    List<Widget> list = [];
+    when(view.setTemplateData(any, any, any)).thenAnswer((realInvocation) {
+      list = realInvocation.positionalArguments[2];
+    });
+
+    presenter.addNewSet();
+
+    expect(list.length, 2);
+
+    presenter.addNewSet();
+
+    expect(list.length, 3);
+  });
+
+  test('test save changes fail', () async {
+    final workoutRepo = MockWorkoutRepository();
+    final exerciseRepo = MockExerciseRepository();
+    final presenter = WorkoutPagePresenter();
+    final view = MockWorkoutPageView();
+    final nameController = TextEditingController(), noteController = TextEditingController();
+
+    presenter.attachRepositories(workoutRepo, exerciseRepo);
+    presenter.changeTemplate(1, 'A', false, false);
+
+    presenter.attach(view);
+
+    final appState = AppState();
+    appState.setInitialState('A', 'token', [Role('A', 'admin')]);
+
+    presenter.setAppState(appState);
+
+    when(exerciseRepo.getExercises()).thenAnswer((realInvocation) async => [Exercise('bodypart1', 'equipment1', 'gifUrl1', 'name1', 'muscleGroup1'), Exercise('bodypart2', 'equipment2', 'gifUrl2', 'name2', 'muscleGroup2'), Exercise('bodypart3', 'equipment3', 'gifUrl3', 'name3', 'muscleGroup3'), ]);
+    when(workoutRepo.fetchWorkout(any, any)).thenAnswer((realInvocation) async => Workout(1, 'name', 'coachNote', 'userId', 'coachId', false, '', '', '', []));
+    when(workoutRepo.fetchTemplate(any, any)).thenAnswer((realInvocation) async => TestData.testWorkoutTemplate1);
+    when(view.noteController).thenReturn(noteController);
+    when(view.nameController).thenReturn(nameController);
+
+    await presenter.fetchData();
+
+    nameController.text = '';
+    await presenter.saveChanges();
+    verify(view.notifyNoName()).called(1);
+
+    nameController.text = 'Azis';
+    await presenter.saveChanges();
+    verify(view.notifyNoSets()).called(1);
+  });
+
+  test('test save changes success', () async {
+    final workoutRepo = MockWorkoutRepository();
+    final exerciseRepo = MockExerciseRepository();
+    final presenter = WorkoutPagePresenter();
+    final view = MockWorkoutPageView();
+    final nameController = TextEditingController(), noteController = TextEditingController();
+
+    presenter.attachRepositories(workoutRepo, exerciseRepo);
+    presenter.changeTemplate(1, 'A', false, false);
+
+    presenter.attach(view);
+
+    final appState = AppState();
+    appState.setInitialState('A', 'token', [Role('A', 'admin')]);
+
+    presenter.setAppState(appState);
+
+    when(exerciseRepo.getExercises()).thenAnswer((realInvocation) async => [Exercise('bodypart1', 'equipment1', 'gifUrl1', 'name1', 'muscleGroup1'), Exercise('bodypart2', 'equipment2', 'gifUrl2', 'name2', 'muscleGroup2'), Exercise('bodypart3', 'equipment3', 'gifUrl3', 'name3', 'muscleGroup3'), ]);
+    when(workoutRepo.fetchWorkout(any, any)).thenAnswer((realInvocation) async => TestData.testWorkout1);
+    when(workoutRepo.fetchTemplate(any, any)).thenAnswer((realInvocation) async => TestData.testWorkoutTemplate1);
+    when(view.noteController).thenReturn(noteController);
+    when(view.nameController).thenReturn(nameController);
+
+    await presenter.fetchData();
+
+    nameController.text = '';
+    await presenter.saveChanges();
+    verify(view.notifyNoName()).called(1);
+
+    nameController.text = 'Azis';
+    await presenter.saveChanges();
+    verify(view.notifySaved()).called(1);
+  });
+
+  test('test save changes success', () async {
+    final workoutRepo = MockWorkoutRepository();
+    final exerciseRepo = MockExerciseRepository();
+    final presenter = WorkoutPagePresenter();
+    final view = MockWorkoutPageView();
+    final nameController = TextEditingController(), noteController = TextEditingController();
+
+    presenter.attachRepositories(workoutRepo, exerciseRepo);
+    presenter.changeTemplate(0, 'A', false, false);
+
+    presenter.attach(view);
+
+    final appState = AppState();
+    appState.setInitialState('A', 'token', [Role('A', 'admin')]);
+
+    presenter.setAppState(appState);
+
+    when(exerciseRepo.getExercises()).thenAnswer((realInvocation) async => [Exercise('bodypart1', 'equipment1', 'gifUrl1', 'name1', 'muscleGroup1'), Exercise('bodypart2', 'equipment2', 'gifUrl2', 'name2', 'muscleGroup2'), Exercise('bodypart3', 'equipment3', 'gifUrl3', 'name3', 'muscleGroup3'), ]);
+    when(workoutRepo.fetchWorkout(any, any)).thenAnswer((realInvocation) async => TestData.testWorkout2);
+    when(workoutRepo.fetchTemplate(any, any)).thenAnswer((realInvocation) async => TestData.testWorkoutTemplate1);
+    when(view.noteController).thenReturn(noteController);
+    when(view.nameController).thenReturn(nameController);
+
+    await presenter.fetchData();
+
+    nameController.text = '';
+    await presenter.saveChanges();
+    verify(view.notifyNoName()).called(1);
+
+    nameController.text = 'Azis';
+    await presenter.saveChanges();
+    verify(view.notifySaved()).called(1);
+  });
+
+  test('test save changes success id 0', () async {
+    final workoutRepo = MockWorkoutRepository();
+    final exerciseRepo = MockExerciseRepository();
+    final presenter = WorkoutPagePresenter();
+    final view = MockWorkoutPageView();
+    final nameController = TextEditingController(), noteController = TextEditingController();
+
+    presenter.attachRepositories(workoutRepo, exerciseRepo);
+    presenter.changeTemplate(0, 'A', false, false);
+
+    presenter.attach(view);
+
+    final appState = AppState();
+    appState.setInitialState('A', 'token', [Role('A', 'admin')]);
+
+    presenter.setAppState(appState);
+
+    when(exerciseRepo.getExercises()).thenAnswer((realInvocation) async => [Exercise('bodypart1', 'equipment1', 'gifUrl1', 'name1', 'muscleGroup1'), Exercise('bodypart2', 'equipment2', 'gifUrl2', 'name2', 'muscleGroup2'), Exercise('bodypart3', 'equipment3', 'gifUrl3', 'name3', 'muscleGroup3'), ]);
+    when(workoutRepo.fetchWorkout(any, any)).thenAnswer((realInvocation) async => TestData.testWorkout1);
+    when(workoutRepo.fetchTemplate(any, any)).thenAnswer((realInvocation) async => TestData.testWorkoutTemplate1);
+    when(view.noteController).thenReturn(noteController);
+    when(view.nameController).thenReturn(nameController);
+
+    await presenter.fetchData();
+
+    nameController.text = '';
+    await presenter.saveChanges();
+    verify(view.notifyNoName()).called(1);
+
+    nameController.text = 'Azis';
+    await presenter.saveChanges();
+    verify(view.notifySaved()).called(1);
+  });
+
+  test('test save changes success id 0', () async {
+    final workoutRepo = MockWorkoutRepository();
+    final exerciseRepo = MockExerciseRepository();
+    final presenter = WorkoutPagePresenter();
+    final view = MockWorkoutPageView();
+    final nameController = TextEditingController(), noteController = TextEditingController();
+
+    presenter.attachRepositories(workoutRepo, exerciseRepo);
+    presenter.changeTemplate(0, 'A', false, false);
+
+    presenter.attach(view);
+
+    final appState = AppState();
+    appState.setInitialState('A', 'token', [Role('A', 'admin')]);
+
+    presenter.setAppState(appState);
+
+    when(exerciseRepo.getExercises()).thenAnswer((realInvocation) async => [Exercise('bodypart1', 'equipment1', 'gifUrl1', 'name1', 'muscleGroup1'), Exercise('bodypart2', 'equipment2', 'gifUrl2', 'name2', 'muscleGroup2'), Exercise('bodypart3', 'equipment3', 'gifUrl3', 'name3', 'muscleGroup3'), ]);
+    when(workoutRepo.fetchWorkout(any, any)).thenAnswer((realInvocation) async => TestData.testWorkout2);
+    when(workoutRepo.fetchTemplate(any, any)).thenAnswer((realInvocation) async => TestData.testWorkoutTemplate1);
+    when(view.noteController).thenReturn(noteController);
+    when(view.nameController).thenReturn(nameController);
+
+    await presenter.fetchData();
+
+    nameController.text = '';
+    await presenter.saveChanges();
+    verify(view.notifyNoName()).called(1);
+
+    nameController.text = 'Azis';
+    await presenter.saveChanges();
+    verify(view.notifySaved()).called(1);
   });
 }
