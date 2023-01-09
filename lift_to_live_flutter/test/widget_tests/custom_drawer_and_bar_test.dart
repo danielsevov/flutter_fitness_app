@@ -35,7 +35,7 @@ void main() {
       await tester.pumpWidget(MaterialApp(
           title: 'Flutter Demo', home: Scaffold(body: Center(child: Container(height: 400, width: 400, color: Helper.blueColor,child: widget),))));
 
-      await tester.pump(const Duration(seconds: 2));
+      await tester.pump(const Duration(seconds: 0));
       await tester.pumpAndSettle();
 
       expect(nameFinder, findsOneWidget);
@@ -71,7 +71,7 @@ void main() {
       await tester.pumpWidget(MaterialApp(
           title: 'Flutter Demo', home: Scaffold(body: Center(child: Container(height: 400, width: 400, color: Helper.blueColor,child: widget),))));
 
-      await tester.pump(const Duration(seconds: 2));
+      await tester.pump(const Duration(seconds: 0));
       await tester.pumpAndSettle();
 
       expect(nameFinder, findsNothing);
@@ -104,7 +104,7 @@ void main() {
       await tester.pumpWidget(MaterialApp(
           title: 'Flutter Demo', home: Scaffold(body: Center(child: Container(height: 600, width: 400, color: Helper.blueColor,child: widget),))));
 
-      await tester.pump(const Duration(seconds: 2));
+      await tester.pump(const Duration(seconds: 0));
       await tester.pumpAndSettle();
 
       expect(nameFinder, findsOneWidget);
@@ -143,7 +143,7 @@ void main() {
       await tester.pumpWidget(MaterialApp(
           title: 'Flutter Demo', home: DefaultBottomBarController(child: Scaffold(body: Center(child: Container(height: 400, width: 400, color: Helper.blueColor,child: widget),)))));
 
-      await tester.pump(const Duration(seconds: 2));
+      await tester.pump(const Duration(seconds: 0));
       await tester.pumpAndSettle();
 
       expect(calendarFinder, findsOneWidget);
@@ -184,7 +184,7 @@ void main() {
       await tester.tap(buttonFinder3);
 
       await tester.pumpAndSettle();
-      await tester.pump(const Duration(seconds: 2));
+      await tester.pump(const Duration(seconds: 0));
 
       verify(view.workoutPressed(true)).called(1);
       verify(view.templatesPressed(true)).called(1);

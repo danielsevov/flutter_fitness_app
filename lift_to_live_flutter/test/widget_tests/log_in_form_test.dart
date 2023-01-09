@@ -71,9 +71,9 @@ void main() {
       await tester.pumpWidget(MaterialApp(
           title: 'Flutter Demo', home: Scaffold(body: Center(child: form,))));
 
-      await tester.pump(const Duration(seconds: 2));
+      await tester.pump(const Duration(seconds: 0));
       await tester.tap(buttonFinder);
-      await tester.pump(const Duration(seconds: 2));
+      await tester.pump(const Duration(seconds: 0));
       await tester.pumpAndSettle();
 
       expect(valFinder, findsOneWidget);
@@ -96,11 +96,11 @@ void main() {
       await tester.pumpWidget(MaterialApp(
           title: 'Flutter Demo', home: Scaffold(body: Center(child: form,))));
 
-      await tester.pump(const Duration(seconds: 2));
+      await tester.pump(const Duration(seconds: 0));
       await tester.enterText(fieldFinder, 'email');
-      await tester.pump(const Duration(seconds: 2));
+      await tester.pump(const Duration(seconds: 0));
       await tester.tap(buttonFinder);
-      await tester.pump(const Duration(seconds: 2));
+      await tester.pump(const Duration(seconds: 0));
       await tester.pumpAndSettle();
 
       expect(valFinder, findsOneWidget);
@@ -123,11 +123,11 @@ void main() {
       await tester.pumpWidget(MaterialApp(
           title: 'Flutter Demo', home: Scaffold(body: Center(child: form,))));
 
-      await tester.pump(const Duration(seconds: 2));
+      await tester.pump(const Duration(seconds: 0));
       await tester.enterText(fieldFinder, 'email@email.com');
-      await tester.pump(const Duration(seconds: 2));
+      await tester.pump(const Duration(seconds: 0));
       await tester.tap(buttonFinder);
-      await tester.pump(const Duration(seconds: 2));
+      await tester.pump(const Duration(seconds: 0));
       await tester.pumpAndSettle();
 
       expect(valFinder, findsNothing);
@@ -151,12 +151,12 @@ void main() {
       await tester.pumpWidget(MaterialApp(
           title: 'Flutter Demo', home: Scaffold(body: Center(child: form,))));
 
-      await tester.pump(const Duration(seconds: 2));
+      await tester.pump(const Duration(seconds: 0));
       await tester.enterText(fieldEmailFinder, 'email@email.com');
       await tester.enterText(fieldPassFinder, 'pass');
-      await tester.pump(const Duration(seconds: 2));
+      await tester.pump(const Duration(seconds: 0));
       await tester.tap(buttonFinder);
-      await tester.pump(const Duration(seconds: 2));
+      await tester.pump(const Duration(seconds: 0));
       await tester.pumpAndSettle();
 
       expect(valFinder, findsNothing);
@@ -183,12 +183,12 @@ void main() {
       await tester.pumpWidget(MaterialApp(
           title: 'Flutter Demo', home: Scaffold(body: Center(child: form,))));
 
-      await tester.pump(const Duration(seconds: 2));
+      await tester.pump(const Duration(seconds: 0));
       await tester.enterText(fieldEmailFinder, 'email@email.com');
       await tester.enterText(fieldPassFinder, 'testpassword');
-      await tester.pump(const Duration(seconds: 2));
+      await tester.pump(const Duration(seconds: 0));
       await tester.tap(buttonFinder);
-      await tester.pump(const Duration(seconds: 2));
+      await tester.pump(const Duration(seconds: 0));
       await tester.pumpAndSettle();
 
       expect(valFinder, findsNothing);
@@ -213,10 +213,10 @@ void main() {
       await tester.pumpWidget(MaterialApp(
           title: 'Flutter Demo', home: Scaffold(body: Center(child: form,))));
 
-      await tester.pump(const Duration(seconds: 2));
+      await tester.pump(const Duration(seconds: 0));
       await tester.enterText(fieldEmailFinder, 'email@email.com');
       await tester.enterText(fieldPassFinder, 'testpassword');
-      await tester.pump(const Duration(seconds: 2));
+      await tester.pump(const Duration(seconds: 0));
       await tester.pumpAndSettle();
 
       expect(form.getEmail(), 'email@email.com');
@@ -240,7 +240,7 @@ void main() {
       await tester.pumpWidget(MaterialApp(
           title: 'Flutter Demo', home: Scaffold(body: Center(child: form,))));
 
-      await tester.pump(const Duration(seconds: 2));
+      await tester.pump(const Duration(seconds: 0));
       await tester.enterText(fieldEmailFinder, 'email@email.com');
       await tester.enterText(fieldPassFinder, 'testpassword');
       await tester.pump(const Duration(seconds: 1));
@@ -271,7 +271,7 @@ void main() {
       await tester.pumpWidget(MaterialApp(
           title: 'Flutter Demo', home: Scaffold(body: Center(child: form,))));
 
-      await tester.pump(const Duration(seconds: 2));
+      await tester.pump(const Duration(seconds: 0));
       await tester.enterText(fieldEmailFinder, 'email@email.com');
       await tester.enterText(fieldPassFinder, 'testpassword');
       await tester.pump(const Duration(seconds: 1));

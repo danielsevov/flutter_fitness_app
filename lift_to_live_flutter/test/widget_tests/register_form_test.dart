@@ -34,7 +34,7 @@ void main() {
       await tester.pumpWidget(MaterialApp(
           title: 'Flutter Demo', home: Scaffold(backgroundColor: Helper.lightBlueColor, body: Center(child: form,))));
 
-      await tester.pump(const Duration(seconds: 2));
+      await tester.pump(const Duration(seconds: 0));
       await tester.pumpAndSettle();
 
       expect(titleFinder, findsOneWidget);
@@ -69,7 +69,7 @@ void main() {
       await tester.pumpWidget(MaterialApp(
           title: 'Flutter Demo', home: Scaffold(backgroundColor: Helper.lightBlueColor, body: Center(child: form,))));
 
-      await tester.pump(const Duration(seconds: 2));
+      await tester.pump(const Duration(seconds: 0));
 
       expect(nameFinder, findsNothing);
       expect(emailFinder, findsNothing);
@@ -80,7 +80,7 @@ void main() {
 
       await tester.tap(titleFinder);
       await tester.pumpAndSettle();
-      await tester.pump(const Duration(seconds: 2));
+      await tester.pump(const Duration(seconds: 0));
 
 
       expect(nameFinder, findsOneWidget);
@@ -108,19 +108,19 @@ void main() {
       await tester.pumpWidget(MaterialApp(
           title: 'Flutter Demo', home: Scaffold(backgroundColor: Helper.lightBlueColor, body: Center(child: form,))));
 
-      await tester.pump(const Duration(seconds: 2));
+      await tester.pump(const Duration(seconds: 0));
 
       expect(userAFinder, findsOneWidget);
 
       await tester.tap(userAFinder);
 
       await tester.pumpAndSettle();
-      await tester.pump(const Duration(seconds: 2));
+      await tester.pump(const Duration(seconds: 0));
 
        await tester.tap(userBFinder);
 
       await tester.pumpAndSettle();
-      await tester.pump(const Duration(seconds: 2));
+      await tester.pump(const Duration(seconds: 0));
 
       expect(userBFinder, findsOneWidget);
     });
@@ -142,7 +142,7 @@ void main() {
       await tester.pumpWidget(MaterialApp(
           title: 'Flutter Demo', home: Scaffold(backgroundColor: Helper.lightBlueColor, body: Center(child: form,))));
 
-      await tester.pump(const Duration(seconds: 2));
+      await tester.pump(const Duration(seconds: 0));
 
       expect(locationFinder, findsOneWidget);
       expect(nameFinder, findsNothing);
@@ -150,12 +150,12 @@ void main() {
       await tester.tap(locationFinder);
 
       await tester.pumpAndSettle();
-      await tester.pump(const Duration(seconds: 2));
+      await tester.pump(const Duration(seconds: 0));
 
       await tester.tap(nameFinder);
 
       await tester.pumpAndSettle();
-      await tester.pump(const Duration(seconds: 2));
+      await tester.pump(const Duration(seconds: 0));
 
       expect(nameFinder, findsOneWidget);
     });
@@ -185,7 +185,7 @@ void main() {
       await tester.pumpWidget(MaterialApp(
           title: 'Flutter Demo', home: Scaffold(backgroundColor: Helper.lightBlueColor, body: Center(child: form,))));
 
-      await tester.pump(const Duration(seconds: 2));
+      await tester.pump(const Duration(seconds: 0));
 
       expect(locationFinder, findsOneWidget);
       expect(nameFinder, findsNothing);
@@ -193,17 +193,17 @@ void main() {
       await tester.tap(locationFinder);
 
       await tester.pumpAndSettle();
-      await tester.pump(const Duration(seconds: 2));
+      await tester.pump(const Duration(seconds: 0));
 
       await tester.tap(nameFinder);
 
       await tester.pumpAndSettle();
-      await tester.pump(const Duration(seconds: 2));
+      await tester.pump(const Duration(seconds: 0));
 
       await tester.tap(buttonFinder);
 
       await tester.pumpAndSettle();
-      await tester.pump(const Duration(seconds: 2));
+      await tester.pump(const Duration(seconds: 0));
 
       expect(dateFinder, findsOneWidget);
     });
@@ -226,16 +226,16 @@ void main() {
       await tester.pumpWidget(MaterialApp(
           title: 'Flutter Demo', home: Scaffold(backgroundColor: Helper.lightBlueColor, body: Center(child: form,))));
 
-      await tester.pump(const Duration(seconds: 2));
+      await tester.pump(const Duration(seconds: 0));
       await tester.pumpAndSettle();
 
       // enter country
       final austriaFinder = find.text('Austria');
       await tester.tap(locationFinder);
       await tester.pumpAndSettle();
-      await tester.pump(const Duration(seconds: 2));
+      await tester.pump(const Duration(seconds: 0));
       await tester.tap(austriaFinder);
-      await tester.pump(const Duration(seconds: 2));
+      await tester.pump(const Duration(seconds: 0));
       await tester.pumpAndSettle();
 
       //enter date
@@ -243,13 +243,13 @@ void main() {
       final dateTextFinder = find.text('1');
       await tester.tap(dateFinder);
       await tester.pumpAndSettle();
-      await tester.pump(const Duration(seconds: 2));
+      await tester.pump(const Duration(seconds: 0));
       await tester.tap(dateTextFinder);
       await tester.pumpAndSettle();
-      await tester.pump(const Duration(seconds: 2));
+      await tester.pump(const Duration(seconds: 0));
       await tester.tap(buttonFinder);
       await tester.pumpAndSettle();
-      await tester.pump(const Duration(seconds: 2));
+      await tester.pump(const Duration(seconds: 0));
 
       form.enterData('User Name', 'user@email.com', 'MyPassword1234', '0888555555');
 
@@ -274,7 +274,7 @@ void main() {
 
       await tester.tap(titleFinder);
       await tester.pumpAndSettle();
-      await tester.pump(const Duration(seconds: 2));
+      await tester.pump(const Duration(seconds: 0));
 
       verify(presenter.registerUser()).called(1);
 

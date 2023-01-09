@@ -26,7 +26,7 @@ void main() {
       await tester.pumpWidget(MaterialApp(
           title: 'Flutter Demo', home: Scaffold(body: Center(child: Container(color: Helper.blueColor,child: widget),))));
 
-      await tester.pump(const Duration(seconds: 2));
+      await tester.pump(const Duration(seconds: 0));
       await tester.pumpAndSettle();
 
       expect(checkBoxFinder, findsOneWidget);
@@ -49,7 +49,7 @@ void main() {
       await tester.pumpWidget(MaterialApp(
           title: 'Flutter Demo', home: Scaffold(body: Center(child: Container(color: Helper.blueColor,child: widget),))));
 
-      await tester.pump(const Duration(seconds: 2));
+      await tester.pump(const Duration(seconds: 0));
       await tester.pumpAndSettle();
 
       expect(iconFinder, findsOneWidget);
@@ -71,7 +71,7 @@ void main() {
       await tester.pumpWidget(MaterialApp(
           title: 'Flutter Demo', home: Scaffold(body: Center(child: Container(color: Helper.blueColor,child: widget),))));
 
-      await tester.pump(const Duration(seconds: 2));
+      await tester.pump(const Duration(seconds: 0));
       await tester.pumpAndSettle();
 
       expect(iconFinder, findsOneWidget);

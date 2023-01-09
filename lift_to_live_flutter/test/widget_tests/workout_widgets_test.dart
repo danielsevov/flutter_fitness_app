@@ -20,7 +20,7 @@ void main() {
         await tester.pumpWidget(MaterialApp(
             title: 'Flutter Demo', home: Scaffold(body: Center(child: Container(color: Helper.blueColor,child: widget),))));
 
-        await tester.pump(const Duration(seconds: 2));
+        await tester.pump(const Duration(seconds: 0));
         await tester.pumpAndSettle();
 
         expect(find.text('Kilograms'), findsOneWidget);
@@ -37,7 +37,7 @@ void main() {
         await tester.pumpWidget(MaterialApp(
             title: 'Flutter Demo', home: Scaffold(body: Center(child: Container(color: Helper.blueColor,child: widget),))));
 
-        await tester.pump(const Duration(seconds: 2));
+        await tester.pump(const Duration(seconds: 0));
         await tester.pumpAndSettle();
 
         expect(find.text('Kilograms'), findsOneWidget);
@@ -60,7 +60,7 @@ void main() {
         await tester.pumpWidget(MaterialApp(
             title: 'Flutter Demo', home: Scaffold(body: Center(child: Container(color: Helper.blueColor,child: widget),))));
 
-        await tester.pump(const Duration(seconds: 2));
+        await tester.pump(const Duration(seconds: 0));
         await tester.pumpAndSettle();
 
         var kiloFinder = find.byType(TextField).first;
@@ -85,7 +85,7 @@ void main() {
         await tester.pumpWidget(MaterialApp(
             title: 'Flutter Demo', home: Scaffold(body: Center(child: Container(color: Helper.blueColor,child: widget),))));
 
-        await tester.pump(const Duration(seconds: 2));
+        await tester.pump(const Duration(seconds: 0));
         await tester.pumpAndSettle();
 
         var kiloFinder = find.byType(TextField).first;
@@ -110,7 +110,7 @@ void main() {
         await tester.pumpWidget(MaterialApp(
             title: 'Flutter Demo', home: Scaffold(body: Center(child: Container(color: Helper.blueColor,child: widget),))));
 
-        await tester.pump(const Duration(seconds: 2));
+        await tester.pump(const Duration(seconds: 0));
         await tester.pumpAndSettle();
 
         var kiloFinder = find.byType(TextField).first;
@@ -139,7 +139,7 @@ void main() {
         await tester.pumpWidget(MaterialApp(
             title: 'Flutter Demo', home: Scaffold(body: Center(child: Container(color: Helper.blueColor,child: widget),))));
 
-        await tester.pump(const Duration(seconds: 2));
+        await tester.pump(const Duration(seconds: 0));
         await tester.pumpAndSettle();
 
         var kiloFinder = find.byType(TextField).first;
@@ -172,7 +172,7 @@ void main() {
         await tester.pumpWidget(MaterialApp(
             title: 'Flutter Demo', home: Scaffold(body: Center(child: Container(color: Helper.blueColor,child: widget),))));
 
-        await tester.pump(const Duration(seconds: 2));
+        await tester.pump(const Duration(seconds: 0));
         await tester.pumpAndSettle();
 
         var setLabel = find.text('Set #1');
@@ -200,7 +200,7 @@ void main() {
         await tester.pumpWidget(MaterialApp(
             title: 'Flutter Demo', home: Scaffold(body: Center(child: Container(color: Helper.blueColor,child: widget),))));
 
-        await tester.pump(const Duration(seconds: 2));
+        await tester.pump(const Duration(seconds: 0));
         await tester.pumpAndSettle();
 
         var setLabel = find.text('Set #1');
@@ -228,7 +228,7 @@ void main() {
         await tester.pumpWidget(MaterialApp(
             title: 'Flutter Demo', home: Scaffold(body: Center(child: Container(color: Helper.blueColor,child: widget),))));
 
-        await tester.pump(const Duration(seconds: 2));
+        await tester.pump(const Duration(seconds: 0));
         await tester.pumpAndSettle();
 
         var lbl1 = find.text('Kilograms');
@@ -256,7 +256,7 @@ void main() {
         await tester.pumpWidget(MaterialApp(
             title: 'Flutter Demo', home: Scaffold(body: Center(child: Container(color: Helper.blueColor,child: widget),))));
 
-        await tester.pump(const Duration(seconds: 2));
+        await tester.pump(const Duration(seconds: 0));
         await tester.pumpAndSettle();
 
         var lbl1 = find.text('Kilograms');
@@ -280,7 +280,7 @@ void main() {
         await tester.pumpWidget(MaterialApp(
             title: 'Flutter Demo', home: Scaffold(body: Center(child: Container(color: Helper.blueColor,child: widget),))));
 
-        await tester.pump(const Duration(seconds: 2));
+        await tester.pump(const Duration(seconds: 0));
         await tester.pumpAndSettle();
 
         var label = find.text('Enter something');
@@ -298,7 +298,7 @@ void main() {
         await tester.pumpWidget(MaterialApp(
             title: 'Flutter Demo', home: Scaffold(body: Center(child: Container(color: Helper.blueColor,child: widget),))));
 
-        await tester.pump(const Duration(seconds: 2));
+        await tester.pump(const Duration(seconds: 0));
         await tester.pumpAndSettle();
 
         var label = find.text('Enter something');
@@ -326,7 +326,7 @@ void main() {
         await tester.pumpWidget(MaterialApp(
             title: 'Flutter Demo', home: Scaffold(body: Center(child: Container(color: Helper.blueColor,child: widget),))));
 
-        await tester.pump(const Duration(seconds: 2));
+        await tester.pump(const Duration(seconds: 0));
         await tester.pumpAndSettle();
 
         var lbl1 = find.text('Kilograms');
@@ -362,7 +362,7 @@ void main() {
         await tester.pumpWidget(MaterialApp(
             title: 'Flutter Demo', home: Scaffold(body: Center(child: Container(color: Helper.blueColor,child: widget),))));
 
-        await tester.pump(const Duration(seconds: 2));
+        await tester.pump(const Duration(seconds: 0));
         await tester.pumpAndSettle();
 
         var lbl1 = find.text('Kilograms');
@@ -400,7 +400,7 @@ void main() {
             title: 'Flutter Demo', home: Scaffold(body: Center(child: Container(color: Helper.blueColor,child: widget),))));
 
         await tester.pumpAndSettle();
-        await tester.pump(const Duration(seconds: 2));
+        await tester.pump(const Duration(seconds: 0));
 
         var exField = find.text('Ex A');
         var newExField = find.text('Ex C');
@@ -408,12 +408,12 @@ void main() {
         await tester.tap(exField);
 
         await tester.pumpAndSettle();
-        await tester.pump(const Duration(seconds: 2));
+        await tester.pump(const Duration(seconds: 0));
 
         await tester.tap(newExField);
 
         await tester.pumpAndSettle();
-        await tester.pump(const Duration(seconds: 2));
+        await tester.pump(const Duration(seconds: 0));
 
         expect(exercise.dropDownValue?.name, 'Ex C');
       });
@@ -438,24 +438,24 @@ void main() {
             title: 'Flutter Demo', home: Scaffold(body: Center(child: Container(color: Helper.blueColor,child: widget),))));
 
         await tester.pumpAndSettle();
-        await tester.pump(const Duration(seconds: 2));
+        await tester.pump(const Duration(seconds: 0));
 
         var buttonFinder = find.text('Add Set');
 
         await tester.tap(buttonFinder);
 
         await tester.pumpAndSettle();
-        await tester.pump(const Duration(seconds: 2));
+        await tester.pump(const Duration(seconds: 0));
 
         await tester.tap(buttonFinder);
 
         await tester.pumpAndSettle();
-        await tester.pump(const Duration(seconds: 2));
+        await tester.pump(const Duration(seconds: 0));
 
         await tester.tap(buttonFinder);
 
         await tester.pumpAndSettle();
-        await tester.pump(const Duration(seconds: 2));
+        await tester.pump(const Duration(seconds: 0));
 
         expect(tasks.length, 3);
       });
@@ -489,7 +489,7 @@ void main() {
             title: 'Flutter Demo', home: Scaffold(body: Center(child: Container(color: Helper.blueColor,child: widget),))));
 
         await tester.pumpAndSettle();
-        await tester.pump(const Duration(seconds: 2));
+        await tester.pump(const Duration(seconds: 0));
 
         var exField = find.text('Ex A');
         var newExField = find.text('Ex C');
@@ -497,17 +497,17 @@ void main() {
         await tester.tap(exField);
 
         await tester.pumpAndSettle();
-        await tester.pump(const Duration(seconds: 2));
+        await tester.pump(const Duration(seconds: 0));
 
         await tester.tap(newExField);
 
         await tester.pumpAndSettle();
-        await tester.pump(const Duration(seconds: 2));
+        await tester.pump(const Duration(seconds: 0));
 
         expect(exercise.dropDownValue?.name, 'Ex C');
 
         await tester.pumpAndSettle();
-        await tester.pump(const Duration(seconds: 2));
+        await tester.pump(const Duration(seconds: 0));
 
         expect(tasks.length, 1);
         expect(widget.toWorkoutSet().toJson().toString(), '{set_note: This is text, reps: [10], kilos: [10], exercise: Ex C, is_completed: true}');
@@ -544,7 +544,7 @@ void main() {
             title: 'Flutter Demo', home: Scaffold(body: Center(child: Container(color: Helper.blueColor,child: widget),))));
 
         await tester.pumpAndSettle();
-        await tester.pump(const Duration(seconds: 2));
+        await tester.pump(const Duration(seconds: 0));
 
         expect(tasks.length, 1);
         expect(widget.toWorkoutSet().exercise, '');
@@ -580,7 +580,7 @@ void main() {
             title: 'Flutter Demo', home: Scaffold(body: Center(child: Container(color: Helper.blueColor,child: widget),))));
 
         await tester.pumpAndSettle();
-        await tester.pump(const Duration(seconds: 2));
+        await tester.pump(const Duration(seconds: 0));
 
         expect(tasks.length, 1);
         expect(widget.toWorkoutSet().exercise, '');
@@ -599,7 +599,7 @@ void main() {
             title: 'Flutter Demo', home: Scaffold(body: Center(child: Container(color: Helper.blueColor,child: widget),))));
 
         await tester.pumpAndSettle();
-        await tester.pump(const Duration(seconds: 2));
+        await tester.pump(const Duration(seconds: 0));
 
         expect(find.text('Workout Name'), findsOneWidget);
         expect(find.text('my note'), findsOneWidget);
@@ -620,7 +620,7 @@ void main() {
             title: 'Flutter Demo', home: Scaffold(body: Center(child: Container(color: Helper.blueColor,child: widget),))));
 
         await tester.pumpAndSettle();
-        await tester.pump(const Duration(seconds: 2));
+        await tester.pump(const Duration(seconds: 0));
 
         expect(find.text('Workout Name'), findsOneWidget);
         expect(find.byIcon(Icons.notes), findsNothing);
@@ -642,7 +642,7 @@ void main() {
             title: 'Flutter Demo', home: Scaffold(body: Center(child: Container(color: Helper.blueColor,child: widget),))));
 
         await tester.pumpAndSettle();
-        await tester.pump(const Duration(seconds: 2));
+        await tester.pump(const Duration(seconds: 0));
 
         await tester.tap(find.byIcon(Icons.edit_note_outlined));
 
@@ -659,12 +659,12 @@ void main() {
             title: 'Flutter Demo', home: Scaffold(body: Center(child: Container(color: Helper.blueColor,child: widget),))));
 
         await tester.pumpAndSettle();
-        await tester.pump(const Duration(seconds: 2));
+        await tester.pump(const Duration(seconds: 0));
 
         await tester.tap(find.text('Show sets'));
 
         await tester.pumpAndSettle();
-        await tester.pump(const Duration(seconds: 2));
+        await tester.pump(const Duration(seconds: 0));
 
         expect(find.text('Hide sets'), findsOneWidget);
       });
@@ -681,7 +681,7 @@ void main() {
             title: 'Flutter Demo', home: Scaffold(body: Center(child: Container(color: Helper.blueColor,child: widget),))));
 
         await tester.pumpAndSettle();
-        await tester.pump(const Duration(seconds: 2));
+        await tester.pump(const Duration(seconds: 0));
 
         expect(find.text('Template Name'), findsOneWidget);
         expect(find.text('Note: my note'), findsOneWidget);
@@ -700,7 +700,7 @@ void main() {
             title: 'Flutter Demo', home: Scaffold(body: Center(child: Container(color: Helper.blueColor,child: widget),))));
 
         await tester.pumpAndSettle();
-        await tester.pump(const Duration(seconds: 2));
+        await tester.pump(const Duration(seconds: 0));
 
         await tester.tap(find.byIcon(Icons.edit_note_outlined));
 
@@ -717,12 +717,12 @@ void main() {
             title: 'Flutter Demo', home: Scaffold(body: Center(child: Container(color: Helper.blueColor,child: widget),))));
 
         await tester.pumpAndSettle();
-        await tester.pump(const Duration(seconds: 2));
+        await tester.pump(const Duration(seconds: 0));
 
         await tester.tap(find.text('Show sets'));
 
         await tester.pumpAndSettle();
-        await tester.pump(const Duration(seconds: 2));
+        await tester.pump(const Duration(seconds: 0));
 
         expect(find.text('Hide sets'), findsOneWidget);
       });
@@ -738,7 +738,7 @@ void main() {
             title: 'Flutter Demo', home: Scaffold(body: Center(child: Container(color: Helper.blueColor,child: widget),))));
 
         await tester.pumpAndSettle();
-        await tester.pump(const Duration(seconds: 2));
+        await tester.pump(const Duration(seconds: 0));
 
         await tester.tap(find.byIcon(Icons.fitness_center_outlined));
 
@@ -756,24 +756,24 @@ void main() {
             title: 'Flutter Demo', home: Scaffold(body: Center(child: Container(color: Helper.blueColor,child: widget),))));
 
         await tester.pumpAndSettle();
-        await tester.pump(const Duration(seconds: 2));
+        await tester.pump(const Duration(seconds: 0));
 
         await tester.tap(find.byIcon(Icons.copy));
 
         await tester.pumpAndSettle();
-        await tester.pump(const Duration(seconds: 2));
+        await tester.pump(const Duration(seconds: 0));
 
         await tester.tap(find.byIcon(Icons.cancel));
 
         expect(copied, false);
 
         await tester.pumpAndSettle();
-        await tester.pump(const Duration(seconds: 2));
+        await tester.pump(const Duration(seconds: 0));
 
         await tester.tap(find.byIcon(Icons.copy));
 
         await tester.pumpAndSettle();
-        await tester.pump(const Duration(seconds: 2));
+        await tester.pump(const Duration(seconds: 0));
 
         await tester.tap(find.byIcon(Icons.check_circle));
 

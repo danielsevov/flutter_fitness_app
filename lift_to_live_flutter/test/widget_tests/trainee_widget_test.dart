@@ -31,7 +31,7 @@ void main() {
       await tester.pumpWidget(MaterialApp(
           title: 'Flutter Demo', home: Scaffold(body: Center(child: widget,))));
 
-      await tester.pump(const Duration(seconds: 2));
+      await tester.pump(const Duration(seconds: 0));
       await tester.pumpAndSettle();
 
       expect(imageFinder, findsOneWidget);
@@ -59,7 +59,7 @@ void main() {
       await tester.pumpWidget(MaterialApp(
           title: 'Flutter Demo', home: Scaffold(body: Center(child: widget,))));
 
-      await tester.pump(const Duration(seconds: 2));
+      await tester.pump(const Duration(seconds: 0));
       await tester.pumpAndSettle();
 
       expect(imageFinder, findsOneWidget);
@@ -86,7 +86,7 @@ void main() {
       await tester.pumpWidget(MaterialApp(
           title: 'Flutter Demo', home: Scaffold(body: Center(child: widget,))));
 
-      await tester.pump(const Duration(seconds: 2));
+      await tester.pump(const Duration(seconds: 0));
       await tester.pumpAndSettle();
 
       expect(imageFinder, findsOneWidget);
@@ -96,7 +96,7 @@ void main() {
 
       await tester.tap(buttonFinder);
 
-      await tester.pump(const Duration(seconds: 2));
+      await tester.pump(const Duration(seconds: 0));
       await tester.pumpAndSettle();
 
       verify(view.navigateToProfilePage('user@email.com')).called(1);

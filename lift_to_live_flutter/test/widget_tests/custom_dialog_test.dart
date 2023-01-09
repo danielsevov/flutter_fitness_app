@@ -39,11 +39,11 @@ void main() {
       await tester.pumpWidget(MaterialApp(
       title: 'Flutter Demo', home: Scaffold(body: dialog)));
 
-      await tester.pump(const Duration(seconds: 2));
+      await tester.pump(const Duration(seconds: 0));
 
       await tester.tap(icon2Finder);
 
-      await tester.pump(const Duration(seconds: 2));
+      await tester.pump(const Duration(seconds: 0));
       await tester.pumpAndSettle();
 
       expect(confirmed, false);
@@ -62,11 +62,11 @@ void main() {
       await tester.pumpWidget(MaterialApp(
           title: 'Flutter Demo', home: Scaffold(body: dialog)));
 
-      await tester.pump(const Duration(seconds: 2));
+      await tester.pump(const Duration(seconds: 0));
 
       await tester.tap(iconFinder);
 
-      await tester.pump(const Duration(seconds: 2));
+      await tester.pump(const Duration(seconds: 0));
       await tester.pumpAndSettle();
 
       expect(canceled, false);
