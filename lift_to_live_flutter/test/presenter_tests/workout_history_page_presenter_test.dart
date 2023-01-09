@@ -128,6 +128,7 @@ void main() {
     presenter.attachRepositories(workoutRepo, exerciseRepo);
     presenter.userId = 'A';
 
+    presenter.detach();
     presenter.attach(view);
 
     final appState = AppState();

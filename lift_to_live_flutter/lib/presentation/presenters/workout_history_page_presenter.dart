@@ -140,7 +140,8 @@ class WorkoutHistoryPagePresenter extends BasePresenter {
             exerciseController: exerciseController,
             noteController: noteController,
             exercises: exerciseNames,
-            setIndex: j, isTemplate: false,
+            setIndex: j,
+            isTemplate: false,
           );
           workoutSetWidgets.add(workoutSet);
         }
@@ -148,14 +149,18 @@ class WorkoutHistoryPagePresenter extends BasePresenter {
         //add workout tasks to the workout instance widget
         _workoutDates.add(element.createdOn);
         _workoutWidgets.add(WorkoutHolder(
-            workoutSetItems: workoutSetWidgets,
-            name: element.name,
-            note: element.coachNote,
-            created: element.createdOn,
-            completed: element.completedOn,
-            duration: element.duration, totalVolume: '$totalVolume kgs', userId: element.userId, id: element.id, onEdit: (BuildContext context){
-          Helper.replacePage(context, PageFactory().getWorkoutPage(element.id, element.userId, false, false));
-        }, ));
+          workoutSetItems: workoutSetWidgets,
+          name: element.name,
+          note: element.coachNote,
+          created: element.createdOn,
+          completed: element.completedOn,
+          duration: element.duration,
+          totalVolume: '$totalVolume kgs',
+          userId: element.userId,
+          id: element.id,
+          //ignore-line
+          onEdit: (BuildContext context) { Helper.replacePage( context, PageFactory().getWorkoutPage(element.id, element.userId, false, false));},
+        ));
       }
 
       // add the bottom margin space
@@ -167,9 +172,7 @@ class WorkoutHistoryPagePresenter extends BasePresenter {
       _view?.setInProgress(false);
       _view?.setWorkoutData(_workoutWidgets, _workoutDates);
       _view?.setFetched(true);
-    }
-
-    catch (e) {
+    } catch (e) {
       _view?.notifyNoWorkoutsFound();
       _workoutWidgets.add(const Text(
         'No Workouts were found!',
