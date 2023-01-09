@@ -158,8 +158,9 @@ class WorkoutHistoryPagePresenter extends BasePresenter {
           totalVolume: '$totalVolume kgs',
           userId: element.userId,
           id: element.id,
-          // coverage:ignore-line
+          // coverage:ignore-start
           onEdit: (BuildContext context) { Helper.replacePage( context, PageFactory().getWorkoutPage(element.id, element.userId, false, false));},
+          // coverage:ignore-end
         ));
       }
 
