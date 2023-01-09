@@ -30,9 +30,6 @@ class _SetTaskHolderState extends State<SetTaskHolder> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-
-              //const SizedBox(),
-
               // text field for entering kilogram values
               Row(
                 children: [
@@ -40,13 +37,14 @@ class _SetTaskHolderState extends State<SetTaskHolder> {
                     width: 60,
                     height: widget.isEnabled ? 50 : 20,
                     child: TextField(
+                      enableInteractiveSelection: false,
                       decoration: InputDecoration(
                         filled: true,
                         fillColor: widget.isEnabled ? Helper.blueColor.withOpacity(0.7) : Helper.lightBlueColor,
                         border: const OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(15)))
                       ),
                       enabled: widget.isEnabled,
-                      onSubmitted: (newString){
+                      onChanged: (newString){
                         try {
                           int.parse(newString);
                         }
@@ -65,7 +63,6 @@ class _SetTaskHolderState extends State<SetTaskHolder> {
                           fontSize: 16),
                     ),
                   ),
-                  //const Text('kgs', style: TextStyle(color: Helper.whiteColor),)
                 ],
               ),
 
@@ -76,13 +73,14 @@ class _SetTaskHolderState extends State<SetTaskHolder> {
                     width: 60,
                   height: widget.isEnabled ? 50 : 20,
                     child: TextField(
+                      enableInteractiveSelection: false,
                       decoration: InputDecoration(
                         filled: true,
                         fillColor: widget.isEnabled ? Helper.blueColor.withOpacity(0.7) : Helper.lightBlueColor,
                           border: const OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(15)))
                       ),
                       enabled: widget.isEnabled,
-                      onSubmitted: (newString){
+                      onChanged: (newString){
                         try {
                           int.parse(newString);
                         }
@@ -101,7 +99,6 @@ class _SetTaskHolderState extends State<SetTaskHolder> {
                           fontSize: 16),
                     ),
                   ),
-                  //const Text('reps', style: TextStyle(color: Helper.whiteColor),)
                 ],
               ),
 
