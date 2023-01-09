@@ -2,14 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lift_to_live_flutter/factory/page_factory.dart';
 import 'package:lift_to_live_flutter/presentation/presenters/workout_templates_page_presenter.dart';
-import 'package:lift_to_live_flutter/presentation/ui/widgets/workout_related/workout_set_holder.dart';
+import 'package:lift_to_live_flutter/presentation/ui/widgets/workout_related/fixed_set_holder.dart';
 
 import '../../../../helper.dart';
 import '../reusable_elements/custom_dialog.dart';
 
 /// A holder for a single template workout entry.
 class TemplateWorkoutHolder extends StatefulWidget {
-  final List<WorkoutSetHolder> workoutSetItems;
+  final List<FixedSetHolder> workoutSetItems;
   final String name, note, creationDate, userId;
   final int id;
   final WorkoutTemplatesPagePresenter presenter;

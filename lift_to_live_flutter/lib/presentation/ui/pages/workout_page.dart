@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lift_to_live_flutter/factory/page_factory.dart';
 import 'package:lift_to_live_flutter/presentation/ui/widgets/reusable_elements/custom_heading_text_field.dart';
-import 'package:lift_to_live_flutter/presentation/ui/widgets/workout_related/template_set_holder.dart';
+import 'package:lift_to_live_flutter/presentation/ui/widgets/workout_related/editable_set_holder.dart';
 import 'package:provider/provider.dart';
 import '../../presenters/workout_page_presenter.dart';
 import '../../state_management/app_state.dart';
@@ -36,7 +36,7 @@ class WorkoutPageState extends State<WorkoutPage>
           false, // Indicator showing if data is being fetched at the moment
       _isFetched = false;
   late double screenHeight, screenWidth;
-  late List<TemplateSetHolder> _workoutWidgets;
+  late List<EditableSetHolder> _workoutWidgets;
   bool reorderEnabled = false;
 
   @override
@@ -102,7 +102,7 @@ class WorkoutPageState extends State<WorkoutPage>
 
   /// Function to set and display the workout template data.
   @override
-  void setTemplateData(String templateName, String templateNote, List<TemplateSetHolder> workoutSetWidgets) {
+  void setTemplateData(String templateName, String templateNote, List<EditableSetHolder> workoutSetWidgets) {
     setState(() {
       nameController.text = templateName;
       noteController.text = templateNote;

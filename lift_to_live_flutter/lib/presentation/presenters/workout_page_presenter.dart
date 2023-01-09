@@ -9,7 +9,7 @@ import 'package:lift_to_live_flutter/domain/repositories/workout_repo.dart';
 import 'package:lift_to_live_flutter/presentation/presenters/base_presenter.dart';
 import 'package:lift_to_live_flutter/presentation/ui/widgets/workout_related/set_task_holder.dart';
 import '../../domain/entities/workout_set.dart';
-import '../ui/widgets/workout_related/template_set_holder.dart';
+import '../ui/widgets/workout_related/editable_set_holder.dart';
 import '../views/workout_page_view.dart';
 
 /// This is the object, which holds the business logic, related to the user Workout Page view.
@@ -25,7 +25,7 @@ class WorkoutPagePresenter extends BasePresenter {
   late final ExerciseRepository _exerciseRepository;
   late List<String> _exerciseNames;
 
-  final List<TemplateSetHolder> _templateSetWidgets = [];
+  final List<EditableSetHolder> _templateSetWidgets = [];
 
   String creationDate = '';
 
@@ -166,7 +166,7 @@ class WorkoutPagePresenter extends BasePresenter {
         kiloControllers = [],
         isCompletedControllers = [];
 
-    _templateSetWidgets.add(TemplateSetHolder(
+    _templateSetWidgets.add(EditableSetHolder(
         setTasks: setTaskItems,
         exerciseController: SingleValueDropDownController(),
         noteController: TextEditingController(),
@@ -256,7 +256,7 @@ class WorkoutPagePresenter extends BasePresenter {
           ));
         }
 
-        var workoutSet = TemplateSetHolder(
+        var workoutSet = EditableSetHolder(
           setTasks: workoutSetItems,
           exerciseController: exerciseController,
           noteController: noteController,

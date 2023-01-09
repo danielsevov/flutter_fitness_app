@@ -8,7 +8,7 @@ import 'package:lift_to_live_flutter/domain/repositories/exercise_repo.dart';
 import 'package:lift_to_live_flutter/domain/repositories/workout_repo.dart';
 import 'package:lift_to_live_flutter/helper.dart';
 import 'package:lift_to_live_flutter/presentation/presenters/base_presenter.dart';
-import 'package:lift_to_live_flutter/presentation/ui/widgets/workout_related/workout_set_holder.dart';
+import 'package:lift_to_live_flutter/presentation/ui/widgets/workout_related/fixed_set_holder.dart';
 import 'package:lift_to_live_flutter/presentation/ui/widgets/workout_related/set_task_holder.dart';
 import 'package:lift_to_live_flutter/presentation/ui/widgets/workout_related/template_workout_holder.dart';
 import '../views/workout_templates_page_view.dart';
@@ -99,7 +99,7 @@ class WorkoutTemplatesPagePresenter extends BasePresenter {
       //add list of workoutSets widgets (1 for each habit task in a habit instance)
       for (Workout element in _workouts) {
         log(element.name);
-        final workoutSetWidgets = <WorkoutSetHolder>[];
+        final workoutSetWidgets = <FixedSetHolder>[];
 
         // create e list of WorkoutSetHolders
         int j = 0;
@@ -140,11 +140,10 @@ class WorkoutTemplatesPagePresenter extends BasePresenter {
             ));
           }
 
-          var workoutSet = WorkoutSetHolder(
+          var workoutSet = FixedSetHolder(
             setTasks: workoutSetItems,
             exerciseController: exerciseController,
             noteController: noteController,
-            isEnabled: false,
             exercises: exerciseNames,
             isTemplate: true,
             setIndex: j,

@@ -6,33 +6,32 @@ import 'package:lift_to_live_flutter/presentation/ui/widgets/workout_related/set
 
 import '../../../../helper.dart';
 
-/// A holder for a single workout set, part of a workout entry.
-class WorkoutSetHolder extends StatefulWidget {
+/// A holder for a single non editable (fixed) set, part of a workout/template entry.
+class FixedSetHolder extends StatefulWidget {
   final List<SetTaskHolder> setTasks;
 
   final TextEditingController noteController;
   final SingleValueDropDownController exerciseController;
 
-  final bool isEnabled, isTemplate;
+  final bool isTemplate;
   final List<String> exercises;
   final int setIndex;
 
-  const WorkoutSetHolder(
+  const FixedSetHolder(
       {Key? key,
       required this.setTasks,
       required this.exerciseController,
       required this.noteController,
-      required this.isEnabled,
       required this.exercises,
       required this.setIndex,
       required this.isTemplate})
       : super(key: key);
 
   @override
-  State<WorkoutSetHolder> createState() => _WorkoutSetHolderState();
+  State<FixedSetHolder> createState() => _FixedSetHolderState();
 }
 
-class _WorkoutSetHolderState extends State<WorkoutSetHolder> {
+class _FixedSetHolderState extends State<FixedSetHolder> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -72,7 +71,7 @@ class _WorkoutSetHolderState extends State<WorkoutSetHolder> {
                   }
                 },
                 items: widget.exercises,
-                isEnabled: widget.isEnabled),
+                isEnabled: false),
             const SizedBox(
               height: 10,
             ),
@@ -97,7 +96,7 @@ class _WorkoutSetHolderState extends State<WorkoutSetHolder> {
                     controller: widget.noteController,
                     keyboardType: TextInputType.text,
                     obscureText: false,
-                    enabled: widget.isEnabled,
+                    enabled: false,
                   ),
             const SizedBox(
               height: 10,

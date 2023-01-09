@@ -1,6 +1,6 @@
 // coverage:ignore-start
 
-import 'package:lift_to_live_flutter/presentation/ui/widgets/workout_related/template_set_holder.dart';
+import 'package:lift_to_live_flutter/presentation/ui/widgets/workout_related/editable_set_holder.dart';
 
 /// API to the WorkoutPage view widget.
 /// Describes the methods of the workout templates page view implementation.
@@ -9,7 +9,7 @@ abstract class WorkoutPageView {
   get nameController;
 
   /// Function to set and display the workout template data.
-  void setTemplateData( String templateName, String templateNote, List<TemplateSetHolder> workoutSetWidgets);
+  void setTemplateData( String templateName, String templateNote, List<EditableSetHolder> workoutSetWidgets);
 
   /// Function to set if data is currently being fetched and an loading indicator should be displayed.
   void setInProgress(bool inProgress);

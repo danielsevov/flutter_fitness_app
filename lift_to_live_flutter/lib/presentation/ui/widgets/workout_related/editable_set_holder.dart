@@ -8,8 +8,8 @@ import 'package:lift_to_live_flutter/presentation/ui/widgets/workout_related/set
 
 import '../../../../helper.dart';
 
-/// A holder for a single workout template set, part of a workout template.
-class TemplateSetHolder extends StatefulWidget {
+/// A holder for a single editable set, part of a workout/template entry.
+class EditableSetHolder extends StatefulWidget {
   final List<SetTaskHolder> setTasks;
   final WorkoutPagePresenter presenter;
 
@@ -24,7 +24,7 @@ class TemplateSetHolder extends StatefulWidget {
 
   final String tag;
 
-  const TemplateSetHolder(
+  const EditableSetHolder(
       {Key? key,
       required this.setTasks,
       required this.exerciseController,
@@ -38,7 +38,7 @@ class TemplateSetHolder extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<TemplateSetHolder> createState() => TemplateSetHolderState();
+  State<EditableSetHolder> createState() => EditableSetHolderState();
 
   WorkoutSet toWorkoutSet() {
     String setNote, exercise;
@@ -64,7 +64,7 @@ class TemplateSetHolder extends StatefulWidget {
   }
 }
 
-class TemplateSetHolderState extends State<TemplateSetHolder>  with AutomaticKeepAliveClientMixin{
+class EditableSetHolderState extends State<EditableSetHolder>  with AutomaticKeepAliveClientMixin{
 
   @override
   bool get wantKeepAlive => true;

@@ -1,13 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:lift_to_live_flutter/presentation/ui/widgets/workout_related/workout_set_holder.dart';
+import 'package:lift_to_live_flutter/presentation/ui/widgets/workout_related/fixed_set_holder.dart';
 
 import '../../../../factory/page_factory.dart';
 import '../../../../helper.dart';
 
 /// A holder for a single workout entry.
 class WorkoutHolder extends StatefulWidget {
-  final List<WorkoutSetHolder> workoutSetItems;
+  final List<FixedSetHolder> workoutSetItems;
   final String name, note, created, completed, duration, totalVolume, userId;
   final int id;
 

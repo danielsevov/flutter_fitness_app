@@ -1,8 +1,10 @@
+import 'package:dropdown_textfield/dropdown_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:lift_to_live_flutter/helper.dart';
 import 'package:lift_to_live_flutter/presentation/ui/widgets/workout_related/set_task_header.dart';
 import 'package:lift_to_live_flutter/presentation/ui/widgets/workout_related/set_task_holder.dart';
+import 'package:lift_to_live_flutter/presentation/ui/widgets/workout_related/fixed_set_holder.dart';
 
 void main() {
   group('set task header tests', () {
@@ -153,8 +155,118 @@ void main() {
     });
   });
 
-  group('workout set holder tests', () {
+  group('fixed set holder tests', () {
+    testWidgets('Fixed set holder constructor test', (tester) async {
+      await tester.runAsync(() async {
+        // tests
+        var note = TextEditingController();
+        var exercise = SingleValueDropDownController();
+        List<String> exercises = ['Ex A', 'Ex B', 'Ex C'];
 
+        final widget = FixedSetHolder(setTasks: const [], exerciseController: exercise, noteController: note, exercises: exercises, setIndex: 1, isTemplate: false);
+
+        await tester.pumpWidget(MaterialApp(
+            title: 'Flutter Demo', home: Scaffold(body: Center(child: Container(color: Helper.blueColor,child: widget),))));
+
+        await tester.pump(const Duration(seconds: 2));
+        await tester.pumpAndSettle();
+
+        var setLabel = find.text('Set #1');
+        var exField = find.text('Enter exercise');
+        var noteField = find.text('Enter note');
+
+        expect(setLabel, findsOneWidget);
+        expect(exField, findsOneWidget);
+        expect(noteField, findsNothing);
+      });
+    });
+
+    testWidgets('Fixed set holder constructor test 2', (tester) async {
+      await tester.runAsync(() async {
+        // tests
+        var note = TextEditingController();
+        note.text = 'This is text';
+
+        var exercise = SingleValueDropDownController();
+        exercise.dropDownValue = const DropDownValueModel(name: 'Ex A', value: 'Ex A');
+        List<String> exercises = ['Ex A', 'Ex B', 'Ex C'];
+
+        final widget = FixedSetHolder(setTasks: const [], exerciseController: exercise, noteController: note, exercises: exercises, setIndex: 1, isTemplate: false);
+
+        await tester.pumpWidget(MaterialApp(
+            title: 'Flutter Demo', home: Scaffold(body: Center(child: Container(color: Helper.blueColor,child: widget),))));
+
+        await tester.pump(const Duration(seconds: 2));
+        await tester.pumpAndSettle();
+
+        var setLabel = find.text('Set #1');
+        var exField = find.text('Ex A');
+        var noteField = find.text('This is text');
+
+        expect(setLabel, findsOneWidget);
+        expect(exField, findsOneWidget);
+        expect(noteField, findsOneWidget);
+      });
+    });
+
+    testWidgets('Fixed set holder constructor test 3', (tester) async {
+      await tester.runAsync(() async {
+        // tests
+        var note = TextEditingController();
+        note.text = 'This is text';
+
+        var exercise = SingleValueDropDownController();
+        exercise.dropDownValue = const DropDownValueModel(name: 'Ex A', value: 'Ex A');
+        List<String> exercises = ['Ex A', 'Ex B', 'Ex C'];
+
+        final widget = FixedSetHolder(setTasks: const [], exerciseController: exercise, noteController: note, exercises: exercises, setIndex: 1, isTemplate: true);
+
+        await tester.pumpWidget(MaterialApp(
+            title: 'Flutter Demo', home: Scaffold(body: Center(child: Container(color: Helper.blueColor,child: widget),))));
+
+        await tester.pump(const Duration(seconds: 2));
+        await tester.pumpAndSettle();
+
+        var lbl1 = find.text('Kilograms');
+        var lbl2 = find.text('Repetitions');
+        var lbl3 = find.text('Completed?');
+
+        expect(lbl1, findsOneWidget);
+        expect(lbl2, findsOneWidget);
+        expect(lbl3, findsNothing);
+      });
+    });
+
+    testWidgets('Fixed set holder constructor test 3', (tester) async {
+      await tester.runAsync(() async {
+        // tests
+        var note = TextEditingController();
+        note.text = 'This is text';
+
+        var exercise = SingleValueDropDownController();
+        exercise.dropDownValue = const DropDownValueModel(name: 'Ex A', value: 'Ex A');
+        List<String> exercises = ['Ex A', 'Ex B', 'Ex C'];
+
+        final widget = FixedSetHolder(setTasks: const [], exerciseController: exercise, noteController: note, exercises: exercises, setIndex: 1, isTemplate: false);
+
+        await tester.pumpWidget(MaterialApp(
+            title: 'Flutter Demo', home: Scaffold(body: Center(child: Container(color: Helper.blueColor,child: widget),))));
+
+        await tester.pump(const Duration(seconds: 2));
+        await tester.pumpAndSettle();
+
+        var lbl1 = find.text('Kilograms');
+        var lbl2 = find.text('Repetitions');
+        var lbl3 = find.text('Completed?');
+
+        expect(lbl1, findsOneWidget);
+        expect(lbl2, findsOneWidget);
+        expect(lbl3, findsOneWidget);
+      });
+    });
   });
 
+  group('Editable set holder tests', () {
+
+  });
 }
