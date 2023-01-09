@@ -11,6 +11,7 @@ import 'package:lift_to_live_flutter/presentation/presenters/base_presenter.dart
 import 'package:lift_to_live_flutter/presentation/ui/widgets/workout_related/fixed_set_holder.dart';
 import 'package:lift_to_live_flutter/presentation/ui/widgets/workout_related/set_task_holder.dart';
 import 'package:lift_to_live_flutter/presentation/ui/widgets/workout_related/template_workout_holder.dart';
+import '../../factory/page_factory.dart';
 import '../views/workout_templates_page_view.dart';
 
 /// This is the object, which holds the business logic, related to the user Workout Templates Page view.
@@ -158,7 +159,11 @@ class WorkoutTemplatesPagePresenter extends BasePresenter {
           note: element.coachNote,
           creationDate: element.createdOn,
           id: element.id,
-          userId: element.userId, presenter: this,
+          userId: element.userId, onSubmit: () { copyWorkout(element.id); }, onEdit: (BuildContext context){
+          Helper.replacePage(context, PageFactory().getWorkoutPage(element.id, element.userId, true, true));
+        }, onStartWorkout: (BuildContext context){
+          Helper.replacePage(context, PageFactory().getWorkoutPage(element.id, element.userId, false, true));
+        },
         ));
       }
 

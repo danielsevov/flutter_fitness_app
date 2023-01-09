@@ -1,7 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:lift_to_live_flutter/factory/page_factory.dart';
-import 'package:lift_to_live_flutter/presentation/presenters/workout_templates_page_presenter.dart';
 import 'package:lift_to_live_flutter/presentation/ui/widgets/workout_related/fixed_set_holder.dart';
 
 import '../../../../helper.dart';
@@ -12,10 +10,11 @@ class TemplateWorkoutHolder extends StatefulWidget {
   final List<FixedSetHolder> workoutSetItems;
   final String name, note, creationDate, userId;
   final int id;
-  final WorkoutTemplatesPagePresenter presenter;
+  final Function() onSubmit;
+  final Function(BuildContext context)? onStartWorkout, onEdit;
 
   const TemplateWorkoutHolder(
-      {Key? key, required this.workoutSetItems, required this.name, required this.note, required this.creationDate, required this.id, required this.userId, required this.presenter, })
+      {Key? key, required this.workoutSetItems, required this.name, required this.note, required this.creationDate, required this.id, required this.userId, required this.onSubmit, this.onStartWorkout, this.onEdit })
       : super(key: key);
 
   @override
@@ -49,9 +48,7 @@ class _TemplateWorkoutHolderState extends State<TemplateWorkoutHolder> {
               children: [
                 const SizedBox(width: 50,),
                 Text(widget.name, style: const TextStyle(color: Helper.yellowColor, fontSize: 22),),
-                FloatingActionButton(heroTag: 'editWorkoutButton${widget.name}', onPressed: (){
-                  Helper.replacePage(context, PageFactory().getWorkoutPage(widget.id, widget.userId, true, true));
-                }, isExtended: false, shape: const CircleBorder(),backgroundColor: Helper.whiteColor.withOpacity(0.33), mini: true, child: const Icon(Icons.edit_note_outlined),),],
+                FloatingActionButton(heroTag: 'editWorkoutButton${widget.name}', onPressed: (){widget.onEdit!(context);}, isExtended: false, shape: const CircleBorder(),backgroundColor: Helper.whiteColor.withOpacity(0.33), mini: true, child: const Icon(Icons.edit_note_outlined),),],
             ),
             const SizedBox(height: 10,),
             Text('Note: ${widget.note}', style: const TextStyle(color: Helper.textFieldTextColor),),
@@ -75,9 +72,7 @@ class _TemplateWorkoutHolderState extends State<TemplateWorkoutHolder> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                FloatingActionButton.extended(heroTag: 'startWorkoutButton${widget.name}', onPressed: (){
-                  Helper.replacePage(context, PageFactory().getWorkoutPage(widget.id, widget.userId, false, true));
-                }, isExtended: true, label: const Text('Start Workout', style: TextStyle(color: Helper.blackColor, fontWeight: FontWeight.w800),), icon: const Icon(Icons.fitness_center_outlined, color: Helper.blackColor,), backgroundColor: Helper.yellowColor,),
+                FloatingActionButton.extended(heroTag: 'startWorkoutButton${widget.name}', onPressed: (){widget.onStartWorkout!(context);}, isExtended: true, label: const Text('Start Workout', style: TextStyle(color: Helper.blackColor, fontWeight: FontWeight.w800),), icon: const Icon(Icons.fitness_center_outlined, color: Helper.blackColor,), backgroundColor: Helper.yellowColor,),
                 FloatingActionButton.extended(heroTag: 'copyTemplateButton${widget.name}', onPressed: (){
                   showDialog(
                       context: context,
@@ -85,9 +80,7 @@ class _TemplateWorkoutHolderState extends State<TemplateWorkoutHolder> {
                         return CustomDialog(
                             title: 'Duplicate Template',
                             bodyText: 'Are you sure you want to make a copy of this template?',
-                            confirm: () {
-                              widget.presenter.copyWorkout(widget.id);
-                            },
+                            confirm: widget.onSubmit,
                             cancel: () {
                               Navigator.pop(context);
                             });

@@ -7,6 +7,7 @@ import 'package:lift_to_live_flutter/presentation/ui/widgets/workout_related/edi
 import 'package:lift_to_live_flutter/presentation/ui/widgets/workout_related/set_task_header.dart';
 import 'package:lift_to_live_flutter/presentation/ui/widgets/workout_related/set_task_holder.dart';
 import 'package:lift_to_live_flutter/presentation/ui/widgets/workout_related/fixed_set_holder.dart';
+import 'package:lift_to_live_flutter/presentation/ui/widgets/workout_related/template_workout_holder.dart';
 import 'package:lift_to_live_flutter/presentation/ui/widgets/workout_related/workout_holder.dart';
 
 void main() {
@@ -666,6 +667,117 @@ void main() {
         await tester.pump(const Duration(seconds: 2));
 
         expect(find.text('Hide sets'), findsOneWidget);
+      });
+    });
+  });
+
+  group('workout template holder tests', () {
+    testWidgets('Workout template holder constructor test', (tester) async {
+      await tester.runAsync(() async {
+        // tests
+        final widget = TemplateWorkoutHolder(workoutSetItems: const [], name: 'Template Name', note: 'my note', creationDate: '1673270770860', userId: 'email@email.com', id: 1, onEdit: (BuildContext context) {}, onSubmit: () { }, onStartWorkout: (BuildContext context) {},);
+
+        await tester.pumpWidget(MaterialApp(
+            title: 'Flutter Demo', home: Scaffold(body: Center(child: Container(color: Helper.blueColor,child: widget),))));
+
+        await tester.pumpAndSettle();
+        await tester.pump(const Duration(seconds: 2));
+
+        expect(find.text('Template Name'), findsOneWidget);
+        expect(find.text('Note: my note'), findsOneWidget);
+        expect(find.text('Created on 09/01/2023'), findsOneWidget);
+        expect(find.text('Show sets'), findsOneWidget);
+      });
+    });
+
+    testWidgets('Workout template holder edit workout template test', (tester) async {
+      await tester.runAsync(() async {
+        // tests
+        bool edited = false;
+        final widget = TemplateWorkoutHolder(workoutSetItems: const [], name: 'Template Name', note: 'my note', creationDate: '1673270770860', userId: 'email@email.com', id: 1, onEdit: (BuildContext context) {edited = true;}, onSubmit: () { }, onStartWorkout: (BuildContext context) {},);
+
+        await tester.pumpWidget(MaterialApp(
+            title: 'Flutter Demo', home: Scaffold(body: Center(child: Container(color: Helper.blueColor,child: widget),))));
+
+        await tester.pumpAndSettle();
+        await tester.pump(const Duration(seconds: 2));
+
+        await tester.tap(find.byIcon(Icons.edit_note_outlined));
+
+        expect(edited, true);
+      });
+    });
+
+    testWidgets('Workout template holder open/close body expansion test', (tester) async {
+      await tester.runAsync(() async {
+        // tests
+        final widget = TemplateWorkoutHolder(workoutSetItems: const [], name: 'Template Name', note: 'my note', creationDate: '1673270770860', userId: 'email@email.com', id: 1, onEdit: (BuildContext context) {}, onSubmit: () { }, onStartWorkout: (BuildContext context) {},);
+
+        await tester.pumpWidget(MaterialApp(
+            title: 'Flutter Demo', home: Scaffold(body: Center(child: Container(color: Helper.blueColor,child: widget),))));
+
+        await tester.pumpAndSettle();
+        await tester.pump(const Duration(seconds: 2));
+
+        await tester.tap(find.text('Show sets'));
+
+        await tester.pumpAndSettle();
+        await tester.pump(const Duration(seconds: 2));
+
+        expect(find.text('Hide sets'), findsOneWidget);
+      });
+    });
+
+    testWidgets('Workout template holder start workout from template test', (tester) async {
+      await tester.runAsync(() async {
+        // tests
+        bool started = false;
+        final widget = TemplateWorkoutHolder(workoutSetItems: const [], name: 'Template Name', note: 'my note', creationDate: '1673270770860', userId: 'email@email.com', id: 1, onEdit: (BuildContext context) {}, onSubmit: () { }, onStartWorkout: (BuildContext context) {started = true;},);
+
+        await tester.pumpWidget(MaterialApp(
+            title: 'Flutter Demo', home: Scaffold(body: Center(child: Container(color: Helper.blueColor,child: widget),))));
+
+        await tester.pumpAndSettle();
+        await tester.pump(const Duration(seconds: 2));
+
+        await tester.tap(find.byIcon(Icons.fitness_center_outlined));
+
+        expect(started, true);
+      });
+    });
+
+    testWidgets('Workout template holder copy workout template test', (tester) async {
+      await tester.runAsync(() async {
+        // tests
+        bool copied = false;
+        final widget = TemplateWorkoutHolder(workoutSetItems: const [], name: 'Template Name', note: 'my note', creationDate: '1673270770860', userId: 'email@email.com', id: 1, onEdit: (BuildContext context) {}, onSubmit: () {copied = true; }, onStartWorkout: (BuildContext context) {},);
+
+        await tester.pumpWidget(MaterialApp(
+            title: 'Flutter Demo', home: Scaffold(body: Center(child: Container(color: Helper.blueColor,child: widget),))));
+
+        await tester.pumpAndSettle();
+        await tester.pump(const Duration(seconds: 2));
+
+        await tester.tap(find.byIcon(Icons.copy));
+
+        await tester.pumpAndSettle();
+        await tester.pump(const Duration(seconds: 2));
+
+        await tester.tap(find.byIcon(Icons.cancel));
+
+        expect(copied, false);
+
+        await tester.pumpAndSettle();
+        await tester.pump(const Duration(seconds: 2));
+
+        await tester.tap(find.byIcon(Icons.copy));
+
+        await tester.pumpAndSettle();
+        await tester.pump(const Duration(seconds: 2));
+
+        await tester.tap(find.byIcon(Icons.check_circle));
+
+        expect(copied, true);
       });
     });
   });
