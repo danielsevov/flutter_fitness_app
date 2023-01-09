@@ -10,6 +10,7 @@ import 'package:lift_to_live_flutter/helper.dart';
 import 'package:lift_to_live_flutter/presentation/presenters/base_presenter.dart';
 import 'package:lift_to_live_flutter/presentation/ui/widgets/workout_related/fixed_set_holder.dart';
 import 'package:lift_to_live_flutter/presentation/ui/widgets/workout_related/set_task_holder.dart';
+import '../../factory/page_factory.dart';
 import '../ui/widgets/workout_related/workout_holder.dart';
 import '../views/workout_history_page_view.dart';
 
@@ -152,7 +153,9 @@ class WorkoutHistoryPagePresenter extends BasePresenter {
             note: element.coachNote,
             created: element.createdOn,
             completed: element.completedOn,
-            duration: element.duration, totalVolume: '$totalVolume kgs', userId: element.userId, id: element.id, ));
+            duration: element.duration, totalVolume: '$totalVolume kgs', userId: element.userId, id: element.id, onEdit: (BuildContext context){
+          Helper.replacePage(context, PageFactory().getWorkoutPage(element.id, element.userId, false, false));
+        }, ));
       }
 
       // add the bottom margin space

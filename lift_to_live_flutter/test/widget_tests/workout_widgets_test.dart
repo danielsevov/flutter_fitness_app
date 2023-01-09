@@ -7,6 +7,7 @@ import 'package:lift_to_live_flutter/presentation/ui/widgets/workout_related/edi
 import 'package:lift_to_live_flutter/presentation/ui/widgets/workout_related/set_task_header.dart';
 import 'package:lift_to_live_flutter/presentation/ui/widgets/workout_related/set_task_holder.dart';
 import 'package:lift_to_live_flutter/presentation/ui/widgets/workout_related/fixed_set_holder.dart';
+import 'package:lift_to_live_flutter/presentation/ui/widgets/workout_related/workout_holder.dart';
 
 void main() {
   group('set task header tests', () {
@@ -544,9 +545,6 @@ void main() {
         await tester.pumpAndSettle();
         await tester.pump(const Duration(seconds: 2));
 
-        await tester.pumpAndSettle();
-        await tester.pump(const Duration(seconds: 2));
-
         expect(tasks.length, 1);
         expect(widget.toWorkoutSet().exercise, '');
         expect(widget.toWorkoutSet().setNote, '');
@@ -583,12 +581,91 @@ void main() {
         await tester.pumpAndSettle();
         await tester.pump(const Duration(seconds: 2));
 
-        await tester.pumpAndSettle();
-        await tester.pump(const Duration(seconds: 2));
-
         expect(tasks.length, 1);
         expect(widget.toWorkoutSet().exercise, '');
         expect(widget.toWorkoutSet().setNote, '');
+      });
+    });
+  });
+
+  group('workout holder tests', () {
+    testWidgets('Workout holder constructor test', (tester) async {
+      await tester.runAsync(() async {
+        // tests
+        final widget = WorkoutHolder(workoutSetItems: const [], name: 'Workout Name', note: 'my note', created: '1673270770860', completed: '', duration: '3600', totalVolume: '3000 kgs', userId: 'email@email.com', id: 1, onEdit: (BuildContext context) {},);
+
+        await tester.pumpWidget(MaterialApp(
+            title: 'Flutter Demo', home: Scaffold(body: Center(child: Container(color: Helper.blueColor,child: widget),))));
+
+        await tester.pumpAndSettle();
+        await tester.pump(const Duration(seconds: 2));
+
+        expect(find.text('Workout Name'), findsOneWidget);
+        expect(find.text('my note'), findsOneWidget);
+        expect(find.text('09/01/2023'), findsOneWidget);
+        expect(find.text('not completed'), findsOneWidget);
+        expect(find.text('10 minutes'), findsOneWidget);
+        expect(find.text('3000 kgs'), findsOneWidget);
+        expect(find.text('Show sets'), findsOneWidget);
+      });
+    });
+
+    testWidgets('Workout holder constructor test 2', (tester) async {
+      await tester.runAsync(() async {
+        // tests
+        final widget = WorkoutHolder(workoutSetItems: const [], name: 'Workout Name', note: '', created: '1673270770860', completed: '1673270770860', duration: '3600', totalVolume: '3000 kgs', userId: 'email@email.com', id: 1, onEdit: (BuildContext context) {},);
+
+        await tester.pumpWidget(MaterialApp(
+            title: 'Flutter Demo', home: Scaffold(body: Center(child: Container(color: Helper.blueColor,child: widget),))));
+
+        await tester.pumpAndSettle();
+        await tester.pump(const Duration(seconds: 2));
+
+        expect(find.text('Workout Name'), findsOneWidget);
+        expect(find.byIcon(Icons.notes), findsNothing);
+        expect(find.text('09/01/2023'), findsNWidgets(2));
+        expect(find.text('not completed'), findsNothing);
+        expect(find.text('10 minutes'), findsOneWidget);
+        expect(find.text('3000 kgs'), findsOneWidget);
+        expect(find.text('Show sets'), findsOneWidget);
+      });
+    });
+
+    testWidgets('Workout holder edit workout test', (tester) async {
+      await tester.runAsync(() async {
+        // tests
+        bool edited = false;
+        final widget = WorkoutHolder(workoutSetItems: const [], name: 'Workout Name', note: '', created: '1673270770860', completed: '1673270770860', duration: '3600', totalVolume: '3000 kgs', userId: 'email@email.com', id: 1, onEdit: (BuildContext context) {edited = true;},);
+
+        await tester.pumpWidget(MaterialApp(
+            title: 'Flutter Demo', home: Scaffold(body: Center(child: Container(color: Helper.blueColor,child: widget),))));
+
+        await tester.pumpAndSettle();
+        await tester.pump(const Duration(seconds: 2));
+
+        await tester.tap(find.byIcon(Icons.edit_note_outlined));
+
+        expect(edited, true);
+      });
+    });
+
+    testWidgets('Workout holder open/close body expansion test', (tester) async {
+      await tester.runAsync(() async {
+        // tests
+        final widget = WorkoutHolder(workoutSetItems: const [], name: 'Workout Name', note: '', created: '1673270770860', completed: '1673270770860', duration: '3600', totalVolume: '3000 kgs', userId: 'email@email.com', id: 1, onEdit: (BuildContext context) {},);
+
+        await tester.pumpWidget(MaterialApp(
+            title: 'Flutter Demo', home: Scaffold(body: Center(child: Container(color: Helper.blueColor,child: widget),))));
+
+        await tester.pumpAndSettle();
+        await tester.pump(const Duration(seconds: 2));
+
+        await tester.tap(find.text('Show sets'));
+
+        await tester.pumpAndSettle();
+        await tester.pump(const Duration(seconds: 2));
+
+        expect(find.text('Hide sets'), findsOneWidget);
       });
     });
   });

@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lift_to_live_flutter/presentation/ui/widgets/workout_related/fixed_set_holder.dart';
 
-import '../../../../factory/page_factory.dart';
 import '../../../../helper.dart';
 
 /// A holder for a single workout entry.
@@ -10,6 +9,7 @@ class WorkoutHolder extends StatefulWidget {
   final List<FixedSetHolder> workoutSetItems;
   final String name, note, created, completed, duration, totalVolume, userId;
   final int id;
+  final Function(BuildContext context)? onEdit;
 
   const WorkoutHolder({
     Key? key,
@@ -18,7 +18,7 @@ class WorkoutHolder extends StatefulWidget {
     required this.note,
     required this.created,
     required this.completed,
-    required this.duration, required this.totalVolume, required this.userId, required this.id,
+    required this.duration, required this.totalVolume, required this.userId, required this.id, required this.onEdit,
   }) : super(key: key);
 
   @override
@@ -54,9 +54,7 @@ class _WorkoutHolderState extends State<WorkoutHolder> {
           children: [
             const SizedBox(width: 50,),
             Text(widget.name, style: const TextStyle(color: Helper.yellowColor, fontSize: 22),),
-            FloatingActionButton(heroTag: 'editWorkoutButton${widget.name}', onPressed: (){
-              Helper.replacePage(context, PageFactory().getWorkoutPage(widget.id, widget.userId, false, false));
-            }, isExtended: false, shape: const CircleBorder(),backgroundColor: Helper.whiteColor.withOpacity(0.33), mini: true, child: const Icon(Icons.edit_note_outlined),),],
+            FloatingActionButton(heroTag: 'editWorkoutButton${widget.name}', onPressed: (){widget.onEdit!(context);}, isExtended: false, shape: const CircleBorder(),backgroundColor: Helper.whiteColor.withOpacity(0.33), mini: true, child: const Icon(Icons.edit_note_outlined),),],
         ),
             const SizedBox(
               height: 10,
