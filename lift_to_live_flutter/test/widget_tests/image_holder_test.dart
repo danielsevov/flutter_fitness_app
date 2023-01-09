@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:lift_to_live_flutter/presentation/presenters/picture_page_presenter.dart';
@@ -24,7 +23,7 @@ void main() {
       await tester.pumpWidget(MaterialApp(
           title: 'Flutter Demo', home: Scaffold(body: Center(child: screen,))));
 
-      await tester.pump(const Duration(seconds: 0));
+      await tester.pump(const Duration(seconds: 1));
       await tester.pumpAndSettle();
 
       expect(imageFinder, findsOneWidget);
@@ -43,14 +42,14 @@ void main() {
       await tester.pumpWidget(MaterialApp(
           title: 'Flutter Demo', home: Scaffold(body: Center(child: screen,))));
 
-      await tester.pump(const Duration(seconds: 0));
+      await tester.pump(const Duration(seconds: 1));
       await tester.pumpAndSettle();
 
       expect(imageFinder, findsOneWidget);
 
       await tester.tap(imageFinder);
 
-      await tester.pump(const Duration(seconds: 0));
+      await tester.pump(const Duration(seconds: 1));
       await tester.pumpAndSettle();
 
       expect(imageFinder, findsNothing);
@@ -75,7 +74,7 @@ void main() {
       await tester.pumpWidget(MaterialApp(
           title: 'Flutter Demo', home: Scaffold(body: Center(child: screen,))));
 
-      await tester.pump(const Duration(seconds: 0));
+      await tester.pump(const Duration(seconds: 1));
       await tester.pumpAndSettle();
 
       expect(imageFinder, findsOneWidget);
@@ -83,7 +82,7 @@ void main() {
 
       await tester.tap(imageFinder);
 
-      await tester.pump(const Duration(seconds: 0));
+      await tester.pump(const Duration(seconds: 1));
       await tester.pumpAndSettle();
 
       expect(imageFinder, findsWidgets);
@@ -108,7 +107,7 @@ void main() {
       await tester.pumpWidget(MaterialApp(
           title: 'Flutter Demo', home: Scaffold(body: Center(child: screen,))));
 
-      await tester.pump(const Duration(seconds: 0));
+      await tester.pump(const Duration(seconds: 1));
       await tester.pumpAndSettle();
 
       expect(imageFinder, findsOneWidget);
@@ -136,7 +135,7 @@ void main() {
       await tester.pumpWidget(MaterialApp(
           title: 'Flutter Demo', home: Scaffold(body: Center(child: screen,))));
 
-      await tester.pump(const Duration(seconds: 0));
+      await tester.pump(const Duration(seconds: 1));
       await tester.pumpAndSettle();
 
       expect(imageFinder, findsOneWidget);
@@ -144,7 +143,7 @@ void main() {
 
       await tester.tap(deleteIconFinder);
 
-      await tester.pump(const Duration(seconds: 0));
+      await tester.pump(const Duration(seconds: 1));
       await tester.pumpAndSettle();
 
       expect(cancelFinder, findsOneWidget);
@@ -172,7 +171,7 @@ void main() {
       await tester.pumpWidget(MaterialApp(
           title: 'Flutter Demo', home: Scaffold(body: Center(child: screen,))));
 
-      await tester.pump(const Duration(seconds: 0));
+      await tester.pump(const Duration(seconds: 1));
       await tester.pumpAndSettle();
 
       expect(imageFinder, findsOneWidget);
@@ -180,7 +179,7 @@ void main() {
 
       await tester.tap(deleteIconFinder);
 
-      await tester.pump(const Duration(seconds: 0));
+      await tester.pump(const Duration(seconds: 1));
       await tester.pumpAndSettle();
 
       expect(cancelFinder, findsOneWidget);
@@ -188,7 +187,7 @@ void main() {
 
       await tester.tap(cancelFinder);
 
-      await tester.pump(const Duration(seconds: 0));
+      await tester.pump(const Duration(seconds: 1));
       await tester.pumpAndSettle();
 
       expect(cancelFinder, findsNothing);
@@ -217,7 +216,7 @@ void main() {
       await tester.pumpWidget(MaterialApp(
           title: 'Flutter Demo', home: Scaffold(body: Center(child: screen,))));
 
-      await tester.pump(const Duration(seconds: 0));
+      await tester.pump(const Duration(seconds: 1));
       await tester.pumpAndSettle();
 
       expect(imageFinder, findsOneWidget);
@@ -225,7 +224,7 @@ void main() {
 
       await tester.tap(deleteIconFinder);
 
-      await tester.pump(const Duration(seconds: 0));
+      await tester.pump(const Duration(seconds: 1));
       await tester.pumpAndSettle();
 
       expect(cancelFinder, findsOneWidget);
@@ -233,7 +232,7 @@ void main() {
 
       await tester.tap(agreeFinder);
 
-      await tester.pump(const Duration(seconds: 0));
+      await tester.pump(const Duration(seconds: 1));
       await tester.pumpAndSettle();
 
       expect(cancelFinder, findsNothing);
