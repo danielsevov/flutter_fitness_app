@@ -30,10 +30,10 @@ abstract class HomePageView {
   void setInProgress(bool inProgress);
 
   /// Function to indicate that the required data has been fetched, so appropriate layout can be displayed.
-  void setFetched(bool fetched) {}
+  void setFetched(bool fetched);
 
   /// Function to show a toast message when a news URL is incorrect.
-  void notifyWrongURL(String s) {}
+  void notifyWrongURL(String s);
 
   /// Function called when user wants to navigate from home to habit page
   void habitsPressed(bool bottomBarButton);
@@ -52,14 +52,13 @@ abstract class HomePageView {
   void redirectToUrl(int index);
 
   /// Function called when user wants to navigate from home to workout history page
-  void historyPressed(bool fromBottomBar) {
-  }
+  void historyPressed(bool fromBottomBar);
 
   /// Function for navigating to edit workout templates page.
-  void templatesPressed(bool bool) {}
+  void templatesPressed(bool bool);
 
   /// Function for navigating to edit workout page.
-  void workoutPressed(bool bool) {}
+  void workoutPressed(bool bool);
 }
 
 // coverage:ignore-end

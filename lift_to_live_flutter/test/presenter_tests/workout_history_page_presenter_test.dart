@@ -12,7 +12,7 @@ import 'package:lift_to_live_flutter/presentation/views/workout_history_page_vie
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-import '../test_data.dart';
+import '../mock_data.dart';
 import 'workout_history_page_presenter_test.mocks.dart';
 
 
@@ -239,7 +239,7 @@ void main() {
     presenter.setAppState(appState);
 
     when(exerciseRepo.getExercises()).thenAnswer((realInvocation) async => [Exercise('bodypart1', 'equipment1', 'gifUrl1', 'name1', 'muscleGroup1'), Exercise('bodypart2', 'equipment2', 'gifUrl2', 'name2', 'muscleGroup2'), Exercise('bodypart3', 'equipment3', 'gifUrl3', 'name3', 'muscleGroup3'), ]);
-    when(workoutRepo.fetchWorkouts(any, any)).thenAnswer((realInvocation) async => [TestData.testWorkout1, TestData.testWorkout2]);
+    when(workoutRepo.fetchWorkouts(any, any)).thenAnswer((realInvocation) async => [MockData.testWorkout1, MockData.testWorkout2]);
 
     List<Widget> list = [];
     List<String> dates = [];
@@ -258,10 +258,10 @@ void main() {
     var element0 = list[0] as WorkoutHolder;
     var element1 = list[1] as WorkoutHolder;
 
-    expect(element0.name, TestData.testWorkout2.name);
-    expect(element1.name, TestData.testWorkout1.name);
+    expect(element0.name, MockData.testWorkout2.name);
+    expect(element1.name, MockData.testWorkout1.name);
 
-    expect(element0.created, TestData.testWorkout2.createdOn);
-    expect(element1.created, TestData.testWorkout1.createdOn);
+    expect(element0.created, MockData.testWorkout2.createdOn);
+    expect(element1.created, MockData.testWorkout1.createdOn);
   });
 }

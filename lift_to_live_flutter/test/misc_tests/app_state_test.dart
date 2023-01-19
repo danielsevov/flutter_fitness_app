@@ -2,7 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:lift_to_live_flutter/domain/entities/role.dart';
 import 'package:lift_to_live_flutter/presentation/state_management/app_state.dart';
 
-import '../test_data.dart';
+import '../mock_data.dart';
 
 void main() {
   test('AppState constructor test', () {
@@ -14,10 +14,10 @@ void main() {
     final appState = AppState();
 
     expect(appState.hasState(), false);
-    appState.setInitialState('email', 'token', [TestData.testRole1]);
+    appState.setInitialState('email', 'token', [MockData.testRole1]);
     expect(appState.hasState(), true);
     expect(appState.getToken(), 'token');
-    expect(appState.getUserRoles(), [TestData.testRole1]);
+    expect(appState.getUserRoles(), [MockData.testRole1]);
     expect(appState.getUserId(), 'email');
   });
 
@@ -25,7 +25,7 @@ void main() {
     final appState = AppState();
 
     expect(appState.hasState(), false);
-    appState.setInitialState('email', 'token', [TestData.testRole1]);
+    appState.setInitialState('email', 'token', [MockData.testRole1]);
     expect(appState.hasState(), true);
     appState.clearState();
     expect(appState.hasState(), false);

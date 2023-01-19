@@ -7,7 +7,7 @@ import 'package:lift_to_live_flutter/presentation/views/home_page_view.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-import '../test_data.dart';
+import '../mock_data.dart';
 import 'article_holder_test.mocks.dart';
 
 @GenerateMocks([HomePageView])
@@ -17,7 +17,7 @@ void main() {
     await tester.runAsync(() async {
       // tests
       final HomePageView view = MockHomePageView();
-      when(view.currentNews).thenReturn(TestData.testNews3);
+      when(view.currentNews).thenReturn(MockData.testNews3);
 
       final widget = NewsArticleHolder(view: view, index: 0);
 
@@ -37,7 +37,7 @@ void main() {
     await tester.runAsync(() async {
       // tests
       final HomePageView view = MockHomePageView();
-      when(view.currentNews).thenReturn(TestData.testNews3);
+      when(view.currentNews).thenReturn(MockData.testNews3);
 
       final widget = NewsArticleHolder(view: view, index: 0);
 

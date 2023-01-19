@@ -25,13 +25,13 @@ abstract class RegisterFormView {
   String getDateOfBirth();
 
   /// Function to clear the current entries.
-  void clearForm() {}
+  void clearForm();
 
   /// Function to clear the current password entry.
-  void clearPassword() {}
+  void clearPassword();
 
   /// Function to clear the current email entry.
-  void clearEmail() {}
+  void clearEmail();
 }
 
 // coverage:ignore-end

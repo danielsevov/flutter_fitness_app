@@ -23,6 +23,7 @@ class WorkoutPagePresenter extends BasePresenter {
 
   late final WorkoutRepository _workoutRepository;
   late final ExerciseRepository _exerciseRepository;
+  late List<Exercise> _exercises;
   late List<String> _exerciseNames;
 
   final List<EditableSetHolder> _templateSetWidgets = [];
@@ -64,6 +65,7 @@ class WorkoutPagePresenter extends BasePresenter {
     return super.appState.isCoachOrAdmin();
   }
 
+  /// Function used for saving the changes made to the workout.
   Future<void> saveChanges() async {
     if(_forTemplate) {
       String coachNote = _view?.noteController.text;
@@ -170,10 +172,10 @@ class WorkoutPagePresenter extends BasePresenter {
         setTasks: setTaskItems,
         exerciseController: SingleValueDropDownController(),
         noteController: TextEditingController(),
-        exercises: _exerciseNames,
+        exerciseNames: _exerciseNames,
         repsControllers: repControllers,
         kilosControllers: kiloControllers,
-        isCompletedControllers: isCompletedControllers, tag: '${tag++}', isTemplate: _forTemplate,));
+        isCompletedControllers: isCompletedControllers, tag: '${tag++}', isTemplate: _forTemplate, exercises: _exercises,));
 
     _view?.setTemplateData(_view?.nameController.text, _view?.noteController.text, _templateSetWidgets);
   }
@@ -187,9 +189,9 @@ class WorkoutPagePresenter extends BasePresenter {
     // fetch the user workouts
     try {
       // fetch all exercise entries
-      List<Exercise> exercises = await _exerciseRepository.getExercises();
+      _exercises = await _exerciseRepository.getExercises();
 
-      _exerciseNames = exercises.map((e) => e.name).toList();
+      _exerciseNames = _exercises.map((e) => e.name).toList();
 
       // fetch single user workout
       Workout template;
@@ -259,10 +261,10 @@ class WorkoutPagePresenter extends BasePresenter {
           setTasks: workoutSetItems,
           exerciseController: exerciseController,
           noteController: noteController,
-          exercises: _exerciseNames,
+          exerciseNames: _exerciseNames,
           repsControllers: reps,
           kilosControllers: kilos,
-          isCompletedControllers: completes,  tag: '${tag++}', isTemplate: _forTemplate,
+          isCompletedControllers: completes,  tag: '${tag++}', isTemplate: _forTemplate, exercises: _exercises,
         );
         _templateSetWidgets.add(workoutSet);
       }
@@ -274,7 +276,6 @@ class WorkoutPagePresenter extends BasePresenter {
     }
 
     catch (e) {
-      _view?.notifyNoTemplatesFound();
       _view?.setTemplateData('' , '', _templateSetWidgets);
       _view?.setInProgress(false);
       _view?.setFetched(true);

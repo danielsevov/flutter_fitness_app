@@ -9,7 +9,7 @@ import 'package:lift_to_live_flutter/domain/repositories/news_repo.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-import '../test_data.dart';
+import '../mock_data.dart';
 import 'news_repo_test.mocks.dart';
 
 @GenerateMocks([NewsAPI])
@@ -25,7 +25,7 @@ void main() {
 
       NewsRepository repository = NewsRepoImpl(newsAPI);
 
-      expect(await repository.getNews("search", 1), TestData.testNews1);
+      expect(await repository.getNews("search", 1), MockData.testNews1);
     });
 
     test('throws an exception if the http call completes with an error', () async {

@@ -13,7 +13,7 @@ abstract class ProfilePageView {
   void setInProgress(bool inProgress);
 
   /// Function to show a toast message when no user data can be fetched.
-  void notifyNoUserData() {}
+  void notifyNoUserData();
 
   /// Function called when user wants to navigate from the users profile to the users habit page
   void habitsPressed(BuildContext context);

@@ -31,7 +31,7 @@ class CustomDropdownTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Build a Form widget using the _formKey created above.
-    return SizedBox(
+    return Expanded(
       child: DropDownTextField(
         dropDownList: items.map((String value) {
           return DropDownValueModel(value: value, name: value);

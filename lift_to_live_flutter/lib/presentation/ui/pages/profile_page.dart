@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:lift_to_live_flutter/factory/page_factory.dart';
 import 'package:provider/provider.dart';
 import '../../../domain/entities/user.dart';
+import '../../../factory/abstract_page_factory.dart';
 import '../../presenters/profile_page_presenter.dart';
 import '../../state_management/app_state.dart';
 import '../../../helper.dart';
@@ -16,12 +16,13 @@ class ProfilePage extends StatefulWidget {
       presenter; // The business logic object of the log in page
   final String userId;
   final String originPage;
+  final AbstractPageFactory pageFactory;
 
   const ProfilePage(
       {Key? key,
       required this.userId,
       required this.originPage,
-      required this.presenter})
+      required this.presenter, required this.pageFactory})
       : super(key: key);
 
   @override
@@ -89,14 +90,14 @@ class ProfilePageState extends State<ProfilePage> implements ProfilePageView {
   @override
   void habitsPressed(BuildContext context) {
     Helper.pushPageWithAnimation(
-        context, PageFactory().getHabitsPage(_user.id));
+        context, widget.pageFactory.getHabitsPage(_user.id));
   }
 
   /// Function called when user wants to navigate from the users profile to the users workout history page.
   @override
   void workoutsPressed(BuildContext context) {
     Helper.pushPageWithAnimation(
-        context, PageFactory().getWorkoutHistoryPage(_user.id));
+        context, widget.pageFactory.getWorkoutHistoryPage(_user.id));
   }
 
   /// Function called when user wants to navigate from profile page to pictures page.
@@ -104,7 +105,7 @@ class ProfilePageState extends State<ProfilePage> implements ProfilePageView {
   void picturesPressed(BuildContext context) {
     Helper.pushPageWithAnimation(
         context,
-        PageFactory().getPicturePage(
+        widget.pageFactory.getPicturePage(
           _user.id,
           _user.name.split(" ")[0],
         ));
@@ -148,7 +149,7 @@ class ProfilePageState extends State<ProfilePage> implements ProfilePageView {
               onPressed: () {
                 if (widget.originPage == 'home') {
                   Helper.replacePage(
-                      context, PageFactory().getWrappedHomePage());
+                      context, widget.pageFactory.getWrappedHomePage());
                 } else if (widget.originPage == 'trainees') {
                   Navigator.pop(context);
                 } else {
@@ -217,7 +218,7 @@ class ProfilePageState extends State<ProfilePage> implements ProfilePageView {
                                             .isAuthorized(false)) {
                                           Helper.pushPageWithAnimation(
                                               context,
-                                              PageFactory().getPicturePage(
+                                              widget.pageFactory.getPicturePage(
                                                 _user.id,
                                                 _user.name.split(" ")[0],
                                               ));

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:lift_to_live_flutter/factory/page_factory.dart';
+import 'package:lift_to_live_flutter/factory/abstract_page_factory.dart';
 import 'package:lift_to_live_flutter/presentation/presenters/log_in_page_presenter.dart';
 import 'package:lift_to_live_flutter/presentation/ui/widgets/user_related/log_in_form.dart';
 import 'package:provider/provider.dart';
@@ -14,8 +14,9 @@ import '../../views/log_in_page_view.dart';
 /// It is a stateful widget and its state object implements the LogInPageView abstract class.
 class LogInPage extends StatefulWidget {
   final LogInPagePresenter presenter;
+  final AbstractPageFactory pageFactory;
 
-  const LogInPage({Key? key, required this.presenter}) : super(key: key);
+  const LogInPage({Key? key, required this.presenter, required this.pageFactory}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => LogInPageState();
@@ -132,7 +133,7 @@ class LogInPageState extends State<LogInPage> implements LogInPageView {
   /// Function to trigger page change from log in page to home page, upon successful log in.
   @override
   void navigateToHome() {
-    Helper.pushPageWithAnimation(context, PageFactory().getWrappedHomePage());
+    Helper.pushPageWithAnimation(context, widget.pageFactory.getWrappedHomePage());
   }
 
   /// Function to display a toast message, when user cannot be authenticated.

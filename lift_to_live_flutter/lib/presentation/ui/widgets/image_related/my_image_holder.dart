@@ -26,7 +26,7 @@ class MyImageHolder extends StatelessWidget {
       decoration: BoxDecoration(
           color: Helper.lightBlueColor,
           borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: Helper.whiteColor, width: 1)),
+          border: Border.all(color: Helper.whiteColor.withOpacity(0.3), width: 0.75)),
       padding: const EdgeInsets.only(bottom: 4, top: 2, right: 6, left: 6),
       margin: const EdgeInsets.only(left: 5),
       child: Column(

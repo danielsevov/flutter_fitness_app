@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lift_to_live_flutter/factory/page_factory.dart';
 import 'package:provider/provider.dart';
+import '../../../factory/abstract_page_factory.dart';
 import '../../presenters/habits_page_presenter.dart';
 import '../../state_management/app_state.dart';
 import '../../../helper.dart';
@@ -12,8 +12,9 @@ import '../widgets/habit_related/custom_habits_calendar.dart';
 class HabitsPage extends StatefulWidget {
   final String userId;
   final HabitsPagePresenter presenter; // The business logic object
+  final AbstractPageFactory pageFactory;
 
-  const HabitsPage({Key? key, required this.userId, required this.presenter})
+  const HabitsPage({Key? key, required this.userId, required this.presenter, required this.pageFactory})
       : super(key: key);
 
   @override
@@ -115,7 +116,7 @@ class HabitsPageState extends State<HabitsPage> implements HabitsPageView {
                             if (widget.presenter.isAuthorized()) {
                               Helper.pushPageWithAnimation(
                                   context,
-                                  PageFactory().getEditHabitsPage(
+                                  widget.pageFactory.getEditHabitsPage(
                                     widget.userId,
                                   ));
                             } else {

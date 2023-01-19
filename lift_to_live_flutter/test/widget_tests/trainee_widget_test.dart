@@ -7,7 +7,7 @@ import 'package:lift_to_live_flutter/presentation/views/trainees_page_view.dart'
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-import '../test_data.dart';
+import '../mock_data.dart';
 import 'trainee_widget_test.mocks.dart';
 
 @GenerateMocks([TraineesPageView])
@@ -16,8 +16,8 @@ void main() {
   testWidgets('TraineeSearchWidget test constructor', (tester) async {
     await tester.runAsync(() async {
       // tests
-      final User user = TestData.testUser1;
-      user.profilePicture = TestData.testImage3;
+      final User user = MockData.testUser1;
+      user.profilePicture = MockData.testImage3;
 
       final TraineesPageView view = MockTraineesPageView();
 
@@ -44,7 +44,7 @@ void main() {
   testWidgets('TraineeSearchWidget test constructor without image', (tester) async {
     await tester.runAsync(() async {
       // tests
-      final User user = TestData.testUser1;
+      final User user = MockData.testUser1;
       user.profilePicture = null;
 
       final TraineesPageView view = MockTraineesPageView();
@@ -72,7 +72,7 @@ void main() {
   testWidgets('TraineeSearchWidget test navigate to profile page', (tester) async {
     await tester.runAsync(() async {
       // tests
-      final User user = TestData.testUser1;
+      final User user = MockData.testUser1;
 
       final TraineesPageView view = MockTraineesPageView();
 

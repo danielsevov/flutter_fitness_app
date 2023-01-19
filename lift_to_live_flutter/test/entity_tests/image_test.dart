@@ -1,11 +1,11 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:lift_to_live_flutter/domain/entities/image.dart';
 
-import '../test_data.dart';
+import '../mock_data.dart';
 
 void main() {
   test('Image constructor test', () {
-    final image = TestData.testImage1;
+    final image = MockData.testImage1;
 
     expect(image.date, 'A');
     expect(image.id, 1);
@@ -16,20 +16,20 @@ void main() {
 
   group('Image toJson tests', (){
     test('Image toJson compared to self', () {
-      final image = TestData.testImage1;
+      final image = MockData.testImage1;
 
       expect(image.toJson().toString() == image.toJson().toString(), true);
     });
 
     test('Image toJson compared to self 2', () {
-      final image = TestData.testImage1;
+      final image = MockData.testImage1;
 
       expect(image.toJson().toString(), '{user_id: A, type: A, id: 1, date: A, data: 4444}');
     });
 
     test('Image toJson compared to other', () {
-      final image = TestData.testImage1;
-      final image2 = TestData.testImage2;
+      final image = MockData.testImage1;
+      final image2 = MockData.testImage2;
 
       expect(image.toJson().toString() == image2.toJson().toString(), false);
     });
@@ -37,15 +37,15 @@ void main() {
 
   group('Image fromJson tests', (){
     test('Image fromJson compared to self', () {
-      final image = TestData.testImage1;
+      final image = MockData.testImage1;
       final imageJson = image.toJson();
 
       expect(image == MyImage.fromJson(imageJson), true);
     });
 
     test('Image fromJson compared to other Image', () {
-      final image = TestData.testImage1;
-      final image2 = TestData.testImage2;
+      final image = MockData.testImage1;
+      final image2 = MockData.testImage2;
       final imageJson = image2.toJson();
 
       expect(image == MyImage.fromJson(imageJson), false);
@@ -54,21 +54,21 @@ void main() {
 
   group('Image equals tests', (){
     test('Image equals compared to self', () {
-      final image = TestData.testImage1;
+      final image = MockData.testImage1;
 
       expect(image == image, true);
     });
 
     test('Image equals compared to self 2', () {
-      final MyImage image = TestData.testImage1;
+      final MyImage image = MockData.testImage1;
       final image2 = MyImage('A', 'A', 1, 'A', '4444');
 
       expect(image == image2, true);
     });
 
     test('Image equals compared to other Image', () {
-      final image = TestData.testImage1;
-      final image2 = TestData.testImage2;
+      final image = MockData.testImage1;
+      final image2 = MockData.testImage2;
 
       expect(image == image2, false);
     });
@@ -76,21 +76,21 @@ void main() {
 
   group('Image hashCode tests', (){
     test('Image hashCode compared to self', () {
-      final image = TestData.testImage1;
+      final image = MockData.testImage1;
 
       expect(image.hashCode == image.hashCode, true);
     });
 
     test('Image hashCode compared to self 2', () {
-      final image = TestData.testImage1;
+      final image = MockData.testImage1;
       final image2 = MyImage('A', 'A', 1, 'A', '4444');
 
       expect(image.hashCode == image2.hashCode, true);
     });
 
     test('Image hashCode compared to other Image', () {
-      final image = TestData.testImage1;
-      final image2 = TestData.testUser1;
+      final image = MockData.testImage1;
+      final image2 = MockData.testUser1;
 
       expect(image.hashCode == image2.hashCode, false);
     });
@@ -98,15 +98,15 @@ void main() {
 
   group('Image toString tests', (){
     test('Image toString test', () {
-      final image = TestData.testImage1;
+      final image = MockData.testImage1;
       final imageToString = image.toString();
 
       expect(imageToString == 'MyImage{userId: A, type: A, data: 4444, date: A, id: 1}', true);
     });
 
     test('Image toString test', () {
-      final image = TestData.testImage1;
-      final image2 = TestData.testImage2;
+      final image = MockData.testImage1;
+      final image2 = MockData.testImage2;
 
       expect(image.toString() == image2.toString(), false);
     });

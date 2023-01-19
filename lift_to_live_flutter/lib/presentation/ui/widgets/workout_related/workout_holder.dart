@@ -177,13 +177,9 @@ class _WorkoutHolderState extends State<WorkoutHolder> {
             FloatingActionButton.extended(heroTag: widget.name, elevation: 0, onPressed: changeExpansion, backgroundColor: Helper.lightBlueColor, icon: isExpanded ? const Icon(CupertinoIcons.chevron_up, color: Helper.yellowColor,) : const Icon(CupertinoIcons.chevron_down, color: Helper.yellowColor,), label: !isExpanded ? const Text('Show sets', style: TextStyle(color: Helper.yellowColor, fontSize: 15),) : const Text('Hide sets', style: TextStyle(color: Helper.yellowColor, fontSize: 15))),
 
             // sets holder
-             isExpanded ? SizedBox(
-              // height: 200,
-              // width: 400,
-              child: Column(
-                children: widget.workoutSetItems,
-              ),
-            ) : const SizedBox(),
+             isExpanded ? Column(
+               children: widget.workoutSetItems,
+             ) : const SizedBox(),
           ],
         ));
   }

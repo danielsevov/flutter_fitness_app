@@ -13,7 +13,7 @@ import 'package:lift_to_live_flutter/presentation/views/home_page_view.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-import '../test_data.dart';
+import '../mock_data.dart';
 import 'home_page_presenter_test.mocks.dart';
 
 
@@ -132,7 +132,7 @@ void main() {
     when(view.setInProgress(any)).thenAnswer((realInvocation) { });
     when(view.setFetched(any)).thenAnswer((realInvocation) { });
     when(newsRepo.getNews(any, any)).thenAnswer(
-            (_) async => TestData.testNews1);
+            (_) async => MockData.testNews1);
     when(view.setNewsData(any)).thenAnswer((realInvocation) { });
 
     await presenter.fetchNews();
@@ -160,10 +160,10 @@ void main() {
     when(userRepo.fetchUser('email', 'token')).thenAnswer(
             (_) async => User('email', 'email', 'coachId', 'nationality', 'dateOfBirth', 'name', 'phoneNumber'));
     when(userRepo.fetchProfileImage('email', 'token')).thenAnswer(
-            (_) async => TestData.testImage1);
+            (_) async => MockData.testImage1);
     when(view.setUserData(any, any)).thenAnswer((realInvocation) { });
     when(newsRepo.getNews(any, any)).thenAnswer(
-            (_) async => TestData.testNews1);
+            (_) async => MockData.testNews1);
     when(view.setNewsData(any)).thenAnswer((realInvocation) { });
 
     await presenter.fetchData();
@@ -195,7 +195,7 @@ void main() {
     when(userRepo.fetchProfileImage('email', 'token')).thenThrow(FailedFetchException(''));
     when(view.setUserData(any, any)).thenAnswer((realInvocation) { });
     when(newsRepo.getNews(any, any)).thenAnswer(
-            (_) async => TestData.testNews1);
+            (_) async => MockData.testNews1);
     when(view.setNewsData(any)).thenAnswer((realInvocation) { });
 
     expect(() => presenter.fetchData(), returnsNormally);
@@ -218,10 +218,10 @@ void main() {
     when(userRepo.fetchUser('email', 'token')).thenAnswer(
             (_) async => User('email', 'email', 'coachId', 'nationality', 'dateOfBirth', 'name', 'phoneNumber'));
     when(userRepo.fetchProfileImage('email', 'token')).thenAnswer(
-            (_) async => TestData.testImage1);
+            (_) async => MockData.testImage1);
     when(view.setUserData(any, any)).thenAnswer((realInvocation) { });
     when(newsRepo.getNews(any, any)).thenAnswer(
-            (_) async => TestData.testNews1);
+            (_) async => MockData.testNews1);
     when(view.setNewsData(any)).thenAnswer((realInvocation) { });
 
     await presenter.fetchData();
@@ -248,7 +248,7 @@ void main() {
     when(userRepo.fetchUser('email', 'token')).thenAnswer(
             (_) async => User('email', 'email', 'coachId', 'nationality', 'dateOfBirth', 'name', 'phoneNumber'));
     when(userRepo.fetchProfileImage('email', 'token')).thenAnswer(
-            (_) async => TestData.testImage1);
+            (_) async => MockData.testImage1);
     when(view.setUserData(any, any)).thenAnswer((realInvocation) { });
     when(newsRepo.getNews(any, any)).thenAnswer(
             (_) async => News('ok', 12, [Article('S', 'S', 'S', 'SSSSSSSSSSSSS', 'S', 'S')]));

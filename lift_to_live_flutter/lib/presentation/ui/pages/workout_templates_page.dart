@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../factory/page_factory.dart';
+import '../../../factory/abstract_page_factory.dart';
 import '../../presenters/workout_templates_page_presenter.dart';
 import '../../state_management/app_state.dart';
 import '../../../helper.dart';
@@ -11,8 +11,9 @@ import '../../views/workout_templates_page_view.dart';
 class WorkoutTemplatesPage extends StatefulWidget {
   final String userId;
   final WorkoutTemplatesPagePresenter presenter; // The business logic object
+  final AbstractPageFactory pageFactory;
 
-  const WorkoutTemplatesPage({Key? key, required this.userId, required this.presenter})
+  const WorkoutTemplatesPage({Key? key, required this.userId, required this.presenter, required this.pageFactory})
       : super(key: key);
 
   @override
@@ -99,7 +100,7 @@ class WorkoutTemplatesPageState extends State<WorkoutTemplatesPage> implements W
 
     return Scaffold(
       floatingActionButton: FloatingActionButton.extended(heroTag: 'addNewTemplateButton', onPressed: (){
-        Helper.replacePage(context, PageFactory().getWorkoutPage(0, widget.userId, true, true));
+        Helper.replacePage(context, widget.pageFactory.getWorkoutPage(0, widget.userId, true, true));
       }, backgroundColor: Helper.yellowColor,label: const Text('Add Template', style: TextStyle(color: Helper.blackColor, fontWeight: FontWeight.w700),), icon: const Icon(Icons.add, color: Helper.blackColor,),),
       body: Container(
         padding: const EdgeInsets.only(bottom: 50),

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:lift_to_live_flutter/factory/page_factory.dart';
 import 'package:lift_to_live_flutter/presentation/ui/widgets/reusable_elements/custom_heading_text_field.dart';
 import 'package:lift_to_live_flutter/presentation/ui/widgets/workout_related/editable_set_holder.dart';
 import 'package:provider/provider.dart';
+import '../../../factory/abstract_page_factory.dart';
 import '../../presenters/workout_page_presenter.dart';
 import '../../state_management/app_state.dart';
 import '../../../helper.dart';
@@ -17,12 +17,13 @@ class WorkoutPage extends StatefulWidget {
   final bool forTemplate, fromTemplate;
   final WorkoutPagePresenter
       presenter; // The business logic object
+  final AbstractPageFactory pageFactory;
 
   const WorkoutPage(
       {Key? key,
       required this.templateId,
       required this.presenter,
-      required this.userId, required this.forTemplate, required this.fromTemplate})
+      required this.userId, required this.forTemplate, required this.fromTemplate, required this.pageFactory})
       : super(key: key);
 
   @override
@@ -90,14 +91,8 @@ class WorkoutPageState extends State<WorkoutPage>
     Helper.makeToast(context,  widget.forTemplate ? 'Template has been saved successfully!' : 'Workout has been saved successfully!');
     Helper.replacePage(
         context,
-        widget.forTemplate ? PageFactory()
-            .getWorkoutTemplatesPage(widget.userId) : PageFactory().getWorkoutHistoryPage(widget.userId));
-  }
-
-  /// Function to notify if no workouts were found
-  @override
-  void notifyNoTemplatesFound() {
-    Helper.makeToast(context, 'No workout entries were found!');
+        widget.forTemplate ? widget.pageFactory
+            .getWorkoutTemplatesPage(widget.userId) : widget.pageFactory.getWorkoutHistoryPage(widget.userId));
   }
 
   /// Function to set and display the workout template data.
@@ -156,7 +151,7 @@ class WorkoutPageState extends State<WorkoutPage>
                   'Add Set',
                   style: TextStyle(color: Helper.whiteColor),
                 )),
-            FloatingActionButton.extended(
+             widget.templateId != 0 ? FloatingActionButton.extended(
                 heroTag: 'deleteButton',
                 icon: const Icon(Icons.delete_outline, color: Helper.whiteColor,),
                 onPressed: () {
@@ -175,8 +170,8 @@ class WorkoutPageState extends State<WorkoutPage>
 
                               Helper.replacePage(
                                   context,
-                                  widget.forTemplate ? PageFactory()
-                                      .getWorkoutTemplatesPage(widget.userId) : PageFactory()
+                                  widget.forTemplate ? widget.pageFactory
+                                      .getWorkoutTemplatesPage(widget.userId) : widget.pageFactory
                                       .getWorkoutHistoryPage(widget.userId));
                             },
                             cancel: () {
@@ -185,7 +180,7 @@ class WorkoutPageState extends State<WorkoutPage>
                       });
                 },
                 backgroundColor: Helper.redColor,
-                label: const Text('Delete')),
+                label: const Text('Delete')) : const SizedBox(),
           ],
         ),
         body: Container(
@@ -224,8 +219,8 @@ class WorkoutPageState extends State<WorkoutPage>
                                         Navigator.pop(context);
                                         Helper.replacePage(
                                             context,
-                                            widget.forTemplate ? PageFactory()
-                                                .getWorkoutTemplatesPage(widget.userId) : PageFactory().getWorkoutHistoryPage(widget.userId));
+                                            widget.forTemplate ? widget.pageFactory
+                                                .getWorkoutTemplatesPage(widget.userId) : widget.pageFactory.getWorkoutHistoryPage(widget.userId));
                                       },
                                       cancel: () {
                                         Navigator.pop(context);

@@ -17,17 +17,14 @@ abstract class WorkoutPageView {
   /// Function to set if data is fetched and should be displayed.
   void setFetched(bool inProgress);
 
-  /// Function to notify if no template workouts were found
-  void notifyNoTemplatesFound();
-
   /// Function to notify there is no name entered for the template
-  void notifyNoName() {}
+  void notifyNoName();
 
   /// Function to notify there is no set data entered for the template
-  void notifyNoSets() {}
+  void notifyNoSets();
 
   /// Function to notify the template is saved
-  void notifySaved() {}
+  void notifySaved();
 }
 
 // coverage:ignore-end

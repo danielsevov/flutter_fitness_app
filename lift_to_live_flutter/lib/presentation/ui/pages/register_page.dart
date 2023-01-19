@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../factory/page_factory.dart';
+import '../../../factory/abstract_page_factory.dart';
 import '../../presenters/register_page_presenter.dart';
 import '../../state_management/app_state.dart';
 import '../../../helper.dart';
@@ -14,8 +14,9 @@ import '../widgets/user_related/register_form.dart';
 class RegisterPage extends StatefulWidget {
   final RegisterPagePresenter
       presenter; // The business logic object of the log in page
+  final AbstractPageFactory pageFactory;
 
-  const RegisterPage({Key? key, required this.presenter}) : super(key: key);
+  const RegisterPage({Key? key, required this.presenter, required this.pageFactory}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => RegisterPageState();
@@ -72,7 +73,7 @@ class RegisterPageState extends State<RegisterPage>
         leading: IconButton(
             icon: const Icon(Icons.arrow_back, color: Helper.yellowColor),
             onPressed: () {
-              Helper.replacePage(context, PageFactory().getTraineesPage());
+              Helper.replacePage(context, widget.pageFactory.getTraineesPage());
             }),
         title: const Text(
           "Register User",
@@ -148,7 +149,7 @@ class RegisterPageState extends State<RegisterPage>
   @override
   void notifyUserRegistered() {
     Helper.makeToast(context, "User has been successfully registered!");
-    Helper.replacePage(context, PageFactory().getTraineesPage());
+    Helper.replacePage(context, widget.pageFactory.getTraineesPage());
   }
 
   /// Function to pass the required coach data to the page view.

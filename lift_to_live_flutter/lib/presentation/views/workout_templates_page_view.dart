@@ -18,7 +18,7 @@ abstract class WorkoutTemplatesPageView {
   void notifyNoTemplateWorkoutsFound();
 
   /// Function to notify a template has been copied
-  void notifyNewTemplate() {}
+  void notifyNewTemplate();
 }
 
 // coverage:ignore-end

@@ -16,7 +16,7 @@ abstract class TraineesPageView {
   void setFetched(bool inProgress);
 
   /// Function to show a toast message when no user data can be fetched.
-  void notifyNoUserData() {}
+  void notifyNoUserData();
 
   /// Function called when user wants to navigate from profile page to pictures page
   void registerPressed(BuildContext context);

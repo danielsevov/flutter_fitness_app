@@ -13,7 +13,7 @@ import 'package:lift_to_live_flutter/presentation/views/workout_page_view.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-import '../test_data.dart';
+import '../mock_data.dart';
 import 'workout_page_presenter_test.mocks.dart';
 
 
@@ -94,7 +94,7 @@ void main() {
 
     await presenter.fetchData();
 
-    verify(view.notifyNoTemplatesFound()).called(1);
+    verify(view.setTemplateData('', '', [])).called(1);
   });
 
   test('test fetchData() fail fetch exercises', () async {
@@ -117,7 +117,7 @@ void main() {
 
     await presenter.fetchData();
 
-    verify(view.notifyNoTemplatesFound()).called(1);
+    verify(view.setTemplateData('', '', [])).called(1);
   });
 
   test('test fetchData() fail fetch workouts', () async {
@@ -142,7 +142,7 @@ void main() {
 
     await presenter.fetchData();
 
-    verify(view.notifyNoTemplatesFound()).called(1);
+    verify(view.setTemplateData('', '', [])).called(1);
   });
 
   test('test fetchData() fail empty workouts', () async {
@@ -163,8 +163,8 @@ void main() {
     presenter.setAppState(appState);
 
     when(exerciseRepo.getExercises()).thenAnswer((realInvocation) async => [Exercise('bodypart1', 'equipment1', 'gifUrl1', 'name1', 'muscleGroup1'), Exercise('bodypart2', 'equipment2', 'gifUrl2', 'name2', 'muscleGroup2'), Exercise('bodypart3', 'equipment3', 'gifUrl3', 'name3', 'muscleGroup3'), ]);
-    when(workoutRepo.fetchWorkout(any, any)).thenAnswer((realInvocation) async => TestData.testWorkout1);
-    when(workoutRepo.fetchTemplate(any, any)).thenAnswer((realInvocation) async => TestData.testWorkoutTemplate1);
+    when(workoutRepo.fetchWorkout(any, any)).thenAnswer((realInvocation) async => MockData.testWorkout1);
+    when(workoutRepo.fetchTemplate(any, any)).thenAnswer((realInvocation) async => MockData.testWorkoutTemplate1);
     when(view.noteController).thenReturn(noteController);
     when(view.nameController).thenReturn(nameController);
 
@@ -203,8 +203,8 @@ void main() {
     presenter.setAppState(appState);
 
     when(exerciseRepo.getExercises()).thenAnswer((realInvocation) async => [Exercise('bodypart1', 'equipment1', 'gifUrl1', 'name1', 'muscleGroup1'), Exercise('bodypart2', 'equipment2', 'gifUrl2', 'name2', 'muscleGroup2'), Exercise('bodypart3', 'equipment3', 'gifUrl3', 'name3', 'muscleGroup3'), ]);
-    when(workoutRepo.fetchWorkout(any, any)).thenAnswer((realInvocation) async => TestData.testWorkout1);
-    when(workoutRepo.fetchTemplate(any, any)).thenAnswer((realInvocation) async => TestData.testWorkoutTemplate1);
+    when(workoutRepo.fetchWorkout(any, any)).thenAnswer((realInvocation) async => MockData.testWorkout1);
+    when(workoutRepo.fetchTemplate(any, any)).thenAnswer((realInvocation) async => MockData.testWorkoutTemplate1);
     when(view.noteController).thenReturn(noteController);
     when(view.nameController).thenReturn(nameController);
 
@@ -243,8 +243,8 @@ void main() {
     presenter.setAppState(appState);
 
     when(exerciseRepo.getExercises()).thenAnswer((realInvocation) async => [Exercise('bodypart1', 'equipment1', 'gifUrl1', 'name1', 'muscleGroup1'), Exercise('bodypart2', 'equipment2', 'gifUrl2', 'name2', 'muscleGroup2'), Exercise('bodypart3', 'equipment3', 'gifUrl3', 'name3', 'muscleGroup3'), ]);
-    when(workoutRepo.fetchWorkout(any, any)).thenAnswer((realInvocation) async => TestData.testWorkout1);
-    when(workoutRepo.fetchTemplate(any, any)).thenAnswer((realInvocation) async => TestData.testWorkoutTemplate1);
+    when(workoutRepo.fetchWorkout(any, any)).thenAnswer((realInvocation) async => MockData.testWorkout1);
+    when(workoutRepo.fetchTemplate(any, any)).thenAnswer((realInvocation) async => MockData.testWorkoutTemplate1);
     when(view.noteController).thenReturn(noteController);
     when(view.nameController).thenReturn(nameController);
 
@@ -273,8 +273,8 @@ void main() {
     presenter.setAppState(appState);
 
     when(exerciseRepo.getExercises()).thenAnswer((realInvocation) async => [Exercise('bodypart1', 'equipment1', 'gifUrl1', 'name1', 'muscleGroup1'), Exercise('bodypart2', 'equipment2', 'gifUrl2', 'name2', 'muscleGroup2'), Exercise('bodypart3', 'equipment3', 'gifUrl3', 'name3', 'muscleGroup3'), ]);
-    when(workoutRepo.fetchWorkout(any, any)).thenAnswer((realInvocation) async => TestData.testWorkout1);
-    when(workoutRepo.fetchTemplate(any, any)).thenAnswer((realInvocation) async => TestData.testWorkoutTemplate1);
+    when(workoutRepo.fetchWorkout(any, any)).thenAnswer((realInvocation) async => MockData.testWorkout1);
+    when(workoutRepo.fetchTemplate(any, any)).thenAnswer((realInvocation) async => MockData.testWorkoutTemplate1);
     when(view.noteController).thenReturn(noteController);
     when(view.nameController).thenReturn(nameController);
 
@@ -313,7 +313,7 @@ void main() {
 
     when(exerciseRepo.getExercises()).thenAnswer((realInvocation) async => [Exercise('bodypart1', 'equipment1', 'gifUrl1', 'name1', 'muscleGroup1'), Exercise('bodypart2', 'equipment2', 'gifUrl2', 'name2', 'muscleGroup2'), Exercise('bodypart3', 'equipment3', 'gifUrl3', 'name3', 'muscleGroup3'), ]);
     when(workoutRepo.fetchWorkout(any, any)).thenAnswer((realInvocation) async => Workout(1, 'name', 'coachNote', 'userId', 'coachId', false, '', '', '', []));
-    when(workoutRepo.fetchTemplate(any, any)).thenAnswer((realInvocation) async => TestData.testWorkoutTemplate1);
+    when(workoutRepo.fetchTemplate(any, any)).thenAnswer((realInvocation) async => MockData.testWorkoutTemplate1);
     when(view.noteController).thenReturn(noteController);
     when(view.nameController).thenReturn(nameController);
 
@@ -380,8 +380,8 @@ void main() {
     presenter.setAppState(appState);
 
     when(exerciseRepo.getExercises()).thenAnswer((realInvocation) async => [Exercise('bodypart1', 'equipment1', 'gifUrl1', 'name1', 'muscleGroup1'), Exercise('bodypart2', 'equipment2', 'gifUrl2', 'name2', 'muscleGroup2'), Exercise('bodypart3', 'equipment3', 'gifUrl3', 'name3', 'muscleGroup3'), ]);
-    when(workoutRepo.fetchWorkout(any, any)).thenAnswer((realInvocation) async => TestData.testWorkout1);
-    when(workoutRepo.fetchTemplate(any, any)).thenAnswer((realInvocation) async => TestData.testWorkoutTemplate1);
+    when(workoutRepo.fetchWorkout(any, any)).thenAnswer((realInvocation) async => MockData.testWorkout1);
+    when(workoutRepo.fetchTemplate(any, any)).thenAnswer((realInvocation) async => MockData.testWorkoutTemplate1);
     when(view.noteController).thenReturn(noteController);
     when(view.nameController).thenReturn(nameController);
 
@@ -414,8 +414,8 @@ void main() {
     presenter.setAppState(appState);
 
     when(exerciseRepo.getExercises()).thenAnswer((realInvocation) async => [Exercise('bodypart1', 'equipment1', 'gifUrl1', 'name1', 'muscleGroup1'), Exercise('bodypart2', 'equipment2', 'gifUrl2', 'name2', 'muscleGroup2'), Exercise('bodypart3', 'equipment3', 'gifUrl3', 'name3', 'muscleGroup3'), ]);
-    when(workoutRepo.fetchWorkout(any, any)).thenAnswer((realInvocation) async => TestData.testWorkout1);
-    when(workoutRepo.fetchTemplate(any, any)).thenAnswer((realInvocation) async => TestData.testWorkoutTemplate1);
+    when(workoutRepo.fetchWorkout(any, any)).thenAnswer((realInvocation) async => MockData.testWorkout1);
+    when(workoutRepo.fetchTemplate(any, any)).thenAnswer((realInvocation) async => MockData.testWorkoutTemplate1);
     when(view.noteController).thenReturn(noteController);
     when(view.nameController).thenReturn(nameController);
 
@@ -448,8 +448,8 @@ void main() {
     presenter.setAppState(appState);
 
     when(exerciseRepo.getExercises()).thenAnswer((realInvocation) async => [Exercise('bodypart1', 'equipment1', 'gifUrl1', 'name1', 'muscleGroup1'), Exercise('bodypart2', 'equipment2', 'gifUrl2', 'name2', 'muscleGroup2'), Exercise('bodypart3', 'equipment3', 'gifUrl3', 'name3', 'muscleGroup3'), ]);
-    when(workoutRepo.fetchWorkout(any, any)).thenAnswer((realInvocation) async => TestData.testWorkout1);
-    when(workoutRepo.fetchTemplate(any, any)).thenAnswer((realInvocation) async => TestData.testWorkoutTemplate1);
+    when(workoutRepo.fetchWorkout(any, any)).thenAnswer((realInvocation) async => MockData.testWorkout1);
+    when(workoutRepo.fetchTemplate(any, any)).thenAnswer((realInvocation) async => MockData.testWorkoutTemplate1);
     when(view.noteController).thenReturn(noteController);
     when(view.nameController).thenReturn(nameController);
 
@@ -482,8 +482,8 @@ void main() {
     presenter.setAppState(appState);
 
     when(exerciseRepo.getExercises()).thenAnswer((realInvocation) async => [Exercise('bodypart1', 'equipment1', 'gifUrl1', 'name1', 'muscleGroup1'), Exercise('bodypart2', 'equipment2', 'gifUrl2', 'name2', 'muscleGroup2'), Exercise('bodypart3', 'equipment3', 'gifUrl3', 'name3', 'muscleGroup3'), ]);
-    when(workoutRepo.fetchWorkout(any, any)).thenAnswer((realInvocation) async => TestData.testWorkout1);
-    when(workoutRepo.fetchTemplate(any, any)).thenAnswer((realInvocation) async => TestData.testWorkoutTemplate1);
+    when(workoutRepo.fetchWorkout(any, any)).thenAnswer((realInvocation) async => MockData.testWorkout1);
+    when(workoutRepo.fetchTemplate(any, any)).thenAnswer((realInvocation) async => MockData.testWorkoutTemplate1);
     when(view.noteController).thenReturn(noteController);
     when(view.nameController).thenReturn(nameController);
 
@@ -516,8 +516,8 @@ void main() {
     presenter.setAppState(appState);
 
     when(exerciseRepo.getExercises()).thenAnswer((realInvocation) async => [Exercise('bodypart1', 'equipment1', 'gifUrl1', 'name1', 'muscleGroup1'), Exercise('bodypart2', 'equipment2', 'gifUrl2', 'name2', 'muscleGroup2'), Exercise('bodypart3', 'equipment3', 'gifUrl3', 'name3', 'muscleGroup3'), ]);
-    when(workoutRepo.fetchWorkout(any, any)).thenAnswer((realInvocation) async => TestData.testWorkout2);
-    when(workoutRepo.fetchTemplate(any, any)).thenAnswer((realInvocation) async => TestData.testWorkoutTemplate2);
+    when(workoutRepo.fetchWorkout(any, any)).thenAnswer((realInvocation) async => MockData.testWorkout2);
+    when(workoutRepo.fetchTemplate(any, any)).thenAnswer((realInvocation) async => MockData.testWorkoutTemplate2);
     when(view.noteController).thenReturn(noteController);
     when(view.nameController).thenReturn(nameController);
 
@@ -550,8 +550,8 @@ void main() {
     presenter.setAppState(appState);
 
     when(exerciseRepo.getExercises()).thenAnswer((realInvocation) async => [Exercise('bodypart1', 'equipment1', 'gifUrl1', 'name1', 'muscleGroup1'), Exercise('bodypart2', 'equipment2', 'gifUrl2', 'name2', 'muscleGroup2'), Exercise('bodypart3', 'equipment3', 'gifUrl3', 'name3', 'muscleGroup3'), ]);
-    when(workoutRepo.fetchWorkout(any, any)).thenAnswer((realInvocation) async => TestData.testWorkout2);
-    when(workoutRepo.fetchTemplate(any, any)).thenAnswer((realInvocation) async => TestData.testWorkoutTemplate2);
+    when(workoutRepo.fetchWorkout(any, any)).thenAnswer((realInvocation) async => MockData.testWorkout2);
+    when(workoutRepo.fetchTemplate(any, any)).thenAnswer((realInvocation) async => MockData.testWorkoutTemplate2);
     when(view.noteController).thenReturn(noteController);
     when(view.nameController).thenReturn(nameController);
 
@@ -584,8 +584,8 @@ void main() {
     presenter.setAppState(appState);
 
     when(exerciseRepo.getExercises()).thenAnswer((realInvocation) async => [Exercise('bodypart1', 'equipment1', 'gifUrl1', 'name1', 'muscleGroup1'), Exercise('bodypart2', 'equipment2', 'gifUrl2', 'name2', 'muscleGroup2'), Exercise('bodypart3', 'equipment3', 'gifUrl3', 'name3', 'muscleGroup3'), ]);
-    when(workoutRepo.fetchWorkout(any, any)).thenAnswer((realInvocation) async => TestData.testWorkout2);
-    when(workoutRepo.fetchTemplate(any, any)).thenAnswer((realInvocation) async => TestData.testWorkoutTemplate2);
+    when(workoutRepo.fetchWorkout(any, any)).thenAnswer((realInvocation) async => MockData.testWorkout2);
+    when(workoutRepo.fetchTemplate(any, any)).thenAnswer((realInvocation) async => MockData.testWorkoutTemplate2);
     when(view.noteController).thenReturn(noteController);
     when(view.nameController).thenReturn(nameController);
 
@@ -618,8 +618,8 @@ void main() {
     presenter.setAppState(appState);
 
     when(exerciseRepo.getExercises()).thenAnswer((realInvocation) async => [Exercise('bodypart1', 'equipment1', 'gifUrl1', 'name1', 'muscleGroup1'), Exercise('bodypart2', 'equipment2', 'gifUrl2', 'name2', 'muscleGroup2'), Exercise('bodypart3', 'equipment3', 'gifUrl3', 'name3', 'muscleGroup3'), ]);
-    when(workoutRepo.fetchWorkout(any, any)).thenAnswer((realInvocation) async => TestData.testWorkout2);
-    when(workoutRepo.fetchTemplate(any, any)).thenAnswer((realInvocation) async => TestData.testWorkoutTemplate2);
+    when(workoutRepo.fetchWorkout(any, any)).thenAnswer((realInvocation) async => MockData.testWorkout2);
+    when(workoutRepo.fetchTemplate(any, any)).thenAnswer((realInvocation) async => MockData.testWorkoutTemplate2);
     when(view.noteController).thenReturn(noteController);
     when(view.nameController).thenReturn(nameController);
 
@@ -652,8 +652,8 @@ void main() {
     presenter.setAppState(appState);
 
     when(exerciseRepo.getExercises()).thenAnswer((realInvocation) async => [Exercise('bodypart1', 'equipment1', 'gifUrl1', 'name1', 'muscleGroup1'), Exercise('bodypart2', 'equipment2', 'gifUrl2', 'name2', 'muscleGroup2'), Exercise('bodypart3', 'equipment3', 'gifUrl3', 'name3', 'muscleGroup3'), ]);
-    when(workoutRepo.fetchWorkout(any, any)).thenAnswer((realInvocation) async => TestData.testWorkout2);
-    when(workoutRepo.fetchTemplate(any, any)).thenAnswer((realInvocation) async => TestData.testWorkoutTemplate2);
+    when(workoutRepo.fetchWorkout(any, any)).thenAnswer((realInvocation) async => MockData.testWorkout2);
+    when(workoutRepo.fetchTemplate(any, any)).thenAnswer((realInvocation) async => MockData.testWorkoutTemplate2);
     when(view.noteController).thenReturn(noteController);
     when(view.nameController).thenReturn(nameController);
 
@@ -686,8 +686,8 @@ void main() {
     presenter.setAppState(appState);
 
     when(exerciseRepo.getExercises()).thenAnswer((realInvocation) async => [Exercise('bodypart1', 'equipment1', 'gifUrl1', 'name1', 'muscleGroup1'), Exercise('bodypart2', 'equipment2', 'gifUrl2', 'name2', 'muscleGroup2'), Exercise('bodypart3', 'equipment3', 'gifUrl3', 'name3', 'muscleGroup3'), ]);
-    when(workoutRepo.fetchWorkout(any, any)).thenAnswer((realInvocation) async => TestData.testWorkout2);
-    when(workoutRepo.fetchTemplate(any, any)).thenAnswer((realInvocation) async => TestData.testWorkoutTemplate2);
+    when(workoutRepo.fetchWorkout(any, any)).thenAnswer((realInvocation) async => MockData.testWorkout2);
+    when(workoutRepo.fetchTemplate(any, any)).thenAnswer((realInvocation) async => MockData.testWorkoutTemplate2);
     when(view.noteController).thenReturn(noteController);
     when(view.nameController).thenReturn(nameController);
 
@@ -720,8 +720,8 @@ void main() {
     presenter.setAppState(appState);
 
     when(exerciseRepo.getExercises()).thenAnswer((realInvocation) async => [Exercise('bodypart1', 'equipment1', 'gifUrl1', 'name1', 'muscleGroup1'), Exercise('bodypart2', 'equipment2', 'gifUrl2', 'name2', 'muscleGroup2'), Exercise('bodypart3', 'equipment3', 'gifUrl3', 'name3', 'muscleGroup3'), ]);
-    when(workoutRepo.fetchWorkout(any, any)).thenAnswer((realInvocation) async => TestData.testWorkout2);
-    when(workoutRepo.fetchTemplate(any, any)).thenAnswer((realInvocation) async => TestData.testWorkoutTemplate2);
+    when(workoutRepo.fetchWorkout(any, any)).thenAnswer((realInvocation) async => MockData.testWorkout2);
+    when(workoutRepo.fetchTemplate(any, any)).thenAnswer((realInvocation) async => MockData.testWorkoutTemplate2);
     when(view.noteController).thenReturn(noteController);
     when(view.nameController).thenReturn(nameController);
 
@@ -754,8 +754,8 @@ void main() {
     presenter.setAppState(appState);
 
     when(exerciseRepo.getExercises()).thenAnswer((realInvocation) async => [Exercise('bodypart1', 'equipment1', 'gifUrl1', 'name1', 'muscleGroup1'), Exercise('bodypart2', 'equipment2', 'gifUrl2', 'name2', 'muscleGroup2'), Exercise('bodypart3', 'equipment3', 'gifUrl3', 'name3', 'muscleGroup3'), ]);
-    when(workoutRepo.fetchWorkout(any, any)).thenAnswer((realInvocation) async => TestData.testWorkout2);
-    when(workoutRepo.fetchTemplate(any, any)).thenAnswer((realInvocation) async => TestData.testWorkoutTemplate2);
+    when(workoutRepo.fetchWorkout(any, any)).thenAnswer((realInvocation) async => MockData.testWorkout2);
+    when(workoutRepo.fetchTemplate(any, any)).thenAnswer((realInvocation) async => MockData.testWorkoutTemplate2);
     when(view.noteController).thenReturn(noteController);
     when(view.nameController).thenReturn(nameController);
 
@@ -788,8 +788,8 @@ void main() {
     presenter.setAppState(appState);
 
     when(exerciseRepo.getExercises()).thenAnswer((realInvocation) async => [Exercise('bodypart1', 'equipment1', 'gifUrl1', 'name1', 'muscleGroup1'), Exercise('bodypart2', 'equipment2', 'gifUrl2', 'name2', 'muscleGroup2'), Exercise('bodypart3', 'equipment3', 'gifUrl3', 'name3', 'muscleGroup3'), ]);
-    when(workoutRepo.fetchWorkout(any, any)).thenAnswer((realInvocation) async => TestData.testWorkout1);
-    when(workoutRepo.fetchTemplate(any, any)).thenAnswer((realInvocation) async => TestData.testWorkoutTemplate1);
+    when(workoutRepo.fetchWorkout(any, any)).thenAnswer((realInvocation) async => MockData.testWorkout1);
+    when(workoutRepo.fetchTemplate(any, any)).thenAnswer((realInvocation) async => MockData.testWorkoutTemplate1);
     when(view.noteController).thenReturn(noteController);
     when(view.nameController).thenReturn(nameController);
 
@@ -822,8 +822,8 @@ void main() {
     presenter.setAppState(appState);
 
     when(exerciseRepo.getExercises()).thenAnswer((realInvocation) async => [Exercise('bodypart1', 'equipment1', 'gifUrl1', 'name1', 'muscleGroup1'), Exercise('bodypart2', 'equipment2', 'gifUrl2', 'name2', 'muscleGroup2'), Exercise('bodypart3', 'equipment3', 'gifUrl3', 'name3', 'muscleGroup3'), ]);
-    when(workoutRepo.fetchWorkout(any, any)).thenAnswer((realInvocation) async => TestData.testWorkout1);
-    when(workoutRepo.fetchTemplate(any, any)).thenAnswer((realInvocation) async => TestData.testWorkoutTemplate1);
+    when(workoutRepo.fetchWorkout(any, any)).thenAnswer((realInvocation) async => MockData.testWorkout1);
+    when(workoutRepo.fetchTemplate(any, any)).thenAnswer((realInvocation) async => MockData.testWorkoutTemplate1);
     when(view.noteController).thenReturn(noteController);
     when(view.nameController).thenReturn(nameController);
 
@@ -856,8 +856,8 @@ void main() {
     presenter.setAppState(appState);
 
     when(exerciseRepo.getExercises()).thenAnswer((realInvocation) async => [Exercise('bodypart1', 'equipment1', 'gifUrl1', 'name1', 'muscleGroup1'), Exercise('bodypart2', 'equipment2', 'gifUrl2', 'name2', 'muscleGroup2'), Exercise('bodypart3', 'equipment3', 'gifUrl3', 'name3', 'muscleGroup3'), ]);
-    when(workoutRepo.fetchWorkout(any, any)).thenAnswer((realInvocation) async => TestData.testWorkout1);
-    when(workoutRepo.fetchTemplate(any, any)).thenAnswer((realInvocation) async => TestData.testWorkoutTemplate1);
+    when(workoutRepo.fetchWorkout(any, any)).thenAnswer((realInvocation) async => MockData.testWorkout1);
+    when(workoutRepo.fetchTemplate(any, any)).thenAnswer((realInvocation) async => MockData.testWorkoutTemplate1);
     when(view.noteController).thenReturn(noteController);
     when(view.nameController).thenReturn(nameController);
 
@@ -890,8 +890,8 @@ void main() {
     presenter.setAppState(appState);
 
     when(exerciseRepo.getExercises()).thenAnswer((realInvocation) async => [Exercise('bodypart1', 'equipment1', 'gifUrl1', 'name1', 'muscleGroup1'), Exercise('bodypart2', 'equipment2', 'gifUrl2', 'name2', 'muscleGroup2'), Exercise('bodypart3', 'equipment3', 'gifUrl3', 'name3', 'muscleGroup3'), ]);
-    when(workoutRepo.fetchWorkout(any, any)).thenAnswer((realInvocation) async => TestData.testWorkout1);
-    when(workoutRepo.fetchTemplate(any, any)).thenAnswer((realInvocation) async => TestData.testWorkoutTemplate1);
+    when(workoutRepo.fetchWorkout(any, any)).thenAnswer((realInvocation) async => MockData.testWorkout1);
+    when(workoutRepo.fetchTemplate(any, any)).thenAnswer((realInvocation) async => MockData.testWorkoutTemplate1);
     when(view.noteController).thenReturn(noteController);
     when(view.nameController).thenReturn(nameController);
 
@@ -924,8 +924,8 @@ void main() {
     presenter.setAppState(appState);
 
     when(exerciseRepo.getExercises()).thenAnswer((realInvocation) async => [Exercise('bodypart1', 'equipment1', 'gifUrl1', 'name1', 'muscleGroup1'), Exercise('bodypart2', 'equipment2', 'gifUrl2', 'name2', 'muscleGroup2'), Exercise('bodypart3', 'equipment3', 'gifUrl3', 'name3', 'muscleGroup3'), ]);
-    when(workoutRepo.fetchWorkout(any, any)).thenAnswer((realInvocation) async => TestData.testWorkout1);
-    when(workoutRepo.fetchTemplate(any, any)).thenAnswer((realInvocation) async => TestData.testWorkoutTemplate1);
+    when(workoutRepo.fetchWorkout(any, any)).thenAnswer((realInvocation) async => MockData.testWorkout1);
+    when(workoutRepo.fetchTemplate(any, any)).thenAnswer((realInvocation) async => MockData.testWorkoutTemplate1);
     when(view.noteController).thenReturn(noteController);
     when(view.nameController).thenReturn(nameController);
 
@@ -958,8 +958,8 @@ void main() {
     presenter.setAppState(appState);
 
     when(exerciseRepo.getExercises()).thenAnswer((realInvocation) async => [Exercise('bodypart1', 'equipment1', 'gifUrl1', 'name1', 'muscleGroup1'), Exercise('bodypart2', 'equipment2', 'gifUrl2', 'name2', 'muscleGroup2'), Exercise('bodypart3', 'equipment3', 'gifUrl3', 'name3', 'muscleGroup3'), ]);
-    when(workoutRepo.fetchWorkout(any, any)).thenAnswer((realInvocation) async => TestData.testWorkout1);
-    when(workoutRepo.fetchTemplate(any, any)).thenAnswer((realInvocation) async => TestData.testWorkoutTemplate1);
+    when(workoutRepo.fetchWorkout(any, any)).thenAnswer((realInvocation) async => MockData.testWorkout1);
+    when(workoutRepo.fetchTemplate(any, any)).thenAnswer((realInvocation) async => MockData.testWorkoutTemplate1);
     when(view.noteController).thenReturn(noteController);
     when(view.nameController).thenReturn(nameController);
 
@@ -992,8 +992,8 @@ void main() {
     presenter.setAppState(appState);
 
     when(exerciseRepo.getExercises()).thenAnswer((realInvocation) async => [Exercise('bodypart1', 'equipment1', 'gifUrl1', 'name1', 'muscleGroup1'), Exercise('bodypart2', 'equipment2', 'gifUrl2', 'name2', 'muscleGroup2'), Exercise('bodypart3', 'equipment3', 'gifUrl3', 'name3', 'muscleGroup3'), ]);
-    when(workoutRepo.fetchWorkout(any, any)).thenAnswer((realInvocation) async => TestData.testWorkout1);
-    when(workoutRepo.fetchTemplate(any, any)).thenAnswer((realInvocation) async => TestData.testWorkoutTemplate1);
+    when(workoutRepo.fetchWorkout(any, any)).thenAnswer((realInvocation) async => MockData.testWorkout1);
+    when(workoutRepo.fetchTemplate(any, any)).thenAnswer((realInvocation) async => MockData.testWorkoutTemplate1);
     when(view.noteController).thenReturn(noteController);
     when(view.nameController).thenReturn(nameController);
 
@@ -1026,8 +1026,8 @@ void main() {
     presenter.setAppState(appState);
 
     when(exerciseRepo.getExercises()).thenAnswer((realInvocation) async => [Exercise('bodypart1', 'equipment1', 'gifUrl1', 'name1', 'muscleGroup1'), Exercise('bodypart2', 'equipment2', 'gifUrl2', 'name2', 'muscleGroup2'), Exercise('bodypart3', 'equipment3', 'gifUrl3', 'name3', 'muscleGroup3'), ]);
-    when(workoutRepo.fetchWorkout(any, any)).thenAnswer((realInvocation) async => TestData.testWorkout2);
-    when(workoutRepo.fetchTemplate(any, any)).thenAnswer((realInvocation) async => TestData.testWorkoutTemplate1);
+    when(workoutRepo.fetchWorkout(any, any)).thenAnswer((realInvocation) async => MockData.testWorkout2);
+    when(workoutRepo.fetchTemplate(any, any)).thenAnswer((realInvocation) async => MockData.testWorkoutTemplate1);
     when(view.noteController).thenReturn(noteController);
     when(view.nameController).thenReturn(nameController);
 

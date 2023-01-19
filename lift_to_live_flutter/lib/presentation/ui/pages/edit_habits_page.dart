@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:lift_to_live_flutter/factory/page_factory.dart';
 import 'package:provider/provider.dart';
 import '../../../domain/entities/habit.dart';
+import '../../../factory/abstract_page_factory.dart';
 import '../../presenters/edit_habits_page_presenter.dart';
 import '../../state_management/app_state.dart';
 import '../../../helper.dart';
@@ -15,9 +15,10 @@ import '../widgets/reusable_elements/custom_heading_text_field.dart';
 class EditHabitsPage extends StatefulWidget {
   final String userId;
   final EditHabitsPagePresenter presenter; // The business logic object
+  final AbstractPageFactory pageFactory;
 
   const EditHabitsPage(
-      {Key? key, required this.userId, required this.presenter})
+      {Key? key, required this.userId, required this.presenter, required this.pageFactory})
       : super(key: key);
 
   @override
@@ -251,7 +252,7 @@ class EditHabitsPageState extends State<EditHabitsPage>
   /// Function for returning from this page to the previous one.
   void goBack() {
     Navigator.pop(context);
-    Helper.replacePage(context, PageFactory().getHabitsPage(widget.userId));
+    Helper.replacePage(context, widget.pageFactory.getHabitsPage(widget.userId));
   }
 
   @override

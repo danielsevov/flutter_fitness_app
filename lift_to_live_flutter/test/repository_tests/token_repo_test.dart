@@ -9,7 +9,7 @@ import 'package:lift_to_live_flutter/domain/repositories/token_repo.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-import '../test_data.dart';
+import '../mock_data.dart';
 import 'token_repo_test.mocks.dart';
 
 @GenerateMocks([BackendAPI])
@@ -25,7 +25,7 @@ void main() {
 
       TokenRepository repository = TokenRepoImpl(backendAPI);
 
-      expect(await repository.getToken('email', 'password'), TestData.testToken1.token);
+      expect(await repository.getToken('email', 'password'), MockData.testToken1.token);
     });
 
     test('throws an exception if the http call completes with an error', () async {

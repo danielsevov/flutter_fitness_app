@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:lift_to_live_flutter/factory/page_factory.dart';
 import 'package:lift_to_live_flutter/presentation/ui/widgets/workout_related/custom_workouts_calendar.dart';
 import 'package:provider/provider.dart';
+import '../../../factory/abstract_page_factory.dart';
 import '../../presenters/workout_history_page_presenter.dart';
 import '../../state_management/app_state.dart';
 import '../../../helper.dart';
@@ -12,9 +12,10 @@ import '../../views/workout_history_page_view.dart';
 class WorkoutHistoryPage extends StatefulWidget {
   final String userId;
   final WorkoutHistoryPagePresenter presenter; // The business logic object
+  final AbstractPageFactory pageFactory;
 
   const WorkoutHistoryPage(
-      {Key? key, required this.userId, required this.presenter})
+      {Key? key, required this.userId, required this.presenter, required this.pageFactory})
       : super(key: key);
 
   @override
@@ -111,7 +112,7 @@ class WorkoutHistoryPageState extends State<WorkoutHistoryPage>
                         onPressed: () {
                           Helper.replacePage(
                               context,
-                              PageFactory()
+                              widget.pageFactory
                                   .getWrappedHomePage());
                         }),
                     iconTheme: const IconThemeData(
@@ -152,7 +153,7 @@ class WorkoutHistoryPageState extends State<WorkoutHistoryPage>
                                   onPressed: () {
                                     Helper.pushPageWithAnimation(
                                         context,
-                                        PageFactory()
+                                        widget.pageFactory
                                             .getWorkoutPage(0,
                                                 widget.userId, false, false));
                                   },
@@ -174,7 +175,7 @@ class WorkoutHistoryPageState extends State<WorkoutHistoryPage>
                                     if (widget.presenter.isAuthorized()) {
                                       Helper.pushPageWithAnimation(
                                           context,
-                                          PageFactory().getWorkoutTemplatesPage(
+                                          widget.pageFactory.getWorkoutTemplatesPage(
                                               widget.userId));
                                     } else {
                                       Helper.makeToast(context,

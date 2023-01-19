@@ -8,7 +8,7 @@ import 'package:lift_to_live_flutter/presentation/ui/widgets/custom_drawer/custo
 import 'package:lift_to_live_flutter/presentation/views/home_page_view.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import '../test_data.dart';
+import '../mock_data.dart';
 import 'custom_drawer_and_bar_test.mocks.dart';
 
 @GenerateMocks([HomePageView])
@@ -20,7 +20,7 @@ void main() {
       when(view.screenWidth).thenReturn(400);
       when(view.screenHeight).thenReturn(400);
       when(view.isFetched).thenReturn(true);
-      when(view.userData).thenReturn(TestData.testUser1);
+      when(view.userData).thenReturn(MockData.testUser1);
       when(view.profilePicture).thenReturn(Image.asset(
           'assets/images/prof_pic.png',
           height: 100));
@@ -56,7 +56,7 @@ void main() {
       when(view.screenWidth).thenReturn(400);
       when(view.screenHeight).thenReturn(400);
       when(view.isFetched).thenReturn(false);
-      when(view.userData).thenReturn(TestData.testUser1);
+      when(view.userData).thenReturn(MockData.testUser1);
       when(view.profilePicture).thenReturn(Image.asset(
           'assets/images/prof_pic.png',
           height: 100));
@@ -88,7 +88,7 @@ void main() {
       when(view.screenWidth).thenReturn(400);
       when(view.screenHeight).thenReturn(600);
       when(view.isFetched).thenReturn(true);
-      when(view.userData).thenReturn(TestData.testUser1);
+      when(view.userData).thenReturn(MockData.testUser1);
       when(view.profilePicture).thenReturn(Image.asset(
           'assets/images/prof_pic.png',
           height: 100));
@@ -128,7 +128,7 @@ void main() {
       when(view.screenWidth).thenReturn(400);
       when(view.screenHeight).thenReturn(400);
       when(view.isFetched).thenReturn(true);
-      when(view.userData).thenReturn(TestData.testUser1);
+      when(view.userData).thenReturn(MockData.testUser1);
       when(view.profilePicture).thenReturn(Image.asset(
           'assets/images/prof_pic.png',
           height: 100));
@@ -165,7 +165,7 @@ void main() {
       when(view.screenWidth).thenReturn(400);
       when(view.screenHeight).thenReturn(400);
       when(view.isFetched).thenReturn(true);
-      when(view.userData).thenReturn(TestData.testUser1);
+      when(view.userData).thenReturn(MockData.testUser1);
       when(view.profilePicture).thenReturn(Image.asset(
           'assets/images/prof_pic.png',
           height: 100));

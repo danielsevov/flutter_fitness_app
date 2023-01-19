@@ -1,6 +1,7 @@
 import 'package:dropdown_textfield/dropdown_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:lift_to_live_flutter/domain/entities/exercise.dart';
 import 'package:lift_to_live_flutter/helper.dart';
 import 'package:lift_to_live_flutter/presentation/ui/widgets/reusable_elements/custom_heading_text_field.dart';
 import 'package:lift_to_live_flutter/presentation/ui/widgets/workout_related/editable_set_holder.dart';
@@ -9,6 +10,8 @@ import 'package:lift_to_live_flutter/presentation/ui/widgets/workout_related/set
 import 'package:lift_to_live_flutter/presentation/ui/widgets/workout_related/fixed_set_holder.dart';
 import 'package:lift_to_live_flutter/presentation/ui/widgets/workout_related/template_workout_holder.dart';
 import 'package:lift_to_live_flutter/presentation/ui/widgets/workout_related/workout_holder.dart';
+
+import '../mock_data.dart';
 
 void main() {
   group('set task header tests', () {
@@ -317,11 +320,12 @@ void main() {
 
         var exercise = SingleValueDropDownController();
         exercise.dropDownValue = const DropDownValueModel(name: 'Ex A', value: 'Ex A');
-        List<String> exercises = ['Ex A', 'Ex B', 'Ex C'];
+        List<String> exerciseNames = ['Ex A', 'Ex B', 'Ex C'];
+        List<Exercise> exercises = [MockData.testExercise1, MockData.testExercise2, MockData.testExercise1];
 
         List<TextEditingController> reps = [], kilos = [], completes = [];
 
-        final widget = EditableSetHolder(setTasks: const [], exerciseController: exercise, noteController: note, exercises: exercises, repsControllers: reps, kilosControllers: kilos, isCompletedControllers: completes, tag: 'HeroTag', isTemplate: false);
+        final widget = EditableSetHolder(exercises: exercises,setTasks: const [], exerciseController: exercise, noteController: note, exerciseNames: exerciseNames, repsControllers: reps, kilosControllers: kilos, isCompletedControllers: completes, tag: 'HeroTag', isTemplate: false,);
 
         await tester.pumpWidget(MaterialApp(
             title: 'Flutter Demo', home: Scaffold(body: Center(child: Container(color: Helper.blueColor,child: widget),))));
@@ -353,11 +357,13 @@ void main() {
 
         var exercise = SingleValueDropDownController();
         exercise.dropDownValue = const DropDownValueModel(name: 'Ex A', value: 'Ex A');
-        List<String> exercises = ['Ex A', 'Ex B', 'Ex C'];
+        List<String> exerciseNames = ['Ex A', 'Ex B', 'Ex C'];
+        List<Exercise> exercises = [MockData.testExercise1, MockData.testExercise2, MockData.testExercise1];
+
 
         List<TextEditingController> reps = [], kilos = [], completes = [];
 
-        final widget = EditableSetHolder(setTasks: const [], exerciseController: exercise, noteController: note, exercises: exercises, repsControllers: reps, kilosControllers: kilos, isCompletedControllers: completes, tag: 'HeroTag', isTemplate: true);
+        final widget = EditableSetHolder(exercises: exercises,setTasks: const [], exerciseController: exercise, noteController: note, exerciseNames: exerciseNames, repsControllers: reps, kilosControllers: kilos, isCompletedControllers: completes, tag: 'HeroTag', isTemplate: true);
 
         await tester.pumpWidget(MaterialApp(
             title: 'Flutter Demo', home: Scaffold(body: Center(child: Container(color: Helper.blueColor,child: widget),))));
@@ -389,12 +395,13 @@ void main() {
 
         var exercise = SingleValueDropDownController();
         exercise.dropDownValue = const DropDownValueModel(name: 'Ex A', value: 'Ex A');
-        List<String> exercises = ['Ex A', 'Ex B', 'Ex C'];
+        List<String> exerciseNames = ['Ex A', 'Ex B', 'Ex C'];
+        List<Exercise> exercises = [MockData.testExercise1, MockData.testExercise2, MockData.testExercise1];
+
 
         List<TextEditingController> reps = [], kilos = [], completes = [];
-        var tasks = <SetTaskHolder>[];
 
-        final widget = EditableSetHolder(setTasks: tasks, exerciseController: exercise, noteController: note, exercises: exercises, repsControllers: reps, kilosControllers: kilos, isCompletedControllers: completes, tag: 'HeroTag', isTemplate: true);
+        final widget = EditableSetHolder(exercises: exercises,setTasks: const [], exerciseController: exercise, noteController: note, exerciseNames: exerciseNames, repsControllers: reps, kilosControllers: kilos, isCompletedControllers: completes, tag: 'HeroTag', isTemplate: true);
 
         await tester.pumpWidget(MaterialApp(
             title: 'Flutter Demo', home: Scaffold(body: Center(child: Container(color: Helper.blueColor,child: widget),))));
@@ -427,12 +434,14 @@ void main() {
 
         var exercise = SingleValueDropDownController();
         exercise.dropDownValue = const DropDownValueModel(name: 'Ex A', value: 'Ex A');
-        List<String> exercises = ['Ex A', 'Ex B', 'Ex C'];
+        List<String> exerciseNames = ['Ex A', 'Ex B', 'Ex C'];
+        List<Exercise> exercises = [MockData.testExercise1, MockData.testExercise2, MockData.testExercise1];
+
 
         List<TextEditingController> reps = [], kilos = [], completes = [];
         var tasks = <SetTaskHolder>[];
 
-        final widget = EditableSetHolder(setTasks: tasks, exerciseController: exercise, noteController: note, exercises: exercises, repsControllers: reps, kilosControllers: kilos, isCompletedControllers: completes, tag: 'HeroTag', isTemplate: true);
+        final widget = EditableSetHolder(exercises: exercises,setTasks: tasks, exerciseController: exercise, noteController: note, exerciseNames: exerciseNames, repsControllers: reps, kilosControllers: kilos, isCompletedControllers: completes, tag: 'HeroTag', isTemplate: true);
 
         await tester.pumpWidget(MaterialApp(
             title: 'Flutter Demo', home: Scaffold(body: Center(child: Container(color: Helper.blueColor,child: widget),))));
@@ -469,7 +478,8 @@ void main() {
 
         var exercise = SingleValueDropDownController();
         exercise.dropDownValue = const DropDownValueModel(name: 'Ex A', value: 'Ex A');
-        List<String> exercises = ['Ex A', 'Ex B', 'Ex C'];
+        List<String> exerciseNames = ['Ex A', 'Ex B', 'Ex C'];
+        List<Exercise> exercises = [MockData.testExercise1, MockData.testExercise2, MockData.testExercise1];
 
         var repC = TextEditingController();
         repC.text = '10';
@@ -483,7 +493,7 @@ void main() {
 
         var tasks = <SetTaskHolder>[task];
 
-        final widget = EditableSetHolder(setTasks: tasks, exerciseController: exercise, noteController: note, exercises: exercises, repsControllers: reps, kilosControllers: kilos, isCompletedControllers: completes, tag: 'HeroTag', isTemplate: true);
+        final widget = EditableSetHolder(exercises: exercises,setTasks: tasks, exerciseController: exercise, noteController: note, exerciseNames: exerciseNames, repsControllers: reps, kilosControllers: kilos, isCompletedControllers: completes, tag: 'HeroTag', isTemplate: true);
 
         await tester.pumpWidget(MaterialApp(
             title: 'Flutter Demo', home: Scaffold(body: Center(child: Container(color: Helper.blueColor,child: widget),))));
@@ -524,7 +534,8 @@ void main() {
 
         var exercise = SingleValueDropDownController();
         exercise.dropDownValue = const DropDownValueModel(name: 'Ex A', value: 'Ex A');
-        List<String> exercises = ['Ex A', 'Ex B', 'Ex C'];
+        List<String> exerciseNames = ['Ex A', 'Ex B', 'Ex C'];
+        List<Exercise> exercises = [MockData.testExercise1, MockData.testExercise2, MockData.testExercise1];
 
         var repC = TextEditingController();
         //repC.text = '10';
@@ -538,7 +549,7 @@ void main() {
 
         var tasks = <SetTaskHolder>[task];
 
-        final widget = EditableSetHolder(setTasks: tasks, exerciseController: exercise, noteController: note, exercises: exercises, repsControllers: reps, kilosControllers: kilos, isCompletedControllers: completes, tag: 'HeroTag', isTemplate: true);
+        final widget = EditableSetHolder(exercises: exercises,setTasks: tasks, exerciseController: exercise, noteController: note, exerciseNames: exerciseNames, repsControllers: reps, kilosControllers: kilos, isCompletedControllers: completes, tag: 'HeroTag', isTemplate: true);
 
         await tester.pumpWidget(MaterialApp(
             title: 'Flutter Demo', home: Scaffold(body: Center(child: Container(color: Helper.blueColor,child: widget),))));
@@ -560,7 +571,8 @@ void main() {
 
         var exercise = SingleValueDropDownController();
         //exercise.dropDownValue = const DropDownValueModel(name: 'Ex A', value: 'Ex A');
-        List<String> exercises = ['Ex A', 'Ex B', 'Ex C'];
+        List<String> exerciseNames = ['Ex A', 'Ex B', 'Ex C'];
+        List<Exercise> exercises = [MockData.testExercise1, MockData.testExercise2, MockData.testExercise1];
 
         var repC = TextEditingController();
         repC.text = '10';
@@ -574,7 +586,7 @@ void main() {
 
         var tasks = <SetTaskHolder>[task];
 
-        final widget = EditableSetHolder(setTasks: tasks, exerciseController: exercise, noteController: note, exercises: exercises, repsControllers: reps, kilosControllers: kilos, isCompletedControllers: completes, tag: 'HeroTag', isTemplate: true);
+        final widget = EditableSetHolder(exercises: exercises,setTasks: tasks, exerciseController: exercise, noteController: note, exerciseNames: exerciseNames, repsControllers: reps, kilosControllers: kilos, isCompletedControllers: completes, tag: 'HeroTag', isTemplate: true);
 
         await tester.pumpWidget(MaterialApp(
             title: 'Flutter Demo', home: Scaffold(body: Center(child: Container(color: Helper.blueColor,child: widget),))));

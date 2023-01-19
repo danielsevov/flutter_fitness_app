@@ -12,10 +12,10 @@ abstract class LogInPageView {
   LogInFormView getLogInForm();
 
   /// Function to trigger page change from log in page to home page, upon successful log in.
-  void navigateToHome() {}
+  void navigateToHome();
 
   /// Function to display a toast message, when user cannot be authenticated.
-  void notifyWrongCredentials() {}
+  void notifyWrongCredentials();
 }
 
 // coverage:ignore-end

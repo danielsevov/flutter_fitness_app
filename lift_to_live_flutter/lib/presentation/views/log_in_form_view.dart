@@ -10,10 +10,10 @@ abstract class LogInFormView {
   String getEmail();
 
   /// Function to clear the current email and password entries.
-  void clearForm() {}
+  void clearForm();
 
   /// Function to clear the current password entry.
-  void clearPassword() {}
+  void clearPassword();
 }
 
 // coverage:ignore-end

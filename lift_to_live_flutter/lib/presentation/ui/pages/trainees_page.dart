@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:lift_to_live_flutter/factory/page_factory.dart';
 import 'package:provider/provider.dart';
+import '../../../factory/abstract_page_factory.dart';
 import '../../presenters/trainees_page_presenter.dart';
 import '../../state_management/app_state.dart';
 import '../../../helper.dart';
@@ -13,8 +13,9 @@ import '../widgets/user_related/trainee_search_holder.dart';
 /// It is a stateful widget and its state object implements the TraineesPageView abstract class.
 class TraineesPage extends StatefulWidget {
   final TraineesPagePresenter presenter; // The business logic object
+  final AbstractPageFactory pageFactory;
 
-  const TraineesPage({Key? key, required this.presenter}) : super(key: key);
+  const TraineesPage({Key? key, required this.presenter, required this.pageFactory}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => TraineesPageState();
@@ -79,13 +80,13 @@ class TraineesPageState extends State<TraineesPage>
   @override
   void navigateToProfilePage(String id) {
     Helper.pushPageWithAnimation(
-        context, PageFactory().getProfilePage(id, 'trainees'));
+        context, widget.pageFactory.getProfilePage(id, 'trainees'));
   }
 
   /// Function called when user wants to navigate to the user registration page.
   @override
   void registerPressed(BuildContext context) {
-    Helper.replacePage(context, PageFactory().getRegisterPage());
+    Helper.replacePage(context, widget.pageFactory.getRegisterPage());
   }
 
   /// Function to apply the search term filter on the trainees

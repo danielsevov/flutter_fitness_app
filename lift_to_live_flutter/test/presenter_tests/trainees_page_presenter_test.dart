@@ -8,7 +8,7 @@ import 'package:lift_to_live_flutter/presentation/views/trainees_page_view.dart'
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-import '../test_data.dart';
+import '../mock_data.dart';
 import '../widget_tests/trainee_widget_test.mocks.dart';
 import 'profile_page_presenter_test.mocks.dart';
 
@@ -77,8 +77,8 @@ void main() {
 
     expect(presenter.isInitialized(), false);
 
-    when(userRepo.fetchMyTrainees(any, any)).thenAnswer((realInvocation) async => [TestData.testUser1]);
-    when(userRepo.fetchProfileImage(any, any)).thenAnswer((realInvocation) async => TestData.testImage3);
+    when(userRepo.fetchMyTrainees(any, any)).thenAnswer((realInvocation) async => [MockData.testUser1]);
+    when(userRepo.fetchProfileImage(any, any)).thenAnswer((realInvocation) async => MockData.testImage3);
 
     appState.setInitialState('email@email.com', '', []);
     presenter.setAppState(appState);
@@ -99,7 +99,7 @@ void main() {
     expect(presenter.isInitialized(), false);
 
     when(userRepo.fetchMyTrainees(any, any)).thenThrow(FailedFetchException('fail'));
-    when(userRepo.fetchProfileImage(any, any)).thenAnswer((realInvocation) async => TestData.testImage3);
+    when(userRepo.fetchProfileImage(any, any)).thenAnswer((realInvocation) async => MockData.testImage3);
 
     appState.setInitialState('email@email.com', '', []);
     presenter.setAppState(appState);
@@ -117,7 +117,7 @@ void main() {
 
     expect(presenter.isInitialized(), false);
 
-    when(userRepo.fetchMyTrainees(any, any)).thenAnswer((realInvocation) async => [TestData.testUser1]);
+    when(userRepo.fetchMyTrainees(any, any)).thenAnswer((realInvocation) async => [MockData.testUser1]);
     when(userRepo.fetchProfileImage(any, any)).thenThrow(FailedFetchException('fail'));
 
     appState.setInitialState('email@email.com', '', []);

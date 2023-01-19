@@ -35,6 +35,8 @@ class _FixedSetHolderState extends State<FixedSetHolder> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: 400,
+        height: widget.setTasks.length * 120 - ((widget.setTasks.length - 2 ) * 80),
         padding: const EdgeInsets.all(10),
         margin: const EdgeInsets.all(10),
         decoration: BoxDecoration(

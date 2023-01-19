@@ -10,7 +10,7 @@ import 'package:lift_to_live_flutter/domain/repositories/user_repo.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-import '../test_data.dart';
+import '../mock_data.dart';
 import 'user_repo_test.mocks.dart';
 
 @GenerateMocks([BackendAPI])
@@ -26,7 +26,7 @@ void main() {
 
       UserRepository repository = UserRepoImpl(backendAPI);
 
-      expect(await repository.fetchUser('A', 'A'), TestData.testUser1);
+      expect(await repository.fetchUser('A', 'A'), MockData.testUser1);
     });
 
     test('throws an exception if the http call completes with an error', () async {
@@ -54,7 +54,7 @@ void main() {
 
       UserRepository repository = UserRepoImpl(backendAPI);
 
-      expect(await repository.fetchMyTrainees('A', 'A'), [TestData.testUser1]);
+      expect(await repository.fetchMyTrainees('A', 'A'), [MockData.testUser1]);
     });
 
     test('throws an exception if the http call completes with an error', () async {
@@ -217,7 +217,7 @@ void main() {
 
       UserRepository repository = UserRepoImpl(backendAPI);
 
-      expect(await repository.fetchUserRoles('A'), [TestData.testRole1]);
+      expect(await repository.fetchUserRoles('A'), [MockData.testRole1]);
     });
 
     test('throws an exception if the http call completes with an error', () async {
@@ -245,7 +245,7 @@ void main() {
 
       UserRepository repository = UserRepoImpl(backendAPI);
 
-      expect(await repository.fetchCoachRoles('A'), [TestData.testRole1]);
+      expect(await repository.fetchCoachRoles('A'), [MockData.testRole1]);
     });
 
     test('throws an exception if the http call completes with an error', () async {

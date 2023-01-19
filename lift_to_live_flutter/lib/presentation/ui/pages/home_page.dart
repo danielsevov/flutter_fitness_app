@@ -12,7 +12,7 @@ import 'package:lift_to_live_flutter/presentation/views/home_page_view.dart';
 import 'package:provider/provider.dart';
 
 import '../../../domain/entities/user.dart';
-import '../../../factory/page_factory.dart';
+import '../../../factory/abstract_page_factory.dart';
 import '../../state_management/app_state.dart';
 import '../../../helper.dart';
 import '../widgets/reusable_elements/custom_dialog.dart';
@@ -23,8 +23,9 @@ import '../widgets/reusable_elements/custom_dialog.dart';
 class HomePage extends StatefulWidget {
   final HomePagePresenter
       presenter; // The business logic object of the log in page
+  final AbstractPageFactory pageFactory;
 
-  const HomePage({Key? key, required this.presenter}) : super(key: key);
+  const HomePage({Key? key, required this.presenter, required this.pageFactory}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => HomePageState();
@@ -118,7 +119,7 @@ class HomePageState extends State<HomePage> implements HomePageView {
   void habitsPressed(bool bottomBarButton) {
     if (!bottomBarButton) Navigator.of(context).pop();
     Helper.pushPageWithAnimation(
-        context, PageFactory().getHabitsPage(_user.id));
+        context, widget.pageFactory.getHabitsPage(_user.id));
   }
 
   /// Function to redirect user to URL
@@ -132,27 +133,27 @@ class HomePageState extends State<HomePage> implements HomePageView {
   void profilePressed(bool bottomBarButton) {
     if (!bottomBarButton) Navigator.of(context).pop();
     Helper.pushPageWithAnimation(
-        context, PageFactory().getProfilePage(_user.id, 'home'));
+        context, widget.pageFactory.getProfilePage(_user.id, 'home'));
   }
 
   @override
   void historyPressed(bool fromBottomBar) {
     if (!fromBottomBar) Navigator.of(context).pop();
     Helper.pushPageWithAnimation(
-        context, PageFactory().getWorkoutHistoryPage(_user.id));
+        context, widget.pageFactory.getWorkoutHistoryPage(_user.id));
   }
 
   @override
   void templatesPressed(bool fromBottomBar) {
     if (!fromBottomBar) Navigator.of(context).pop();
     Helper.pushPageWithAnimation(
-        context, PageFactory().getWorkoutTemplatesPage(_user.id));
+        context, widget.pageFactory.getWorkoutTemplatesPage(_user.id));
   }
 
   @override
   void workoutPressed(bool bool) {
     Helper.pushPageWithAnimation(
-        context, PageFactory().getWorkoutPage(0, _user.id, false, false));
+        context, widget.pageFactory.getWorkoutPage(0, _user.id, false, false));
   }
 
   /// Function called when user wants to navigate from home to trainees page
@@ -161,7 +162,7 @@ class HomePageState extends State<HomePage> implements HomePageView {
   void traineesPressed(bool bottomBarButton) {
     if (!bottomBarButton) Navigator.of(context).pop();
     if (widget.presenter.isCoachOrAdmin()) {
-      Helper.pushPageWithAnimation(context, PageFactory().getTraineesPage());
+      Helper.pushPageWithAnimation(context, widget.pageFactory.getTraineesPage());
     } else {
       Helper.makeToast(context, "Become coach to access this page!");
     }
@@ -171,7 +172,7 @@ class HomePageState extends State<HomePage> implements HomePageView {
   @override
   void logOutPressed(BuildContext context) {
     widget.presenter.logOut(const FlutterSecureStorage());
-    Helper.pushPageWithAnimation(context, PageFactory().getLogInPage());
+    Helper.pushPageWithAnimation(context, widget.pageFactory.getLogInPage());
   }
 
   /// Build method of the home page view

@@ -5,6 +5,7 @@ import 'package:lift_to_live_flutter/domain/repositories/exercise_repo.dart';
 import 'package:lift_to_live_flutter/domain/repositories/habits_repo.dart';
 import 'package:lift_to_live_flutter/domain/repositories/user_repo.dart';
 import 'package:lift_to_live_flutter/domain/repositories/workout_repo.dart';
+import 'package:lift_to_live_flutter/factory/abstract_presenter_factory.dart';
 import 'package:lift_to_live_flutter/presentation/presenters/workout_history_page_presenter.dart';
 import 'package:lift_to_live_flutter/presentation/presenters/workout_templates_page_presenter.dart';
 
@@ -27,7 +28,7 @@ import '../presentation/presenters/trainees_page_presenter.dart';
 
 /// Factory object for creating a presenter objects, by attaching the required repositories and datasources.
 /// This factory is a singleton object.
-class PresenterFactory {
+class PresenterFactory implements AbstractPresenterFactory{
   static final PresenterFactory _instance = PresenterFactory._internal();
 
   PresenterFactory._internal();
@@ -39,16 +40,22 @@ class PresenterFactory {
   BackendAPI backendAPI = BackendAPI(); // datasource
   NewsAPI newsAPI = NewsAPI(); //datasource
 
+  @override
   TokenRepository getTokenRepository() =>
       TokenRepoImpl(backendAPI); // token repository
+  @override
   UserRepository getUserRepository() =>
       UserRepoImpl(backendAPI); // user repository
+  @override
   HabitsRepository getHabitsRepository() =>
       HabitsRepoImpl(backendAPI); // habits repository
+  @override
   NewsRepository getNewsRepository() =>
       NewsRepoImpl(newsAPI); //news repository
+  @override
   ExerciseRepository getExerciseRepository() =>
       ExerciseRepoImpl(); //exercise repository
+  @override
   WorkoutRepository getWorkoutRepository() =>
       WorkoutRepoImpl(backendAPI); //workouts repository
 
@@ -66,6 +73,7 @@ class PresenterFactory {
   WorkoutPagePresenter workoutPagePresenter = WorkoutPagePresenter();
 
   // function to get a LogInPagePresenter object.
+  @override
   LogInPagePresenter getLogInPagePresenter() {
     if(!logInPagePresenter.repositoriesAttached) {
       logInPagePresenter.attachRepositories(getTokenRepository(), getUserRepository());
@@ -75,6 +83,7 @@ class PresenterFactory {
   }
 
   // function to get a RegisterPagePresenter object.
+  @override
   RegisterPagePresenter getRegisterPagePresenter() {
     if(!registerPagePresenter.repositoriesAttached) {
       registerPagePresenter.attachRepositories(getUserRepository());
@@ -84,6 +93,7 @@ class PresenterFactory {
   }
 
   // function to get a TraineesPagePresenter object.
+  @override
   TraineesPagePresenter getTraineesPagePresenter() {
     if(!traineesPagePresenter.repositoriesAttached) {
       traineesPagePresenter.attachRepositories(getUserRepository());
@@ -93,6 +103,7 @@ class PresenterFactory {
   }
 
   // function to get a HomePagePresenter object.
+  @override
   ProfilePagePresenter getProfilePagePresenter(String userId){
     if(!profilePagePresenter.repositoriesAttached) {
       profilePagePresenter.attachRepositories(getUserRepository());
@@ -106,6 +117,7 @@ class PresenterFactory {
   }
 
   // function to get a PicturePagePresenter object.
+  @override
   PicturePagePresenter getPicturePagePresenter(String userId) {
     if(!picturePagePresenter.repositoriesAttached) {
       picturePagePresenter.attachRepositories(getUserRepository());
@@ -117,6 +129,7 @@ class PresenterFactory {
   }
 
   // function to get a HomePagePresenter object.
+  @override
   HomePagePresenter getHomePagePresenter() {
     if(!homePagePresenter.repositoriesAttached) {
       homePagePresenter.attachRepositories(getUserRepository(), getNewsRepository());
@@ -126,6 +139,7 @@ class PresenterFactory {
   }
 
   // function to get a HabitsPagePresenter object.
+  @override
   HabitsPagePresenter getHabitsPagePresenter(String userId) {
     if(!habitsPagePresenter.repositoriesAttached) {
       habitsPagePresenter.attachRepositories(getHabitsRepository());
@@ -137,6 +151,7 @@ class PresenterFactory {
   }
 
   // function to get a EditHabitsPagePresenter object.
+  @override
   EditHabitsPagePresenter getEditHabitsPagePresenter(String userId) {
     if(!editHabitsPagePresenter.repositoriesAttached) {
       editHabitsPagePresenter.attachRepositories(getHabitsRepository());
@@ -148,6 +163,7 @@ class PresenterFactory {
   }
 
   // function to get a WorkoutHistoryPagePresenter object.
+  @override
   WorkoutHistoryPagePresenter getWorkoutHistoryPresenter(String userId) {
     if(!workoutHistoryPagePresenter.repositoriesAttached) {
       workoutHistoryPagePresenter.attachRepositories(getWorkoutRepository(), getExerciseRepository());
@@ -159,6 +175,7 @@ class PresenterFactory {
   }
 
   // function to get a WorkoutTemplatesPagePresenter object.
+  @override
   WorkoutTemplatesPagePresenter getWorkoutTemplatesPagePresenter(String userId) {
     if(!workoutTemplatesPagePresenter.repositoriesAttached) {
       workoutTemplatesPagePresenter.attachRepositories(getWorkoutRepository(), getExerciseRepository());
@@ -170,6 +187,7 @@ class PresenterFactory {
   }
 
   // function to get a WorkoutPagePresenter object.
+  @override
   WorkoutPagePresenter getWorkoutPagePresenter(int templateId, String userId, bool forTemplate, bool fromTemplate) {
     if(!workoutPagePresenter.repositoriesAttached) {
       workoutPagePresenter.attachRepositories(getWorkoutRepository(), getExerciseRepository());
@@ -180,6 +198,7 @@ class PresenterFactory {
     return workoutPagePresenter;
   }
 
+  @override
   void reset() {
     homePagePresenter.reset();
     profilePagePresenter.reset();

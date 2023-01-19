@@ -8,7 +8,7 @@ import 'package:lift_to_live_flutter/presentation/views/picture_page_view.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-import '../test_data.dart';
+import '../mock_data.dart';
 import 'picture_page_presenter_test.mocks.dart';
 
 
@@ -62,7 +62,7 @@ void main() {
     presenter.changeUser('email@email.com');
     expect(presenter.isInitialized(), false);
 
-    when(userRepo.fetchUserImages(any, any)).thenAnswer((realInvocation) async => [TestData.testImage1, TestData.testImage2]);
+    when(userRepo.fetchUserImages(any, any)).thenAnswer((realInvocation) async => [MockData.testImage1, MockData.testImage2]);
 
     appState.setInitialState('email@email.com', '', []);
     presenter.setAppState(appState);
@@ -110,7 +110,7 @@ void main() {
     presenter.changeUser('email@email.com');
     expect(presenter.isInitialized(), false);
 
-    when(userRepo.fetchUserImages(any, any)).thenAnswer((realInvocation) async => [TestData.testImage1, TestData.testImage2]);
+    when(userRepo.fetchUserImages(any, any)).thenAnswer((realInvocation) async => [MockData.testImage1, MockData.testImage2]);
     when(userRepo.deleteImage(any, any)).thenAnswer((realInvocation) async => {});
 
     appState.setInitialState('email@email.com', 'token', []);
