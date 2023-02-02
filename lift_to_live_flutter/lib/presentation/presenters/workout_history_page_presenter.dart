@@ -159,7 +159,7 @@ class WorkoutHistoryPagePresenter extends BasePresenter {
           userId: element.userId,
           id: element.id,
           // coverage:ignore-start
-          onEdit: (BuildContext context) { Helper.replacePage( context, PageFactory().getWorkoutPage(element.id, element.userId, false, false));},
+          onEdit: (BuildContext context) { Helper.replacePageWithSlideAnimation( context, PageFactory().getWorkoutPage(element.id, element.userId, false, false));},
           // coverage:ignore-end
         ));
       }

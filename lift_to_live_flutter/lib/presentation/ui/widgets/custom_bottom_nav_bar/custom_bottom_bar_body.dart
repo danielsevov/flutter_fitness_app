@@ -13,7 +13,8 @@ class CustomBottomBarBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: view.screenWidth * 0.7,
+      //width: view.screenWidth ,
+      padding: const EdgeInsets.all(20),
       decoration: const BoxDecoration(
           color: Helper.lightBlueColor,
           borderRadius: BorderRadius.all(Radius.circular(30))),

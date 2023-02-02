@@ -25,7 +25,7 @@ class CustomDrawer extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: [
           SizedBox(
-            height: view.screenHeight / 7 * 4,
+            height: view.screenHeight * 0.65,
             child: CustomDrawerHeader(
               view: view,
             ),

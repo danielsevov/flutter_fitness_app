@@ -54,22 +54,22 @@ class CustomFormDropdownTextField extends StatelessWidget {
           ),
           filled: true,
           fillColor: Helper.blueColor,
-          errorStyle: const TextStyle(color: Helper.textFieldErrorColor),
+          errorStyle: const TextStyle(color: Helper.whiteColor),
           focusedBorder: OutlineInputBorder(
               borderSide: const BorderSide(
-                  color: Helper.textFieldBorderColor, width: 1),
+                  color: Helper.yellowColor, width: 1),
               borderRadius: BorderRadius.circular(10)),
           focusedErrorBorder: OutlineInputBorder(
               borderSide:
-                  BorderSide(color: Helper.textFieldErrorColor.withOpacity(0.3), width: 1),
+                  const BorderSide(color: Helper.yellowColor, width: 1),
               borderRadius: BorderRadius.circular(10)),
           errorBorder: OutlineInputBorder(
               borderSide:
-                  const BorderSide(color: Helper.textFieldErrorColor, width: 1),
+                  const BorderSide(color: Helper.whiteColor, width: 1),
               borderRadius: BorderRadius.circular(10)),
           enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(
-                  color: Helper.textFieldBorderColor.withOpacity(0.3), width: 1),
+                  color: Helper.whiteColor.withOpacity(0.3), width: 1),
               borderRadius: BorderRadius.circular(10)),
           hintText: hint,
           hintStyle: const TextStyle(

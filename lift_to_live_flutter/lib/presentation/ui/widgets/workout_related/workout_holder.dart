@@ -100,7 +100,7 @@ class _WorkoutHolderState extends State<WorkoutHolder> {
                 const SizedBox(
                   width: 10,
                 ),
-                widget.duration.isEmpty ? const Text('0 minutes', style: TextStyle(color: Helper.textFieldTextColor)) : Text('${(int.parse(widget.duration) / 360).round()} minutes',
+                widget.duration.isEmpty ? const Text('0 minutes', style: TextStyle(color: Helper.textFieldTextColor)) : Text('${(double.parse(widget.duration) / 60).round()} minutes',
                     style: const TextStyle(color: Helper.textFieldTextColor)),
               ],
             ),

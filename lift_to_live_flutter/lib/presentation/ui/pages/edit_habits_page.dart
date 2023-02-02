@@ -252,7 +252,7 @@ class EditHabitsPageState extends State<EditHabitsPage>
   /// Function for returning from this page to the previous one.
   void goBack() {
     Navigator.pop(context);
-    Helper.replacePage(context, widget.pageFactory.getHabitsPage(widget.userId));
+    Helper.replacePageWithSlideAnimation(context, widget.pageFactory.getHabitsPage(widget.userId));
   }
 
   @override

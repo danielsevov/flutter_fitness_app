@@ -26,6 +26,7 @@ class MyApp extends StatelessWidget {
 
             //set the primary color of the app
             theme: ThemeData(
+                splashColor: Helper.blueColor,
                 backgroundColor: Helper.pageBackgroundColor,
                 canvasColor: Helper.blueColor),
 

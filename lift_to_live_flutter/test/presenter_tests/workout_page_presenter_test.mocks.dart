@@ -245,6 +245,7 @@ class MockWorkoutPageView extends _i1.Mock implements _i8.WorkoutPageView {
     String? templateName,
     String? templateNote,
     List<_i9.EditableSetHolder>? workoutSetWidgets,
+    int? duration,
   ) =>
       super.noSuchMethod(
         Invocation.method(
@@ -253,6 +254,7 @@ class MockWorkoutPageView extends _i1.Mock implements _i8.WorkoutPageView {
             templateName,
             templateNote,
             workoutSetWidgets,
+            duration,
           ],
         ),
         returnValueForMissingStub: null,
@@ -270,14 +272,6 @@ class MockWorkoutPageView extends _i1.Mock implements _i8.WorkoutPageView {
         Invocation.method(
           #setFetched,
           [inProgress],
-        ),
-        returnValueForMissingStub: null,
-      );
-  @override
-  void notifyNoTemplatesFound() => super.noSuchMethod(
-        Invocation.method(
-          #notifyNoTemplatesFound,
-          [],
         ),
         returnValueForMissingStub: null,
       );

@@ -114,7 +114,7 @@ class HabitsPageState extends State<HabitsPage> implements HabitsPageView {
                       IconButton(
                           onPressed: () async {
                             if (widget.presenter.isAuthorized()) {
-                              Helper.pushPageWithAnimation(
+                              Helper.pushPageWithSlideAnimation(
                                   context,
                                   widget.pageFactory.getEditHabitsPage(
                                     widget.userId,

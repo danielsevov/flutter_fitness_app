@@ -21,6 +21,7 @@ class CustomHabitsCalendar extends StatelessWidget {
       ),
       child: habits.isNotEmpty
           ? TableCalendar(
+        availableGestures: AvailableGestures.horizontalSwipe,
               calendarStyle: const CalendarStyle(
                   weekendTextStyle: TextStyle(color: Helper.whiteColor),
                   todayDecoration: BoxDecoration(

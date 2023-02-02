@@ -20,6 +20,7 @@ class WorkoutPagePresenter extends BasePresenter {
   late String _userId;
   late bool _forTemplate, _fromTemplate;
   int tag = 0;
+  int _seconds = 0;
 
   late final WorkoutRepository _workoutRepository;
   late final ExerciseRepository _exerciseRepository;
@@ -66,7 +67,7 @@ class WorkoutPagePresenter extends BasePresenter {
   }
 
   /// Function used for saving the changes made to the workout.
-  Future<void> saveChanges() async {
+  Future<void> saveChanges(int secondsPassed) async {
     if(_forTemplate) {
       String coachNote = _view?.noteController.text;
       String name = _view?.nameController.text;
@@ -138,17 +139,17 @@ class WorkoutPagePresenter extends BasePresenter {
 
       if(_templateId != 0) {
         if(isCompleted) {
-          await _workoutRepository.patchWorkout(_templateId, coachNote, '', _userId, appState.getUserId(), workoutSets, completedOn, creationDate, name, '0', false, appState.getToken());
+          await _workoutRepository.patchWorkout(_templateId, coachNote, '', _userId, appState.getUserId(), workoutSets, completedOn, creationDate, name, secondsPassed.toString(), false, appState.getToken());
         } else {
-          await _workoutRepository.patchWorkout(_templateId, coachNote, '', _userId, appState.getUserId(), workoutSets, '', creationDate, name, '0', false, appState.getToken());
+          await _workoutRepository.patchWorkout(_templateId, coachNote, '', _userId, appState.getUserId(), workoutSets, '', creationDate, name, secondsPassed.toString(), false, appState.getToken());
         }
       }
       else {
         if(isCompleted) {
-          await _workoutRepository.postWorkout(coachNote, '', _userId, appState.getUserId(), workoutSets, completedOn, creationDate, name, '0', false, appState.getToken());
+          await _workoutRepository.postWorkout(coachNote, '', _userId, appState.getUserId(), workoutSets, completedOn, creationDate, name, secondsPassed.toString(), false, appState.getToken());
         }
         else {
-          await _workoutRepository.postWorkout(coachNote, '', _userId, appState.getUserId(), workoutSets, '', creationDate, name, '0', false, appState.getToken());
+          await _workoutRepository.postWorkout(coachNote, '', _userId, appState.getUserId(), workoutSets, '', creationDate, name, secondsPassed.toString(), false, appState.getToken());
         }
       }
 
@@ -177,11 +178,13 @@ class WorkoutPagePresenter extends BasePresenter {
         kilosControllers: kiloControllers,
         isCompletedControllers: isCompletedControllers, tag: '${tag++}', isTemplate: _forTemplate, exercises: _exercises,));
 
-    _view?.setTemplateData(_view?.nameController.text, _view?.noteController.text, _templateSetWidgets);
+    _view?.setTemplateData(_view?.nameController.text, _view?.noteController.text, _templateSetWidgets, _seconds);
   }
 
   /// Function used for fetching the required data, which is then displayed on the workout templates page.
   Future<void> fetchData() async {
+    _seconds = 0;
+
     // set the loading indicator to be displayed on the home page view
     _view?.setInProgress(true);
     changeTemplate(_templateId, _userId, _forTemplate, _fromTemplate);
@@ -215,6 +218,13 @@ class WorkoutPagePresenter extends BasePresenter {
         template.userId = _userId;
         template.coachId = appState.getUserId();
         template.createdOn = (DateTime.now().millisecondsSinceEpoch).toString();
+      }
+
+      try{
+        _seconds = int.parse(template.duration);
+      }
+      catch (e){
+        _seconds = 0;
       }
 
       creationDate = template.createdOn;
@@ -266,17 +276,18 @@ class WorkoutPagePresenter extends BasePresenter {
           kilosControllers: kilos,
           isCompletedControllers: completes,  tag: '${tag++}', isTemplate: _forTemplate, exercises: _exercises,
         );
+
         _templateSetWidgets.add(workoutSet);
       }
 
       // notify the page view that the fetch is complete
       _view?.setInProgress(false);
-      _view?.setTemplateData(_view?.nameController.text, _view?.noteController.text, _templateSetWidgets);
+      _view?.setTemplateData(_view?.nameController.text, _view?.noteController.text, _templateSetWidgets, _seconds);
       _view?.setFetched(true);
     }
 
     catch (e) {
-      _view?.setTemplateData('' , '', _templateSetWidgets);
+      _view?.setTemplateData('' , '', _templateSetWidgets, _seconds);
       _view?.setInProgress(false);
       _view?.setFetched(true);
     }

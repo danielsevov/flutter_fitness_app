@@ -110,7 +110,7 @@ class WorkoutHistoryPageState extends State<WorkoutHistoryPage>
                         icon: const Icon(Icons.arrow_back,
                             color: Helper.yellowColor),
                         onPressed: () {
-                          Helper.replacePage(
+                          Helper.replacePageWithSlideAnimation(
                               context,
                               widget.pageFactory
                                   .getWrappedHomePage());
@@ -146,12 +146,12 @@ class WorkoutHistoryPageState extends State<WorkoutHistoryPage>
                               height: 20,
                             ),
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              mainAxisAlignment: widget.userId == widget.presenter.appState.getUserId() ? MainAxisAlignment.spaceEvenly : MainAxisAlignment.center,
                               children: [
-                                FloatingActionButton.extended(
+                                 widget.userId == widget.presenter.appState.getUserId() ? FloatingActionButton.extended(
                                   backgroundColor: Helper.yellowColor,
                                   onPressed: () {
-                                    Helper.pushPageWithAnimation(
+                                    Helper.pushPageWithSlideAnimation(
                                         context,
                                         widget.pageFactory
                                             .getWorkoutPage(0,
@@ -168,12 +168,12 @@ class WorkoutHistoryPageState extends State<WorkoutHistoryPage>
                                         color: Helper.blackColor,
                                         fontWeight: FontWeight.w900),
                                   ),
-                                ),
+                                ) : const SizedBox(),
                                 FloatingActionButton.extended(
                                   backgroundColor: Helper.redColor,
                                   onPressed: () {
                                     if (widget.presenter.isAuthorized()) {
-                                      Helper.pushPageWithAnimation(
+                                      Helper.pushPageWithSlideAnimation(
                                           context,
                                           widget.pageFactory.getWorkoutTemplatesPage(
                                               widget.userId));

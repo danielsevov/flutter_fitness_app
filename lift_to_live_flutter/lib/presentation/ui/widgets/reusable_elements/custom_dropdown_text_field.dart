@@ -46,6 +46,7 @@ class CustomDropdownTextField extends StatelessWidget {
         textFieldDecoration: InputDecoration(
           filled: true,
             fillColor: isEnabled ? Helper.lightBlueColor : Helper.blueColor,
+            focusedBorder: const OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(15)), borderSide: BorderSide(color: Helper.yellowColor)),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
               borderSide:

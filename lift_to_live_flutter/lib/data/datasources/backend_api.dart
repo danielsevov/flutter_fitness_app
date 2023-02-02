@@ -18,9 +18,9 @@ class BackendAPI {
 
   BackendAPI._internal();
 
-  static const apiURL = "http://192.168.178.25:3000/"; //molensingel
+  //static const apiURL = "http://192.168.178.25:3000/"; //molensingel
   //static const apiURL = "http://145.93.150.0:3000/"; //fontys
-  //static const apiURL = "http://lift2live.synology.me:3000/"; // sofia
+  static const apiURL = "http://lift2live.synology.me:3000/"; // sofia
   //static const apiURL = "http://192.168.13.9:3000/"; // sofia new
 
   /// This function is used for patching an image entry.

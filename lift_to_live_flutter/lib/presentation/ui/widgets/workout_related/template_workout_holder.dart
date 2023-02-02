@@ -8,13 +8,13 @@ import '../reusable_elements/custom_dialog.dart';
 /// A holder for a single template workout entry.
 class TemplateWorkoutHolder extends StatefulWidget {
   final List<FixedSetHolder> workoutSetItems;
-  final String name, note, creationDate, userId;
+  final String name, note, creationDate, userId, currentUser;
   final int id;
   final Function() onSubmit;
   final Function(BuildContext context)? onStartWorkout, onEdit;
 
   const TemplateWorkoutHolder(
-      {Key? key, required this.workoutSetItems, required this.name, required this.note, required this.creationDate, required this.id, required this.userId, required this.onSubmit, this.onStartWorkout, this.onEdit })
+      {Key? key, required this.workoutSetItems, required this.name, required this.note, required this.creationDate, required this.id, required this.userId, required this.onSubmit, this.onStartWorkout, this.onEdit, required this.currentUser })
       : super(key: key);
 
   @override
@@ -70,9 +70,9 @@ class _TemplateWorkoutHolderState extends State<TemplateWorkoutHolder> {
             ) : const SizedBox(),
             const SizedBox(height: 10,),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: widget.userId == widget.currentUser ? MainAxisAlignment.spaceEvenly : MainAxisAlignment.start,
               children: [
-                FloatingActionButton.extended(heroTag: 'startWorkoutButton${widget.name}', onPressed: (){widget.onStartWorkout!(context);}, isExtended: true, label: const Text('Start Workout', style: TextStyle(color: Helper.blackColor, fontWeight: FontWeight.w800),), icon: const Icon(Icons.fitness_center_outlined, color: Helper.blackColor,), backgroundColor: Helper.yellowColor,),
+                widget.userId == widget.currentUser ? FloatingActionButton.extended(heroTag: 'startWorkoutButton${widget.name}', onPressed: (){widget.onStartWorkout!(context);}, isExtended: true, label: const Text('Start Workout', style: TextStyle(color: Helper.blackColor, fontWeight: FontWeight.w800),), icon: const Icon(Icons.fitness_center_outlined, color: Helper.blackColor,), backgroundColor: Helper.yellowColor,) : const SizedBox(),
                 FloatingActionButton.extended(heroTag: 'copyTemplateButton${widget.name}', onPressed: (){
                   showDialog(
                       context: context,

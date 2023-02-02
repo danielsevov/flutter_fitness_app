@@ -79,14 +79,14 @@ class TraineesPageState extends State<TraineesPage>
   /// Function to navigate to the selected user profile page
   @override
   void navigateToProfilePage(String id) {
-    Helper.pushPageWithAnimation(
+    Helper.pushPageWithSlideAnimation(
         context, widget.pageFactory.getProfilePage(id, 'trainees'));
   }
 
   /// Function called when user wants to navigate to the user registration page.
   @override
   void registerPressed(BuildContext context) {
-    Helper.replacePage(context, widget.pageFactory.getRegisterPage());
+    Helper.replacePageWithSlideAnimation(context, widget.pageFactory.getRegisterPage());
   }
 
   /// Function to apply the search term filter on the trainees
@@ -144,7 +144,16 @@ class TraineesPageState extends State<TraineesPage>
           color: Helper.yellowColor, //change your color here
         ),
       ),
-      body: SingleChildScrollView(
+      body: _isLoading
+          ? const Center(
+        child: Padding(
+          padding: EdgeInsets.all(15.0),
+          child: CircularProgressIndicator(
+            color: Helper.yellowColor,
+          ),
+        ),
+      )
+          : SingleChildScrollView(
         child: Container(
           decoration: const BoxDecoration(
             image: DecorationImage(
@@ -158,7 +167,7 @@ class TraineesPageState extends State<TraineesPage>
                 height: 10,
               ),
               SizedBox(
-                width: screenWidth > 500 ? 500 : screenWidth - 20,
+                width: screenWidth - 20,
                 child: TextField(
                   onTap: () {},
                   onChanged: (searchTerm) {
@@ -173,8 +182,8 @@ class TraineesPageState extends State<TraineesPage>
                             color: Helper.yellowColor, width: 1),
                         borderRadius: BorderRadius.circular(10)),
                     enabledBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(
-                            color: Helper.whiteColor, width: 1),
+                        borderSide: BorderSide(
+                            color: Helper.whiteColor.withOpacity(0.3), width: 1),
                         borderRadius: BorderRadius.circular(10)),
                     prefixIcon: const Icon(
                       Icons.search,
@@ -192,22 +201,14 @@ class TraineesPageState extends State<TraineesPage>
                       height: 0.8),
                 ),
               ),
-              _isLoading
-                  ? const Center(
-                      child: Padding(
-                        padding: EdgeInsets.all(15.0),
-                        child: CircularProgressIndicator(
-                          color: Helper.yellowColor,
-                        ),
-                      ),
-                    )
-                  : Column(
+              Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         const SizedBox(height: 10),
-                        SizedBox(
-                          height: screenHeight / 1.5,
+                        Container(
+                          padding: const EdgeInsets.only(bottom: 20),
+                          height: screenHeight / 1.4,
                           width: screenWidth > 500 ? 500 : screenWidth,
                           child: ListView(
                             children: _userWidgets

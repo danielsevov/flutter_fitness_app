@@ -73,7 +73,7 @@ class RegisterPageState extends State<RegisterPage>
         leading: IconButton(
             icon: const Icon(Icons.arrow_back, color: Helper.yellowColor),
             onPressed: () {
-              Helper.replacePage(context, widget.pageFactory.getTraineesPage());
+              Helper.replacePageWithSlideAnimation(context, widget.pageFactory.getTraineesPage());
             }),
         title: const Text(
           "Register User",
@@ -149,7 +149,7 @@ class RegisterPageState extends State<RegisterPage>
   @override
   void notifyUserRegistered() {
     Helper.makeToast(context, "User has been successfully registered!");
-    Helper.replacePage(context, widget.pageFactory.getTraineesPage());
+    Helper.replacePageWithSlideAnimation(context, widget.pageFactory.getTraineesPage());
   }
 
   /// Function to pass the required coach data to the page view.

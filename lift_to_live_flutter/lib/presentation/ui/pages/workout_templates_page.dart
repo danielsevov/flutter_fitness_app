@@ -100,7 +100,7 @@ class WorkoutTemplatesPageState extends State<WorkoutTemplatesPage> implements W
 
     return Scaffold(
       floatingActionButton: FloatingActionButton.extended(heroTag: 'addNewTemplateButton', onPressed: (){
-        Helper.replacePage(context, widget.pageFactory.getWorkoutPage(0, widget.userId, true, true));
+        Helper.replacePageWithSlideAnimation(context, widget.pageFactory.getWorkoutPage(0, widget.userId, true, true));
       }, backgroundColor: Helper.yellowColor,label: const Text('Add Template', style: TextStyle(color: Helper.blackColor, fontWeight: FontWeight.w700),), icon: const Icon(Icons.add, color: Helper.blackColor,),),
       body: Container(
         padding: const EdgeInsets.only(bottom: 50),

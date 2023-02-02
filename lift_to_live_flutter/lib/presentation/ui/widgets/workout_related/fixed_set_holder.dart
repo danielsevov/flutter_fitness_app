@@ -36,7 +36,7 @@ class _FixedSetHolderState extends State<FixedSetHolder> {
   Widget build(BuildContext context) {
     return Container(
       width: 400,
-        height: widget.setTasks.length * 120 - ((widget.setTasks.length - 2 ) * 80),
+        height: widget.setTasks.length * 120 - ((widget.setTasks.length - 2 ) * 80) + widget.noteController.text.length.toDouble()/2,
         padding: const EdgeInsets.all(10),
         margin: const EdgeInsets.all(10),
         decoration: BoxDecoration(

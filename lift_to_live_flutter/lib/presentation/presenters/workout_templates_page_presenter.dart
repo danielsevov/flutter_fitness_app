@@ -162,9 +162,9 @@ class WorkoutTemplatesPagePresenter extends BasePresenter {
           userId: element.userId,
           // coverage:ignore-start
           onSubmit: () { copyWorkout(element.id); }, onEdit: (BuildContext context){
-          Helper.replacePage(context, PageFactory().getWorkoutPage(element.id, element.userId, true, true));},
+          Helper.replacePageWithSlideAnimation(context, PageFactory().getWorkoutPage(element.id, element.userId, true, true));},
           onStartWorkout: (BuildContext context){
-          Helper.replacePage(context, PageFactory().getWorkoutPage(element.id, element.userId, false, true));},
+          Helper.replacePageWithSlideAnimation(context, PageFactory().getWorkoutPage(element.id, element.userId, false, true));}, currentUser: appState.getUserId(),
           // coverage:ignore-end
         ));
       }

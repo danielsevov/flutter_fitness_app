@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:expandable_bottom_bar/expandable_bottom_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:lift_to_live_flutter/domain/entities/news.dart';
 import 'package:lift_to_live_flutter/presentation/presenters/home_page_presenter.dart';
@@ -118,7 +119,7 @@ class HomePageState extends State<HomePage> implements HomePageView {
   @override
   void habitsPressed(bool bottomBarButton) {
     if (!bottomBarButton) Navigator.of(context).pop();
-    Helper.pushPageWithAnimation(
+    Helper.pushPageWithSlideAnimation(
         context, widget.pageFactory.getHabitsPage(_user.id));
   }
 
@@ -132,27 +133,30 @@ class HomePageState extends State<HomePage> implements HomePageView {
   @override
   void profilePressed(bool bottomBarButton) {
     if (!bottomBarButton) Navigator.of(context).pop();
-    Helper.pushPageWithAnimation(
+    Helper.pushPageWithSlideAnimation(
         context, widget.pageFactory.getProfilePage(_user.id, 'home'));
   }
 
+  /// Function called when user wants to navigate from home to workout history page
   @override
   void historyPressed(bool fromBottomBar) {
     if (!fromBottomBar) Navigator.of(context).pop();
-    Helper.pushPageWithAnimation(
+    Helper.pushPageWithSlideAnimation(
         context, widget.pageFactory.getWorkoutHistoryPage(_user.id));
   }
 
+  /// Function for navigating to edit workout templates page.
   @override
   void templatesPressed(bool fromBottomBar) {
     if (!fromBottomBar) Navigator.of(context).pop();
-    Helper.pushPageWithAnimation(
+    Helper.pushPageWithSlideAnimation(
         context, widget.pageFactory.getWorkoutTemplatesPage(_user.id));
   }
 
+  /// Function for navigating to edit workout page.
   @override
   void workoutPressed(bool bool) {
-    Helper.pushPageWithAnimation(
+    Helper.pushPageWithSlideAnimation(
         context, widget.pageFactory.getWorkoutPage(0, _user.id, false, false));
   }
 
@@ -162,7 +166,7 @@ class HomePageState extends State<HomePage> implements HomePageView {
   void traineesPressed(bool bottomBarButton) {
     if (!bottomBarButton) Navigator.of(context).pop();
     if (widget.presenter.isCoachOrAdmin()) {
-      Helper.pushPageWithAnimation(context, widget.pageFactory.getTraineesPage());
+      Helper.pushPageWithSlideAnimation(context, widget.pageFactory.getTraineesPage());
     } else {
       Helper.makeToast(context, "Become coach to access this page!");
     }
@@ -172,7 +176,39 @@ class HomePageState extends State<HomePage> implements HomePageView {
   @override
   void logOutPressed(BuildContext context) {
     widget.presenter.logOut(const FlutterSecureStorage());
-    Helper.pushPageWithAnimation(context, widget.pageFactory.getLogInPage());
+    Helper.pushPageWithSlideAnimation(context, widget.pageFactory.getLogInPage());
+  }
+
+  /// Function for showing sign out dialog
+  @override
+  void showSignOutDialog() {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return CustomDialog(
+              title: 'Sign out',
+              bodyText: 'Are you sure you want to sign out?',
+              confirm: () {
+                logOutPressed(context);
+              },
+              cancel: () {
+                Navigator.pop(context);
+                showDialog(
+                    context: context,
+                    builder: (context) {
+                      return CustomDialog(
+                          title: 'Exit',
+                          bodyText: 'Do you want to exit the app instead?',
+                          confirm: () {
+                            Navigator.pop(context);
+                            SystemNavigator.pop();
+                          },
+                          cancel: () {
+                            Navigator.pop(context);
+                          });
+                    });
+              });
+        });
   }
 
   /// Build method of the home page view
@@ -195,6 +231,7 @@ class HomePageState extends State<HomePage> implements HomePageView {
     return WillPopScope(
       onWillPop: () async {
         // Return false to prevent the user from navigating away
+        showSignOutDialog();
         return false;
       },
       child: Scaffold(
@@ -219,7 +256,7 @@ class HomePageState extends State<HomePage> implements HomePageView {
         ),
 
         //floating action button position to center
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
 
         // bottom navigation bar on scaffold
         bottomNavigationBar: CustomBottomBar(view: this),
@@ -251,19 +288,7 @@ class HomePageState extends State<HomePage> implements HomePageView {
                   IconButton(
                       //on pressed clear token and navigate to log in page
                       onPressed: () async {
-                        showDialog(
-                            context: context,
-                            builder: (context) {
-                              return CustomDialog(
-                                  title: 'Sign out',
-                                  bodyText: 'Are you sure you want to sign out?',
-                                  confirm: () {
-                                    logOutPressed(context);
-                                  },
-                                  cancel: () {
-                                    Navigator.pop(context);
-                                  });
-                            });
+                        showSignOutDialog();
                       },
                       icon: const Icon(
                         Icons.logout,

@@ -97,13 +97,16 @@ class CustomDrawerHeader extends StatelessWidget {
                           ),
                           const SizedBox(
                             width: 40,
+                            height: 20,
                           ),
                         ],
                       ),
                     ),
                   ],
                 )
-              : const SizedBox(),
+              : const SizedBox(
+            height: 20,
+          ),
           // const SizedBox(
           //   height: 20,
           // ),

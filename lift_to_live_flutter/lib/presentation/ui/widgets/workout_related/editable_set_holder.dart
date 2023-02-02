@@ -130,6 +130,7 @@ class EditableSetHolderState extends State<EditableSetHolder>  with AutomaticKee
               maxLines: 10,
               minLines: 1,
               decoration: const InputDecoration(
+                focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Helper.yellowColor)),
                 hintText: 'Enter note',
                 hintStyle: TextStyle(color: Helper.textFieldHintColor),
                 icon: Icon(
@@ -157,23 +158,46 @@ class EditableSetHolderState extends State<EditableSetHolder>  with AutomaticKee
                 children: widget.setTasks,
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: FloatingActionButton.extended(
-                backgroundColor: Helper.yellowColor,
-                onPressed: () {
-                  addNewTask();
-                },
-                icon: const Icon(
-                  Icons.add,
-                  color: Helper.blackColor,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: FloatingActionButton.extended(
+                    backgroundColor: Helper.yellowColor,
+                    onPressed: () {
+                      addNewTask();
+                    },
+                    icon: const Icon(
+                      Icons.add,
+                      color: Helper.blackColor,
+                    ),
+                    heroTag: '${widget.tag}add',
+                    label: const Text(
+                      'Add Set',
+                      style: TextStyle(color: Helper.blackColor),
+                    ),
+                  ),
                 ),
-                heroTag: widget.tag,
-                label: const Text(
-                  'Add Set',
-                  style: TextStyle(color: Helper.blackColor),
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: FloatingActionButton.extended(
+                    backgroundColor: Helper.redColor,
+                    onPressed: () {
+                      dropNewestTask();
+                    },
+                    icon: const Icon(
+                      Icons.remove,
+                      color: Helper.whiteColor,
+                    ),
+                    heroTag: '${widget.tag}drop',
+                    label: const Text(
+                      'Drop Set',
+                      style: TextStyle(color: Helper.whiteColor),
+                    ),
+                  ),
                 ),
-              ),
+              ],
             )
           ],
         ));
@@ -197,6 +221,20 @@ class EditableSetHolderState extends State<EditableSetHolder>  with AutomaticKee
         isEnabled: true,
         isTemplate: widget.isTemplate,
       ));
+    });
+  }
+
+  /// Function used for removing the newest set task.
+  void dropNewestTask() {
+    setState(() {
+      if(widget.setTasks.isNotEmpty) {
+        int index = widget.setTasks.length - 1;
+
+        widget.setTasks.removeAt(index);
+        widget.repsControllers.removeAt(index);
+        widget.kilosControllers.removeAt(index);
+        widget.isCompletedControllers.removeAt(index);
+      }
     });
   }
 }

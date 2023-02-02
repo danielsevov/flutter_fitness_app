@@ -605,7 +605,7 @@ void main() {
     testWidgets('Workout holder constructor test', (tester) async {
       await tester.runAsync(() async {
         // tests
-        final widget = WorkoutHolder(workoutSetItems: const [], name: 'Workout Name', note: 'my note', created: '1673270770860', completed: '', duration: '3600', totalVolume: '3000 kgs', userId: 'email@email.com', id: 1, onEdit: (BuildContext context) {},);
+        final widget = WorkoutHolder(workoutSetItems: const [], name: 'Workout Name', note: 'my note', created: '1673270770860', completed: '', duration: '600', totalVolume: '3000 kgs', userId: 'email@email.com', id: 1, onEdit: (BuildContext context) {},);
 
         await tester.pumpWidget(MaterialApp(
             title: 'Flutter Demo', home: Scaffold(body: Center(child: Container(color: Helper.blueColor,child: widget),))));
@@ -626,7 +626,7 @@ void main() {
     testWidgets('Workout holder constructor test 2', (tester) async {
       await tester.runAsync(() async {
         // tests
-        final widget = WorkoutHolder(workoutSetItems: const [], name: 'Workout Name', note: '', created: '1673270770860', completed: '1673270770860', duration: '3600', totalVolume: '3000 kgs', userId: 'email@email.com', id: 1, onEdit: (BuildContext context) {},);
+        final widget = WorkoutHolder(workoutSetItems: const [], name: 'Workout Name', note: '', created: '1673270770860', completed: '1673270770860', duration: '600', totalVolume: '3000 kgs', userId: 'email@email.com', id: 1, onEdit: (BuildContext context) {},);
 
         await tester.pumpWidget(MaterialApp(
             title: 'Flutter Demo', home: Scaffold(body: Center(child: Container(color: Helper.blueColor,child: widget),))));
@@ -687,7 +687,7 @@ void main() {
     testWidgets('Workout template holder constructor test', (tester) async {
       await tester.runAsync(() async {
         // tests
-        final widget = TemplateWorkoutHolder(workoutSetItems: const [], name: 'Template Name', note: 'my note', creationDate: '1673270770860', userId: 'email@email.com', id: 1, onEdit: (BuildContext context) {}, onSubmit: () { }, onStartWorkout: (BuildContext context) {},);
+        final widget = TemplateWorkoutHolder(workoutSetItems: const [], name: 'Template Name', note: 'my note', creationDate: '1673270770860', userId: 'email@email.com', id: 1, onEdit: (BuildContext context) {}, onSubmit: () { }, onStartWorkout: (BuildContext context) {}, currentUser: 'email@email.com',);
 
         await tester.pumpWidget(MaterialApp(
             title: 'Flutter Demo', home: Scaffold(body: Center(child: Container(color: Helper.blueColor,child: widget),))));
@@ -706,7 +706,7 @@ void main() {
       await tester.runAsync(() async {
         // tests
         bool edited = false;
-        final widget = TemplateWorkoutHolder(workoutSetItems: const [], name: 'Template Name', note: 'my note', creationDate: '1673270770860', userId: 'email@email.com', id: 1, onEdit: (BuildContext context) {edited = true;}, onSubmit: () { }, onStartWorkout: (BuildContext context) {},);
+        final widget = TemplateWorkoutHolder(workoutSetItems: const [], name: 'Template Name', note: 'my note', creationDate: '1673270770860', userId: 'email@email.com', id: 1, onEdit: (BuildContext context) {edited = true;}, onSubmit: () { }, onStartWorkout: (BuildContext context) {}, currentUser: 'email@email.com');
 
         await tester.pumpWidget(MaterialApp(
             title: 'Flutter Demo', home: Scaffold(body: Center(child: Container(color: Helper.blueColor,child: widget),))));
@@ -723,7 +723,7 @@ void main() {
     testWidgets('Workout template holder open/close body expansion test', (tester) async {
       await tester.runAsync(() async {
         // tests
-        final widget = TemplateWorkoutHolder(workoutSetItems: const [], name: 'Template Name', note: 'my note', creationDate: '1673270770860', userId: 'email@email.com', id: 1, onEdit: (BuildContext context) {}, onSubmit: () { }, onStartWorkout: (BuildContext context) {},);
+        final widget = TemplateWorkoutHolder(workoutSetItems: const [], name: 'Template Name', note: 'my note', creationDate: '1673270770860', userId: 'email@email.com', id: 1, onEdit: (BuildContext context) {}, onSubmit: () { }, onStartWorkout: (BuildContext context) {},currentUser: 'email@email.com');
 
         await tester.pumpWidget(MaterialApp(
             title: 'Flutter Demo', home: Scaffold(body: Center(child: Container(color: Helper.blueColor,child: widget),))));
@@ -744,7 +744,7 @@ void main() {
       await tester.runAsync(() async {
         // tests
         bool started = false;
-        final widget = TemplateWorkoutHolder(workoutSetItems: const [], name: 'Template Name', note: 'my note', creationDate: '1673270770860', userId: 'email@email.com', id: 1, onEdit: (BuildContext context) {}, onSubmit: () { }, onStartWorkout: (BuildContext context) {started = true;},);
+        final widget = TemplateWorkoutHolder(workoutSetItems: const [], name: 'Template Name', note: 'my note', creationDate: '1673270770860', userId: 'email@email.com', id: 1, onEdit: (BuildContext context) {}, onSubmit: () { }, onStartWorkout: (BuildContext context) {started = true;},currentUser: 'email@email.com');
 
         await tester.pumpWidget(MaterialApp(
             title: 'Flutter Demo', home: Scaffold(body: Center(child: Container(color: Helper.blueColor,child: widget),))));
@@ -762,7 +762,7 @@ void main() {
       await tester.runAsync(() async {
         // tests
         bool copied = false;
-        final widget = TemplateWorkoutHolder(workoutSetItems: const [], name: 'Template Name', note: 'my note', creationDate: '1673270770860', userId: 'email@email.com', id: 1, onEdit: (BuildContext context) {}, onSubmit: () {copied = true; }, onStartWorkout: (BuildContext context) {},);
+        final widget = TemplateWorkoutHolder(workoutSetItems: const [], name: 'Template Name', note: 'my note', creationDate: '1673270770860', userId: 'email@email.com', id: 1, onEdit: (BuildContext context) {}, onSubmit: () {copied = true; }, onStartWorkout: (BuildContext context) {},currentUser: 'email@email.com');
 
         await tester.pumpWidget(MaterialApp(
             title: 'Flutter Demo', home: Scaffold(body: Center(child: Container(color: Helper.blueColor,child: widget),))));

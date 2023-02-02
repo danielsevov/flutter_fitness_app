@@ -1,3 +1,7 @@
+import 'dart:async';
+import 'dart:developer';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lift_to_live_flutter/presentation/ui/widgets/reusable_elements/custom_heading_text_field.dart';
 import 'package:lift_to_live_flutter/presentation/ui/widgets/workout_related/editable_set_holder.dart';
@@ -15,15 +19,17 @@ class WorkoutPage extends StatefulWidget {
   final int templateId;
   final String userId;
   final bool forTemplate, fromTemplate;
-  final WorkoutPagePresenter
-      presenter; // The business logic object
+  final WorkoutPagePresenter presenter; // The business logic object
   final AbstractPageFactory pageFactory;
 
   const WorkoutPage(
       {Key? key,
       required this.templateId,
       required this.presenter,
-      required this.userId, required this.forTemplate, required this.fromTemplate, required this.pageFactory})
+      required this.userId,
+      required this.forTemplate,
+      required this.fromTemplate,
+      required this.pageFactory})
       : super(key: key);
 
   @override
@@ -31,22 +37,25 @@ class WorkoutPage extends StatefulWidget {
 }
 
 /// State object of the WorkoutPage. Holds the mutable data, related to the page.
-class WorkoutPageState extends State<WorkoutPage>
-    implements WorkoutPageView {
+class WorkoutPageState extends State<WorkoutPage> implements WorkoutPageView {
   bool _isLoading =
           false, // Indicator showing if data is being fetched at the moment
       _isFetched = false;
   late double screenHeight, screenWidth;
   late List<EditableSetHolder> _workoutWidgets;
   bool reorderEnabled = false;
+  bool timerShouldBeRunning = true;
+  int seconds = 0;
 
   @override
-  final TextEditingController nameController = TextEditingController(), noteController = TextEditingController();
+  final TextEditingController nameController = TextEditingController(),
+      noteController = TextEditingController();
 
   /// initialize the page view by attaching it to the presenter
   @override
   void initState() {
     widget.presenter.attach(this);
+    startTimer();
     super.initState();
   }
 
@@ -88,20 +97,28 @@ class WorkoutPageState extends State<WorkoutPage>
   /// Function to notify the template is saved
   @override
   void notifySaved() {
-    Helper.makeToast(context,  widget.forTemplate ? 'Template has been saved successfully!' : 'Workout has been saved successfully!');
-    Helper.replacePage(
+    Helper.makeToast(
         context,
-        widget.forTemplate ? widget.pageFactory
-            .getWorkoutTemplatesPage(widget.userId) : widget.pageFactory.getWorkoutHistoryPage(widget.userId));
+        widget.forTemplate
+            ? 'Template has been saved successfully!'
+            : 'Workout has been saved successfully!');
+    Helper.replacePageWithSlideAnimation(
+        context,
+        widget.forTemplate
+            ? widget.pageFactory.getWorkoutTemplatesPage(widget.userId)
+            : widget.pageFactory.getWorkoutHistoryPage(widget.userId));
   }
 
   /// Function to set and display the workout template data.
   @override
-  void setTemplateData(String templateName, String templateNote, List<EditableSetHolder> workoutSetWidgets) {
+  void setTemplateData(String templateName, String templateNote,
+      List<EditableSetHolder> workoutSetWidgets, int secondsPassed) {
     setState(() {
       nameController.text = templateName;
       noteController.text = templateNote;
       _workoutWidgets = workoutSetWidgets;
+
+      seconds += secondsPassed;
     });
   }
 
@@ -125,62 +142,109 @@ class WorkoutPageState extends State<WorkoutPage>
     return WillPopScope(
       onWillPop: () async {
         // Return false to prevent the user from navigating away
+        showDialog(
+            context: context,
+            builder: (context) {
+              return CustomDialog(
+                  title: 'Cancel Edit',
+                  bodyText:
+                  'Are you sure you want to cancel your edit and discard the changes made?',
+                  confirm: () {
+                    timerShouldBeRunning = false;
+                    Navigator.pop(context);
+                    Helper.replacePageWithSlideAnimation(
+                        context,
+                        widget.forTemplate
+                            ? widget.pageFactory
+                            .getWorkoutTemplatesPage(
+                            widget.userId)
+                            : widget.pageFactory
+                            .getWorkoutHistoryPage(
+                            widget.userId));
+                  },
+                  cancel: () {
+                    Navigator.pop(context);
+                  });
+            });
         return false;
       },
       child: Scaffold(
         floatingActionButton: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            const SizedBox(width: 20,),
+            const SizedBox(
+              width: 20,
+            ),
             FloatingActionButton.extended(
                 heroTag: 'saveChangesButton',
                 onPressed: () async {
-                  await widget.presenter.saveChanges();
+                  timerShouldBeRunning = false;
+                  await widget.presenter.saveChanges(seconds);
                 },
                 backgroundColor: Helper.yellowColor,
-                icon: const Icon(Icons.check, color: Helper.whiteColor,),
+                icon: const Icon(
+                  Icons.check,
+                  color: Helper.whiteColor,
+                ),
                 label: const Text('Save')),
             FloatingActionButton.extended(
                 heroTag: 'addButton',
                 onPressed: () {
                   widget.presenter.addNewSet();
                 },
-                icon: const Icon(Icons.add, color: Helper.whiteColor,),
+                icon: const Icon(
+                  Icons.add,
+                  color: Helper.whiteColor,
+                ),
                 backgroundColor: Helper.blackColor,
                 label: const Text(
                   'Add Set',
                   style: TextStyle(color: Helper.whiteColor),
                 )),
-             widget.templateId != 0 ? FloatingActionButton.extended(
-                heroTag: 'deleteButton',
-                icon: const Icon(Icons.delete_outline, color: Helper.whiteColor,),
-                onPressed: () {
-                  showDialog(
-                      context: context,
-                      builder: (context) {
-                        return CustomDialog(
-                            title: widget.forTemplate ? 'Delete Template' : 'Delete Workout',
-                            bodyText: 'Are you sure you want to delete the current workout/template?',
-                            confirm: () async {
-                              Navigator.pop(context);
+            widget.templateId != 0
+                ? FloatingActionButton.extended(
+                    heroTag: 'deleteButton',
+                    icon: const Icon(
+                      Icons.delete_outline,
+                      color: Helper.whiteColor,
+                    ),
+                    onPressed: () {
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return CustomDialog(
+                                title: widget.forTemplate
+                                    ? 'Delete Template'
+                                    : 'Delete Workout',
+                                bodyText:
+                                    'Are you sure you want to delete the current workout/template?',
+                                confirm: () async {
+                                  timerShouldBeRunning = false;
+                                  Navigator.pop(context);
 
-                              if(widget.templateId != 0) {
-                                widget.presenter.deleteTemplate(widget.templateId);
-                              }
+                                  if (widget.templateId != 0) {
+                                    widget.presenter
+                                        .deleteTemplate(widget.templateId);
+                                  }
 
-                              Helper.replacePage(
-                                  context,
-                                  widget.forTemplate ? widget.pageFactory
-                                      .getWorkoutTemplatesPage(widget.userId) : widget.pageFactory
-                                      .getWorkoutHistoryPage(widget.userId));
-                            },
-                            cancel: () {
-                              Navigator.pop(context);
-                            });
-                      });
-                },
-                backgroundColor: Helper.redColor,
-                label: const Text('Delete')) : const SizedBox(),
+                                  Helper.replacePageWithSlideAnimation(
+                                      context,
+                                      widget.forTemplate
+                                          ? widget.pageFactory
+                                              .getWorkoutTemplatesPage(
+                                                  widget.userId)
+                                          : widget.pageFactory
+                                              .getWorkoutHistoryPage(
+                                                  widget.userId));
+                                },
+                                cancel: () {
+                                  Navigator.pop(context);
+                                });
+                          });
+                    },
+                    backgroundColor: Helper.redColor,
+                    label: const Text('Delete'))
+                : const SizedBox(),
           ],
         ),
         body: Container(
@@ -198,7 +262,9 @@ class WorkoutPageState extends State<WorkoutPage>
                       actions: [
                         IconButton(
                             icon: Icon(Icons.reorder,
-                                color: !reorderEnabled ? Helper.yellowColor : Helper.yellowColor.withOpacity(0.33)),
+                                color: !reorderEnabled
+                                    ? Helper.yellowColor
+                                    : Helper.yellowColor.withOpacity(0.33)),
                             onPressed: () {
                               setState(() {
                                 reorderEnabled = !reorderEnabled;
@@ -214,13 +280,20 @@ class WorkoutPageState extends State<WorkoutPage>
                                 builder: (context) {
                                   return CustomDialog(
                                       title: 'Cancel Edit',
-                                      bodyText: 'Are you sure you want to cancel your edit and discard the changes made?',
+                                      bodyText:
+                                          'Are you sure you want to cancel your edit and discard the changes made?',
                                       confirm: () {
+                                        timerShouldBeRunning = false;
                                         Navigator.pop(context);
-                                        Helper.replacePage(
+                                        Helper.replacePageWithSlideAnimation(
                                             context,
-                                            widget.forTemplate ? widget.pageFactory
-                                                .getWorkoutTemplatesPage(widget.userId) : widget.pageFactory.getWorkoutHistoryPage(widget.userId));
+                                            widget.forTemplate
+                                                ? widget.pageFactory
+                                                    .getWorkoutTemplatesPage(
+                                                        widget.userId)
+                                                : widget.pageFactory
+                                                    .getWorkoutHistoryPage(
+                                                        widget.userId));
                                       },
                                       cancel: () {
                                         Navigator.pop(context);
@@ -241,29 +314,65 @@ class WorkoutPageState extends State<WorkoutPage>
                               bottomRight: Radius.circular(15))),
                       flexibleSpace: FlexibleSpaceBar(
                         title: Text(
-                          widget.forTemplate ? widget.templateId!=0 ? 'Edit Template' : 'New Template' : widget.templateId!=0 ? 'Edit Workout' : 'New Workout' ,
+                          widget.forTemplate
+                              ? widget.templateId != 0
+                                  ? 'Edit Template'
+                                  : 'New Template'
+                              : widget.templateId != 0
+                                  ? 'Edit Workout'
+                                  : 'New Workout',
                           style: const TextStyle(
                               fontSize: 28, fontWeight: FontWeight.w300),
                         ),
                         centerTitle: true,
                       ),
                     ),
-              SliverList(
-                delegate: SliverChildBuilderDelegate(
-                      (BuildContext context, int index) {
-                    return !reorderEnabled ? Column(
-                      children: [
-                        const SizedBox(height: 10,),
-                        CustomHeadingTextField(screenHeight: screenHeight, screenWidth: screenWidth, controller: nameController, textInputType: TextInputType.text, hint: 'Enter workout name', icon: Icons.drive_file_rename_outline, color: Helper.yellowColor, isHeadline: true,),
-                        const SizedBox(height: 10,),
-                        CustomHeadingTextField(screenHeight: screenHeight, screenWidth: screenWidth, controller: noteController, textInputType: TextInputType.multiline, hint: 'Enter workout note', icon: Icons.notes, color: Helper.whiteColor, isHeadline: false,),
-                        const SizedBox(height: 20,),
-                      ],
-                    ) : const SizedBox();
-                  },
-                  childCount: 1,
-                ),
-              ),
+                    SliverList(
+                      delegate: SliverChildBuilderDelegate(
+                        (BuildContext context, int index) {
+                          return !reorderEnabled
+                              ? Column(
+                                  children: [
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    CustomHeadingTextField(
+                                      screenHeight: screenHeight,
+                                      screenWidth: screenWidth,
+                                      controller: nameController,
+                                      textInputType: TextInputType.text,
+                                      hint: 'Enter workout name',
+                                      icon: Icons.drive_file_rename_outline,
+                                      color: Helper.yellowColor,
+                                      isHeadline: true,
+                                    ),
+                                    CustomHeadingTextField(
+                                      screenHeight: screenHeight,
+                                      screenWidth: screenWidth,
+                                      controller: noteController,
+                                      textInputType: TextInputType.multiline,
+                                      hint: 'Enter workout note',
+                                      icon: Icons.notes,
+                                      color: Helper.whiteColor,
+                                      isHeadline: false,
+                                    ),
+                                    Row(mainAxisAlignment: MainAxisAlignment.start,
+                                      children: [
+                                        const SizedBox(width: 20,),
+                                      const Icon(CupertinoIcons.clock, color: Helper.yellowColor,),
+                                      seconds > 60 ? Text('   ${(seconds/60).floor()}m : ${seconds%60}s', style: const TextStyle(color: Helper.whiteColor),) : Text('   ${seconds}s', style: const TextStyle(color: Helper.whiteColor),),
+                                    ],),
+                                    const SizedBox(
+                                      height: 20,
+                                    ),
+
+                                  ],
+                                )
+                              : const SizedBox();
+                        },
+                        childCount: 1,
+                      ),
+                    ),
                     SliverReorderableList(
                       itemBuilder: (BuildContext context, int index) {
                         return ReorderableDragStartListener(
@@ -275,24 +384,88 @@ class WorkoutPageState extends State<WorkoutPage>
                                 ? Helper.blueColor.withOpacity(0.12)
                                 : Helper.blueColor.withOpacity(0.12),
                             padding: const EdgeInsets.all(10),
-                            child: reorderEnabled ? Column(
-                              children: [
-                                Text('Set #${index+1}', style: const TextStyle(color: Helper.yellowColor, fontSize: 22),),
-                              ],
-                            ) : Column(children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text('Set #${index+1}', style: const TextStyle(color: Helper.yellowColor, fontSize: 22),),
-                                  IconButton(onPressed: (){
-                                    setState(() {
-                                      _workoutWidgets.removeAt(index);
-                                    });
-                                  }, icon: const Icon(Icons.delete_outline, color: Helper.yellowColor, size: 30,))
-                                ],
-                              ),
-                              _workoutWidgets[index]
-                            ],),
+                            child: reorderEnabled
+                                ? Column(
+                                    children: [
+                                      Text(
+                                        'Set #${index + 1}',
+                                        style: const TextStyle(
+                                            color: Helper.yellowColor,
+                                            fontSize: 22),
+                                      ),
+                                    ],
+                                  )
+                                : Column(
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            'Set #${index + 1}',
+                                            style: const TextStyle(
+                                                color: Helper.yellowColor,
+                                                fontSize: 22),
+                                          ),
+                                          IconButton(
+                                              onPressed: () {
+                                                setState(() {
+                                                  if (_workoutWidgets[index]
+                                                          .setTasks
+                                                          .isNotEmpty &&
+                                                      _workoutWidgets[index]
+                                                          .setTasks
+                                                          .every((element) =>
+                                                              element.isCompletedController
+                                                                      .text ==
+                                                                  'true' &&
+                                                              element
+                                                                  .repsController
+                                                                  .text
+                                                                  .isNotEmpty &&
+                                                              element
+                                                                  .kilosController
+                                                                  .text
+                                                                  .isNotEmpty)) {
+                                                    showDialog(
+                                                        context: context,
+                                                        builder: (context) {
+                                                          return CustomDialog(
+                                                              title:
+                                                                  'Delete Set',
+                                                              bodyText:
+                                                                  'Are you sure you want to delete the current set?',
+                                                              confirm:
+                                                                  () async {
+                                                                setState(() {
+                                                                  _workoutWidgets
+                                                                      .removeAt(
+                                                                          index);
+                                                                });
+                                                                Navigator.pop(
+                                                                    context);
+                                                              },
+                                                              cancel: () {
+                                                                Navigator.pop(
+                                                                    context);
+                                                              });
+                                                        });
+                                                  } else {
+                                                    _workoutWidgets
+                                                        .removeAt(index);
+                                                  }
+                                                });
+                                              },
+                                              icon: const Icon(
+                                                Icons.delete_outline,
+                                                color: Helper.yellowColor,
+                                                size: 30,
+                                              ))
+                                        ],
+                                      ),
+                                      _workoutWidgets[index]
+                                    ],
+                                  ),
                           ),
                         );
                       },
@@ -320,5 +493,18 @@ class WorkoutPageState extends State<WorkoutPage>
                   )),
       ),
     );
+  }
+
+  void startTimer() {
+    Timer.periodic(const Duration(seconds: 1), (timer) {
+      if(!timerShouldBeRunning) {
+        timer.cancel();
+      } else {
+        log(timer.tick.toString());
+        setState(() {
+          seconds++;
+        });
+      }
+    });
   }
 }

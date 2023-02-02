@@ -94,7 +94,7 @@ void main() {
 
     await presenter.fetchData();
 
-    verify(view.setTemplateData('', '', [])).called(1);
+    verify(view.setTemplateData('', '', [], 0)).called(1);
   });
 
   test('test fetchData() fail fetch exercises', () async {
@@ -117,7 +117,7 @@ void main() {
 
     await presenter.fetchData();
 
-    verify(view.setTemplateData('', '', [])).called(1);
+    verify(view.setTemplateData('', '', [], 0)).called(1);
   });
 
   test('test fetchData() fail fetch workouts', () async {
@@ -142,7 +142,7 @@ void main() {
 
     await presenter.fetchData();
 
-    verify(view.setTemplateData('', '', [])).called(1);
+    verify(view.setTemplateData('', '', [], 0)).called(1);
   });
 
   test('test fetchData() fail empty workouts', () async {
@@ -171,7 +171,7 @@ void main() {
     String name = 'testname', note = 'testnote';
     List<Widget> list = [];
 
-    when(view.setTemplateData(any, any, any)).thenAnswer((realInvocation) {
+    when(view.setTemplateData(any, any, any, 0)).thenAnswer((realInvocation) {
       name = realInvocation.positionalArguments[0];
       note = realInvocation.positionalArguments[1];
       list = realInvocation.positionalArguments[2];
@@ -179,7 +179,7 @@ void main() {
 
     await presenter.fetchData();
 
-    verifyNever(view.notifyNoTemplatesFound());
+    verifyNever(view.notifyNoSets());
     expect(list.length, 1);
     expect(name, 'A');
     expect(note, 'A');
@@ -210,13 +210,13 @@ void main() {
 
     List<Widget> list = [];
 
-    when(view.setTemplateData(any, any, any)).thenAnswer((realInvocation) {
+    when(view.setTemplateData(any, any, any, 0)).thenAnswer((realInvocation) {
       list = realInvocation.positionalArguments[2];
     });
 
     await presenter.fetchData();
 
-    verifyNever(view.notifyNoTemplatesFound());
+    verifyNever(view.notifyNoSets());
     expect(list.length, 1);
 
     var element1 = list[0] as EditableSetHolder;
@@ -281,7 +281,7 @@ void main() {
     await presenter.fetchData();
 
     List<Widget> list = [];
-    when(view.setTemplateData(any, any, any)).thenAnswer((realInvocation) {
+    when(view.setTemplateData(any, any, any, 0)).thenAnswer((realInvocation) {
       list = realInvocation.positionalArguments[2];
     });
 
@@ -320,11 +320,11 @@ void main() {
     await presenter.fetchData();
 
     nameController.text = '';
-    await presenter.saveChanges();
+    await presenter.saveChanges(0);
     verify(view.notifyNoName()).called(1);
 
     nameController.text = 'Azis';
-    await presenter.saveChanges();
+    await presenter.saveChanges(0);
     verify(view.notifyNoSets()).called(1);
   });
 
@@ -354,11 +354,11 @@ void main() {
     await presenter.fetchData();
 
     nameController.text = '';
-    await presenter.saveChanges();
+    await presenter.saveChanges(0);
     verify(view.notifyNoName()).called(1);
 
     nameController.text = 'Azis';
-    await presenter.saveChanges();
+    await presenter.saveChanges(0);
     verify(view.notifyNoSets()).called(1);
   });
 
@@ -388,11 +388,11 @@ void main() {
     await presenter.fetchData();
 
     nameController.text = '';
-    await presenter.saveChanges();
+    await presenter.saveChanges(0);
     verify(view.notifyNoName()).called(1);
 
     nameController.text = 'Azis';
-    await presenter.saveChanges();
+    await presenter.saveChanges(0);
     verify(view.notifySaved()).called(1);
   });
 
@@ -422,11 +422,11 @@ void main() {
     await presenter.fetchData();
 
     nameController.text = '';
-    await presenter.saveChanges();
+    await presenter.saveChanges(0);
     verify(view.notifyNoName()).called(1);
 
     nameController.text = 'Azis';
-    await presenter.saveChanges();
+    await presenter.saveChanges(0);
     verify(view.notifySaved()).called(1);
   });
 
@@ -456,11 +456,11 @@ void main() {
     await presenter.fetchData();
 
     nameController.text = '';
-    await presenter.saveChanges();
+    await presenter.saveChanges(0);
     verify(view.notifyNoName()).called(1);
 
     nameController.text = 'Azis';
-    await presenter.saveChanges();
+    await presenter.saveChanges(0);
     verify(view.notifySaved()).called(1);
   });
 
@@ -490,11 +490,11 @@ void main() {
     await presenter.fetchData();
 
     nameController.text = '';
-    await presenter.saveChanges();
+    await presenter.saveChanges(0);
     verify(view.notifyNoName()).called(1);
 
     nameController.text = 'Azis';
-    await presenter.saveChanges();
+    await presenter.saveChanges(0);
     verify(view.notifySaved()).called(1);
   });
 
@@ -524,11 +524,11 @@ void main() {
     await presenter.fetchData();
 
     nameController.text = '';
-    await presenter.saveChanges();
+    await presenter.saveChanges(0);
     verify(view.notifyNoName()).called(1);
 
     nameController.text = 'Azis';
-    await presenter.saveChanges();
+    await presenter.saveChanges(0);
     verify(view.notifySaved()).called(1);
   });
 
@@ -558,11 +558,11 @@ void main() {
     await presenter.fetchData();
 
     nameController.text = '';
-    await presenter.saveChanges();
+    await presenter.saveChanges(0);
     verify(view.notifyNoName()).called(1);
 
     nameController.text = 'Azis';
-    await presenter.saveChanges();
+    await presenter.saveChanges(0);
     verify(view.notifySaved()).called(1);
   });
 
@@ -592,11 +592,11 @@ void main() {
     await presenter.fetchData();
 
     nameController.text = '';
-    await presenter.saveChanges();
+    await presenter.saveChanges(0);
     verify(view.notifyNoName()).called(1);
 
     nameController.text = 'Azis';
-    await presenter.saveChanges();
+    await presenter.saveChanges(0);
     verify(view.notifySaved()).called(1);
   });
 
@@ -626,11 +626,11 @@ void main() {
     await presenter.fetchData();
 
     nameController.text = '';
-    await presenter.saveChanges();
+    await presenter.saveChanges(0);
     verify(view.notifyNoName()).called(1);
 
     nameController.text = 'Azis';
-    await presenter.saveChanges();
+    await presenter.saveChanges(0);
     verify(view.notifySaved()).called(1);
   });
 
@@ -660,11 +660,11 @@ void main() {
     await presenter.fetchData();
 
     nameController.text = '';
-    await presenter.saveChanges();
+    await presenter.saveChanges(0);
     verify(view.notifyNoName()).called(1);
 
     nameController.text = 'Azis';
-    await presenter.saveChanges();
+    await presenter.saveChanges(0);
     verify(view.notifySaved()).called(1);
   });
 
@@ -694,11 +694,11 @@ void main() {
     await presenter.fetchData();
 
     nameController.text = '';
-    await presenter.saveChanges();
+    await presenter.saveChanges(0);
     verify(view.notifyNoName()).called(1);
 
     nameController.text = 'Azis';
-    await presenter.saveChanges();
+    await presenter.saveChanges(0);
     verify(view.notifySaved()).called(1);
   });
 
@@ -728,11 +728,11 @@ void main() {
     await presenter.fetchData();
 
     nameController.text = '';
-    await presenter.saveChanges();
+    await presenter.saveChanges(0);
     verify(view.notifyNoName()).called(1);
 
     nameController.text = 'Azis';
-    await presenter.saveChanges();
+    await presenter.saveChanges(0);
     verify(view.notifySaved()).called(1);
   });
 
@@ -762,11 +762,11 @@ void main() {
     await presenter.fetchData();
 
     nameController.text = '';
-    await presenter.saveChanges();
+    await presenter.saveChanges(0);
     verify(view.notifyNoName()).called(1);
 
     nameController.text = 'Azis';
-    await presenter.saveChanges();
+    await presenter.saveChanges(0);
     verify(view.notifySaved()).called(1);
   });
 
@@ -796,11 +796,11 @@ void main() {
     await presenter.fetchData();
 
     nameController.text = '';
-    await presenter.saveChanges();
+    await presenter.saveChanges(0);
     verify(view.notifyNoName()).called(1);
 
     nameController.text = 'Azis';
-    await presenter.saveChanges();
+    await presenter.saveChanges(0);
     verify(view.notifySaved()).called(1);
   });
 
@@ -830,11 +830,11 @@ void main() {
     await presenter.fetchData();
 
     nameController.text = '';
-    await presenter.saveChanges();
+    await presenter.saveChanges(0);
     verify(view.notifyNoName()).called(1);
 
     nameController.text = 'Azis';
-    await presenter.saveChanges();
+    await presenter.saveChanges(0);
     verify(view.notifySaved()).called(1);
   });
 
@@ -864,11 +864,11 @@ void main() {
     await presenter.fetchData();
 
     nameController.text = '';
-    await presenter.saveChanges();
+    await presenter.saveChanges(0);
     verify(view.notifyNoName()).called(1);
 
     nameController.text = 'Azis';
-    await presenter.saveChanges();
+    await presenter.saveChanges(0);
     verify(view.notifySaved()).called(1);
   });
 
@@ -898,11 +898,11 @@ void main() {
     await presenter.fetchData();
 
     nameController.text = '';
-    await presenter.saveChanges();
+    await presenter.saveChanges(0);
     verify(view.notifyNoName()).called(1);
 
     nameController.text = 'Azis';
-    await presenter.saveChanges();
+    await presenter.saveChanges(0);
     verify(view.notifySaved()).called(1);
   });
 
@@ -932,11 +932,11 @@ void main() {
     await presenter.fetchData();
 
     nameController.text = '';
-    await presenter.saveChanges();
+    await presenter.saveChanges(0);
     verify(view.notifyNoName()).called(1);
 
     nameController.text = 'Azis';
-    await presenter.saveChanges();
+    await presenter.saveChanges(0);
     verify(view.notifySaved()).called(1);
   });
 
@@ -966,11 +966,11 @@ void main() {
     await presenter.fetchData();
 
     nameController.text = '';
-    await presenter.saveChanges();
+    await presenter.saveChanges(0);
     verify(view.notifyNoName()).called(1);
 
     nameController.text = 'Azis';
-    await presenter.saveChanges();
+    await presenter.saveChanges(0);
     verify(view.notifySaved()).called(1);
   });
 
@@ -1000,11 +1000,11 @@ void main() {
     await presenter.fetchData();
 
     nameController.text = '';
-    await presenter.saveChanges();
+    await presenter.saveChanges(0);
     verify(view.notifyNoName()).called(1);
 
     nameController.text = 'Azis';
-    await presenter.saveChanges();
+    await presenter.saveChanges(0);
     verify(view.notifySaved()).called(1);
   });
 
@@ -1034,11 +1034,11 @@ void main() {
     await presenter.fetchData();
 
     nameController.text = '';
-    await presenter.saveChanges();
+    await presenter.saveChanges(0);
     verify(view.notifyNoName()).called(1);
 
     nameController.text = 'Azis';
-    await presenter.saveChanges();
+    await presenter.saveChanges(0);
     verify(view.notifySaved()).called(1);
   });
 }

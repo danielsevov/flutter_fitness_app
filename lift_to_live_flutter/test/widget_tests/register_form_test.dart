@@ -272,6 +272,7 @@ void main() {
 
       expect(form.getEmail(), 'user@email.com');
 
+      await tester.drag(find.byType(SingleChildScrollView), const Offset(0, -5000));
       await tester.tap(titleFinder);
       await tester.pumpAndSettle();
       await tester.pump(const Duration(seconds: 0));

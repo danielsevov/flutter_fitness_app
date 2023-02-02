@@ -39,8 +39,9 @@ class _SetTaskHolderState extends State<SetTaskHolder> {
                     child: TextField(
                       enableInteractiveSelection: false,
                       decoration: InputDecoration(
+                        focusedBorder: const OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(15)), borderSide: BorderSide(color: Helper.yellowColor)),
                         filled: true,
-                        fillColor: widget.isEnabled ? Helper.blueColor.withOpacity(0.7) : Helper.lightBlueColor,
+                        fillColor: widget.isEnabled && widget.isCompletedController.text != 'true' ? Helper.blueColor.withOpacity(0.7) : Helper.lightBlueColor,
                         border: const OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(15)))
                       ),
                       enabled: widget.isEnabled,
@@ -75,8 +76,9 @@ class _SetTaskHolderState extends State<SetTaskHolder> {
                     child: TextField(
                       enableInteractiveSelection: false,
                       decoration: InputDecoration(
-                        filled: true,
-                        fillColor: widget.isEnabled ? Helper.blueColor.withOpacity(0.7) : Helper.lightBlueColor,
+                          focusedBorder: const OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(15)), borderSide: BorderSide(color: Helper.yellowColor)),
+                          filled: true,
+                        fillColor: widget.isEnabled && widget.isCompletedController.text != 'true' ? Helper.blueColor.withOpacity(0.7) : Helper.lightBlueColor,
                           border: const OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(15)))
                       ),
                       enabled: widget.isEnabled,
@@ -110,7 +112,7 @@ class _SetTaskHolderState extends State<SetTaskHolder> {
                               const BorderSide(color: Helper.yellowColor, width: 2),
                           checkColor: Helper.blackColor,
                           fillColor: MaterialStateProperty.all(
-                              !widget.isEnabled
+                              !widget.isEnabled || widget.isCompletedController.text == 'true'
                                   ? Helper.yellowColor.withOpacity(0.3)
                                   : Helper.yellowColor.withOpacity(1)),
                           value: widget.isCompletedController.text == 'true',
@@ -122,7 +124,7 @@ class _SetTaskHolderState extends State<SetTaskHolder> {
                             }
                           },
                         ),
-              ) : const SizedBox()
+              ) : const SizedBox(),
             ],
           ),
         ));

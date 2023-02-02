@@ -9,7 +9,7 @@ abstract class WorkoutPageView {
   get nameController;
 
   /// Function to set and display the workout template data.
-  void setTemplateData( String templateName, String templateNote, List<EditableSetHolder> workoutSetWidgets);
+  void setTemplateData( String templateName, String templateNote, List<EditableSetHolder> workoutSetWidgets, int duration);
 
   /// Function to set if data is currently being fetched and an loading indicator should be displayed.
   void setInProgress(bool inProgress);

@@ -25,12 +25,25 @@ class _ExerciseInfoHolderState extends State<ExerciseInfoHolder> {
           borderRadius: BorderRadius.all(Radius.circular(30)),
           //border: Border.all(color: Helper.whiteColor, width: 0.75),
         ),
-        height: 300,
-        padding: const EdgeInsets.all(5.0),
+        height: 400,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            SizedBox(child: Text("Exercise: ${widget.exercise.name.toUpperCase()}", style: const TextStyle(color: Helper.yellowColor, fontSize: 12),)),
+            Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const SizedBox(width: 50,),
+                  SizedBox(child: Text(widget.exercise.name.toUpperCase(), style: const TextStyle(color: Helper.yellowColor, fontSize: 12))),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 10.0),
+                    child: IconButton(onPressed: (){
+                      setState(() {
+                        Navigator.pop(context);
+                      });
+                    }, icon: const Icon(Icons.cancel, color: Helper.yellowColor,),),
+                  )
+
+            ]),
             SizedBox(child: Text("Body Part: ${widget.exercise.bodyPart.toUpperCase()}", style: const TextStyle(color: Helper.yellowColor, fontSize: 12),)),
             SizedBox(child: Text("Muscle Group: ${widget.exercise.muscleGroup.toUpperCase()}", style: const TextStyle(color: Helper.yellowColor, fontSize: 12),)),
             SizedBox(child: Text("Equipment: ${widget.exercise.equipment.toUpperCase()}", style: const TextStyle(color: Helper.yellowColor, fontSize: 12),)),

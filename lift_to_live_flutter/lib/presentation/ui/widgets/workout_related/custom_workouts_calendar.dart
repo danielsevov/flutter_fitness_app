@@ -20,6 +20,7 @@ class CustomWorkoutCalendar extends StatelessWidget {
       ),
       child: workoutDates.isNotEmpty
           ? TableCalendar(
+          availableGestures: AvailableGestures.horizontalSwipe,
               calendarStyle: const CalendarStyle(
                   weekendTextStyle: TextStyle(color: Helper.whiteColor),
                   todayDecoration: BoxDecoration(

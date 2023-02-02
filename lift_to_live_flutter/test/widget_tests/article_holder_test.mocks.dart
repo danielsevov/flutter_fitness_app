@@ -101,6 +101,14 @@ class MockHomePageView extends _i1.Mock implements _i2.HomePageView {
         returnValueForMissingStub: null,
       );
   @override
+  void showSignOutDialog() => super.noSuchMethod(
+        Invocation.method(
+          #showSignOutDialog,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
   void traineesPressed(bool? bottomBarButton) => super.noSuchMethod(
         Invocation.method(
           #traineesPressed,

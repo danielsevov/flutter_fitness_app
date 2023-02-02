@@ -145,7 +145,7 @@ class RegisterFormState extends State<RegisterForm> {
                 return null;
               },
             ),
-            const SizedBox(height: 5),
+            const SizedBox(height: 20),
 
             /// email text field
             CustomFormTextField(
@@ -165,7 +165,7 @@ class RegisterFormState extends State<RegisterForm> {
                 return null;
               },
             ),
-            const SizedBox(height: 5),
+            const SizedBox(height: 20),
 
             /// password text field
             CustomFormTextField(
@@ -183,7 +183,7 @@ class RegisterFormState extends State<RegisterForm> {
                 return null;
               },
             ),
-            const SizedBox(height: 5),
+            const SizedBox(height: 20),
 
             /// nationality text field
             CustomFormTextField(
@@ -224,7 +224,7 @@ class RegisterFormState extends State<RegisterForm> {
                 );
               },
             ),
-            const SizedBox(height: 5),
+            const SizedBox(height: 20),
 
             /// phone text field
             CustomFormTextField(
@@ -242,7 +242,7 @@ class RegisterFormState extends State<RegisterForm> {
                 return null;
               },
             ),
-            const SizedBox(height: 5),
+            const SizedBox(height: 20),
 
             ///birth date text field
             CustomFormTextField(
@@ -302,7 +302,7 @@ class RegisterFormState extends State<RegisterForm> {
                 } else {}
               },
             ),
-            const SizedBox(height: 5),
+            const SizedBox(height: 20),
 
             /// coach text field
             CustomFormDropdownTextField(
@@ -317,6 +317,7 @@ class RegisterFormState extends State<RegisterForm> {
                   // do other stuff with _category
                   setState(
                       () => widget._coachController.text = newValue as String);
+                  _registerFormKey.currentState?.validate();
                 },
                 items: widget.coaches, isEnabled: true,),
             const SizedBox(

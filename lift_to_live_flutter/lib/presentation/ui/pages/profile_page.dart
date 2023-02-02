@@ -89,21 +89,21 @@ class ProfilePageState extends State<ProfilePage> implements ProfilePageView {
   /// Function called when user wants to navigate from the users profile to the users habit page.
   @override
   void habitsPressed(BuildContext context) {
-    Helper.pushPageWithAnimation(
+    Helper.pushPageWithSlideAnimation(
         context, widget.pageFactory.getHabitsPage(_user.id));
   }
 
   /// Function called when user wants to navigate from the users profile to the users workout history page.
   @override
   void workoutsPressed(BuildContext context) {
-    Helper.pushPageWithAnimation(
+    Helper.pushPageWithSlideAnimation(
         context, widget.pageFactory.getWorkoutHistoryPage(_user.id));
   }
 
   /// Function called when user wants to navigate from profile page to pictures page.
   @override
   void picturesPressed(BuildContext context) {
-    Helper.pushPageWithAnimation(
+    Helper.pushPageWithSlideAnimation(
         context,
         widget.pageFactory.getPicturePage(
           _user.id,
@@ -148,7 +148,7 @@ class ProfilePageState extends State<ProfilePage> implements ProfilePageView {
               icon: const Icon(Icons.arrow_back, color: Helper.yellowColor),
               onPressed: () {
                 if (widget.originPage == 'home') {
-                  Helper.replacePage(
+                  Helper.replacePageWithSlideAnimation(
                       context, widget.pageFactory.getWrappedHomePage());
                 } else if (widget.originPage == 'trainees') {
                   Navigator.pop(context);
@@ -216,7 +216,7 @@ class ProfilePageState extends State<ProfilePage> implements ProfilePageView {
                                       onPressed: () async {
                                         if (widget.presenter
                                             .isAuthorized(false)) {
-                                          Helper.pushPageWithAnimation(
+                                          Helper.pushPageWithSlideAnimation(
                                               context,
                                               widget.pageFactory.getPicturePage(
                                                 _user.id,

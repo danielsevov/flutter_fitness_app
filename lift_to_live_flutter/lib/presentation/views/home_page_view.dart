@@ -44,6 +44,9 @@ abstract class HomePageView {
   /// Function called when user wants to log out
   void logOutPressed(BuildContext context);
 
+  /// Function for showing sign out dialog
+  void showSignOutDialog();
+
   /// Function called when user wants to navigate from home to trainees page
   /// This is only allowed if user is admin or coach.
   void traineesPressed(bool bottomBarButton);
