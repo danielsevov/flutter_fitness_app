@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -46,6 +45,8 @@ class WorkoutPageState extends State<WorkoutPage> implements WorkoutPageView {
   bool reorderEnabled = false;
   bool timerShouldBeRunning = true;
   int seconds = 0;
+  int timerSeconds = 0;
+  bool timerActive = false;
 
   @override
   final TextEditingController nameController = TextEditingController(),
@@ -361,6 +362,43 @@ class WorkoutPageState extends State<WorkoutPage> implements WorkoutPageView {
                                         const SizedBox(width: 20,),
                                       const Icon(CupertinoIcons.clock, color: Helper.yellowColor,),
                                       seconds > 60 ? Text('   ${(seconds/60).floor()}m : ${seconds%60}s', style: const TextStyle(color: Helper.whiteColor),) : Text('   ${seconds}s', style: const TextStyle(color: Helper.whiteColor),),
+                                        Expanded(
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            children: [
+                                              Container(
+                                                decoration: BoxDecoration(color: Helper.lightBlueColor, borderRadius: BorderRadius.circular(15), border: Border.all(color: Helper.whiteColor.withOpacity(0.3))),
+                                                child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                                                  IconButton(icon: Icon(timerActive ? Icons.stop_circle_outlined : Icons.play_circle_outline, color: Helper.yellowColor,), onPressed: (){
+                                                    setState(() {
+                                                      timerActive = !timerActive;
+                                                    });
+                                                  }),
+                                                  IconButton(icon: const Icon(Icons.more_time, color: Helper.whiteColor,), onPressed: (){
+                                                    setState(() {
+                                                      timerSeconds += 30;
+                                                    });
+                                                  }),
+                                                  Padding(padding: const EdgeInsets.all(1), child: timerSeconds > 60 ? Text('   ${(timerSeconds/60).floor()}m : ${timerSeconds%60}s', style: const TextStyle(color: Helper.whiteColor),) : Text('   ${timerSeconds}s', style: const TextStyle(color: Helper.whiteColor),),),
+                                                  IconButton(icon: const Icon(Icons.remove, color: Helper.whiteColor,), onPressed: (){
+                                                    setState(() {
+                                                      if(timerSeconds >= 30) {
+                                                        timerSeconds -= 30;
+                                                      } else {
+                                                        timerSeconds = 0;
+                                                      }
+                                                    });
+                                                  }),
+                                                  IconButton(icon: const Icon(Icons.lock_reset, color: Helper.yellowColor,), onPressed: (){
+                                                    setState(() {
+                                                      timerSeconds = 0;
+                                                    });
+                                                  }),
+                                                ],),
+                                              ),
+                                            ],
+                                          ),
+                                        )
                                     ],),
                                     const SizedBox(
                                       height: 20,
@@ -500,9 +538,21 @@ class WorkoutPageState extends State<WorkoutPage> implements WorkoutPageView {
       if(!timerShouldBeRunning) {
         timer.cancel();
       } else {
-        log(timer.tick.toString());
         setState(() {
           seconds++;
+
+          if(timerActive) {
+            setState(() {
+              timerSeconds--;
+            });
+
+            if(timerSeconds <= 0) {
+              setState(() {
+                timerActive = false;
+                timerSeconds = 0;
+              });
+            }
+          }
         });
       }
     });

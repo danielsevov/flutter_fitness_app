@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../presenters/picture_page_presenter.dart';
@@ -122,10 +123,11 @@ class PicturePageState extends State<PicturePage> implements PicturePageView {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
+                          const Icon(Icons.arrow_upward, color: Helper.yellowColor,),
                           const Text(
-                            "Front Photos",
+                            " Front Photos",
                             style: TextStyle(
-                                color: Helper.lightHeadlineColor, fontSize: 24),
+                                color: Helper.yellowColor, fontSize: 24),
                           ),
                           const SizedBox(
                             width: 10,
@@ -149,11 +151,11 @@ class PicturePageState extends State<PicturePage> implements PicturePageView {
                       ),
                       Container(
                         padding: const EdgeInsets.fromLTRB(5, 20, 5, 20),
-                        height: 300,
-                        child: ListView(
+                        height: _picturesFront.isNotEmpty ? 300 : 100,
+                        child: _picturesFront.isNotEmpty ? ListView(
                           scrollDirection: Axis.horizontal,
                           children: _picturesFront,
-                        ),
+                        ) : const Text('No front pictures found.', style: TextStyle(color: Helper.whiteColor),),
                       ),
                       const SizedBox(
                         height: 20,
@@ -161,10 +163,11 @@ class PicturePageState extends State<PicturePage> implements PicturePageView {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
+                          const Icon(CupertinoIcons.arrow_down, color: Helper.yellowColor,),
                           const Text(
-                            "Back Photos",
+                            " Back Photos",
                             style: TextStyle(
-                                color: Helper.lightHeadlineColor, fontSize: 24),
+                                color: Helper.yellowColor, fontSize: 24),
                           ),
                           const SizedBox(
                             width: 10,
@@ -188,11 +191,11 @@ class PicturePageState extends State<PicturePage> implements PicturePageView {
                       ),
                       Container(
                         padding: const EdgeInsets.fromLTRB(5, 20, 5, 20),
-                        height: 300,
-                        child: ListView(
+                        height: _picturesBack.isNotEmpty ? 300 : 100,
+                        child: _picturesBack.isNotEmpty ? ListView(
                           scrollDirection: Axis.horizontal,
                           children: _picturesBack,
-                        ),
+                        ) : const Text('No back pictures found.', style: TextStyle(color: Helper.whiteColor),),
                       ),
                       const SizedBox(
                         height: 20,
@@ -200,10 +203,11 @@ class PicturePageState extends State<PicturePage> implements PicturePageView {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
+                          const Icon(Icons.subdirectory_arrow_left , color: Helper.yellowColor,),
                           const Text(
-                            "Side Photos",
+                            " Side Photos",
                             style: TextStyle(
-                                color: Helper.lightHeadlineColor, fontSize: 24),
+                                color: Helper.yellowColor, fontSize: 24),
                           ),
                           const SizedBox(
                             width: 10,
@@ -227,11 +231,11 @@ class PicturePageState extends State<PicturePage> implements PicturePageView {
                       ),
                       Container(
                         padding: const EdgeInsets.fromLTRB(5, 20, 5, 20),
-                        height: 300,
-                        child: ListView(
+                        height: _picturesSide.isNotEmpty ? 300 : 100,
+                        child: _picturesSide.isNotEmpty ? ListView(
                           scrollDirection: Axis.horizontal,
                           children: _picturesSide,
-                        ),
+                        ) : const Text('No side pictures found.', style: TextStyle(color: Helper.whiteColor),),
                       ),
                       const SizedBox(
                         height: 20,
