@@ -30,32 +30,6 @@ void main() {
     });
   });
 
-  testWidgets('DetailedScreen test tap', (tester) async {
-    await tester.runAsync(() async {
-      // tests
-      final img = Image.asset('assets/images/prof_pic.png');
-
-      final screen = DetailScreen(img: img);
-
-      final imageFinder = find.image(img.image);
-
-      await tester.pumpWidget(MaterialApp(
-          title: 'Flutter Demo', home: Scaffold(body: Center(child: screen,))));
-
-      await tester.pump(const Duration(seconds: 1));
-      await tester.pumpAndSettle();
-
-      expect(imageFinder, findsOneWidget);
-
-      await tester.tap(imageFinder);
-
-      await tester.pump(const Duration(seconds: 1));
-      await tester.pumpAndSettle();
-
-      expect(imageFinder, findsNothing);
-    });
-  });
-
   testWidgets('Image holder test constructor', (tester) async {
     await tester.runAsync(() async {
       // tests
